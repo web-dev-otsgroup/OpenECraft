@@ -5,102 +5,6 @@ its GitHub release ([docs/releasing.md](docs/releasing.md)).
 
 ## [0.1.2] - unreleased
 
-- **Logos in title blocks** (#165): title blocks and drawn report forms get image
-  elements (*➕ Image*), with a picture of their own (e.g. the company logo, kept in the
-  title block and its file) or the new project logo of *Project properties › Logo*
-  (e.g. the customer's), fitted with its aspect ratio; the cover page shows the project
-  logo above the project name or at a place and size of its own (`set_cover_logo`). Texts of forms can be bold, italic and rotated, and new placeholders show the
-  previous and next page (`{page.previous}`, `{page.next}`) and revision tables
-  (`{rev.1.name}`, `{rev.2.date}` …). Commands: `list_title_blocks`, `set_title_block`,
-  `delete_title_block`, `set_default_title_block`, `set_page` (`title_block`),
-  `add_title_block_image`, `set_project_info` (`logo`)
-  ([reports and checks](docs/features/reports-and-checks.md#forms)).
-- **Customised forms and drawings:** elements of title blocks and drawn forms can be
-  limited to page types or to a filled placeholder (revision tables), get their own
-  colour and dashes, and QR codes encode texts with placeholders. Title blocks follow
-  the page type and the plot frame (*Title block by page type*, frame property). A
-  **stamp** across every page follows the revision workflow (DRAFT, FOR APPROVAL,
-  nothing or AS BUILT when released) and `{rev.status}`, `{rev.approved_by}`,
-  `{rev.approved_date}` show who approved. Report forms get total rows, shaded rows
-  and column alignment. The **company library** on the parts server shares title
-  blocks, report schemes and plot frames between projects (`GET` / `PUT
-  /api/v1/libraries/forms`). Commands: `set_stamp`, `set_default_title_block`
-  (`page_type`), `set_frame` (`title_block`), `parts_company_forms`
-  (`publish`)
-  ([reports and checks](docs/features/reports-and-checks.md#forms)).
-- **More data from EDZ files** (#162): connection points keep the wires their clamps
-  take (smallest and largest cross-section, most wires), and the new check *Wires at
-  connection points* warns about more wires than that or wires too thin or too thick.
-  Drilling patterns tell tapped from through holes and give the cutout of a part (an
-  HMI panel's `197 x 141` instead of a Ø141 hole); EPLAN's rail data or a text naming
-  the rail make a part one for a mounting rail of that size. The product picture is
-  kept with the part and shown in the part details with its mounting and wiring data,
-  and the part XML of an unpacked EDZ file is read with its connection points, drilling
-  pattern, macros and picture ([parts](docs/features/parts.md)).
-- **Placed cutouts** (#162): a part has any number of cutouts and door cutouts, each with
-  its centre, turn and corner radius (table and preview in the *Mounting* tab of the part
-  editor, text `197 x 141 @ 0/-6.5 R3 15°`, read from EDZ drilling patterns). The
-  openings sit there and turn with the device, the NC data carry turn and radius, and
-  the manufacturing check reports cutouts beyond the device front or in the free edge
-  of the door and the walls ([panel layout](docs/features/panel-layout.md)).
-- **Scaled symbols** (#162): *Scale* in the properties of a placed library symbol (or
-  `update_symbol` with `scale`) draws an imported symbol larger or smaller, its texts
-  at their size and its wires following ([symbols](docs/features/symbols.md)).
-- **Administration of the parts server on its web page:** *Administration* shows an
-  overview of the server and manages the users (create, change, delete, last sign-in,
-  sign out everywhere), the access rights (sign-in for reading, roles, grants), the
-  catalogs (also installing the bundled ones), the import of parts, and exports and
-  backups: the parts as CSV or JSON, catalogs, users, access settings (also restored)
-  and the whole database as one SQLite file. On a new server an administrator signs in
-  with the access token. New API: `GET /export.json`, `GET /backup`, `GET /bundled`,
-  `POST /bundled/{id}`, `DELETE /users/{name}/sessions`; `GET /users` also returns the
-  open sessions and the last sign-in ([parts server](docs/parts-server.md)).
-- **Registration on the parts server:** users can create an account themselves
-  (*Register* next to the sign-in) and become readers, when it is switched on in
-  *Administration › Access rights* or with `--registration`, `OPENECRAFT_REGISTRATION`
-  or `registration` in the configuration file; it is closed by default. New accounts
-  wait for the approval of an administrator (*Administration › Users*: approve or
-  reject) unless approval is switched off. Registrations are throttled per client,
-  names that grants refer to cannot be taken. Command line / MCP:
-  `parts_registration` (`enabled`, `approval`), `parts_user_approve`. New API:
-  `POST /register`, `GET|PUT /registration`, `POST /users/{name}/approval`; `/info`
-  tells whether the registration is open.
-- **EPLAN Data Portal downloads:** DXF and commercial-data downloads use the current
-  POST API, and the connection test checks the protected file-provider service without
-  downloading commercial data. On Windows, an explicit Remember token option lets
-  a verified PAT be shared securely between the editor and CLI/MCP through
-  Credential Manager ([parts server](docs/parts-server.md#shared-data-portal-pat-on-windows)). The first
-  GUI request loads the saved PAT in the background automatically, without requiring
-  a connection test. Concurrent requests share the lookup.
-
-- **Straight ferrules and terminals:** a wire or cable core with a ferrule or a crimped
-  terminal runs straight out of its connection point for the length of it (with its
-  collar or insulated sleeve) and bends only behind it, in the 3D routing and in the 3D
-  view, instead of bending the ferrule where it goes into the device
-  ([panel layout](docs/features/panel-layout.md)).
-- **Keys and gestures:** *File › Settings › Keys and gestures* configures every key,
-  modifier and gesture in one place: the keyboard shortcuts (now also the keys that
-  move through the 3D view, and the panel layout follows the keys of Rotate, Delete and
-  Fit), the modifier keys (adding to the selection, opening links, a single item of an
-  assembly, *Keep connections* reversed for a move, rotating back, moving faster in 3D,
-  the wheel turned sideways or zooming),
-  the mouse buttons that pan, orbit, cancel, rotate while moving and the double-clicks,
-  and what the wheel does, two fingers (pan and zoom together, zoom only or pan only)
-  and three fingers on a touch screen. It replaces the *Navigation* and
-  *Keyboard shortcuts* settings ([user interface](docs/user-interface.md)).
-- **Moved wires stay connected** (#133): a wire moved on its own no longer leaves the
-  connection points it ends at; it gets a new leg from the point, or slides along the
-  rail it ends on. *Edit › Keep connections* (on by default) switches this and the
-  stretching of attached wires off, so the selection moves alone; Alt held at the
-  start of a drag reverses it for that drag. Dragging the square handle at an end of a
-  selected wire moves only that end, to disconnect it or connect it elsewhere. Commands:
-  `move_items` (`keep_connections`), `move_wire_end`
-  ([schematic](docs/features/schematic.md#editing)).
-- **Server administrator from the environment:** `OPENECRAFT_ADMIN_USER` (parts server)
-  and `OPENECRAFT_PROJECT_ADMIN_USER` (project server) name the administrator account
-  created at startup, as `--admin-user` does, so a Docker container gets its first user
-  from environment variables alone ([installation](docs/installation.md#docker-images-of-the-servers)).
-
 - **Full-canvas schematic crosshair:** *File › Settings › Appearance* can extend the
   placement crosshair to the edges of the schematic canvas, following the snapped
   working point.
@@ -117,20 +21,6 @@ its GitHub release ([docs/releasing.md](docs/releasing.md)).
 - **Auto-connect hints:** while a symbol is placed or moved with the mouse, faint
   dotted lines show the wires auto-connect would draw
   ([schematic](docs/features/schematic.md#routing)).
-- **Cut, copy and paste in the panel layout** (#153): right click an item in the front
-  view for *Cut*, *Copy*, *Paste*, *Properties* and *Remove* (devices go back to the
-  devices to place), or use `Ctrl+X` / `Ctrl+C` / `Ctrl+V`. Rails, ducts and the other
-  items are copied with what is mounted on them, without devices; cut devices go back
-  to the devices to place. The copy follows the pointer until a click places it
-  ([panel layout](docs/features/panel-layout.md#enclosures-and-devices)). New command
-  `copy_panel_items`.
-- **Profile sizes on mounting layouts** (#152): cable ducts, mounting rails and busbar
-  systems are labelled with their cross-section and cut length
-  (*60 × 100 mm, L = 940 mm*) on mounting layout pages and in the panel layout, on the
-  longest stretch no device covers (only the length where the whole label does not
-  fit), beside the end of a full one. The panel legend lists them after the devices with part number, cross-section
-  (width × height) and cut length; the bill of materials lists the pieces to cut below
-  each of their parts (*2 pcs, Cut length 550 mm, +CAB1*).
 - **Panel layout profile sizing** (#135): select a mounting rail or cable duct and drag
   either end to change its length while the opposite end stays put.
 - **Connection symbols** (#96): Auto-connect wires the branch of a T-junction that sits
@@ -146,7 +36,7 @@ its GitHub release ([docs/releasing.md](docs/releasing.md)).
   floor and site plan, 3D view, field plan, symbol editor) zooms with a pinch and pans
   with two fingers, both in one movement; on a touch screen the first finger no longer
   selects, moves or orbits while two are down. The horizontal mouse wheel and
-  `Shift`+wheel pan sideways. *Settings › Keys and gestures › Wheel and touch* chooses what scrolling does:
+  `Shift`+wheel pan sideways. *Settings › Navigation* chooses what scrolling does:
   *Automatic* (trackpads pan, mouse wheels zoom, told apart on macOS), *Zooms (mouse
   wheel)* or *Pans (trackpad)*, and can invert the direction of panning by scrolling.
   The symbol editor's canvas pans too (also with the middle mouse button).
@@ -309,18 +199,6 @@ its GitHub release ([docs/releasing.md](docs/releasing.md)).
   resized, and a long list of properties scrolls. A renamed property is applied when
   its name field loses focus (Esc keeps the old name), so the text cursor no longer
   jumps to another property while typing.
-- **Wires in 3D:** a wire starts in the opening of its connection point and leaves it
-  along the direction the point opens in (up or down out of the upper or lower edge of
-  a device) before it comes down to the cable duct, instead of running straight back
-  along the device to the mounting plate. The generated connection points of DIN rail
-  devices lie in their end faces below the screws (40 % of the depth above the rail
-  instead of 75 %, in front of the screws), and the generated models of DIN rail devices
-  and contactors show these wire entries. NH fuse switch disconnectors on busbars are
-  wired into the clamps in their terminal compartments (57.5 % of the depth, entered
-  from the end faces below the screws) instead of in front of their terminal covers,
-  and the strips for 185 mm busbars are drawn with their fuses one above the other and
-  the connection compartment at the bottom. Devices drawn as boxes (parts without a 3D
-  model) show the openings of their connection points.
 - **Structure boxes:** *Insert › Structure box* draws a rectangle whose devices take other
   function (`=`) or location (`+`) identifiers than the page (also installation site and
   product); only the aspects set on the box override the page, nested boxes resolve to
