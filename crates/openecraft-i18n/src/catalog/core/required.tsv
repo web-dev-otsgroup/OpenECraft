@@ -63,7 +63,6 @@ Address {} is used by {} and {}	Adresse {} wird von {} und {} verwendet	L'adress
 Adhesive	Kleben	Collé	Adhesivo
 Adjustable output voltage	Einstellbare Ausgangsspannung	Tension de sortie réglable	Tensión de salida ajustable
 Administer the server	Server verwalten	Administrer le serveur	Administrar el servidor
-Administrator	Administrator	Administrateur	Administrador
 Air dryer	Drucklufttrockner	Sécheur d'air	Secador de aire
 Air receiver	Druckluftbehälter	Réservoir d'air comprimé	Depósito de aire comprimido
 Alarm limit H	Alarmgrenze H	Seuil d'alarme H	Límite de alarma H
@@ -177,8 +176,10 @@ By wire number	Nach Drahtnummer	Par numéro de fil	Por número de cable
 CPU	CPU	CPU	CPU
 Cable bridge	Kabelbrücke	Passerelle de câbles	Puente de cables
 Cable connection diagram	Kabelanschlussplan	Plan de raccordement des câbles	Esquema de conexión de cables
+Cable definition on page {} has no cable. Select a cable before assigning crossed wires.	Kabeldefinitionslinie auf Seite {} hat kein Kabel. Vor der Aderzuordnung ein Kabel auswählen.	La définition de câble sur la page {} n'a pas de câble. Sélectionnez un câble avant d'affecter les fils traversés.	La definición de cable en la página {} no tiene cable. Seleccione un cable antes de asignar los hilos cruzados.
 Cable definition on page {} refers to the unknown cable {}	Kabeldefinition auf Seite {} verweist auf das unbekannte Kabel {}	La définition de câble en page {} renvoie au câble inconnu {}	La definición de manguera en la página {} remite a la manguera desconocida {}
 Cable definition {} on page {} crosses no wire	Kabeldefinition {} auf Seite {} kreuzt keine Verbindung	La définition de câble {} en page {} ne croise aucun fil	La definición de manguera {} en la página {} no cruza ningún cable
+Cable definition {} on page {}: {} crossed wires, {} unassigned, {} free cores, {} additional cores required, {} conflicting assignments	Kabeldefinition {} auf Seite {}: {} gekreuzte Drähte, {} ohne Zuordnung, {} freie Adern, {} zusätzliche Adern erforderlich, {} widersprüchliche Zuordnungen	Définition de câble {} sur la page {} : {} fils croisés, {} non affectés, {} conducteurs libres, {} conducteurs supplémentaires nécessaires, {} affectations en conflit	Definición de cable {} en la página {}: {} hilos cruzados, {} sin asignar, {} conductores libres, {} conductores adicionales necesarios, {} asignaciones en conflicto
 Cable definitions	Kabeldefinitionen	Définitions de câbles	Definiciones de cable
 Cable diagram	Kabelplan	Schéma de câbles	Diagrama de cables
 Cable entry 5 x M25	Kabeleinführung 5 x M25	Entrée de câbles 5 x M25	Entrada de cables 5 x M25
@@ -218,7 +219,7 @@ Cell temperatures: {} °C (U max), {} °C (U mean), {} °C (U min)	Zelltemperatu
 Centre horizontally	Horizontal zentrieren	Centrer horizontalement	Centrar horizontalmente
 Centre vertically	Vertikal zentrieren	Centrer verticalement	Centrar verticalmente
 Centrifugal pump	Kreiselpumpe	Pompe centrifuge	Bomba centrífuga
-Change	Änderung	Modification	Cambio
+Changed in the project folder by another program and also in the open project: {}{}. Save the project under another name, or open it again and repeat the changes	Im Projektordner von einem anderen Programm und auch im geöffneten Projekt geändert: {}{}. Speichern Sie das Projekt unter einem anderen Namen, oder öffnen Sie es erneut und wiederholen Sie die Änderungen	Modifié dans le dossier du projet par un autre programme et aussi dans le projet ouvert : {}{}. Enregistrez le projet sous un autre nom, ou ouvrez-le à nouveau et répétez les modifications	Modificado en la carpeta del proyecto por otro programa y también en el proyecto abierto: {}{}. Guarde el proyecto con otro nombre, o ábralo de nuevo y repita los cambios
 Changed since mounted	Seit Montage geändert	Modifié depuis le montage	Modificado desde el montaje
 Changed since wired	Seit dem Verdrahten geändert	Modifié depuis le câblage	Modificado desde el cableado
 Changeover contact	Wechslerkontakt	Contact inverseur	Contacto conmutado
@@ -327,6 +328,7 @@ Copper bar {}: segment {} is {} mm straight, at least {} mm are needed for bendi
 Copper bar {}: {} mm are longer than the stock length of {} mm	Kupferschiene {}: {} mm sind länger als die Lagerlänge von {} mm	Barre de cuivre {} : {} mm dépassent la longueur de stock de {} mm	Pletina de cobre {}: {} mm superan la longitud de stock de {} mm
 Copper bar {}: {} mm are too thick for {}	Kupferschiene {}: {} mm sind zu dick für {}	Barre de cuivre {} : {} mm sont trop épais pour {}	Pletina de cobre {}: {} mm son demasiado gruesos para {}
 Copper bar {}: {} segments need {} bends	Kupferschiene {}: {} Abschnitte brauchen {} Biegungen	Barre de cuivre {} : {} segments nécessitent {} pliages	Pletina de cobre {}: {} tramos necesitan {} dobleces
+Copper-bonded steel	Verkupferter Stahl	Acier cuivré	Acero cobreado
 Cores used	Adern belegt	Âmes utilisées	Núcleos usados
 Corner on page {} does not fit its wires: it needs one wire in each of its two directions and no connection point there	Ecke auf Seite {} passt nicht zu ihren Verbindungslinien: sie braucht je eine Linie in ihren beiden Richtungen und keinen Anschlusspunkt dort	Le coin en page {} ne correspond pas à ses fils : il lui faut un fil dans chacune de ses deux directions et aucun point de connexion à cet endroit	La esquina en la página {} no se ajusta a sus cables: necesita un cable en cada una de sus dos direcciones y ningún punto de conexión allí
 Corrugated tube	Wellrohr	Gaine annelée	Tubo corrugado
@@ -345,7 +347,6 @@ Create projects	Projekte anlegen	Créer des projets	Crear proyectos
 Creation date	Erstellungsdatum	Date de création	Fecha de creación
 Cross-section {} carries {} A, less than the {} A of {}	Querschnitt {} trägt {} A, weniger als die {} A von {}	La section {} supporte {} A, moins que les {} A de {}	La sección {} soporta {} A, menos que los {} A de {}
 Crossing on page {} does not fit its wires: it needs a wire in all four directions and no connection point there	Kreuzung auf Seite {} passt nicht zu ihren Verbindungslinien: sie braucht eine Linie in alle vier Richtungen und keinen Anschlusspunkt dort	Le croisement en page {} ne correspond pas à ses fils : il lui faut un fil dans les quatre directions et aucun point de connexion à cet endroit	El cruce en la página {} no se ajusta a sus cables: necesita un cable en las cuatro direcciones y ningún punto de conexión allí
-Currency	Währung	Devise	Moneda
 Current (A)	Strom (A)	Courant (A)	Corriente (A)
 Current capacity (A)	Strombelastbarkeit (A)	Courant admissible (A)	Intensidad admisible (A)
 Current consumption	Stromaufnahme	Consommation de courant	Consumo de corriente
@@ -472,10 +473,10 @@ ERP item master and bill of materials (CSV)	ERP-Artikelstamm und Stückliste (CS
 ERP number	ERP-Nummer	Numéro ERP	Número ERP
 ETIM class	ETIM-Klasse	Classe ETIM	Clase ETIM
 Earth electrode	Erder	Prise de terre	Electrodo de tierra
+Earth rod	Tiefenerder	Piquet de terre	Pica de tierra
 East-west on a flat roof	Ost-West auf einem Flachdach	Est-ouest sur un toit plat	Este-oeste en una cubierta plana
 Edit pages	Seiten bearbeiten	Modifier les pages	Editar páginas
 Edit project data	Projektdaten bearbeiten	Modifier les données du projet	Editar datos del proyecto
-Editor	Bearbeiter	Éditeur	Editor
 Efficiency	Wirkungsgrad	Rendement	Rendimiento
 Efficiency class	Effizienzklasse	Classe de rendement	Clase de eficiencia
 Electrical data	Elektrische Daten	Données électriques	Datos eléctricos
@@ -595,10 +596,12 @@ Foot switch NO (NFPA)	Fußschalter Schließer (NFPA)	Interrupteur à pied NO (NF
 Force	Kraft	Force	Fuerza
 Fork terminal	Gabelkabelschuh	Cosse à fourche	Terminal de horquilla
 Format (placeholders)	Format (Platzhalter)	Format (espaces réservés)	Formato (marcadores)
+Foundation earth electrode	Fundamenterder	Prise de terre de fondation	Electrodo de cimentación
 Frame size	Baugröße	Taille de carcasse	Tamaño constructivo
 Free	Frei	Libre	Libre
 Free air (mm)	Freie Verlegung (mm)	Air libre (mm)	Aire libre (mm)
 Free run	Freie Verlegung	Pose libre	Tendido libre
+Freestanding on posts	Freiflächenanlage auf Pfosten	Au sol sur pieux	Sobre suelo en postes
 Frequency converter	Frequenzumrichter	Variateur de fréquence	Variador de frecuencia
 Frequency meter	Frequenzmesser	Fréquencemètre	Frecuencímetro
 From end	Vom Ende	Depuis la fin	Desde el final
@@ -799,7 +802,6 @@ Invalid feedback: {}	Ungültige Rückmeldung: {}	Retour invalide : {}	Retroalime
 Invalid hole {}	Ungültige Bohrung {}	Trou invalide {}	Taladro no válido {}
 Invalid length {}	Ungültige Länge {}	Longueur invalide {}	Longitud no válida {}
 Invalid property key: {}	Ungültiger Eigenschaftsschlüssel: {}	Clé de propriété invalide : {}	Clave de propiedad no válida: {}
-Inverter	Wechselrichter	Onduleur	Inversor
 Inverter (single-line)	Wechselrichter (einpolig)	Onduleur (unifilaire)	Inversor (unifilar)
 Inverter / charger	Wechselrichter / Ladegerät	Onduleur / chargeur	Inversor / cargador
 Inverter DC/AC	Wechselrichter DC/AC	Onduleur DC/AC	Inversor DC/AC
@@ -830,7 +832,6 @@ Latitude is within ±90° and longitude within ±180°	Die Breite liegt innerhal
 Lead time (days)	Lieferzeit (Tage)	Délai de livraison (jours)	Plazo de entrega (días)
 Leakage current	Ableitstrom	Courant de fuite	Corriente de fuga
 Leakage line	Leckölleitung	Conduite de fuite	Línea de fugas
-Left side	Linke Seite	Côté gauche	Lado izquierdo
 Left side panel	Linke Seitenwand	Paroi latérale gauche	Panel lateral izquierdo
 Legend plate text	Schildtext	Texte de l'étiquette	Texto de la placa
 Length (m)	Länge (m)	Longueur (m)	Longitud (m)
@@ -896,7 +897,6 @@ Manual switch NO	Handschalter Schließer	Commutateur manuel NO	Interruptor manua
 Manual switch NO, latching	Handschalter Schließer, rastend	Commutateur manuel NO, à accrochage	Interruptor manual NA, con enclavamiento
 Manual work	Handarbeit	Travail manuel	Trabajo manual
 Manufacturer's table	Herstellertabelle	Tableau du fabricant	Tabla del fabricante
-Manufacturers	Hersteller	Fabricants	Fabricantes
 Marking (CSV)	Beschriftung (CSV)	Repérage (CSV)	Marcado (CSV)
 Marking (Excel)	Beschriftung (Excel)	Repérage (Excel)	Marcado (Excel)
 Mating faces	Steckseiten	Faces d'accouplement	Caras de acoplamiento
@@ -927,8 +927,6 @@ Minimum operating temperature	Minimale Betriebstemperatur	Température de servic
 Mirror contacts	Spiegelkontakte	Contacts miroirs	Contactos espejo
 Mirrored	Gespiegelt	En miroir	Reflejado
 Mission time	Gebrauchsdauer	Durée de mission	Tiempo de misión
-Module	Modul	Module	Módulo
-Modules	Module	Modules	Módulos
 Moisture	Feuchte	Humidité	Humedad
 Moment of inertia	Trägheitsmoment	Moment d'inertie	Momento de inercia
 Motion detector	Bewegungsmelder	Détecteur de mouvement	Detector de movimiento
@@ -973,7 +971,6 @@ Mounting site	Montageort	Lieu de montage	Lugar de montaje
 Mounting type	Befestigungsart	Type de fixation	Tipo de montaje
 Multi-line text	Mehrzeiliger Text	Texte multiligne	Texto de varias líneas
 N terminal	N-Klemme	Borne N	Borne N
-NC contact	Öffner	Contact NF	Contacto NC
 NC contact (NFPA)	Öffner (NFPA)	Contact NF (NFPA)	Contacto NC (NFPA)
 NC contact K (GOST)	Öffner K (GOST)	Contact NF K (GOST)	Contacto NC K (GOST)
 NC contact KA (GB)	Öffner KA (GB)	Contact NF KA (GB)	Contacto NC KA (GB)
@@ -988,7 +985,6 @@ NC contact, on-delay KT (GOST)	Öffner, einschaltverzögert KT (GOST)	Contact NF
 NC contact, on-delay TLR (JIS)	Öffner, einschaltverzögert TLR (JIS)	Contact NF, temporisé à l'appel TLR (JIS)	Contacto NC, temporizado a la conexión TLR (JIS)
 NC contact, timed opening (NFPA)	Öffner, verzögert öffnend (NFPA)	Contact NF, ouverture temporisée (NFPA)	Contacto NC, apertura temporizada (NFPA)
 NFPA / JIC	NFPA / JIC	NFPA / JIC	NFPA / JIC
-NO contact	Schließer	Contact NO	Contacto NA
 NO contact (NFPA)	Schließer (NFPA)	Contact NO (NFPA)	Contacto NA (NFPA)
 NO contact K (GOST)	Schließer K (GOST)	Contact NO K (GOST)	Contacto NA K (GOST)
 NO contact KA (GB)	Schließer KA (GB)	Contact NO KA (GB)	Contacto NA KA (GB)
@@ -1025,7 +1021,6 @@ No plugs	Keine Stecker	Aucun connecteur	Sin conectores
 No report block {}	Kein Auswertungsblock {}	Aucun bloc de rapports {}	Ningún bloque de informes {}
 No segment template named {}	Keine Segmentvorlage namens {}	Aucun modèle de segment nommé {}	No hay ninguna plantilla de segmento llamada {}
 No subproject {}	Kein Teilprojekt {}	Aucun sous-projet {}	No hay ningún subproyecto {}
-No such PV array	Keine solche PV-Anlage	Pas de tel champ photovoltaïque	No existe tal campo fotovoltaico
 No such building	Kein solches Gebäude	Bâtiment introuvable	No existe ese edificio
 No such inner wall	Keine solche Innenwand	Aucun mur intérieur de ce type	No existe esa pared interior
 No such object: {}	Kein solches Objekt: {}	Objet inexistant : {}	No existe el objeto: {}
@@ -1097,7 +1092,6 @@ Optocoupler	Optokoppler	Optocoupleur	Optoacoplador
 Order numbers	Bestellnummern	Références de commande	Números de pedido
 Order status	Bestellstatus	État de commande	Estado del pedido
 Ordered	Bestellt	Commandé	Pedido
-Other	Sonstiges	Autre	Otro
 Other bus device	Sonstiger Busteilnehmer	Autre appareil de bus	Otro dispositivo de bus
 Other module	Sonstige Baugruppe	Autre module	Otro módulo
 Other properties	Weitere Eigenschaften	Autres propriétés	Otras propiedades
@@ -1329,7 +1323,6 @@ Product	Produkt	Produit	Producto
 Production of {}{} failed: {}	Fertigung von {}{} fehlgeschlagen: {}	La production de {}{} a échoué : {}	La producción de {}{} ha fallado: {}
 Production wire list (CSV)	Produktions-Leitungsliste (CSV)	Liste de fils pour la production (CSV)	Lista de hilos para producción (CSV)
 Project description	Projektbeschreibung	Description du projet	Descripción del proyecto
-Project manager	Projektleiter	Chef de projet	Jefe de proyecto
 Project number	Projektnummer	Numéro de projet	Número de proyecto
 Project property of the property database (by key)	Projekteigenschaft der Eigenschaftsdatenbank (über den Schlüssel)	Propriété de projet de la base de propriétés (par clé)	Propiedad de proyecto de la base de propiedades (por clave)
 Project revision	Projektrevision	Révision du projet	Revisión del proyecto
@@ -1403,7 +1396,6 @@ Rated short-time withstand current	Bemessungskurzzeitstromfestigkeit	Courant ass
 Rated speed	Bemessungsdrehzahl	Vitesse assignée	Velocidad nominal
 Rated torque	Bemessungsmoment	Couple assigné	Par nominal
 Rated voltage	Bemessungsspannung	Tension assignée	Tensión nominal
-Rear wall	Rückwand	Paroi arrière	Pared trasera
 Rectangular punch	Rechteckstempel	Poinçon rectangulaire	Punzón rectangular
 Rectifier / inverter AC/DC, bidirectional	Gleich- / Wechselrichter AC/DC, bidirektional	Redresseur / onduleur AC/DC, bidirectionnel	Rectificador / inversor AC/DC, bidireccional
 Redline	Redline	Redline	Redline
@@ -1442,21 +1434,19 @@ Resolution	Auflösung	Résolution	Resolución
 Response time	Ansprechzeit	Temps de réponse	Tiempo de respuesta
 Result	Ergebnis	Résultat	Resultado
 Return / exhaust line	Rücklauf- / Abluftleitung	Conduite de retour / d'échappement	Línea de retorno / escape
-Reviewer	Prüfer	Réviseur	Revisor
 Revision overview (changes)	Revisionsübersicht (Änderungen)	Vue d'ensemble des révisions (modifications)	Resumen de revisiones (cambios)
 Revision table: author of the last revision (2: the one before …)	Revisionstabelle: Autor der letzten Revision (2: die davor …)	Tableau des révisions : auteur de la dernière révision (2 : la précédente …)	Tabla de revisiones: autor de la última revisión (2: la anterior …)
 Revision table: date of the last revision (2: the one before …)	Revisionstabelle: Datum der letzten Revision (2: die davor …)	Tableau des révisions : date de la dernière révision (2 : la précédente …)	Tabla de revisiones: fecha de la última revisión (2: la anterior …)
 Revision table: description of the last revision (2: the one before …)	Revisionstabelle: Beschreibung der letzten Revision (2: die davor …)	Tableau des révisions : description de la dernière révision (2 : la précédente …)	Tabla de revisiones: descripción de la última revisión (2: la anterior …)
 Revision table: index of the last revision (2: the one before …)	Revisionstabelle: Index der letzten Revision (2: die davor …)	Tableau des révisions : indice de la dernière révision (2 : la précédente …)	Tabla de revisiones: índice de la última revisión (2: la anterior …)
-Right side	Rechte Seite	Côté droit	Lado derecho
 Right side panel	Rechte Seitenwand	Paroi latérale droite	Panel lateral derecho
+Ring earth electrode	Ringerder	Boucle de terre	Anillo de tierra
 Ring terminal	Ringkabelschuh	Cosse à œillet	Terminal de ojal
 Rivet nut	Einnietmutter	Écrou à sertir	Tuerca remachable
 RoHS compliant	RoHS-konform	Conforme RoHS	Conforme a RoHS
 Rockwell (Local:1:I.Data.0)	Rockwell (Local:1:I.Data.0)	Rockwell (Local:1:I.Data.0)	Rockwell (Local:1:I.Data.0)
 Roller switch NC	Rollenschalter Öffner	Interrupteur à galet NF	Interruptor de rodillo NC
 Roller switch NO	Rollenschalter Schließer	Interrupteur à galet NO	Interruptor de rodillo NA
-Roof	Dach	Toit	Techo
 Roof top	Dach	Toiture	Cubierta
 Room floor	Raumboden	Sol de la salle	Suelo de la sala
 Room {} stands outside the plot boundary	Raum {} steht außerhalb der Grundstücksgrenze	La pièce {} se trouve hors de la limite du terrain	La sala {} está fuera del límite de la parcela
@@ -1594,13 +1584,13 @@ Spare terminal	Reserveklemme	Borne de réserve	Borne de reserva
 Speed	Drehzahl	Vitesse	Velocidad
 Spiral	Wendeltreppe	Hélicoïdal	De caracol
 Stainless steel	Edelstahl	Acier inoxydable	Acero inoxidable
+Stainless steel V4A	Edelstahl V4A	Acier inoxydable V4A	Acero inoxidable V4A
 Stair {} of {}: its levels are missing or its upper level is not above the lower one	Treppe {} von {}: ihre Ebenen fehlen oder ihre obere Ebene liegt nicht über der unteren	Escalier {} de {} : ses niveaux manquent ou son niveau supérieur n'est pas au-dessus de l'inférieur	Escalera {} de {}: faltan sus niveles o su nivel superior no está por encima del inferior
 Stair {} of {}: rise of {} mm per step, aim for 160 - 190 mm	Treppe {} von {}: Steigung von {} mm je Stufe, anzustreben sind 160 - 190 mm	Escalier {} de {} : hauteur de {} mm par marche, visez 160 - 190 mm	Escalera {} de {}: contrahuella de {} mm por peldaño, procure 160 - 190 mm
 Stair {} of {}: twice the rise and the going make {} mm, the step rule asks for 590 - 650 mm	Treppe {} von {}: zweimal Steigung plus Auftritt ergeben {} mm, die Schrittmaßregel verlangt 590 - 650 mm	Escalier {} de {} : deux hauteurs plus le giron font {} mm, la loi de Blondel demande 590 - 650 mm	Escalera {} de {}: dos contrahuellas más la huella suman {} mm, la regla del paso pide 590 - 650 mm
 Standard	Norm	Norme	Norma
 Start / stop circuit with a relay: coil and contacts form one device with cross references and contact image, terminal strip, wire numbers, terminal diagram and connection list.	Start-/Stopp-Schaltung mit einem Relais: Spule und Kontakte bilden ein Betriebsmittel mit Querverweisen und Kontaktspiegel, Klemmleiste, Verbindungsnummern, Klemmenplan und Verbindungsliste.	Circuit marche / arrêt avec un relais : bobine et contacts forment un appareil avec renvois et image des contacts, bornier, numéros de fils, plan de bornier et liste des connexions.	Circuito de marcha / paro con un relé: bobina y contactos forman un equipo con referencias cruzadas e imagen de contactos, regleta de bornes, números de cable, diagrama de bornes y lista de conexiones.
 Start date	Startdatum	Date de début	Fecha de inicio
-Started	Begonnen	Commencé	Iniciado
 Starting current ratio	Anlaufstromverhältnis	Rapport du courant de démarrage	Relación de corriente de arranque
 Starting torque	Anlaufmoment	Couple de démarrage	Par de arranque
 State of the project: draft, in review, approved, released	Stand des Projekts: Entwurf, in Prüfung, freigegeben, veröffentlicht	État du projet : brouillon, en revue, approuvé, publié	Estado del proyecto: borrador, en revisión, aprobado, publicado
@@ -1609,6 +1599,7 @@ Station name {} is used {} times	Stationsname {} wird {}-mal verwendet	Le nom de
 Station {} is not connected to bus {}	Station {} ist nicht mit Bus {} verbunden	La station {} n'est pas reliée au bus {}	La estación {} no está conectada al bus {}
 Station {}: bus system {} does not exist	Station {}: Bussystem {} existiert nicht	Station {} : le système de bus {} n'existe pas	Estación {}: el sistema de bus {} no existe
 Steam	Dampf	Vapeur	Vapor
+Steel, hot-dip galvanised	Stahl, feuerverzinkt	Acier galvanisé à chaud	Acero galvanizado en caliente
 Stock	Bestand	Stock	Existencias
 Stop category	Stoppkategorie	Catégorie d'arrêt	Categoría de parada
 Storage temperature range	Lagertemperaturbereich	Plage de température de stockage	Rango de temperatura de almacenamiento
@@ -1700,6 +1691,7 @@ The archive contains no project	Das Archiv enthält kein Projekt	L'archive ne co
 The archive has no manifest	Das Archiv hat kein Manifest	L'archive n'a pas de manifeste	El archivo comprimido no tiene manifiesto
 The archive is damaged	Das Archiv ist beschädigt	L'archive est endommagée	El archivo comprimido está dañado
 The archive unpacks to more than {} MB	Das Archiv entpackt sich zu mehr als {} MB	L'archive se décompresse en plus de {} Mo	El archivo comprimido se descomprime en más de {} MB
+The archive was written by a newer version (archive version {})	Das Archiv wurde von einer neueren Version geschrieben (Archivversion {})	L'archive a été écrite par une version plus récente (version d'archive {})	El archivo comprimido fue escrito por una versión más reciente (versión de archivo comprimido {})
 The assembly manufacturer must be named (IEC 61439-1, 6.1)	Der Hersteller der Schaltgerätekombination muss angegeben sein (IEC 61439-1, 6.1)	Le constructeur de l'ensemble doit être indiqué (IEC 61439-1, 6.1)	El fabricante del conjunto debe indicarse (IEC 61439-1, 6.1)
 The cabinet line-up in its room: L-shaped floor plan, inner wall, door and window, the line-up at its place, a mounting rail with a socket outlet on a wall, a wall-mounted emergency light and a cable tray under the ceiling.	Die Schrankanreihung in ihrem Raum: L-förmiger Grundriss, Innenwand, Tür und Fenster, die Anreihung an ihrem Platz, eine Tragschiene mit Steckdose an einer Wand, eine wandmontierte Notleuchte und eine Kabelrinne unter der Decke.	Les armoires juxtaposées dans leur local : plan en L, cloison, porte et fenêtre, les armoires à leur place, un rail avec une prise murale, un éclairage de secours fixé au mur et un chemin de câbles sous le plafond.	La batería de armarios en su sala: planta en L, tabique, puerta y ventana, la batería en su lugar, un carril con una toma de corriente en una pared, una luz de emergencia montada en la pared y una bandeja de cables bajo el techo.
 The configuration is not a JSON object	Die Konfiguration ist kein JSON-Objekt	La configuration n'est pas un objet JSON	La configuración no es un objeto JSON
@@ -1716,7 +1708,10 @@ The file is empty	Die Datei ist leer	Le fichier est vide	El archivo está vacío
 The file is from an earlier extraction of subproject {}	Die Datei stammt aus einer früheren Auslagerung von Teilprojekt {}	Le fichier provient d'une extraction antérieure du sous-projet {}	El archivo procede de una extracción anterior del subproyecto {}
 The file was written by a newer version (format {}): data this version does not know is lost when saving	Die Datei wurde von einer neueren Version geschrieben (Format {}): Daten, die diese Version nicht kennt, gehen beim Speichern verloren	Le fichier a été écrit par une version plus récente (format {}) : les données que cette version ne connaît pas sont perdues à l'enregistrement	El archivo fue escrito por una versión más reciente (formato {}): los datos que esta versión no conoce se pierden al guardar
 The first column must be Key	Die erste Spalte muss Key sein	La première colonne doit être Key	La primera columna debe ser Key
+The folder {} already holds the project {}: a split project needs a folder of its own	Der Ordner {} enthält bereits das Projekt {}: ein geteiltes Projekt braucht einen eigenen Ordner	Le dossier {} contient déjà le projet {} : un projet fractionné a besoin de son propre dossier	La carpeta {} ya contiene el proyecto {}: un proyecto dividido necesita una carpeta propia
+The folder {} holds files that belong to no project ({}): a split project needs a folder of its own	Der Ordner {} enthält Dateien, die zu keinem Projekt gehören ({}): ein geteiltes Projekt braucht einen eigenen Ordner	Le dossier {} contient des fichiers qui n'appartiennent à aucun projet ({}) : un projet fractionné a besoin de son propre dossier	La carpeta {} contiene archivos que no pertenecen a ningún proyecto ({}): un proyecto dividido necesita una carpeta propia
 The function definition needs a key and a name	Die Funktionsdefinition braucht einen Schlüssel und einen Namen	La définition de fonction a besoin d'une clé et d'un nom	La definición de función necesita una clave y un nombre
+The index of the project names no file layout: it was not written by OpenECraft	Der Index des Projekts nennt kein Dateilayout: er wurde nicht von OpenECraft geschrieben	L'index du projet n'indique aucune structure de fichiers : il n'a pas été écrit par OpenECraft	El índice del proyecto no indica ninguna estructura de archivos: no fue escrito por OpenECraft
 The inner wall leaves the room	Die Innenwand verlässt den Raum	Le mur intérieur sort de la salle	La pared interior sale de la sala
 The last page cannot be deleted	Die letzte Seite kann nicht gelöscht werden	La dernière page ne peut pas être supprimée	La última página no se puede eliminar
 The level would overlap level {}	Die Ebene würde Ebene {} überlappen	Le niveau chevaucherait le niveau {}	El nivel se solaparía con el nivel {}
@@ -1729,9 +1724,12 @@ The plant of level 15 with an office building: the office on the ground level an
 The plot boundary crosses itself	Die Grundstücksgrenze kreuzt sich selbst	La limite du terrain se croise elle-même	El límite de la parcela se cruza consigo mismo
 The plot boundary encloses no area	Die Grundstücksgrenze umschließt keine Fläche	La limite du terrain n'entoure aucune surface	El límite de la parcela no encierra ninguna superficie
 The plot boundary is no polygon: it crosses itself or has fewer than three corners	Die Grundstücksgrenze ist kein Polygon: Sie kreuzt sich selbst oder hat weniger als drei Ecken	La limite du terrain n'est pas un polygone : elle se croise ou a moins de trois sommets	El límite de la parcela no es un polígono: se cruza consigo mismo o tiene menos de tres esquinas
+The project cannot be written as files: {}	Das Projekt kann nicht als Dateien geschrieben werden: {}	Le projet ne peut pas être écrit sous forme de fichiers : {}	El proyecto no se puede escribir como archivos: {}
+The project file {} is missing	Die Projektdatei {} fehlt	Le fichier de projet {} est manquant	Falta el archivo de proyecto {}
 The project has no harnesses	Das Projekt hat keine Kabelbäume	Le projet n'a aucun faisceau	El proyecto no tiene mazos
 The project has no panel layout	Das Projekt hat keinen Schaltschrankaufbau	Le projet n'a pas d'implantation d'armoire	El proyecto no tiene diseño de armario
 The project has several harnesses: {}	Das Projekt hat mehrere Kabelbäume: {}	Le projet a plusieurs faisceaux : {}	El proyecto tiene varios mazos: {}
+The project was written by a newer version (file layout {})	Das Projekt wurde von einer neueren Version geschrieben (Dateilayout {})	Le projet a été écrit par une version plus récente (structure de fichiers {})	El proyecto fue escrito por una versión más reciente (estructura de archivos {})
 The property needs a name	Die Eigenschaft braucht einen Namen	La propriété a besoin d'un nom	La propiedad necesita un nombre
 The pump room in a plant of two buildings: the main building with the electrical room on its ground level and the control room above, joined by a shaft; the pump house with pump motor 2, linked by a cable trench between the building entries through which its motor cable is routed; façade lights on the outside walls and a weather station on the roof.	Der Pumpenraum in einer Anlage aus zwei Gebäuden: das Hauptgebäude mit dem Elektroraum im Erdgeschoss und der Leitwarte darüber, durch einen Schacht verbunden; das Pumpenhaus mit Pumpenmotor 2, über einen Kabelgraben zwischen den Gebäudeeinführungen angebunden, durch den sein Motorkabel verlegt wird; Fassadenleuchten an den Außenwänden und eine Wetterstation auf dem Dach.	La salle des pompes dans une installation de deux bâtiments : le bâtiment principal avec le local électrique au rez-de-chaussée et la salle de commande au-dessus, reliés par une gaine ; la station de pompage avec le moteur de pompe 2, reliée par une tranchée de câbles entre les entrées de bâtiment par laquelle passe son câble moteur ; des appliques sur les murs extérieurs et une station météo sur la toiture.	La sala de bombas en una instalación de dos edificios: el edificio principal con la sala eléctrica en planta baja y la sala de control encima, unidas por un patinillo; la caseta de bombas con el motor de la bomba 2, unida por una zanja de cables entre las entradas de edificio por la que se tiende su cable de motor; apliques en los muros exteriores y una estación meteorológica en la cubierta.
 The pump station built into two bayed floor-standing enclosures: busbar system, rails and ducts, door devices and handles, filter fan, light, PE bar, cable glands, a cable passage, climate calculation, duct fill and 3D routing.	Die Pumpstation in zwei angereihten Standschränken: Sammelschienensystem, Tragschienen und Kabelkanäle, Türgeräte und Griffe, Filterlüfter, Leuchte, PE-Schiene, Kabelverschraubungen, ein Kabeldurchgang, Klimatisierungsberechnung, Kanalfüllgrad und 3D-Routing.	La station de pompage montée dans deux armoires au sol juxtaposées : jeu de barres, rails et goulottes, appareils de porte et poignées, ventilateur à filtre, éclairage, barre de terre, presse-étoupes, un passage de câbles, calcul de climatisation, taux de remplissage des goulottes et routage 3D.	La estación de bombeo montada en dos armarios de pie en batería: sistema de embarrado, carriles y canaletas, equipos de puerta y manetas, ventilador con filtro, luminaria, barra de tierra, prensaestopas, un paso de cables, cálculo de climatización, ocupación de canaletas y enrutado 3D.
@@ -1850,7 +1848,6 @@ Unit price	Einzelpreis	Prix unitaire	Precio unitario
 Units	Einheiten	Unités	Unidades
 Units {} to {} are outside the rack ({} U)	Die Einheiten {} bis {} liegen außerhalb des Racks ({} HE)	Les unités {} à {} sont hors de la baie ({} U)	Las unidades {} a {} están fuera del rack ({} U)
 Units {} to {} are taken by {}	Die Einheiten {} bis {} sind durch {} belegt	Les unités {} à {} sont occupées par {}	Las unidades {} a {} están ocupadas por {}
-Unknown	Unbekannt	Inconnu	Desconocido
 Unknown cable {}	Unbekanntes Kabel {}	Câble inconnu {}	Cable desconocido {}
 Unknown device or part: {}	Unbekanntes Gerät oder unbekannter Artikel: {}	Appareil ou article inconnu : {}	Equipo o artículo desconocido: {}
 Unknown device: {}	Unbekanntes Gerät: {}	Appareil inconnu : {}	Equipo desconocido: {}
@@ -1884,7 +1881,6 @@ Vessel	Behälter	Réservoir	Recipiente
 Vibration	Schwingung	Vibration	Vibración
 Vibration resistance	Vibrationsfestigkeit	Résistance aux vibrations	Resistencia a vibraciones
 View projects	Projekte ansehen	Consulter les projets	Ver proyectos
-Viewer	Betrachter	Lecteur	Lector
 Violations	Verstöße	Violations	Infracciones
 Voltage (V)	Spannung (V)	Tension (V)	Tensión (V)
 Voltage drop (%)	Spannungsfall (%)	Chute de tension (%)	Caída de tensión (%)
@@ -2031,7 +2027,6 @@ page properties	Seiteneigenschaften	propriétés de la page	propiedades de la p�
 pigtail {} mm	Pigtail {} mm	queue de cochon {} mm	coleta {} mm
 pilot	Steuer	pilotage	pilotaje
 pink	rosa	rose	rosa
-portrait	hoch	portrait	vertical
 pressure	Druck	pression	presión
 red	rot	rouge	rojo
 released	freigegeben	diffusée	liberada
@@ -2070,6 +2065,7 @@ yellow	gelb	jaune	amarillo
 {} has no door or window {}	{} hat keine Tür und kein Fenster {}	{} n'a pas de porte ni de fenêtre {}	{} no tiene puerta ni ventana {}
 {} has no {} free rack units	{} hat keine {} freien Höheneinheiten	{} n'a pas {} unités libres	{} no tiene {} unidades libres
 {} has nothing to manufacture	{} hat nichts zu fertigen	{} n'a rien à fabriquer	{} no tiene nada que fabricar
+{} holds an unresolved merge conflict of git: the file was merged as text. Take one version of the file (git checkout --ours or --theirs), then set up the merge driver for split projects (merge_project_file) before merging again	{} enthält einen ungelösten Merge-Konflikt von git: die Datei wurde als Text zusammengeführt. Übernehmen Sie eine Version der Datei (git checkout --ours oder --theirs) und richten Sie dann den Merge-Treiber für geteilte Projekte ein (merge_project_file), bevor Sie erneut zusammenführen	{} contient un conflit de fusion git non résolu : le fichier a été fusionné comme du texte. Reprenez une version du fichier (git checkout --ours ou --theirs), puis configurez le pilote de fusion des projets fractionnés (merge_project_file) avant de fusionner à nouveau	{} contiene un conflicto de fusión de git sin resolver: el archivo se fusionó como texto. Tome una versión del archivo (git checkout --ours o --theirs) y configure después el controlador de fusión para proyectos divididos (merge_project_file) antes de volver a fusionar
 {} is a built-in function definition	{} ist eine eingebaute Funktionsdefinition	{} est une définition de fonction intégrée	{} es una definición de función integrada
 {} is a built-in property	{} ist eine eingebaute Eigenschaft	{} est une propriété intégrée	{} es una propiedad integrada
 {} is a built-in scheme	{} ist ein eingebautes Schema	{} est un schéma intégré	{} es un esquema integrado
@@ -2104,6 +2100,7 @@ yellow	gelb	jaune	amarillo
 {} symbols, {} wires, {} texts / graphics	{} Symbole, {} Leitungen, {} Texte / Grafiken	{} symboles, {} fils, {} textes / graphiques	{} símbolos, {} hilos, {} textos / gráficos
 {} texts are not translated into {}	{} Texte sind nicht in {} übersetzt	{} textes ne sont pas traduits en {}	{} textos no están traducidos al {}
 {} unused device data records removed	{} unbenutzte Gerätedatensätze entfernt	{} enregistrements de données d'appareil inutilisés supprimés	{} registros de datos de dispositivo sin uso eliminados
+{} wires crossed, {} assigned, {} free cores, {} unassigned	{} Drähte gekreuzt, {} zugeordnet, {} freie Adern, {} ohne Zuordnung	{} fils croisés, {} affectés, {} conducteurs libres, {} non affectés	{} hilos cruzados, {} asignados, {} conductores libres, {} sin asignar
 {} wiring marks belong to wires that no longer exist	{} Verdrahtungsmarkierungen gehören zu Drähten, die es nicht mehr gibt	{} marques de câblage appartiennent à des fils qui n'existent plus	{} marcas de cableado pertenecen a cables que ya no existen
 {} without device tag on page {}	{} ohne Betriebsmittelkennzeichen auf Seite {}	{} sans repère d'appareil sur la page {}	{} sin designación de dispositivo en la página {}
 {} {} cannot be laid flush-mounted: the installation zones of the room do not join its ends	{} {} kann nicht unter Putz verlegt werden: die Installationszonen des Raums verbinden seine Enden nicht	{} {} ne peut pas être posé encastré : les zones d'installation de la salle ne relient pas ses extrémités	{} {} no se puede tender empotrado: las zonas de instalación de la sala no unen sus extremos
@@ -2121,6 +2118,7 @@ yellow	gelb	jaune	amarillo
 {}: PV array {} covers a roof window	{}: PV-Anlage {} verdeckt ein Dachfenster	{} : le champ photovoltaïque {} couvre une fenêtre de toit	{}: el campo fotovoltaico {} cubre una ventana de tejado
 {}: PV array {} has {} modules, its device {} has {}	{}: PV-Anlage {} hat {} Module, ihr Betriebsmittel {} hat {}	{} : le champ photovoltaïque {} a {} modules, son appareil {} en a {}	{}: el campo fotovoltaico {} tiene {} módulos, su dispositivo {} tiene {}
 {}: PV array {} is mounted tilted on a pitched roof	{}: PV-Anlage {} ist auf einem geneigten Dach aufgeständert	{} : le champ photovoltaïque {} est monté incliné sur un toit en pente	{}: el campo fotovoltaico {} está montado inclinado en una cubierta inclinada
+{}: PV array {} lies outside the protection of the air-termination system	{}: PV-Anlage {} liegt außerhalb des Schutzbereichs der Fangeinrichtung	{} : le champ photovoltaïque {} est hors de la zone protégée par le dispositif de capture	{}: el campo fotovoltaico {} está fuera de la protección del sistema captador
 {}: PV array {} of roof {} lies across a ridge, a hip or the edge of the roof	{}: PV-Anlage {} des Dachs {} liegt über einem First, einem Grat oder dem Dachrand	{} : le champ photovoltaïque {} du toit {} passe sur un faîtage, une arête ou le bord du toit	{}: el campo fotovoltaico {} de la cubierta {} pasa sobre una cumbrera, una limatesa o el borde de la cubierta
 {}: PV array {} of roof {} lies outside the roof	{}: PV-Anlage {} des Dachs {} liegt außerhalb des Dachs	{} : le champ photovoltaïque {} du toit {} est hors du toit	{}: el campo fotovoltaico {} de la cubierta {} está fuera de la cubierta
 {}: PV arrays {} and {} lie over each other	{}: PV-Anlagen {} und {} liegen übereinander	{} : les champs photovoltaïques {} et {} se superposent	{}: los campos fotovoltaicos {} y {} se superponen
@@ -2132,6 +2130,7 @@ yellow	gelb	jaune	amarillo
 {}: a wire of {} mm² is thinner than the connection point takes (at least {} mm²)	{}: Ein Leiter mit {} mm² ist dünner, als der Anschluss aufnimmt (mindestens {} mm²)	{} : un fil de {} mm² est plus fin que ce qu'accepte le point de connexion (au moins {} mm²)	{}: un cable de {} mm² es más fino de lo que admite el punto de conexión (al menos {} mm²)
 {}: accessory {} fits none of the device's parts	{}: Zubehör {} passt zu keinem Artikel des Geräts	{} : l'accessoire {} ne convient à aucun article de l'appareil	{}: el accesorio {} no es compatible con ningún artículo del equipo
 {}: actuator {} is {} mm above the floor, recommended {} … {} mm	{}: Bedienteil {} liegt {} mm über dem Boden, empfohlen {} … {} mm	{} : l'organe de commande {} est à {} mm au-dessus du sol, recommandé {} … {} mm	{}: el actuador {} está a {} mm sobre el suelo, recomendado {} … {} mm
+{}: air-termination rod {} stands off the roofs	{}: Fangstange {} steht neben den Dächern	{} : la tige captrice {} est hors des toits	{}: la punta captadora {} está fuera de los tejados
 {}: auxiliary function(s) without main function	{}: Hilfsfunktion(en) ohne Hauptfunktion	{} : fonction(s) auxiliaire(s) sans fonction principale	{}: función(es) auxiliar(es) sin función principal
 {}: breaking capacity {} kA below the short-circuit current {} kA	{}: Schaltvermögen {} kA unter dem Kurzschlussstrom {} kA	{} : pouvoir de coupure {} kA inférieur au courant de court-circuit {} kA	{}: poder de corte {} kA inferior a la corriente de cortocircuito {} kA
 {}: cable duct at {} mm filled {} % (limit {} %)	{}: Kabelkanal bei {} mm zu {} % gefüllt (Grenzwert {} %)	{} : goulotte à {} mm remplie à {} % (limite {} %)	{}: canaleta en {} mm llena al {} % (límite {} %)
@@ -2149,15 +2148,19 @@ yellow	gelb	jaune	amarillo
 {}: cross-section {} below the {} mm² of power circuits	{}: Querschnitt {} unter den {} mm² von Hauptstromkreisen	{} : section {} inférieure aux {} mm² des circuits de puissance	{}: sección {} inferior a los {} mm² de los circuitos de potencia
 {}: cross-section {} differs from the potential definition ({})	{}: Querschnitt {} weicht von der Potenzialdefinition ab ({})	{} : la section {} diffère de la définition du potentiel ({})	{}: la sección {} difiere de la definición del potencial ({})
 {}: cutout of {} on the {} is {} mm from the edge, at least {} mm required	{}: Ausschnitt von {} auf {} ist {} mm vom Rand entfernt, mindestens {} mm erforderlich	{} : la découpe de {} sur {} est à {} mm du bord, au moins {} mm requis	{}: el recorte de {} en {} está a {} mm del borde, se requieren al menos {} mm
+{}: cutout of {} on the {} lies in a restricted cut-out area	{}: Ausschnitt von {} auf {} liegt in einer Sperrfläche für Ausschnitte	{} : la découpe de {} sur {} se trouve dans une zone interdite aux découpes	{}: el recorte de {} en {} está en una zona restringida para recortes
 {}: cutout of {} on the {} reaches {} mm beyond its front	{}: Ausschnitt von {} auf {} ragt {} mm über seine Front hinaus	{} : la découpe de {} sur {} dépasse sa face avant de {} mm	{}: el recorte de {} en {} sobresale {} mm de su frente
 {}: cutouts of {} and {} on the {} are too close ({} mm web, at least {} mm)	{}: Ausschnitte von {} und {} auf {} liegen zu nah beieinander ({} mm Steg, mindestens {} mm)	{} : les découpes de {} et {} sur {} sont trop proches ({} mm d'âme, au moins {} mm)	{}: los recortes de {} y {} en {} están demasiado cerca ({} mm de alma, al menos {} mm)
 {}: designation '{}' used more than once	{}: Bezeichnung '{}' mehrfach verwendet	{} : désignation '{}' utilisée plusieurs fois	{}: designación '{}' usada más de una vez
 {}: device box extends or shows a device that is not placed	{}: Gerätebox erweitert oder zeigt ein Betriebsmittel, das nicht platziert ist	{} : la boîte d'appareil étend ou montre un appareil qui n'est pas placé	{}: la caja de dispositivo amplía o muestra un dispositivo que no está colocado
 {}: device box shows connection point '{}' that the device does not have	{}: Gerätebox zeigt Anschlusspunkt '{}', den das Betriebsmittel nicht hat	{} : la boîte d'appareil montre le point de connexion '{}' que l'appareil n'a pas	{}: la caja de dispositivo muestra el punto de conexión '{}' que el dispositivo no tiene
 {}: device tag without device name	{}: Betriebsmittelkennzeichen ohne Betriebsmittelname	{} : repère d'appareil sans nom d'appareil	{}: designación de dispositivo sin nombre de dispositivo
+{}: earth electrode {} has no walls to run along: the building has no rooms or roofs	{}: Erder {} hat keine Wände, an denen er verläuft: das Gebäude hat keine Räume oder Dächer	{} : la prise de terre {} n'a pas de murs à suivre : le bâtiment n'a ni pièces ni toits	{}: el electrodo de tierra {} no tiene muros que seguir: el edificio no tiene locales ni tejados
+{}: earth rod {} stands inside the walls of the building	{}: Tiefenerder {} steht innerhalb der Wände des Gebäudes	{} : le piquet de terre {} est à l'intérieur des murs du bâtiment	{}: la pica de tierra {} está dentro de los muros del edificio
 {}: fault current {} A at {} does not disconnect within {} s (needs {} A)	{}: Fehlerstrom {} A an {} schaltet nicht innerhalb von {} s ab (benötigt {} A)	{} : le courant de défaut {} A à {} ne coupe pas en {} s (il faut {} A)	{}: la corriente de defecto {} A en {} no desconecta en {} s (necesita {} A)
 {}: function texts differ in the single-line diagram and the schematic	{}: Funktionstexte in Übersichtsschaltplan und Stromlaufplan unterscheiden sich	{} : les textes de fonction diffèrent entre le schéma unifilaire et le schéma développé	{}: los textos de función difieren entre el esquema unifilar y el esquema desarrollado
 {}: hole of {} is too close to the cutout of {} on the {}	{}: Bohrung von {} liegt zu nah am Ausschnitt von {} auf {}	{} : le perçage de {} est trop proche de la découpe de {} sur {}	{}: el taladro de {} está demasiado cerca del recorte de {} en {}
+{}: hole of {} on the {} lies in a restricted cut-out area	{}: Bohrung von {} auf {} liegt in einer Sperrfläche für Ausschnitte	{} : le trou de {} sur {} se trouve dans une zone interdite aux découpes	{}: el agujero de {} en {} está en una zona restringida para recortes
 {}: hole Ø{} of {} on the {} is {} mm from the edge, at least {} mm required	{}: Bohrung Ø{} von {} auf {} ist {} mm vom Rand entfernt, mindestens {} mm erforderlich	{} : le perçage Ø{} de {} sur {} est à {} mm du bord, au moins {} mm requis	{}: el taladro Ø{} de {} en {} está a {} mm del borde, se requieren al menos {} mm
 {}: holes of {} and {} on the {} are too close ({} mm web, at least {} mm)	{}: Bohrungen von {} und {} auf {} liegen zu nah beieinander ({} mm Steg, mindestens {} mm)	{} : les perçages de {} et {} sur {} sont trop proches ({} mm d'âme, au moins {} mm)	{}: los taladros de {} y {} en {} están demasiado cerca ({} mm de alma, al menos {} mm)
 {}: hot spot of about {} °C at x = {} mm, y = {} mm of the mounting plate (inside temperature at most {} °C)	{}: Hotspot von etwa {} °C bei x = {} mm, y = {} mm der Montageplatte (Innentemperatur höchstens {} °C)	{} : point chaud d'environ {} °C à x = {} mm, y = {} mm de la plaque de montage (température intérieure au plus {} °C)	{}: punto caliente de unos {} °C en x = {} mm, y = {} mm de la placa de montaje (temperatura interior como máximo {} °C)
@@ -2222,8 +2225,15 @@ yellow	gelb	jaune	amarillo
 {}: terminal {} uses {} levels, its part {} has {}	{}: Klemme {} nutzt {} Etagen, ihr Artikel {} hat {}	{} : la borne {} utilise {} étages, son article {} en a {}	{}: el borne {} usa {} pisos, su artículo {} tiene {}
 {}: terminals {} are {} mm above the floor, at least {} mm required	{}: Klemmen {} liegen {} mm über dem Boden, mindestens {} mm erforderlich	{} : les bornes {} sont à {} mm au-dessus du sol, au moins {} mm requis	{}: los bornes {} están a {} mm sobre el suelo, se requieren al menos {} mm
 {}: the busbar system with {} bars joins {} conductors ({}): short circuit	{}: Das Sammelschienensystem mit {} Schienen verbindet {} Leiter ({}): Kurzschluss	{} : le système de jeu de barres à {} barres relie {} conducteurs ({}) : court-circuit	{}: el sistema de embarrado con {} barras une {} conductores ({}): cortocircuito
+{}: the busbar {} of earth electrode {} does not exist	{}: die Schiene {} des Erders {} existiert nicht	{} : la barrette {} de la prise de terre {} n'existe pas	{}: la barra {} del electrodo de tierra {} no existe
 {}: the device {} of PV array {} does not exist	{}: das Betriebsmittel {} der PV-Anlage {} gibt es nicht	{} : l'appareil {} du champ photovoltaïque {} n'existe pas	{}: el dispositivo {} del campo fotovoltaico {} no existe
+{}: the earthing busbar {} of PV array {} does not exist	{}: die Erdungsschiene {} der PV-Anlage {} existiert nicht	{} : la barre de terre {} du champ photovoltaïque {} n'existe pas	{}: la barra de tierra {} del campo fotovoltaico {} no existe
+{}: the freestanding PV array {} stands on {}	{}: die Freiflächenanlage {} steht auf {}	{} : le champ au sol {} se trouve sur {}	{}: el campo sobre suelo {} está sobre {}
+{}: the freestanding PV arrays {} and {} stand on each other	{}: die Freiflächenanlagen {} und {} stehen übereinander	{} : les champs au sol {} et {} se superposent	{}: los campos sobre suelo {} y {} se superponen
+{}: the generator junction box {} of PV array {} does not exist	{}: der Generatoranschlusskasten {} der PV-Anlage {} existiert nicht	{} : la boîte de jonction générateur {} du champ photovoltaïque {} n'existe pas	{}: la caja de conexión del generador {} del campo fotovoltaico {} no existe
 {}: the level of the room no longer exists	{}: die Ebene des Raums existiert nicht mehr	{} : le niveau de la pièce n'existe plus	{}: el nivel de la sala ya no existe
+{}: the lightning protection has no earth electrode	{}: der Blitzschutz hat keinen Erder	{} : la protection contre la foudre n'a pas de prise de terre	{}: la protección contra el rayo no tiene electrodo de tierra
+{}: the lightning protection has no walls to run along: the building has no rooms or roofs	{}: der Blitzschutz hat keine Wände, an denen er verläuft: das Gebäude hat keine Räume oder Dächer	{} : la protection contre la foudre n'a pas de murs à suivre : le bâtiment n'a ni pièces ni toits	{}: la protección contra el rayo no tiene muros que seguir: el edificio no tiene locales ni tejados
 {}: the module {} of PV array {} has no electrical data	{}: das Modul {} der PV-Anlage {} hat keine elektrischen Daten	{} : le module {} du champ photovoltaïque {} n'a pas de données électriques	{}: el módulo {} del campo fotovoltaico {} no tiene datos eléctricos
 {}: the station has no port {}	{}: Die Station hat keinen Port {}	{} : la station n'a pas de port {}	{}: la estación no tiene el puerto {}
 {}: the strings of PV array {} connect {} modules, the array has {}	{}: die Strings der PV-Anlage {} verschalten {} Module, die Anlage hat {}	{} : les chaînes du champ photovoltaïque {} raccordent {} modules, le champ en a {}	{}: los strings del campo fotovoltaico {} conectan {} módulos, el campo tiene {}
@@ -2240,6 +2250,7 @@ yellow	gelb	jaune	amarillo
 {}: {} carries {} A, the load {} needs {} A	{}: {} trägt {} A, der Verbraucher {} braucht {} A	{} : {} supporte {} A, la charge {} demande {} A	{}: {} soporta {} A, la carga {} necesita {} A
 {}: {} changed after it was mounted	{}: {} wurde nach der Montage geändert	{} : {} a été modifié après le montage	{}: {} se modificó después del montaje
 {}: {} collides with {}	{}: {} kollidiert mit {}	{} : {} entre en collision avec {}	{}: {} colisiona con {}
+{}: {} down conductors, class {} needs {} round the building	{}: {} Ableitungen, Klasse {} braucht {} rund um das Gebäude	{} : {} conducteurs de descente, la classe {} en exige {} autour du bâtiment	{}: {} bajantes, la clase {} necesita {} alrededor del edificio
 {}: {} inputs used, the module has {}	{}: {} Eingänge verwendet, die Baugruppe hat {}	{} : {} entrées utilisées, le module en a {}	{}: {} entradas usadas, el módulo tiene {}
 {}: {} is a fluid device, not an electrical one	{}: {} ist ein Fluidgerät, kein elektrisches	{} : {} est un appareil fluidique, pas électrique	{}: {} es un dispositivo de fluidos, no eléctrico
 {}: {} is closer than {} mm to a cable duct	{}: {} ist näher als {} mm an einem Kabelkanal	{} : {} est à moins de {} mm d'une goulotte	{}: {} está a menos de {} mm de una canaleta
@@ -2259,6 +2270,7 @@ yellow	gelb	jaune	amarillo
 {}: {} kg on the {} exceed its load of {} kg	{}: {} kg auf {} überschreiten die Traglast von {} kg	{} : {} kg sur {} dépassent sa charge de {} kg	{}: {} kg en {} superan su carga de {} kg
 {}: {} leads into no room	{}: {} führt in keinen Raum	{} : {} ne mène à aucune salle	{}: {} no lleva a ninguna sala
 {}: {} lies above the sloped ceiling	{}: {} liegt über der Dachschräge	{} : {} se trouve au-dessus du plafond rampant	{}: {} queda por encima del techo inclinado
+{}: {} lies in a restricted placing area of the {}	{}: {} liegt in einer Sperrfläche für Geräte auf {}	{} : {} se trouve dans une zone interdite au placement sur {}	{}: {} está en una zona restringida para la colocación en {}
 {}: {} modules of PV array {} are not connected to a string	{}: {} Module der PV-Anlage {} sind an keinen String angeschlossen	{} : {} modules du champ photovoltaïque {} ne sont raccordés à aucune chaîne	{}: {} módulos del campo fotovoltaico {} no están conectados a ningún string
 {}: {} modules, the head has {} slots	{}: {} Baugruppen, der Kopf hat {} Steckplätze	{} : {} modules, la tête a {} emplacements	{}: {} módulos, la cabecera tiene {} slots
 {}: {} of {} mm is longer than the stock length of {} mm and has to be joined	{}: {} mit {} mm ist länger als die Lagerlänge von {} mm und muss gestoßen werden	{} : {} de {} mm dépasse la longueur de stock de {} mm et doit être raboutée	{}: {} de {} mm supera la longitud de stock de {} mm y debe empalmarse

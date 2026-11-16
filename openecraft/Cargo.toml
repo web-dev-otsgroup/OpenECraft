@@ -2,7 +2,7 @@
 name = "openecraft"
 version.workspace = true
 edition = "2021"
-description = "OpenECraft - an open electrical CAE (schematic) editor in the spirit of EPLAN Electric P8"
+description = "OpenECraft - an open source electrical CAE (schematic) editor"
 license = "MIT OR Apache-2.0"
 
 [[bin]]
@@ -30,12 +30,17 @@ serde_json = "1"
 log = "0.4"
 image = { version = "0.25", default-features = false, features = ["png", "jpeg"] }
 openecraft-edz = { path = "../crates/openecraft-edz" }
+openecraft-step = { path = "../crates/openecraft-step" }
 openecraft-parts = { path = "../crates/openecraft-parts" }
 openecraft-i18n = { path = "../crates/openecraft-i18n" }
 openecraft-ui = { path = "../crates/openecraft-ui" }
 openecraft-core = { path = "../crates/openecraft-core" }
 openecraft-client = { path = "../crates/openecraft-client" }
 openecraft-api = { path = "../crates/openecraft-api" }
+openecraft-view = { path = "../crates/openecraft-view" }
+openecraft-shell = { path = "../crates/openecraft-shell" }
+openecraft-session = { path = "../crates/openecraft-session" }
+openecraft-canvas = { path = "../crates/openecraft-canvas" }
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 env_logger = "0.11"

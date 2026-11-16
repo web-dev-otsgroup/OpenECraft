@@ -5,10 +5,11 @@ use openecraft_i18n::{tr, tr_fmt};
 use crate::icons::{self, Icon};
 use crate::io::{short_name, FileKind};
 use egui::{vec2, Color32, Pos2, RichText, Sense, Shape, Stroke};
-use openecraft_parts::vec3::{cross, dot, norm, sub, Orbit};
+use crate::view_cube::{Action, ViewCube};
+use openecraft_parts::vec3::{cross, dot, norm, quarter_turn, sub, view_from, Orbit};
 use openecraft_parts::{
     default_connection_points, distinct_values, parse_mesh, parse_svg, natural_cmp, ConnectionPoint, Exit, FnKind, FunctionTemplate, Grouping,
-    Component, Cutout, Mesh3d, Model2d, MountingData, Part, PartFilter, PlacedCutout, Prim2d, TopGroup, MOUNTING_KEYS, PRODUCT_GROUPS,
+    Component, Cutout, Mesh3d, Model2d, MountingData, Part, PartFilter, PlacedCutout, Prim2d, RestrictedArea, Restriction, TopGroup, ENCLOSURE_FACES, MOUNTING_KEYS, PRODUCT_GROUPS,
 };
 use openecraft_parts::portal::{Attachment, Lifecycle};
 use openecraft_parts::{date_from_unix, productgroups};
@@ -310,6 +311,69 @@ fn mounting_data(ui: &mut egui::Ui, part: &mut Part) {
     cutout_table(ui, "pcut", &mut part.mounting_data.cutouts);
     ui.label(RichText::new(tr("Door cutouts")).strong().color(DOOR_CUTOUT)).on_hover_text(tr("In the door, when they differ from the cutouts"));
     cutout_table(ui, "pdcut", &mut part.mounting_data.door_cutouts);
+    if part.subgroup == "Enclosure" || !part.mounting_data.restricted.is_empty() {
+        restricted_table(ui, &mut part.mounting_data.restricted);
+    }
+}
+
+/// Title of an enclosure face by its key ([`openecraft_parts::ENCLOSURE_FACES`]).
+fn face_title(key: &str) -> &'static str {
+    match key {
+        "plate" => tr("Mounting plate"),
+        "door" => tr("Door"),
+        "left" => tr("Left side"),
+        "right" => tr("Right side"),
+        "rear" => tr("Rear wall"),
+        "roof" => tr("Roof"),
+        _ => tr("Bottom"),
+    }
+}
+
+/// The restricted areas of an enclosure part: kind, face, place and size.
+fn restricted_table(ui: &mut egui::Ui, list: &mut Vec<RestrictedArea>) {
+    let header = egui::CollapsingHeader::new(RichText::new(tr_fmt!("Restricted areas: {}", list.len())).strong()).id_salt("prestricted");
+    header.show(ui, |ui| {
+        ui.weak(tr("Areas of the enclosure kept free of devices (placing) or of cutouts and holes (cut-out); place and size in the coordinates of the face, as its items have them."));
+        let mut remove = None;
+        egui::ScrollArea::vertical().id_salt("prestricted_rows").max_height(260.0).show(ui, |ui| {
+            egui::Grid::new("prestricted_grid").num_columns(7).striped(true).spacing([6.0, 4.0]).show(ui, |ui| {
+                for h in [tr("Kind"), tr("Face"), "X", "Y", tr("Width"), tr("Height"), ""] {
+                    ui.label(RichText::new(h).strong());
+                }
+                ui.end_row();
+                for (i, a) in list.iter_mut().enumerate() {
+                    let kind = |k: Restriction| if k == Restriction::Placing { tr("Placing") } else { tr("Cut-out") };
+                    egui::ComboBox::from_id_salt(("prestricted_kind", i)).selected_text(kind(a.kind)).width(80.0).show_ui(ui, |ui| {
+                        for k in [Restriction::Placing, Restriction::Cutout] {
+                            ui.selectable_value(&mut a.kind, k, kind(k));
+                        }
+                    });
+                    egui::ComboBox::from_id_salt(("prestricted_face", i)).selected_text(face_title(&a.face)).width(110.0).show_ui(ui, |ui| {
+                        for f in ENCLOSURE_FACES {
+                            if ui.selectable_label(a.face == f, face_title(f)).clicked() {
+                                a.face = f.to_string();
+                            }
+                        }
+                    });
+                    for v in [&mut a.x, &mut a.y] {
+                        ui.add(egui::DragValue::new(v).speed(0.5).range(-5000.0..=5000.0).suffix(" mm"));
+                    }
+                    ui.add(cutout_size(&mut a.w));
+                    ui.add(cutout_size(&mut a.h));
+                    if icons::button(ui, Icon::Delete, tr("Remove")).clicked() {
+                        remove = Some(i);
+                    }
+                    ui.end_row();
+                }
+            });
+        });
+        if let Some(i) = remove {
+            list.remove(i);
+        }
+        if icons::text_button(ui, Icon::Plus, tr("Add restricted area")).clicked() {
+            list.push(RestrictedArea { face: "plate".into(), w: 50.0, h: 50.0, ..Default::default() });
+        }
+    });
 }
 
 fn cutout_size(v: &mut f32) -> egui::DragValue<'_> {
@@ -1119,15 +1183,29 @@ fn paint_model_2d(painter: &egui::Painter, m: &Model2d, map: &dyn Fn([f32; 2]) -
     }
 }
 
-/// Small shaded view of a mesh; drag to rotate.
+/// Starting yaw and pitch of [`mesh_preview`].
+const PREVIEW_VIEW: (f32, f32) = (0.6, 0.35);
+
+/// Steepest view of [`mesh_preview`], short of straight down.
+const PREVIEW_PITCH: f32 = 1.5;
+
+/// Small shaded view of a mesh; drag to rotate, the view cube in the corner turns it to
+/// a side, an edge or a corner.
 pub fn mesh_preview(ui: &mut egui::Ui, mesh: &Mesh3d, size: egui::Vec2) {
     let (resp, painter) = ui.allocate_painter(size, Sense::drag());
     let id = resp.id.with("angles");
-    let (mut yaw, mut pitch): (f32, f32) = ui.data(|d| d.get_temp(id)).unwrap_or((0.6, 0.35));
+    let goal_id = resp.id.with("goal");
+    let (mut yaw, mut pitch): (f32, f32) = ui.data(|d| d.get_temp(id)).unwrap_or(PREVIEW_VIEW);
+    let mut goal: Option<(f32, f32)> = ui.data(|d| d.get_temp(goal_id));
+    let orbit = |(yaw, pitch): (f32, f32), dl: egui::Vec2| (yaw - dl.x * 0.01, (pitch + dl.y * 0.01).clamp(-PREVIEW_PITCH, PREVIEW_PITCH));
     if resp.dragged() {
-        yaw -= resp.drag_delta().x * 0.01;
-        pitch = (pitch + resp.drag_delta().y * 0.01).clamp(-1.5, 1.5);
-        ui.data_mut(|d| d.insert_temp(id, (yaw, pitch)));
+        (yaw, pitch) = orbit((yaw, pitch), resp.drag_delta());
+        goal = None;
+    }
+    if let Some(g) = goal {
+        let dt = ui.input(|i| i.stable_dt).min(0.1);
+        (yaw, pitch, goal) = glide_angles((yaw, pitch), g, dt);
+        ui.ctx().request_repaint();
     }
     let dark = ui.visuals().dark_mode;
     painter.rect_filled(resp.rect, 4.0, if dark { Color32::from_rgb(30, 32, 36) } else { Color32::from_rgb(232, 235, 240) });
@@ -1221,6 +1299,50 @@ pub fn mesh_preview(ui: &mut egui::Ui, mesh: &Mesh3d, size: egui::Vec2) {
     painter.add(Shape::mesh(out));
     if resp.hovered() {
         painter.text(resp.rect.left_bottom() + vec2(4.0, -4.0), egui::Align2::LEFT_BOTTOM, tr("Drag to turn the model"), egui::FontId::proportional(10.0), Color32::GRAY);
+    }
+    let cube = ViewCube::compact();
+    let centre = resp.rect.right_top() + vec2(-cube.size().x / 2.0 - 2.0, cube.size().y / 2.0 + 2.0);
+    let aim = goal.unwrap_or((yaw, pitch));
+    match cube.show(ui, resp.id.with("view_cube"), centre, yaw, pitch) {
+        Some(Action::Look(d)) => {
+            let (y, p) = view_from(d, aim.0);
+            goal = Some((y, p.clamp(-PREVIEW_PITCH, PREVIEW_PITCH)));
+        }
+        Some(Action::Turn(q)) => goal = Some((quarter_turn(aim.0, q), aim.1)),
+        Some(Action::Home) => goal = Some(PREVIEW_VIEW),
+        Some(Action::Orbit(dl)) => {
+            (yaw, pitch) = orbit((yaw, pitch), dl);
+            goal = None;
+        }
+        Some(Action::Fit) | None => {}
+    }
+    if goal.is_some() {
+        ui.ctx().request_repaint();
+    }
+    ui.data_mut(|d| {
+        d.insert_temp(id, (yaw, pitch));
+        match goal {
+            Some(g) => {
+                d.insert_temp(goal_id, g);
+            }
+            None => {
+                d.remove::<(f32, f32)>(goal_id);
+            }
+        }
+    });
+}
+
+/// Yaw and pitch a step of `dt` seconds on the way to `goal` (the shorter way round);
+/// no goal once there.
+fn glide_angles((yaw, pitch): (f32, f32), goal: (f32, f32), dt: f32) -> (f32, f32, Option<(f32, f32)>) {
+    use std::f32::consts::{PI, TAU};
+    let t = 1.0 - (-dt * 10.0).exp();
+    let turn = (goal.0 - yaw + PI).rem_euclid(TAU) - PI;
+    let (yaw, pitch) = (yaw + turn * t, pitch + (goal.1 - pitch) * t);
+    if (turn * (1.0 - t)).abs() < 1e-3 && (goal.1 - pitch).abs() < 1e-3 {
+        (goal.0, goal.1, None)
+    } else {
+        (yaw, pitch, Some(goal))
     }
 }
 

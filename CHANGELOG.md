@@ -3,8 +3,437 @@
 The notable changes of each OpenECraft release. The section of a version is the text of
 its GitHub release ([docs/releasing.md](docs/releasing.md)).
 
-## [0.1.2] - unreleased
+## [0.1.3] - unreleased
 
+<<<<<<< HEAD
+=======
+- **Light theme on Linux:** with the theme *System* the editor and the parts manager
+  started dark on Linux, where the window system does not report the desktop's theme.
+  They now take the colour scheme of the desktop from the settings portal (GNOME, KDE
+  and others, also in Flatpak and snap) or a dark GTK theme (`GTK_THEME`), follow a
+  change of it while running and are light without either. A theme chosen in the
+  settings stays as it is.
+- **AppImage updates with AppImageUpdate:** the AppImage carries update information
+  (`gh-releases-zsync`) and each release has its `.zsync` file, so AppImageUpdate,
+  Gear Lever and similar tools update it from the latest release, downloading only the
+  changed parts. The editor's own update keeps working.
+- **Report a bug from the editor:** a *Report a bug* button at the right of the quick
+  access row (also Help › Report a bug… and File › Help) opens a form for what
+  happened, the steps and the expected result, with a screenshot of the window and
+  the technical details (version, system, language, workspace, counts of the open
+  project, the last messages; no project contents), all reviewable and editable.
+  *Open GitHub issue form* opens a new issue on GitHub with the report filled in and
+  copies it; nothing is sent from the editor. The screenshot is copied or saved as PNG
+  to attach it there.
+- **Compressed downloads behind a reverse proxy:** the website and web editor images
+  sent the WebAssembly (40 MB instead of 15 MB for the website), the scripts and the
+  style sheet uncompressed when a reverse proxy spoke HTTP/1.0 to them, as nginx's
+  `proxy_pass` does by default. They now compress for HTTP/1.0 too and answer with
+  `Vary: Accept-Encoding`, so that caches keep the compressed and plain files apart.
+
+## [0.1.2] - 2026-11-15
+
+- **Website with live demos:** `website/` is a page that presents the project and
+  runs it: the schematic editor and the panel in 3D as canvases, the project check,
+  the reports, a console with the commands of the command line and the exports, all
+  on one example project in the browser, in the 20 languages of the editor. It is
+  deployed as static files (`cd website && trunk build --release`) or with the Docker
+  image `ghcr.io/nilres/openecraft-website`, which serves the web editor at `/editor/`
+  as well ([website](docs/website.md)); where the links of the page lead (web editor,
+  repository, downloads, documentation, issues) is set in `config.js` or with
+  environment variables of the image (`OPENECRAFT_EDITOR_URL`, …). The 3D routing
+  of the examples comes with the page; that of a changed project is searched in a
+  worker, so the page stays usable meanwhile. The demos are the editor's own code: its
+  shell tables, document state and drawing views moved into the library crates
+  `openecraft-shell`, `openecraft-session` and `openecraft-canvas`.
+- **Legal notice on the website:** the operator of a site sets a legal notice
+  (*Impressum*: name, address, email, phone, representative, register entry, VAT ID,
+  responsible person, further text) in `legal` of `config.js` or with the variables
+  `OPENECRAFT_LEGAL_…` of the Docker image; the footer then links to it, labelled in
+  the language of the page ([website](docs/website.md#legal-notice)). The image
+  writes `config.js` with a start script, so any character is allowed in a setting.
+- **Privacy notice, licenses and disclaimers on the website:** the footer links a
+  privacy notice (what the page does: no cookies, no tracking, nothing sent; the
+  operator adds the hosting and the server logs with `legal.privacy` /
+  `OPENECRAFT_LEGAL_PRIVACY`) and the license files of OpenECraft, its fonts and its
+  libraries, and says that OpenECraft is not affiliated with the owners of the
+  product names it mentions and comes without warranty. The page has a Content
+  Security Policy that keeps it to its own address, the Docker image sends
+  `Referrer-Policy` and `X-Frame-Options`
+  ([website](docs/website.md#privacy-notice-licenses-and-disclaimers)). The image
+  sends the WebAssembly compressed by its build instead of compressing it for every
+  visitor, and the page has an icon for the home screen of iPhones.
+- **Website shown before its demos are loaded, and in every language for search
+  engines:** the page shows a picture of the first sheet and loads the 40 MB module
+  afterwards (at the first scroll, click or key, or when the browser has time). The
+  build writes the page in every language beside the English one (`de.html`, …) with
+  translated title and description; with the public address the pages name each
+  other (`hreflang`) and the sitemap lists them. The image logs visits without whole
+  IP addresses, and links to the page are previewed with the name and a screenshot
+  ([website](docs/website.md#search-engines-and-link-previews)).
+- **Website for search engines and link previews:** the page has Open Graph and
+  Twitter card tags, structured data (`SoftwareApplication`), a translated title,
+  texts for the pictures of the gallery, which are WebP files of a fourteenth of the
+  size of the screenshots, and headings in order. With its public address
+  (`OPENECRAFT_SITE_URL` of the Docker image, or `installer/docker/website-site.sh`
+  on a page deployed by hand) it gets a canonical address, a preview image for links,
+  a sitemap and a robots.txt naming it
+  ([website](docs/website.md#search-engines-and-link-previews)).
+- **Automatic saving of shared projects**: a project opened from the project server
+  is saved to it by itself, 30 seconds after a change and every 30 seconds while the
+  work goes on (*Settings › Servers* or the *Project server* pane: on / off, 10 to
+  600 s). Unfinished drags and text inputs are not sent, saves run one at a time and
+  release no locks; `Ctrl+S` still saves at once. The status bar and the pane show
+  *Saved*, *Not saved yet*, *Saving…*, *Waiting for the server*, *Save failed* and
+  *Partly saved* apart, with the time of the last save the server confirmed. During
+  an outage the changes wait, the local recovery copy is written at once (and named
+  only once it is written) and the save follows when the session goes on
+  ([project server](docs/project-server.md)).
+- **Properties and copies of server projects** (#186): the project list of the
+  *Project server* pane selects a project; *Properties…* shows its properties as
+  saved on the server and changes them without opening the project (for who may
+  change the project data, while nobody has locked it; only the properties are
+  written, never the whole project). *Copy project…* shows the properties of the copy
+  at once: a free name on the server and the title, description, company, author,
+  date, revision and project properties of the original to adjust; *Create and open*
+  creates the copy from the saved state and opens it, *Cancel* leaves nothing on the
+  server. The original, its sessions, locks and access rights stay untouched; the
+  copy belongs to who created it and starts without the original's review records,
+  released revisions and baselines unless asked for. Unsaved changes of the open
+  project are asked about first; a project changed on the server meanwhile is
+  reported before the copy is made. The server records the project and revision a copy
+  was made from. Needs the updated project server.
+- **View cube in the 3D views**: the 3D view of the panel layout shows a view cube
+  in its top right corner and an axis triad (x red, y green, z blue) bottom left. A
+  click on a face, edge or corner of the cube turns the camera to look from there
+  (26 views, the corners isometric), a drag on it orbits; its buttons turn the view
+  by 90°, go back to the starting view or show everything. It replaces the buttons
+  of the standard views. The 3D previews of parts (part editor, data portal,
+  installation) have a small cube without labels and glide to the view clicked.
+- **Who created and last changed a shared project**: the project list of the
+  *Project server* pane and of the server's web page shows *Created by*, *Last
+  changed by* and *Last changed* for each project (`created_by`, `created_at`,
+  `changed_by`, `changed_at` of `GET /api/v1/projects`). The project server records
+  the signed-in user of the creation and of every save that changes the project;
+  opening, keeping a session alive and saving unchanged content do not count.
+  Projects of earlier versions show *Unknown* until their next change.
+- **Docker image of the web editor:** `ghcr.io/nilres/openecraft-web` serves the
+  web editor with nginx on port 8080, built by `installer/docker/Dockerfile`
+  (target `editor-web`) and published with the server images;
+  `installer/docker/compose.yaml` starts it with both servers
+  ([installation](docs/installation.md#docker-image-of-the-web-editor)).
+- **Web page of the project server**: started with `--web` (or
+  `OPENECRAFT_PROJECT_WEB=true`, `web = true` in its configuration file), the project
+  server serves a web page with the projects the user may see and a read-only view of
+  each: the pages by section or by structure, the devices with their places and the
+  pages drawn as on paper, with the locks of the users working on them. Project
+  managers edit the permissions of their projects; administrators get an
+  administration area for the users, the access rights (access without sign-in,
+  roles, grants) and the directories (Active Directory, LDAP, with a test), and a
+  view of the open sessions (user, project, saves, locked pages) with the history of
+  the ended ones, which the server keeps in `sessions.jsonl` of its data directory. The
+  server also offers the directories over its API (`/api/v1/directories`) and tells
+  the caller's user and rights in `/api/v1/info`. The page shares its sign-in, access
+  administration and styles with the parts server's data portal (new crate
+  `openecraft-web`), and its project views with the editor's navigator (new crate
+  `openecraft-view`).
+- **Shared projects recover expired sessions** (#183): the editor tells a server
+  that does not answer, an ended project session (expired, or the server restarted)
+  and an invalid sign-in apart. An ended session opens the project again with the
+  existing sign-in, without asking for the password; your unsaved changes are put
+  onto the server's current project and lock again, while changes another user
+  made meanwhile (or pages they removed) win and your version is kept in
+  *Project server › Kept changes*. After an invalid sign-in, signing in again in the
+  Project server pane continues the project. A failed save now shows the lost
+  connection at once; the pane and the status bar show the connection apart from
+  whether your changes are saved on the server, and a restored connection clears the
+  old connection error but not an unsaved failed save. *Keep working on a local
+  copy* ends the shared session and keeps the project with your changes locally.
+- **Freestanding PV arrays:** ground-mounted PV arrays on the plot, added in the
+  Buildings pane (*Freestanding PV arrays*) or clicked into the site plan: rows of
+  tilted tables with modules on top of each other, on rails over table beams on rammed
+  posts (generic `GEN.PV-POST-RAM` and `GEN.PV-TABLE-BEAM`), free of shade in winter.
+  Their modules and mounting go into the bill of materials, they have strings like the
+  arrays on the roofs, their leads run through a cable trench to the devices, and the
+  site plan and the 3D view draw them. Checked for arrays on each other, on a room and
+  outside the plot boundary. Commands `add_pv_array` / `set_pv_array` without building
+  and roof, with `stack` and `clearance`
+  ([panel layout](docs/features/panel-layout.md#buildings-levels-and-shafts)).
+- **Roofs picked in 3D:** a click on a roof in the 3D view shows it in the Layout
+  properties, where a PV array or a roof window is added at the point clicked. The
+  PV array window adds a string to the array with *+ String* beside its strings.
+- **Shared saves one at a time** (#182): a save to the project server waits for
+  the answer to the one before it (Save or Ctrl+S again sends the project as it is
+  then), and an answer marks only what its request sent as saved: edits or Undo
+  made while saving stay unsaved. Save and release keeps a page edited again
+  while saving and requests its lock again. Answers that arrive out of order no
+  longer take the project back to an older revision, a failed save sends and
+  releases nothing more, and closing or replacing a shared project ends its
+  session only after the save under way. The live project server tests run with
+  `scripts/test-project-server-live.ps1` (formerly `test-cable-rename.ps1`).
+- **Keep me signed in** (#184): optional project-server sign-in persistence on
+  Windows using Credential Manager, separately for each server and account. The
+  editor validates the saved session and reads current account rights before
+  using it. Sign out preserves open work as a local recovery copy, removes the
+  remembered credential and ends the account session after pending project closes.
+  Change user keeps the remembered sign-in for switching back. Reauthentication
+  retains pending save confirmations; stale windows cannot delete newer tokens.
+  Browser, macOS and
+  Linux sign-ins remain in memory only; remembering does not extend server expiry.
+  Remembered sign-in requires the updated project server; older servers still
+  support manual sign-in.
+- **Shared saves keep conflicting local edits** (#181): when the project server
+  leaves changes out of a save (locked or changed by another user), when a lock
+  is refused or lost, or when another user changed a target first, the editor
+  keeps your version before it shows the server's. *Project server › Kept changes*
+  lists these copies to compare with the open project, take over again as an
+  undoable edit (not while another user holds the lock), export as a project file
+  or discard; they are stored and survive closing the app or reopening the
+  project. A partial save is reported as such and never marks the project as
+  saved; the unsaved-changes question mentions the kept copies. Changes still
+  waiting for their lock are no longer replaced by a refresh.
+- **Cable core labels** (#172): automatic text clearance from definition lines,
+  wires, nearby symbols and labels; direct text dragging without selecting the
+  wire first, with a hover target. Align the crossed core labels of a definition
+  with a page preview, common side and clearance. Applying replaces only those
+  label positions in one undo step; manual offsets retain their original meaning.
+  Unresolved placement conflicts are outlined in the editor and block alignment.
+  The same positions are used by screen, SVG and PDF, and by the registered
+  `preview_core_labels` / `align_core_labels` commands.
+  **Rendering change for existing projects:** automatic labels without manual
+  offsets use the new layout, including on released pages and in PDF/SVG exports.
+  Release protection prevents edits; it does not select the previous renderer.
+  Saved manual offsets retain their positions. Page drawing reuses the caller's
+  index and the editor shares one label layout for drawing and pointer targets.
+- **Quick cable rename** (#174): select a cable definition or its label and use
+  *Rename cable…* in the context menu, the properties or the cable navigator.
+  The dialog selects the complete tag, validates it before applying and updates
+  references across pages in one undo step. Shared projects acquire all affected
+  locks first. Also available as the `rename_cable` CLI/MCP/plugin command.
+  Canvas context menus stay open during a left-button press so their commands
+  actually run on release.
+  Session-bound snapshots keep own locks identifiable when loading concurrent
+  page changes. Older servers use their GET snapshot and an authenticated status
+  at the same revision, preserving own locks without guessing from user names.
+  Cancelling an in-flight rename releases its new locks after the request has
+  finished; existing locks and locks protecting other local edits are kept.
+- **Cable core assignment** (#173): preview crossed wires, free cores and the
+  assignment order from the line start. Insufficient cores or conflicting wire
+  assignments leave all pending assignments unchanged and show a persistent
+  check warning. Correct the cable/core list before assigning again. Existing
+  assignments and cores used on other pages are preserved. CLI/MCP can inspect
+  `preview_cable_definition` and explicitly `apply_cable_definition`.
+  Rejected new definitions do not create unused cables. Imported core names
+  without a cable are preserved as conflicts; disabled assignment buttons explain
+  the reason. Interactive previews reuse the session index.
+- **PV arrays in 3D:** a click on an array opens its properties (modules and their
+  data, peak power, mounting and material, earthing, strings with their values and the
+  lengths of their leads, problems, and its settings). The cabling of the strings is
+  drawn from module to module and down to the generator junction box (`combiner`) with
+  the DC main cable on to the inverter: every module's plus lead (red) meets the next
+  module's minus lead (black) at a connector; *Show › See-through PV modules* shows it
+  under the modules. The mounting gets roof hooks
+  and an earthing point with its clamp on each rail or row of mounting bases, bonded by
+  the earthing conductor to an earthing busbar (`set_pv_array` `earthing`). *Show ›
+  Hide PV modules* shows the mounting. A room under the roof shown alone shows the
+  arrays and the roof windows over it; roof windows are no longer covered by the roof
+  seen through from outside. Example 16 places the inverter and the bonding busbar in
+  the attic ([panel layout](docs/features/panel-layout.md#buildings-levels-and-shafts)).
+- **Earthing and lightning protection:** buildings get earth electrodes (foundation
+  earth electrode in meshes, ring earth electrode, earth rods; connected to a main
+  earthing busbar) and a lightning protection system of class I - IV (air-termination
+  conductors on ridges and hips or as a mesh on flat roofs, air-termination rods, down
+  conductors with test joints into the electrodes), added in *Site › Earthing and
+  lightning protection* (rods clicked into the site plan), with their material,
+  diameter and mounting hardware (conductor holders, rod holders or concrete bases),
+  selected by a click in 3D or the site plan and set in their properties, drawn in 3D and in the site plan,
+  their material in the bill of materials, checked (down conductors per class, PV
+  arrays in the protection angle). Commands: `add_earth_electrode`,
+  `set_earth_electrode`, `set_lightning_protection`, `add_air_rod`, `set_air_rod`
+  ([panel layout](docs/features/panel-layout.md#buildings-levels-and-shafts)).
+- **Moving buildings:** *Site › Move buildings* is an edit mode of the site plan in which
+  buildings are dragged to their places and turned by 90°, with the rooms standing in
+  them.
+- **Outlets, switches and heating:** the menu has tabs, a search, filters by maker and
+  type and a 3D preview of the part picked; outlets and switches are drawn with their
+  models in the 3D view (frames, sockets with earthing clips, tilted rockers).
+- **Split projects for version control.** A project can be stored as
+  a folder of small files instead of one `.oec` file: the index `<name>.oecp`, one file
+  per page, one per device, part, cable and other record of the project-wide data, and
+  the embedded documents and images as plain files named by their hash. Every JSON
+  file is one line and depends only on the content, so a change touches only the files
+  it concerns and two people editing different pages do not conflict. `convert_project
+  --format oec|oecp|oecz` converts between the project file, the split project and the
+  archive; `--project <name>.oecp`, `open_project`, `save_project`, templates,
+  subprojects, the project index and batch changes read and write split projects. In
+  the desktop editor *File › Save as split project…* writes one (into a folder of its
+  own when the chosen folder holds other files), *Open*, the recent files, templates,
+  the comparison, subprojects and the project database read them, *Save* rewrites only
+  the changed files, and the installers open `.oecp` files with the editor. The web
+  version cannot open folders and keeps `.oec` and `.oecz`. **Archives (`.oecz`) are
+  written in version 2**: they hold the files of a split project instead of one
+  `project.oec`, so an embedded file used several times is stored once; the manifest
+  names the version (`version`), archives of version 1 are still read, and versions
+  of OpenECraft before this one cannot read the new archives. The **project server
+  stores its projects as split projects** (`<name>/<name>.oecp` in the data
+  directory) and writes only the files a save changed; project files of earlier
+  versions are converted at the first start and kept as `<name>.oec.bak`. For **git**,
+  saving writes a `.gitattributes` that keeps the files unconverted, and the merge
+  driver `merge_project_file` merges the JSON files record by record (fields of a
+  record, records by their id, the order of pages and records, the id counter);
+  `check_project_data --repair` renumbers ids two branches gave twice
+  (`docs/command-line.md`). Copies of a split project start the ids of their new
+  objects at different random places, so that this is rare. A save writes only the
+  files this side changed: what another program changed in the folder meanwhile (a
+  `git pull`) is kept and read in, and a file changed by both is not overwritten.
+  A file git merged as text is named when the project is opened. Large split
+  projects stay fast: the records of a kind are spread over 16 folders, a save
+  writes only the pages and data that changed, the folder is read once on all
+  threads, and a save is one step that a crash either leaves undone or the next
+  access finishes (journal `.oecp-save`). The `.oec` file stays the default (#149).
+- **Parts server: groups, catalog permissions, directories and a dashboard.** Users
+  are gathered in **groups** of the server (*Administration › Groups*, `/api/v1/groups`;
+  the groups of local accounts become such groups at startup), and grants to a group
+  apply to its members, local or from a directory. Each catalog gets **permissions**
+  of users and groups (*Catalogs › Permissions*, grants on `catalog:<id>`), which
+  apply to the catalog and its parts whatever their manufacturer. Users who may change
+  parts create them on the web page (*New part*) and edit or delete those they may
+  change. The **Active Directory / LDAP** connections are set up and tested in
+  *Administration › Directories*. A **dashboard** shows graphs of the parts (per
+  manufacturer, group, catalog, lifecycle, changes per month, completeness);
+  administrators hide it on the web page, with `--dashboard false`,
+  `OPENECRAFT_DASHBOARD` or `dashboard` in the configuration file. **Exports carry the
+  version of the server** (`export` in `export.json`, which is now an object with
+  `parts`, a first line in `export.csv`, the `meta` table of backups, the header
+  `X-OpenECraft-Server-Version`). The web page shows the OpenECraft logo, its title
+  leads back to the start page and the list shows 10 to 200 parts per page.
+  **Catalogs have company logos** (*Administration › Catalogs › Edit*,
+  `/api/v1/catalogs/{id}/logo`), shown on the catalog cards and on their parts; the
+  bundled catalogs bring the manufacturers' logos (from Wikimedia Commons, name badges
+  for COSMO, Janitza, MDT and Pylontech). The editor's *Data portal* shows the logo of a
+  part's catalog and the parts manager the logos of its catalogs, where they are also
+  changed or removed; *Settings › Appearance › Data portal* (editor) and *Logos* (parts
+  manager) hide them ([parts server](docs/parts-server.md), [access control](docs/access-control.md)).
+- **Enclosure packages of configurators** (#176): *Import parts* (editor, Parts
+  Manager, `parts_import`) reads the ZIP archive of the Rittal configurator: the parts
+  of its bill of materials, the configured enclosure with size, GTIN, configuration id,
+  the preview of its EPLAN macro as picture, the bodies of the EPLAN Pro Panel macro
+  (or else the STEP model) as 3D model, the place of its mounting plate (part data
+  `Mounting origin`, used by new enclosures of the part) and its restricted areas, and
+  the macro, EPLAN project, STEP file and PDFs as attachments
+  ([parts](docs/features/parts.md)). **Restricted areas** of enclosure parts (mounting
+  data, on the faces of the enclosure) are drawn hatched in the panel layout, which
+  reports devices in a placing area and cutouts and holes in a cut-out area
+  ([panel layout](docs/features/panel-layout.md#restricted-areas)), shown in the 3D view
+  and edited in a table of the part editor. An enclosure of a maker's part that names
+  its system keeps that part instead of the catalog's body (also in the bill of
+  materials), and the **3D view and 3D exports show the maker's model** of the
+  enclosure. Mounting plates that are not centred get their size (`Mounting size`,
+  `mounting_size`). Importing a part again refreshes the project's copy with what the
+  import brings (models, mounting data, technical data). Unpacked EDZ files and vendor
+  folders take 3D models from their 3D macros, and macros with bodies in a form not
+  read are reported. The 3D macros of EDZ files give their parts a 3D
+  model. *Import parts* tells its result in a box at the bottom right. Cabinet doors
+  can be hinged on the right (*Door hinge*, `door_hinge`, part data `Door hinge`; the
+  Rittal import finds it from the hinge blocks): the door view, the 3D view and the
+  door wiring follow it. STEP files whose arcs are given by their vertices
+  only (as Open CASCADE writes them) are read now, and a body STEP cannot convert no
+  longer fails the whole model.
+- **Logos in title blocks** (#165): title blocks and drawn report forms get image
+  elements (*➕ Image*), with a picture of their own (e.g. the company logo, kept in the
+  title block and its file) or the new project logo of *Project properties › Logo*
+  (e.g. the customer's), fitted with its aspect ratio; the cover page shows the project
+  logo above the project name or at a place and size of its own (`set_cover_logo`). Texts of forms can be bold, italic and rotated, and new placeholders show the
+  previous and next page (`{page.previous}`, `{page.next}`) and revision tables
+  (`{rev.1.name}`, `{rev.2.date}` …). Commands: `list_title_blocks`, `set_title_block`,
+  `delete_title_block`, `set_default_title_block`, `set_page` (`title_block`),
+  `add_title_block_image`, `set_project_info` (`logo`)
+  ([reports and checks](docs/features/reports-and-checks.md#forms)).
+- **Customised forms and drawings:** elements of title blocks and drawn forms can be
+  limited to page types or to a filled placeholder (revision tables), get their own
+  colour and dashes, and QR codes encode texts with placeholders. Title blocks follow
+  the page type and the plot frame (*Title block by page type*, frame property). A
+  **stamp** across every page follows the revision workflow (DRAFT, FOR APPROVAL,
+  nothing or AS BUILT when released) and `{rev.status}`, `{rev.approved_by}`,
+  `{rev.approved_date}` show who approved. Report forms get total rows, shaded rows
+  and column alignment. The **company library** on the parts server shares title
+  blocks, report schemes and plot frames between projects (`GET` / `PUT
+  /api/v1/libraries/forms`). Commands: `set_stamp`, `set_default_title_block`
+  (`page_type`), `set_frame` (`title_block`), `parts_company_forms`
+  (`publish`)
+  ([reports and checks](docs/features/reports-and-checks.md#forms)).
+- **More data from EDZ files** (#162): connection points keep the wires their clamps
+  take (smallest and largest cross-section, most wires), and the new check *Wires at
+  connection points* warns about more wires than that or wires too thin or too thick.
+  Drilling patterns tell tapped from through holes and give the cutout of a part (an
+  HMI panel's `197 x 141` instead of a Ø141 hole); EPLAN's rail data or a text naming
+  the rail make a part one for a mounting rail of that size. The product picture is
+  kept with the part and shown in the part details with its mounting and wiring data,
+  and the part XML of an unpacked EDZ file is read with its connection points, drilling
+  pattern, macros and picture ([parts](docs/features/parts.md)).
+- **Placed cutouts** (#162): a part has any number of cutouts and door cutouts, each with
+  its centre, turn and corner radius (table and preview in the *Mounting* tab of the part
+  editor, text `197 x 141 @ 0/-6.5 R3 15°`, read from EDZ drilling patterns). The
+  openings sit there and turn with the device, the NC data carry turn and radius, and
+  the manufacturing check reports cutouts beyond the device front or in the free edge
+  of the door and the walls ([panel layout](docs/features/panel-layout.md)).
+- **Scaled symbols** (#162): *Scale* in the properties of a placed library symbol (or
+  `update_symbol` with `scale`) draws an imported symbol larger or smaller, its texts
+  at their size and its wires following ([symbols](docs/features/symbols.md)).
+- **Administration of the parts server on its web page:** *Administration* shows an
+  overview of the server and manages the users (create, change, delete, last sign-in,
+  sign out everywhere), the access rights (sign-in for reading, roles, grants), the
+  catalogs (also installing the bundled ones), the import of parts, and exports and
+  backups: the parts as CSV or JSON, catalogs, users, access settings (also restored)
+  and the whole database as one SQLite file. On a new server an administrator signs in
+  with the access token. New API: `GET /export.json`, `GET /backup`, `GET /bundled`,
+  `POST /bundled/{id}`, `DELETE /users/{name}/sessions`; `GET /users` also returns the
+  open sessions and the last sign-in ([parts server](docs/parts-server.md)).
+- **Registration on the parts server:** users can create an account themselves
+  (*Register* next to the sign-in) and become readers, when it is switched on in
+  *Administration › Access rights* or with `--registration`, `OPENECRAFT_REGISTRATION`
+  or `registration` in the configuration file; it is closed by default. New accounts
+  wait for the approval of an administrator (*Administration › Users*: approve or
+  reject) unless approval is switched off. Registrations are throttled per client,
+  names that grants refer to cannot be taken. Command line / MCP:
+  `parts_registration` (`enabled`, `approval`), `parts_user_approve`. New API:
+  `POST /register`, `GET|PUT /registration`, `POST /users/{name}/approval`; `/info`
+  tells whether the registration is open.
+- **EPLAN Data Portal downloads:** DXF and commercial-data downloads use the current
+  POST API, and the connection test checks the protected file-provider service without
+  downloading commercial data. On Windows, an explicit Remember token option lets
+  a verified PAT be shared securely between the editor and CLI/MCP through
+  Credential Manager ([parts server](docs/parts-server.md#shared-data-portal-pat-on-windows)). The first
+  GUI request loads the saved PAT in the background automatically, without requiring
+  a connection test. Concurrent requests share the lookup.
+- **Straight ferrules and terminals:** a wire or cable core with a ferrule or a crimped
+  terminal runs straight out of its connection point for the length of it (with its
+  collar or insulated sleeve) and bends only behind it, in the 3D routing and in the 3D
+  view, instead of bending the ferrule where it goes into the device
+  ([panel layout](docs/features/panel-layout.md)).
+- **Keys and gestures:** *File › Settings › Keys and gestures* configures every key,
+  modifier and gesture in one place: the keyboard shortcuts (now also the keys that
+  move through the 3D view, and the panel layout follows the keys of Rotate, Delete and
+  Fit), the modifier keys (adding to the selection, opening links, a single item of an
+  assembly, *Keep connections* reversed for a move, rotating back, moving faster in 3D,
+  the wheel turned sideways or zooming),
+  the mouse buttons that pan, orbit, cancel, rotate while moving and the double-clicks,
+  and what the wheel does, two fingers (pan and zoom together, zoom only or pan only)
+  and three fingers on a touch screen. It replaces the *Navigation* and
+  *Keyboard shortcuts* settings ([user interface](docs/user-interface.md)).
+- **Moved wires stay connected** (#133): a wire moved on its own no longer leaves the
+  connection points it ends at; it gets a new leg from the point, or slides along the
+  rail it ends on. *Edit › Keep connections* (on by default) switches this and the
+  stretching of attached wires off, so the selection moves alone; Alt held at the
+  start of a drag reverses it for that drag. Dragging the square handle at an end of a
+  selected wire moves only that end, to disconnect it or connect it elsewhere. Commands:
+  `move_items` (`keep_connections`), `move_wire_end`
+  ([schematic](docs/features/schematic.md#editing)).
+- **Server administrator from the environment:** `OPENECRAFT_ADMIN_USER` (parts server)
+  and `OPENECRAFT_PROJECT_ADMIN_USER` (project server) name the administrator account
+  created at startup, as `--admin-user` does, so a Docker container gets its first user
+  from environment variables alone ([installation](docs/installation.md#docker-images-of-the-servers)).
+>>>>>>> 971c82b6cf3a9dd36f46ab572d373b585e6a70ad
 - **Full-canvas schematic crosshair:** *File › Settings › Appearance* can extend the
   placement crosshair to the edges of the schematic canvas, following the snapped
   working point.
@@ -155,7 +584,6 @@ its GitHub release ([docs/releasing.md](docs/releasing.md)).
   ([schematic](docs/features/schematic.md)).
 - CAD drawing imports return original geometry bounds and their page origin, so
   external importers can recover drawing coordinates without changing page placement.
-
 - **Device boxes with device connection points:** a dashed box of any size drawn on
   the schematic is a device of its own (power supply, measuring instrument, control
   module) without a library symbol; device connection points placed on its outline
@@ -173,7 +601,6 @@ its GitHub release ([docs/releasing.md](docs/releasing.md)).
   list that connection once, and neither role counts as a second main function. Role
   on `add_device_box` and `update_device_box`, command `show_device_pins`
   ([schematic](docs/features/schematic.md)).
-
 - **Cable cores at the cable definition line:** the stroke, core designation and cable
   tag of each core sit where a cable definition line of its cable crosses the wire, so
   they line up on wires of different lengths (30 % of the wire without a line). The core
@@ -210,16 +637,13 @@ its GitHub release ([docs/releasing.md](docs/releasing.md)).
   structure. Commands `add_structure_box`,
   `update_structure_box`, `list_structure_boxes`
   ([schematic](docs/features/schematic.md#structure-identifiers-iec-81346)).
-
 - **Tag blocks clear of neighbouring symbols:** a tag block placed automatically that
   would run into a neighbouring symbol goes on the other side of its symbol, above or
   below, whichever is clear of symbols and wires; the tag of functions of one device
   side by side in a row is shown once, at the first of them (the surge protective
   devices `-F1` of the transformer metering examples no longer overlap). Tag blocks
   placed by hand stay where they are.
-
 - Preserve imported plot-frame artwork and live page fields as reusable frames, separate from selectable page content, including canvas, frame preview and exports.
-
 - PLC addresses that are not byte.bit addresses, such as imported card positions like `A1.3.1`, are compared as whole texts, so different addresses are no longer reported as duplicates.
 - Keep the closing window responsive while preparing recovery data, with progress for the previous autosave, project, parts database and macro library.
 - Reuse Insert center symbol groups and search results while scrolling, refreshing them when definitions, parts, search text or language change.
@@ -297,11 +721,9 @@ its GitHub release ([docs/releasing.md](docs/releasing.md)).
 - Preserve the connectivity domain of imported fluid and process symbols so their ports stay distinct from electrical connections.
 - Keep imported property text angles and pin designation fields editable and linked to their placed symbol.
 - Support imported secondary device functions and local junction paths without adding spurious main functions or device endpoints.
-
 - **Accessories from macros:** a macro can list in `device_part_additions` the literal
   accessory articles of its devices to add when it extends an existing device; the other
   articles and the local quantities of that device stay as they are.
-
 - **Reusing failed route searches:** with the routing rule `reuse_failed_searches` (off by
   default), a search that found no route is not repeated when later routes only fill the
   channels.

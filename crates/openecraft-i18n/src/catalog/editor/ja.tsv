@@ -1,4 +1,4 @@
-# English<TAB>日本語 – the editor (openecraft/) (texts without a line are shown in English). Sorted by the English text: cargo run -p openecraft-i18n --example tidy
+# English<TAB>日本語 – the editor (openecraft/) and its shell, session and views (openecraft-shell, -session, -canvas) (texts without a line are shown in English). Sorted by the English text: cargo run -p openecraft-i18n --example tidy
    |  Potential {}	   |  電位 {}
   (built-in)	  (組み込み)
 (choose a part)	(部品を選択)
@@ -8,7 +8,6 @@
 (empty)	(空)
 (included)	(付属)
 (no cable highlighted)	(強調表示されたケーブルなし)
-(no structure)	(構造なし)
 (none)	(なし)
 (project default)	(プロジェクトの既定値)
 (repairable)	(修復可能)
@@ -42,13 +41,13 @@
 3D macro	3D マクロ
 3D macro {} inserted	3D マクロ {} を挿入しました
 3D macro {} saved	3D マクロ {} を保存しました
-3D view	3D ビュー
 =A1+CAB1	=A1+CAB1
 ? = not in the schematic yet	? = まだ回路図にありません
 A baseline stores the whole project (pages, devices, parts, settings). Releasing a revision stores one.	ベースラインはプロジェクト全体 (ページ、デバイス、部品、設定) を保存します。リビジョンをリリースするとベースラインが 1 つ保存されます。
 A cable of the bus type for every connection without cable	ケーブルのない接続ごとにバスタイプのケーブルを作成
 A cutout of the same size at the same place in the neighbour's side wall: together they are a cable passage	隣のエンクロージャーの側板の同じ位置に同じサイズの切り欠きを追加します。両方でケーブル貫通口になります
 A file of the same name in the folder gets a new version (checked out and in), otherwise the file is added	フォルダー内に同名のファイルがある場合は新しいバージョンになり (チェックアウトとチェックイン)、ない場合はファイルが追加されます
+A folder with one small file per page, device and part instead of one project file, for version control such as git	1 つのプロジェクトファイルの代わりに、ページ、機器、部品ごとに小さなファイルを持つフォルダー。git などのバージョン管理用
 A large text across every page, e.g. DRAFT while a revision is being prepared; texts take placeholders, empty: no stamp.	各ページに大きく表示する文字（例: リビジョン準備中の「ドラフト」）。プレースホルダーを使えます。空 = なし。
 A level on top of the highest one	最上階の上の階
 A local file opens locally, a server project is opened on the project server again	ローカルファイルはローカルで開き、サーバープロジェクトはプロジェクトサーバーで再度開きます
@@ -65,6 +64,8 @@ A reference point at the origin of the plant	設備の原点にある基準点
 A report block generates the pages of a report, e.g. one terminal diagram per strip, and updates them.	レポートブロックはレポートのページ (例: 端子台ごとに 1 つの端子図) を生成し、更新します。
 A schematic page 3.1, 3.2, … after the current page, kept as sub-page when renumbering	現在のページの後に作成される回路図ページ 3.1、3.2、…。再番号付け時もサブページとして維持されます
 A schematic page per planned device with a page macro that is not in the schematic yet (selected segment, otherwise all)	ページマクロを持ち、まだ回路図にない計画済みデバイスごとの回路図ページ (選択したセグメント、選択がない場合はすべて)
+A split project (.oecp) is a folder with one small file per page, device, part and embedded file, for version control such as git: File › Save as split project.	分割プロジェクト（.oecp）は、ページ、機器、部品、埋め込みファイルごとに小さなファイルを持つフォルダーで、git などのバージョン管理用です: ファイル › 分割プロジェクトとして保存。
+A split project is a folder of files: the browser cannot open it. Convert it to a project file (.oec) or an archive (.oecz) first.	分割プロジェクトはファイルのフォルダーです。ブラウザーでは開けません。先にプロジェクトファイル（.oec）またはアーカイブ（.oecz）に変換してください。
 A template of this name is replaced.	この名前のテンプレートは置き換えられます。
 A template sets the page type, plot frame, title block, structure and description of a new page and places its content.	テンプレートは、新しいページのページタイプ、図枠、表題欄、構造、説明を設定し、その内容を配置します。
 A way through free air costs this many times the way in a duct or routing path	空中を通る経路のコストは、ダクトまたは配線経路を通る場合のこの倍数になります
@@ -77,7 +78,6 @@ Accept as checked	確認済みとして承認
 Accepted messages ({})	承認済みメッセージ ({})
 Active	有効
 Actuators on the door	扉の操作部
-Add	追加
 Add a command	コマンドを追加
 Add a target language to translate the project texts.	プロジェクトテキストを翻訳するには、ターゲット言語を追加してください。
 Add filter	フィルターを追加
@@ -110,6 +110,9 @@ Air at devices at most	デバイス周囲の最高温度
 Air temperature	空気温度
 Air temperature at the devices	デバイス周囲の空気温度
 Air temperature {} … {} °C	空気温度 {} … {} °C
+Air-termination conductors on the ridges and hips (a mesh on flat roofs), down conductors along the outer walls with test joints, ending on the earth electrodes	棟と隅棟の受雷導体 (陸屋根では網目)、外壁に沿った試験用接続端子付きの引下げ導線で、接地極で終わります
+Air-termination rod	突針
+Air-termination rod placed on building {}; click for the next one · Esc: stop	建物 {} に突針を配置しました。次の突針はクリック · Esc：終了
 Align	整列
 Aligned	平行
 Alignment	整列
@@ -126,6 +129,7 @@ All pages	すべてのページ
 All report pages	すべてのレポートページ
 All user symbols as library file	すべてのユーザーシンボル (ライブラリファイル)
 All wires of this potential are highlighted.	この電位のすべての電線が強調表示されています。
+Also copy revisions, baselines and review records	リビジョン、ベースライン、レビュー記録もコピー
 Also the groups that do not fit the function definition	機能定義に適合しないグループも含める
 Altitude	標高
 Always	常に
@@ -154,6 +158,7 @@ Arc	円弧
 Archive and version	アーカイブとバージョン
 Archive project…	プロジェクトをアーカイブ…
 Arms	側
+Array	アレイ
 As defined by the check	チェックの定義どおり
 As the rules say ({})	規則に従う ({})
 Aspects of the pages	ページのアスペクト
@@ -182,8 +187,7 @@ Automatic ({})	自動 ({})
 Automatic accessories	自動付属品
 Automatic configuration	自動構成
 Automatic placement	自動配置
-Automation	自動化
-Aux	補助
+Automatic: {}	自動: {}
 Avoid:	回避:
 Back	戻る
 Back to the project (Esc)	プロジェクトに戻る (Esc)
@@ -218,6 +222,9 @@ Boundary	境界
 Breaking capacity against the short-circuit current at each protective device of the mains, disconnection at the lowest fault current at the end of its circuit, short-circuit withstand of the cables and selectivity with the device upstream.	電源系統の各保護機器における短絡電流に対する遮断容量、回路末端の最小故障電流での遮断、ケーブルの短絡耐量、上位機器との選択遮断。
 Bridge: four wires; the connection comes in at one side and goes to the three others, the opposite side first	ブリッジ：4本の接続線。接続は一方の側から入り、他の3方向へ、まず反対側へ向かいます
 Building {} added with a level at ground level	地上階 1 つで建物 {} を追加しました
+Building {} at x {} m, z {} m	建物 {} の位置 x {} m、z {} m
+Building {} at x {} m, z {} m, turned {}°	建物 {} の位置 x {} m、z {} m、回転 {}°
+Building {} at x {} m, z {} m, turned {}°: it stands outside the plot boundary	建物 {} の位置 x {} m、z {} m、回転 {}°：敷地境界の外にあります
 Built-in frames cannot be changed; copy one to adapt it.	組み込みの図枠は変更できません。調整するにはコピーしてください。
 Built-in scheme: copy it to change it.	組み込みのスキーム: 変更するにはコピーしてください。
 Built-in title blocks are read only – use “Copy as new” to make your own.	組み込みの表題欄は読み取り専用です。独自の表題欄を作成するには「新規としてコピー」を使用してください。
@@ -253,12 +260,16 @@ Change request	変更依頼
 Change requests	変更依頼
 Change requests (CSV, JSON)	変更依頼 (CSV、JSON)
 Changed against the frozen routes:	固定されたルートからの変更:
-Changed by another user in the meantime, your change was replaced: {}	その間に別のユーザーが変更したため、あなたの変更は置き換えられました: {}
+Changed by another user before you got the lock	ロックを取得する前に別のユーザーが変更しました
+Changed by another user in the meantime: {}. Your version is kept in the Project server pane.	その間に別のユーザーが変更しました: {}。あなたの版はプロジェクトサーバーのペインに保管されています。
 Changed cells of a CSV or Excel file exported here (rows by their key)	ここからエクスポートした CSV または Excel ファイルの変更されたセル (行はキーで識別)
 Changed message levels ({})	変更したメッセージレベル ({})
 Changed since mounted: was at X {} mm, Y {} mm with part {}	取付後に変更されました: 以前は X {} mm、Y {} mm、部品 {}
 Changed since wired: was {} · {} · {}	配線後に変更されました: 変更前 {} · {} · {}
 Changes	変更
+Changes not saved on the project server yet: finished changes are saved automatically within {} s	変更はまだプロジェクトサーバーに保存されていません: 完了した変更は {} 秒以内に自動保存されます
+Changes not saved on the project server: save them when the server answers again.	変更はプロジェクトサーバーに保存されていません: サーバーが再び応答したら保存してください。
+Changes not saved on the project server: they are saved as soon as the server answers again.	変更はプロジェクトサーバーに保存されていません: サーバーが再び応答するとただちに保存されます。
 Changes since revision {}	リビジョン {} 以降の変更
 Changes the page order; the name stays	ページの順序を変更します。名前は変わりません
 Changes the tag of all functions of this device	このデバイスのすべての機能のタグを変更します
@@ -290,10 +301,14 @@ Choose another project	別のプロジェクトを選択
 Choose file…	ファイルを選択…
 Choose image…	画像を選択…
 Choose pages	ページを選択
+Choose the building.	建物を選択してください。
 Chooses the pages whose structure starts with this	構造がこれで始まるページを選択します
 Circle	円
 Circuits of a generic manifold	汎用ヘッダーの回路数
+Class of the lightning protection system: the distance of its down conductors, the mesh of flat roofs and the protection angle	雷保護システムのクラス：引下げ導線の間隔、陸屋根の網目、保護角
+Class {}	クラス {}
 Clear	クリア
+Clear the search	検索をクリア
 Clearance	クリアランス
 Click	クリック
 Click a text: open its link	テキストをクリック：リンクを開く
@@ -302,6 +317,7 @@ Click centre, then a point on the circle	中心をクリックし、次に円周
 Click in the panel layout: a single item of an assembly	盤レイアウトでクリック：アセンブリの単一の項目
 Click into the page to place the image	ページ内をクリックして画像を配置します
 Click into the page to place {}	ページ内をクリックして {} を配置します
+Click on a roof of building {}	建物 {} の屋根をクリックしてください
 Click on a wall	壁をクリック
 Click on a wire to place the connection definition point	電線をクリックして接続定義ポイントを配置します
 Click on the 4 mm grid	4 mm グリッド上をクリックします
@@ -326,17 +342,23 @@ Click two corners	2 つのコーナーをクリックします
 Click two corners of the structure box, then set its identifiers in the properties · Esc or right click to finish	構造ボックスの 2 つの角をクリックし、プロパティで識別子を設定します · Esc または右クリックで終了
 Click two nodes to connect them	2 つのノードをクリックして接続します
 Click two points to measure from one to the other · Esc: stop	2点をクリックして一方から他方まで測定 · Esc：終了
+Click where an air-termination rod goes on a roof · Esc: stop	屋根の上で突針を置く場所をクリック · Esc：終了
+Click where an earth rod goes, at or round a building · Esc: stop	建物のそばや周囲で接地棒を打つ場所をクリック · Esc：終了
 Click where four wires meet: the bridge leads the connection from one side to the three others, the opposite side first · {} turns it · Esc or right click to finish	4本の接続線が交わる点をクリック：ブリッジは接続を一方の側から他の3方向へ、まず反対側へ導きます · {} で回転 · Esc または右クリックで終了
 Click where it is in the site plan	配置図でその位置をクリックします
+Click where the air-termination rods go on the roofs in the site plan	配置図で屋根の上の突針の位置をクリックします
+Click where the earth rods go in the site plan	配置図で接地棒の位置をクリックします
+Click where the middle of a freestanding PV array goes in the site plan	配置図で野立てPVアレイの中心の位置をクリックします
+Click where the middle of a freestanding PV array goes · Esc: stop	野立てPVアレイの中心の位置をクリック · Esc：終了
 Click where the reference point is	基準点の位置をクリックします
 Click where three wires meet: the T-junction names the device the wires start from and the order of their targets · {} turns it where no wires meet yet · Esc or right click to finish	3本の接続線が交わる点をクリック：T分岐は電線が出る機器と目標の順序を指定します · まだ接続線が交わらない場所では {} で回転 · Esc または右クリックで終了
 Click where two wires cross: the crossing connects them and leads each end of its line straight on first, then across · {} turns it · Esc or right click to finish	2本の接続線が交わる点をクリック：交差は両者を接続し、線の各端をまず直進、次に横方向へ導きます · {} で回転 · Esc または右クリックで終了
 Click where two wires meet at a right angle, or where connection points face each other across the corner: with Auto-connect on, wires are drawn to it · {} turns it · Esc or right click to finish	2本の接続線が直角に交わる点、または接続点がコーナーをはさんで向き合う点をクリック：自動接続が有効なときはここへ接続線が描かれます · {} で回転 · Esc または右クリックで終了
 Click while moving	移動中にクリック
 Click, or drag it into the page	クリックするか、ページにドラッグします
+Clicked at x {} mm, z {} mm in the floor plan of the building: a new roof window or PV array goes there.	建物の平面図の x {} mm、z {} mm をクリックしました。新しい天窓またはPVアレイがそこに置かれます。
 Climate (IEC 60890)	温度管理 (IEC 60890)
 Clipboard	クリップボード
-Close	閉じる
 Close door	扉を閉じる
 Close page tab	ページタブを閉じる
 Close shared project	共有プロジェクトを閉じる
@@ -367,13 +389,16 @@ Comments ({})	コメント ({})
 Comments a reviewer made in a PDF export of the project (Acrobat or another PDF viewer)	レビュー担当者がプロジェクトの PDF エクスポートに付けたコメント (Acrobat またはその他の PDF ビューアー)
 Comments and markup	コメントとマークアップ
 Company library	会社ライブラリ
+Compare	比較
 Compare and baselines	比較とベースライン
 Compare with	比較対象
 Compare with a baseline, a revision or another project file and take differences over	ベースライン、リビジョン、または別のプロジェクトファイルと比較して、相違点を反映します
 Complete tag: {}\nAspects missing here are taken from the page (=function +location) or the structure box the symbol lies in.	完全なタグ: {}\nここで不足しているアスペクトは、ページ (=機能 +取付場所) またはシンボルがある構造ボックスから取得されます。
+Concrete base	コンクリート台座
 Condition	条件
 Condition (OPTION=value & …)	条件 (OPTION=値 & …)
 Conductive frame	導電性フレーム
+Conductor	導体
 Conflicts	競合
 Connected devices	接続されたデバイス
 Connected to:	接続先:
@@ -406,6 +431,9 @@ Copy	コピー
 Copy / cut / paste (devices get new tags)	コピー / 切り取り / 貼り付け (デバイスには新しいタグが付きます)
 Copy as new	新規としてコピー
 Copy built-in…	組み込みをコピー…
+Copy of	コピー元
+Copy project	プロジェクトをコピー
+Copy project…	プロジェクトをコピー…
 Core designations separated by blanks	スペース区切りの心線名称
 Core labels placed by hand	手動で配置した心線ラベル
 Cores 1, 2, 3 … for the wires crossed, plus GNYE	横切った電線に心線 1、2、3 …、さらに GNYE
@@ -417,14 +445,21 @@ Covers what is behind the text	テキストの背後にあるものを隠しま�
 Create	作成
 Create an enclosure in the panel layout first.	最初に盤レイアウトでエンクロージャーを作成してください。
 Create an enclosure or a room (Layout space › New enclosure, New room) to start the panel layout.	エンクロージャーまたは部屋を作成して (レイアウト空間 › 新しいエンクロージャー、新しい部屋) レイアウトを開始します。
+Create and open	作成して開く
 Create baseline	ベースラインを作成
 Create bus cables	バスケーブルを作成
 Create draft	ドラフトを作成
 Create revision	リビジョンを作成
+Created on the server	サーバーでの作成
+Created {}	作成: {}
+Created {} as a copy of {} and opened it	{} を {} のコピーとして作成し、開きました
+Creates a new project on the server from the saved state of this one; you set its name and properties first	このプロジェクトの保存済みの状態からサーバーに新しいプロジェクトを作成します。先に名前とプロパティを設定します
+Creating {} as a copy of {}…	{} を {} のコピーとして作成しています…
 Cross references…	相互参照…
 Crossed wires	横切った電線
 Ctrl + click on the text opens it as well	テキストを Ctrl + クリックしても開きます
 Ctrl+A	Ctrl+A
+Current at maximum power	最大出力時の電流
 Current-carrying capacity: {} × IEC 60204-1, table 6	許容電流: {} × IEC 60204-1、表 6
 Customer rule sets	顧客ルールセット
 Customer, plant or standard	顧客、工場、または規格
@@ -437,6 +472,7 @@ Cut length step tubes	チューブの切断長の刻み
 Cut length step wires	電線の切断長の刻み
 Cutout {} × {} mm	切り欠き {} × {} mm
 Cutting allowance per end	端部ごとの切断余長
+DC leads	直流ケーブル
 DRAFT	ドラフト
 DRAFT, FOR APPROVAL and APPROVED in the current language; nothing once released	現在の言語の「ドラフト」「承認前」「承認済み」。リリース後は表示しません
 DWG import failed: {}	DWG のインポートに失敗しました: {}
@@ -459,9 +495,11 @@ Define all used	使用中のものをすべて定義
 Defined potentials	定義済みの電位
 Del	Del
 Delete PV array	PVアレイを削除
+Delete air-termination rod	突針を削除
 Delete cable (its wires are removed from it)	ケーブルを削除 (その電線はケーブルから外されます)
 Delete comment	コメントを削除
 Delete connection point	接続ポイントを削除
+Delete earth electrode	接地極を削除
 Delete element	要素を削除
 Delete enclosure	エンクロージャーを削除
 Delete enclosure {} with everything placed in it?	エンクロージャー {} を配置済みの内容ごと削除しますか?
@@ -485,10 +523,14 @@ Delete the property and all its values	プロパティとそのすべての値�
 Delete this workspace	このワークスペースを削除
 Delete variant	バリアントを削除
 Delete zone	ゾーンを削除
+Deletes this copy of your changes for good	この変更のコピーを完全に削除します
 Depth / mounted at	奥行き / 取付位置
+Depth below the ground	地表からの深さ
 Depth from / to	奥行き 開始 / 終了
 Depth in the floor	床内の深さ
+Depth of its top below the ground	上端の地表からの深さ
 Derive project definition	プロジェクト定義を派生
+Describe a problem with a screenshot and the technical details and open it as a new issue on GitHub	スクリーンショットと技術情報で問題を説明し、GitHub に新しい Issue として開きます
 Descriptions	説明
 Deselect	選択解除
 Designations separated by blanks; empty: those of the symbol	スペース区切りの名称。空欄: シンボルの名称
@@ -521,6 +563,8 @@ Devices, connections and terminals: filter, fill, find and replace, CSV	デバ�
 Dew point	露点
 Diameter	直径
 Diameter / bends	直径 / 曲げ
+Diameter of a round wire; 0: a flat strip 30 x 3.5 mm	丸線の直径。0: 帯板 30 x 3.5 mm
+Diameter of the rod	突針の直径
 Dictionary for translators: one column per language	翻訳者用の辞書: 言語ごとに 1 列
 Digits	桁数
 Dimension	寸法
@@ -547,7 +591,6 @@ Divider	セパレーター
 Do the gesture…	ジェスチャーを行ってください…
 Dock	ドッキング
 Document {} embedded ({})	ドキュメント {} を埋め込みました ({})
-Documents	ドキュメント
 Done ones too	完了したものも表示
 Done.	完了しました。
 Door (front)	扉 (前面)
@@ -556,9 +599,11 @@ Door NC data (DWG)	扉の NC データ (DWG)
 Door NC data (DXF)	扉の NC データ (DXF)
 Door clearance	扉のクリアランス
 Door cutouts (CSV)	扉の切り欠き (CSV)
+Door hinge	扉のヒンジ
 Door: {} devices, {} cutouts	扉: デバイス {} 個、切り欠き {} 個
 Dot	点
 Double-click	ダブルクリック
+Down conductors	引下げ導線
 Download into database	データベースにダウンロード
 Download project	プロジェクトをダウンロード
 Downloaded {} (version {})	{} をダウンロードしました (バージョン {})
@@ -569,6 +614,7 @@ Draft	ドラフト
 Draft of revision {} created	リビジョン {} のドラフトを作成しました
 Draft of revision {} discarded	リビジョン {} のドラフトを破棄しました
 Drag	ドラッグ
+Drag a building to move it · R: turn the building under the pointer by 90° · Esc: stop	建物をドラッグして移動 · R：ポインター下の建物を 90° 回転 · Esc：終了
 Drag a connection point designation of the selected symbol to place it.	選択したシンボルの接続ポイントの名称をドラッグして配置します。
 Drag an end of a selected wire to move only that end. Alt-drag reverses Keep connections.	選択した電線の端をドラッグすると、その端だけを移動します。Alt を押しながらドラッグすると「接続を保持」が逆になります。
 Drag an entry into the page, or click it and then click into the page.	エントリをページにドラッグするか、クリックしてからページ内をクリックします。
@@ -609,12 +655,21 @@ Duct fill limit	ダクト充填率の上限
 Duplicate	複製
 Each example builds on the one before and shows more of the features.	各サンプルは前のものを基にしており、より多くの機能を示します。
 Each point-to-point connection can belong to a harness	各ポイントツーポイント接続は 1 つのハーネスに属することができます
+Earth electrodes	接地極
+Earth electrodes of a building (foundation and ring earth electrodes, earth rods clicked into the site plan) and its lightning protection with the air-termination rods clicked onto its roofs	建物の接地極 (基礎接地極と環状接地極、配置図でクリックして置く接地棒) と、屋根の上にクリックして置く突針を含む雷保護
+Earth rod placed at building {}; click for the next one · Esc: stop	建物 {} に接地棒を配置しました。次の接地棒はクリック · Esc：終了
+Earthing and lightning protection	接地と雷保護
+Earthing busbar	接地ブスバー
+Earthing conductor	接地導体
+Earthing points	接地点
 Earthing system	系統接地方式
 Easting, northing	東座標、北座標
 Eaves	軒
 Edge length of the routing grid: smaller is finer and slower	配線グリッドの辺の長さ: 小さいほど精細になり、処理は遅くなります
+Edge the door is hinged at, seen from the front: the 3D view opens the door there and the door wires run over it	正面から見た扉のヒンジ側の端: 3D ビューはそこで扉を開き、扉の配線はそこを通ります
 Edit in table	表で編集
 Edit in table…	表で編集…
+Edit mode: drag the buildings to their places in the site plan and turn them; a click on a room no longer opens it	編集モード：配置図で建物をその位置へドラッグして回転します。部屋をクリックしても開かなくなります
 Editable copy of this plot frame	この図枠の編集可能なコピー
 Editable copy of this title block	この表題欄の編集可能なコピー
 Effective surface	有効表面積
@@ -690,7 +745,6 @@ Fill	入力
 Fill level	充填率
 Filled	塗りつぶし
 Filter connections…	接続をフィルター…
-Filter devices…	デバイスをフィルター…
 Filter…	フィルター…
 Find	検索
 Find a command	コマンドを検索
@@ -702,13 +756,12 @@ Finds the Vault items of the project parts by item number or Part Number propert
 Find…	検索…
 Finish a wire, polyline, polygon or wall	配線、ポリライン、多角形、壁を終了
 Finish or cancel the drawing, then back to selecting	描画を終了またはキャンセルし、選択に戻る
+Finished changes of a project opened from the project server are saved to it by themselves; input under way is saved once it is finished. Locks are kept. Save (Ctrl+S) still saves at once.	プロジェクトサーバーから開いたプロジェクトの完了した変更は、自動的にサーバーに保存されます。入力中の内容は完了後に保存されます。ロックは保持されます。保存 (Ctrl+S) は引き続きただちに保存します。
 First row	最初の行
-Fit	全体表示
 Fit page	ページに合わせる
 Fits {}	{} に適合
 Fitted into the rectangle keeping its aspect ratio (PNG, JPEG)	縦横比を保って四角形に収めます（PNG、JPEG）
 Float	フロート
-Floor plan	平面図
 Floor plan with {} walls	壁 {} 面の平面図
 Floor-standing part	床置き部品
 Fluid and process	流体とプロセス
@@ -730,6 +783,12 @@ Frame of all pages that do not choose one	図枠を選択していないすべ�
 Free air	空中
 Free air factor	空中係数
 Free space in front of every device on the plate up to the door; parts add theirs (Service space)	取付板上の各デバイスの前面から扉までの空きスペース。部品は独自の値を加算します (Service space)
+Freestanding	野立て
+Freestanding PV array {}	野立てPVアレイ {}
+Freestanding PV array {} placed; click for the next one · Esc: stop	野立てPVアレイ {} を配置しました。次はクリック · Esc：終了
+Freestanding PV array {}: {} modules	野立てPVアレイ {}：{} 枚のモジュール
+Freestanding PV array {}: {} modules, {} kWp	野立てPVアレイ {}：{} 枚のモジュール、{} kWp
+Freestanding PV arrays	野立てPVアレイ
 Freeze all routes	すべてのルートを固定
 Freeze route	ルートを固定
 Frequency	周波数
@@ -763,6 +822,7 @@ Generated page – edit via page properties	生成されたページ – ペー�
 Generates the pages of all report blocks again	すべてのレポートブロックのページを再生成します
 Generates {} pages	{} ページを生成します
 Generation failed: {}	生成に失敗しました: {}
+Generator junction box	接続箱
 Generic	汎用
 German zones (DIN 18015-3)	ドイツのゾーン (DIN 18015-3)
 Getting started	はじめに使う
@@ -772,6 +832,8 @@ Go to page	ページへ移動
 Graphic line	図形線
 Graphic rectangle	図形四角形
 Graphical form	グラフィカルフォーム
+Greatest distance of the conductor holders on the roof and on the walls	屋根と壁の導体支持金具の最大間隔
+Greatest distance of the posts along a table	架台に沿った杭の最大間隔
 Greatest distance of the roof hooks along a rail	レールに沿った屋根フックの最大間隔
 Grid	グリッド
 Grid north	座標北
@@ -780,7 +842,6 @@ Grid {} mm	グリッド {} mm
 Group as assembly	アセンブリとしてグループ化
 Group column	グループ列
 Group in the symbol list, e.g. your company	シンボルリストのグループ (例: 自社名)
-Group the pages by structure	ページを構造でグループ化
 Groups shown	表示するグループ
 HEATER=yes	HEATER=yes
 Hardware configuration and PLC tags for TIA Portal and other PLC tools	TIA Portal やその他の PLC ツール用のハードウェア構成と PLC タグ
@@ -794,15 +855,22 @@ Height above sea level	標高
 Height above the floor	床面からの高さ
 Height above the mounting plate	取付板からの高さ
 Height above the plate	板からの高さ
+Height of the lower edge of the modules above the ground	地面からのモジュール下端の高さ
 Height of the plinth, 0 without plinth	台座の高さ (0 は台座なし)
+Height of the rod above the covering	屋根葺き材からの突針の高さ
+Height of the test joints above the ground	試験用接続端子の地表からの高さ
 Heights above floor (IEC 60204-1)	床面からの高さ (IEC 60204-1)
 Held while clicking, moving or scrolling. Ctrl is Cmd on macOS.	クリック、移動、スクロールの間押したままにします。macOS では Ctrl は Cmd です。
 Help	ヘルプ
+Hide PV modules	PVモジュールを非表示
 Hide the groups you do not need and put the commands you use most into own groups.	不要なグループを非表示にし、よく使うコマンドを独自のグループにまとめます。
 Highest phase unbalance	最大相不平衡
 Highest short-circuit current	最大短絡電流
 Highest voltage (open circuit at the lowest temperature), mean and lowest voltage (at maximum power at the mean and the highest temperature), current at maximum power, peak power	最高電圧（最低温度での開放電圧）、平均・最低電圧（平均・最高温度での最大出力時）、最大出力時の電流、ピーク出力
 Highest: the lowest voltage	最高：最低電圧
+Holder distance	支持金具の間隔
+Holders on the roof	屋根の支持金具
+Holders on the walls	壁の支持金具
 Hole to sheet edge	穴から板端まで
 Home	ホーム
 Hook distance	フック間隔
@@ -817,6 +885,8 @@ Hose defaults and PCT loops of the pre-planning	ホースの既定値と事前�
 Hose number	ホース番号
 Hoses and pipes	ホースと配管
 Hoses rated below it are errors; 0 = not checked	これより定格の低いホースはエラーになります。0 = チェックしない
+How far inside the outer walls	外壁の内側への距離
+How far outside the outer walls	外壁の外側への距離
 How the leaf opens: hinged at its left or right edge (seen from inside the room), into or out of the room, or sliding along the wall	扉の開き方：左または右の端に吊り元（室内から見て）、室内側または室外側へ開く、または壁に沿って引く
 How the wire is terminated at this end; by default as chosen for the connection point or its device, otherwise as the layout sets ferrules	この端での電線の端末処理。既定では接続点またはその機器に選んだもの、なければレイアウトのフェルール設定に従います
 How wires jump over the wires they cross, how T-connections are marked and whether moved items route their connections anew	配線が交差する配線をどのように越えるか、T 接続をどのように示すか、移動した項目の接続を再配線するか
@@ -850,6 +920,7 @@ Import symbol library…	シンボルライブラリをインポート…
 Import symbol table…	シンボルテーブルをインポート…
 Imported	インポート済み
 Imported {} entries of the property library	プロパティライブラリのエントリを {} 件インポートしました
+Imported {} into the parts database	{} を部品データベースにインポートしました
 Imported {} macros	{} 個のマクロをインポートしました
 Imported {} page templates	{} 個のページテンプレートをインポートしました
 Imported {} parts into the database	{} 個の部品をデータベースにインポートしました
@@ -892,11 +963,11 @@ Instead of user name and password	ユーザー名とパスワードの代わり
 Instruments in the P&ID carry function letters and loop number in their label (TIC 101); their device tag links them with the schematic.	P&ID の計器は、ラベルに機能文字とループ番号 (TIC 101) を持ちます。デバイスタグによって回路図とリンクされます。
 Insulation	絶縁
 Interruption points refer to	中断ポイントの参照先
+Interval	間隔
 Introduction	はじめに
 Invalid value	無効な値
 Invert the direction of panning by scrolling	スクロールによるパンの方向を反転する
 Inverter or charge controller (devices with PV input data)	インバーターまたは充電コントローラー（PV入力データのある機器）
-Isometric	等角
 Items copied: {}	コピーした要素: {}
 Items copied: {} (devices left out: {}, a device is placed once)	コピーした要素: {} (除外したデバイス: {}、デバイスは一度だけ配置されます)
 Items cut: {}	切り取った要素: {}
@@ -916,6 +987,7 @@ Keep connections	接続を保持
 Keep sub-pages (3.a, 3.1) with the page before	サブページ (3.a、3.1) を前のページと一緒に維持
 Keep the degree of protection	保護等級を維持
 Keep this route when recalculating, as long as it is still possible	再計算時も、可能な限りこのルートを維持します
+Kept changes	保管された変更
 Key tips of the ribbon	リボンのアクセスキー
 Key: {}	キー: {}
 Keyboard shortcuts	キーボードショートカット
@@ -929,6 +1001,8 @@ Labeling scheme	ラベリングスキーム
 Landscape	横
 Large dot	大きい点
 Larger texts and buttons for a touch screen at the workbench	作業台のタッチスクリーン用に文字とボタンを大きく
+Largest mesh	最大の網目
+Last save confirmed by the project server: {}	プロジェクトサーバーが確認した最後の保存: {}
 Latitude, longitude	緯度、経度
 Layer	レイヤー
 Layer {}	レイヤー {}
@@ -942,6 +1016,7 @@ Layout space	レイアウト空間
 Layout spaces	レイアウト空間
 Leave out the ceilings of the rooms and the roofs in the 3D view	3D ビューで部屋の天井と屋根を省略
 Leave out the covers of all cable ducts in the 3D view: the wires in them are seen	3D ビューですべての配線ダクトのふたを省略します：中の電線が見えます
+Leave out the modules of the PV arrays in the 3D view: their rails, roof hooks, mounting bases, earthing and cabling are seen	3D ビューで PVアレイのモジュールを非表示にします。レール、屋根フック、架台、接地、配線が見えます
 Leave repeated values of the first column blank	最初の列で繰り返される値を空白にする
 Left button	左ボタン
 Left edges	左端
@@ -949,6 +1024,7 @@ Legend plates (door devices)	銘板 (扉取付機器)
 Length from the node to the device	ノードからデバイスまでの長さ
 Length inside an enclosure	エンクロージャー内の長さ
 Length of a shield pigtail where there is no shield clamp	シールドクランプがない場合のシールドピグテールの長さ
+Length of the rod	接地棒の長さ
 Length of wires that are not routed in the panel layout	盤レイアウトで配線ルートが設定されていない電線の長さ
 Length {} mm	長さ {} mm
 Letters, digits, space, - _ . (up to 64 characters)	英字、数字、スペース、- _ . (最大 64 文字)
@@ -957,6 +1033,8 @@ Level of this kind of message	この種類のメッセージのレベル
 Level {} added to building {}; new rooms go onto it	建物 {1} に階 {0} を追加しました。新しい部屋はこの階に置かれます
 Level {} of building {}	建物 {1} の階 {0}
 Library	ライブラリ
+Lightning protection	雷保護
+Lightning protection of building {}	建物 {} の雷保護
 Like two fingers	2 本指と同じ
 Limits	制限値
 Limits in effect	適用中の制限値
@@ -975,28 +1053,29 @@ Load reserve	負荷余裕
 Load template…	テンプレートを読み込む…
 Loading changes…	変更を読み込んでいます…
 Loading the project access…	プロジェクトへのアクセスを読み込んでいます…
+Loading the properties of {}…	{} のプロパティを読み込んでいます…
 Loads	負荷
 Local file	ローカルファイル
 Local file: {}	ローカルファイル：{}
 Local recovery copy of server project: {}	サーバープロジェクトのローカル復元コピー：{}
+Local recovery copy with these changes written: {}	これらの変更を含むローカル復元コピーを書き込みました: {}
 Lock all	すべてロック
 Lock all pages	すべてのページをロック
 Lock current page	現在のページをロック
 Lock page	ページをロック
 Lock project data	プロジェクトデータをロック
-Locked	ロック
 Locked by other users	他のユーザーがロック中
 Locked by {} on the project server – read only	プロジェクトサーバーで {} がロック中 – 読み取り専用
 Locked by {} – read only	{} がロック中 – 読み取り専用
 Locking…	ロックしています…
 Logic	ロジック
-Logo	ロゴ
 Logo on the cover page	表紙のロゴ
 Longer values are drawn smaller (0 = no limit)	長い値は小さく描画されます (0 = 制限なし)
 Look for updates when OpenECraft starts	OpenECraft の起動時に更新を確認する
 Looking for updates…	更新を確認しています…
 Looks for a new release of OpenECraft on GitHub and installs it in the background	GitHub で OpenECraft の新しいリリースを探し、バックグラウンドでインストールします
 Loop	ループ
+Lower edge	下端
 Lowest fault current	最小故障電流
 Lowest: the highest open-circuit voltage	最低：最高開放電圧
 Macro boxes	マクロボックス
@@ -1006,8 +1085,9 @@ Macro {} saved	マクロ {} を保存しました
 Macros	マクロ
 Macros ({})	マクロ ({})
 Macro…	マクロ…
-Main	メイン
+Main earthing busbar	主接地ブスバー
 Make the selected elements of this project equal to the compared ones	このプロジェクトの選択した要素を比較対象と同じにします
+Maker	メーカー
 Makes the current page content of the option	現在のページをオプションの内容にします
 Manage plugins	プラグインの管理
 Management	管理
@@ -1042,6 +1122,7 @@ Messages of this session	このセッションのメッセージ
 Middle	中央
 Middle button	中ボタン
 Middle of the PV array in the floor plan of the building	建物の平面図におけるPVアレイの中心
+Middle of the PV array in the plant	施設内のPVアレイの中心
 Min. bend radius	最小曲げ半径
 Minimize the ribbon	リボンを最小化
 Mirror	反転
@@ -1050,7 +1131,9 @@ Mixed	混在
 Mode	モード
 Model of a part (2D / 3D)	部品のモデル (2D / 3D)
 Modifier keys	モディファイアキー
+Module area	モジュール面積
 Module part; its size comes from the part	モジュール部品。サイズは部品から取得
+Modules on top of each other on a table	1 つの架台に上下に並ぶモジュール
 Motors feed the short circuit	モーターが短絡電流を供給
 Mounted on	取付先
 Mounting assistant: the panel items in mounting order with their place and part	取付アシスタント: 盤アイテムを取付順に位置と部品とともに表示
@@ -1062,6 +1145,7 @@ Mouse	マウス
 Move	移動
 Move ahead in the 3D view (held)	3D ビューで前進（押したまま）
 Move back in the 3D view (held)	3D ビューで後ろへ移動（押したまま）
+Move buildings	建物を移動
 Move down	下へ移動
 Move down in the 3D view (held)	3D ビューで下へ移動（押したまま）
 Move faster with the keys of the 3D view	3D ビューのキーで速く移動
@@ -1107,7 +1191,6 @@ New document page…	新しいドキュメントページ…
 New empty	新規 (空)
 New enclosure	新しいエンクロージャー
 New graphics page	新しい図形ページ
-New group	新しいグループ
 New harness	新しいハーネス
 New items go onto this layer	新しいアイテムはこのレイヤーに配置されます
 New mounting layout page	新しい取付図ページ
@@ -1149,6 +1232,7 @@ No PLC cards in the project.	プロジェクトに PLC カードがありませ�
 No PLC inputs / outputs placed.	PLC 入力 / 出力が配置されていません。
 No accessories: glands, connectors, shield clamps … go into the bill of materials and are checked against the cable.	付属品がありません。グランド、コネクター、シールドクランプなどは部品表に含まれ、ケーブルと照合してチェックされます。
 No bus systems.	バスシステムがありません。
+No busbar	ブスバーなし
 No cable passage to {}: wires to it are not routed	{} へのケーブル貫通口がありません: そこへの電線は配線ルートが設定されません
 No cables defined.	ケーブルが定義されていません。
 No cables yet. Draw a cable definition across wires or add a cable.	ケーブルはまだありません。電線を横切るケーブル定義を描画するか、ケーブルを追加してください。
@@ -1160,18 +1244,22 @@ No device has mounting data yet: assign parts with dimensions to the devices (Pr
 No differences to {}.	{} との相違点はありません。
 No document embedded	ドキュメントが埋め込まれていません
 No dot: plain T	点なし: 単純な T
+No earth electrode yet: a foundation earth electrode in the foundation slab, a ring earth electrode round the walls or earth rods.	接地極はまだありません。基礎スラブ内の基礎接地極、壁の周囲の環状接地極、または接地棒です。
 No enclosure yet – create one with New enclosure, or a room for cabinets with New room.	エンクロージャーがまだありません – 「新しいエンクロージャー」で作成するか、「新しい部屋」でキャビネット用の部屋を作成します。
 No field cables: place the enclosures and field devices at nodes of the route network.	フィールドケーブルがありません。エンクロージャーとフィールドデバイスをルートネットワークのノードに配置してください。
 No filter fans: an air/air heat exchanger or a cooling unit	フィルターファンなし: 空気/空気熱交換器またはクーラー
+No freestanding PV array yet: rows of tilted tables on rammed posts on the plot.	野立てPVアレイはまだありません。敷地上の打込み杭に傾斜した架台を列に並べます。
 No gesture	ジェスチャーなし
 No harnesses defined.	ハーネスが定義されていません。
 No inverter	インバーターなし
 No jump: plain crossing, connections have dots	ジャンプなし: 単純な交差、接続には点
+No local recovery copy of these changes has been written yet	これらの変更のローカル復元コピーはまだ書き込まれていません
 No longer reported	報告されなくなりました
 No macros yet. Select items in a schematic and save them as a macro.	マクロはまだありません。回路図で要素を選択し、マクロとして保存してください。
 No modules: plug in PLC cards of the schematic.	モジュールがありません: 回路図の PLC カードを装着してください。
 No numbers for	番号を付けない対象
 No panel items: place the devices in the panel layout.	盤アイテムがありません。盤レイアウトにデバイスを配置してください。
+No part matches.	一致する部品はありません。
 No parts marked for floor mounting yet. Mark one in the parts management: part editor › Mounting data › Floor mounting.	床置きとしてマークされた部品はまだありません。部品管理でマークしてください: 部品エディター › 取付データ › 床置き。
 No parts marked for wall mounting yet. Mark one in the parts management: part editor › Mounting data › Wall mounting.	壁取付としてマークされた部品はまだありません。部品管理でマークしてください: 部品エディター › 取付データ › 壁取付。
 No parts of the product group Cables in the parts database.	部品データベースに製品グループ「ケーブル」の部品がありません。
@@ -1190,6 +1278,7 @@ No segments yet: draw them in the plant layout.	区間はまだありません�
 No shortcut	ショートカットなし
 No single-line symbols and no power devices in the schematic.	単線シンボルも回路図の動力デバイスもありません。
 No stations: add one or use the automatic configuration.	ステーションがありません: ステーションを追加するか、自動構成を使用してください。
+No string yet: the modules are not connected.	ストリングはまだありません。モジュールは接続されていません。
 No subprojects were taken out of this project.	このプロジェクトから切り出されたサブプロジェクトはありません。
 No terminal strips: place terminals in a schematic first.	端子台がありません: 最初に回路図に端子を配置してください。
 No user symbols yet. Create one or copy a built-in symbol.	ユーザーシンボルはまだありません。作成するか、組み込みシンボルをコピーしてください。
@@ -1200,11 +1289,14 @@ None – editing a page or the project data locks it.	なし – ページまた
 Not a page template file: {}	ページテンプレートファイルではありません: {}
 Not a point: type x y or @dx dy	点ではありません。x y または @dx dy を入力してください
 Not a symbol library: {}	シンボルライブラリではありません: {}
+Not changed, the lock was refused: {}. Your version is kept in the Project server pane.	ロックが拒否されたため変更されていません: {}。あなたの版はプロジェクトサーバーのペインに保管されています。
 Not changed: {}	変更されていません: {}
+Not changed: {}. Your version is kept in the Project server pane.	変更されていません: {}。あなたの版はプロジェクトサーバーのペインに保管されています。
 Not found: {}	見つかりません: {}
 Not in the project parts – synchronize in parts management	プロジェクト部品にありません – 部品管理で同期してください
 Not on a wire	電線上にありません
-Not saved, locked or changed by another user: {}	保存されていません。他のユーザーがロックまたは変更しています: {}
+Not saved yet	未保存
+Not saved, locked or changed by another user	他のユーザーがロックまたは変更しているため保存されていません
 Not taken: the left button alone selects, draws and moves; hold a modifier or use another button.	使えません：左ボタンのみは選択、描画、移動に使われます。モディファイアキーを押すか別のボタンを使ってください。
 Not the shared project: changes are saved locally until it is opened on the project server again	共有プロジェクトではありません：プロジェクトサーバーで再度開くまで変更はローカルに保存されます
 Nothing exchanged yet.	まだ何も交換されていません。
@@ -1226,6 +1318,7 @@ Offset from one row to the next: downwards for lists, sideways for rows side by 
 On a touch screen and a trackpad. Pan only: pinching does not zoom; zoom only: scrolling with two fingers on a trackpad zooms too, where the system tells trackpads apart. One finger works like the left mouse button.	タッチスクリーンとトラックパッドで有効です。パンのみ：ピンチでズームしません。ズームのみ：システムがトラックパッドを区別できる場合、トラックパッドでの 2 本指スクロールもズームします。1 本指はマウスの左ボタンと同じです。
 On a touch screen; trackpads leave three-finger gestures to the system.	タッチスクリーンで有効です。トラックパッドの 3 本指の操作はシステムが使います。
 On startup	起動時
+On the roof, joined to the air-termination conductors; move it to its place	屋根の上で受雷導体に接続されます。位置まで移動してください
 One row per label	ラベルごとに 1 行
 Only devices on the current page	現在のページのデバイスのみ
 Only frames no page uses can be deleted	削除できるのはどのページでも使用されていない図枠のみです
@@ -1253,6 +1346,7 @@ Open the selection: its properties, in the floor plan its face	選択を開く�
 Open to {}: wires cross beside the mounting plates	{} へ開放: 電線は取付板の横を通ります
 Open walls and floors	壁と床を開く
 Open, save, import, export, print and the settings	開く、保存、インポート、エクスポート、印刷と設定
+Open-circuit voltage	開放電圧
 OpenECraft page templates	OpenECraft ページテンプレート
 OpenECraft page templates (JSON)	OpenECraft ページテンプレート (JSON)
 OpenECraft project	OpenECraft プロジェクト
@@ -1263,6 +1357,7 @@ OpenECraft property library	OpenECraft プロパティライブラリ
 OpenECraft property library (JSON)	OpenECraft プロパティライブラリ (JSON)
 OpenECraft rule sets	OpenECraft ルールセット
 OpenECraft rule sets (JSON)	OpenECraft ルールセット (JSON)
+OpenECraft split project	OpenECraft 分割プロジェクト
 OpenECraft structure template	OpenECraft 構造テンプレート
 OpenECraft structure template (JSON)	OpenECraft 構造テンプレート (JSON)
 OpenECraft symbol library	OpenECraft シンボルライブラリ
@@ -1294,6 +1389,7 @@ Other values ({})	その他の値 ({})
 Otherwise from the plant layout, or next to the other line-ups	それ以外の場合はプラントレイアウトから、または他の列盤の隣に配置
 Out since {} (pages locked)	{} から切り出し中 (ページはロック中)
 Outer diameter (e.g. 8 mm) or DN	外径 (例: 8 mm) または DN
+Outlets	コンセント
 Outlets, switches, heating	コンセント、スイッチ、暖房
 Outline	輪郭
 Outlines	輪郭
@@ -1316,6 +1412,10 @@ PLC channels	PLC チャンネル
 PLC hardware and bus topology	PLC ハードウェアとバストポロジー
 PLC overview	PLC 概要
 PNG or JPEG bitmap, e.g. a logo or a photo	PNG または JPEG のビットマップ (例: ロゴや写真)
+PV array {}	PVアレイ {}
+PV array {} lies outside the protection of the air-termination system	PVアレイ {} は受雷部の保護範囲外にあります
+PV array {} of building {}: {} modules	建物 {1} の PVアレイ {0}：{2} 枚のモジュール
+PV array {} of building {}: {} modules, {} kWp	建物 {1} の PVアレイ {0}：{2} 枚のモジュール、{3} kWp
 PV arrays	PVアレイ
 Page graphics	ページのグラフィック
 Page heading	ページ見出し
@@ -1350,6 +1450,10 @@ Part of the profile: generic types or parts from the parts store	プロファイ
 Part selection from the parts database	部品データベースからの部品選択
 Part selection – {}	部品選択 – {}
 Part selection…	部品の選択…
+Partly saved	一部保存
+Partly saved (revision {}). Not saved, locked or changed by another user: {}. Your version is kept in the Project server pane.	一部を保存しました (リビジョン {})。他のユーザーがロックまたは変更しているため保存されていません: {}。あなたの版はプロジェクトサーバーのペインに保管されています。
+Partly saved to the project server (revision {})	プロジェクトサーバーに一部を保存しました (リビジョン {})
+Partly saved: the project server left changes out. Your version of them is kept below; they are not saved on the server.	一部保存: プロジェクトサーバーは一部の変更を保存しませんでした。あなたのバージョンは下に保持されています。サーバーには保存されていません。
 Parts can only be dropped onto pages that can be changed; this one is released, locked or generated	部品は変更可能なページにのみドロップできます。このページはリリース済み、ロック済み、または生成ページです
 Parts management	部品管理
 Parts marked for floor mounting (pumps, tanks, compressors): choose one, then click where it stands on the floor of the room	床置きとしてマークされた部品 (ポンプ、タンク、コンプレッサー): 1 つ選択し、部屋の床の設置場所をクリックします
@@ -1363,6 +1467,8 @@ Path for cables, tubes or wires over the plate: click the corners, double-click 
 Path function text	パス機能テキスト
 Pattern	パターン
 Pattern…	パターン…
+Peak power	ピーク出力
+Pick a part in the list.	リストから部品を選択してください。
 Pin-out	ピン配置
 Pipe run	配管ルート
 Pipe run on a wall, the ceiling or the floor of the room, along which hoses, tubes and pipes are routed: click the corners, double-click or Enter to finish	部屋の壁、天井、床に沿った配管ルートで、ホース、チューブ、配管がこれに沿って配線されます: 角をクリックし、ダブルクリックまたは Enter で終了
@@ -1379,6 +1485,7 @@ Place in schematic	回路図に配置
 Place in the plant	プラント内の位置
 Place in the room	室内の位置
 Place in the site plan	配置図に配置
+Place on the wall	壁に配置
 Place text	テキストを配置
 Place the georeferenced point everything is measured from	すべての測定の基準となるジオリファレンス点を配置します
 Place the georeferenced point of the plant in the site plan; its coordinates go into the Buildings pane, every point is then measured from it	設備のジオリファレンス点を配置図に配置します。座標は建物ペインで入力し、すべての点はそこから測定されます
@@ -1401,7 +1508,6 @@ Plant layout	プラントレイアウト
 Plant layout, route network, field cable planning, equipotential bonding and cable accessories	プラントレイアウト、ルートネットワーク、フィールドケーブル計画、等電位ボンディング、ケーブル付属品
 Plant segments with planned devices before the schematic	回路図作成前の、計画済みデバイスを含むプラントセグメント
 Plate outline, holes per diameter, cutouts	板の外形、直径ごとの穴、切り欠き
-Plot	敷地
 Plot boundary	敷地境界
 Plot boundary drawn: {} m²	敷地境界を描きました：{} m²
 Plot boundary drawn: {} m²; outside it: {}	敷地境界を描きました：{} m²。外側：{}
@@ -1409,8 +1515,8 @@ Plot frames	図枠
 Plot, {}	敷地、{}
 Plug in card	カードを装着
 Plugin commands	プラグインコマンド
-Plugins	プラグイン
 Plugins add commands, checks, reports and exports. External plugins are loaded from the folders in the environment variable {} (one subfolder with a plugin.json per plugin).	プラグインはコマンド、チェック、レポート、エクスポートを追加します。外部プラグインは環境変数 {} のフォルダーから読み込まれます (プラグインごとに plugin.json を含むサブフォルダー 1 つ)。
+Plus and minus leads from the modules to the inverter	モジュールからインバーターへのプラスとマイナスのケーブル
 Points	点
 Polygon	多角形
 Polyline	ポリライン
@@ -1423,6 +1529,8 @@ Position of the cursor	カーソルの位置
 Position of the device tag (instead of the tag block)	デバイスタグの位置 (タグブロックの代わり)
 Position of the label (terminal number, address …)	ラベルの位置 (端子番号、アドレス …)
 Positions are relative to the lower right corner of the symbol.	位置はシンボルの右下隅を基準とします。
+Post distance	杭の間隔
+Posts	杭
 Potential {}	電位 {}
 Potential: {}	電位: {}
 Power and current of the loads of the mains (motors, drives, heaters, power supplies, transformers), the load of each protective device, the demand with the diversity factor and the load budget of the power supplies.	電源系統の負荷 (モーター、ドライブ、ヒーター、電源装置、変圧器) の電力と電流、各保護機器の負荷、分散率を考慮した需要、電源装置の負荷バジェット。
@@ -1447,7 +1555,6 @@ Profile name	プロファイル名
 Profiles	プロファイル
 Project access	プロジェクトへのアクセス
 Project and user settings in one dialog	プロジェクトとユーザーの設定を 1 つのダイアログで
-Project data	プロジェクトデータ
 Project database	プロジェクトデータベース
 Project database, batch changes of project properties, subprojects, options, archives and verification	プロジェクトデータベース、プロジェクトプロパティの一括変更、サブプロジェクト、オプション、アーカイブ、検証
 Project default: {}	プロジェクトの既定値: {}
@@ -1490,7 +1597,6 @@ Read a file of the other system (CSV or JSON) and review the changes	相手シ�
 Readdress card	カードのアドレスを再設定
 Reading the folder…	フォルダーを読み込んでいます…
 Real length per millimetre on the page, e.g. 10 for a 1:10 drawing	ページ上の 1 mm あたりの実長 (例: 1:10 の図面では 10)
-Rear	背面
 Rear left corner of the line-up on the floor, as in the 3D view with all enclosures	床面上の列盤の左後隅 (すべてのエンクロージャーの 3D ビューと同じ)
 Recent projects	最近のプロジェクト
 Recently used	最近使用したもの
@@ -1498,10 +1604,8 @@ Recommended height of manual actuators (10.1.2)	手動操作部の推奨高さ (
 Record	記録
 Record: do the gesture in the field that appears, holding a modifier if wanted (Esc cancels). Add keeps the gestures there are. Right click in the select tool opens the context menu.	記録：表示される領域でジェスチャーを行います。必要ならモディファイアキーを押したままにします（Esc でキャンセル）。追加は既存のジェスチャーを残します。選択ツールでの右クリックはコンテキストメニューを開きます。
 Redline: to be changed · Greenline: changed as built	レッドライン: 変更予定 · グリーンライン: 施工どおりに変更済み
-Redo	やり直し
 Reference point	基準点
 Reference point placed at x {} m, z {} m; enter its coordinates in the Buildings pane	基準点を x {} m、z {} m に配置しました。建物ペインで座標を入力してください
-Refresh	最新の情報に更新
 Refresh example catalog parts (GEN.*)	サンプルカタログの部品 (GEN.*) を更新
 Rejected and closed ones too	却下済みとクローズ済みも表示
 Relative column width	相対列幅
@@ -1514,6 +1618,7 @@ Release: lock all pages	リリース: すべてのページをロック
 Released page – read only	リリース済みのページ – 読み取り専用
 Released pages in it keep their names	その中のリリース済みページは名前を保持します
 Released pages keep their name.	リリース済みのページは名前を維持します。
+Released revisions, baselines, comments, markup, approvals and change requests of the source. Without them the copy starts as a new project.	元のプロジェクトのリリース済みリビジョン、ベースライン、コメント、マークアップ、承認、変更依頼。これらがない場合、コピーは新しいプロジェクトとして始まります。
 Releases all locks; the project stays open as a local copy	すべてのロックを解放します。プロジェクトはローカルコピーとして開いたままになります
 Releasing…	解放しています…
 Remove from cable	ケーブルから削除
@@ -1558,14 +1663,19 @@ Replace	置換
 Replace all	すべて置換
 Replace text	テキストを置換
 Replace with	置換後の文字列
+Replaced by the version on the project server: {}. Your version is kept in the Project server pane.	プロジェクトサーバーの版に置き換えられました: {}。あなたの版はプロジェクトサーバーのペインに保管されています。
 Replaced when the configurator generates again; switch off to keep the page	コンフィギュレーターで再生成すると置き換えられます。ページを保持するにはオフにしてください
+Replaced while you held no lock	ロックを持っていない間に置き換えられました
 Replaces in free texts, function texts, page, device and cable descriptions; released pages stay	フリーテキスト、機能テキスト、ページ・デバイス・ケーブルの説明を置換します。リリース済みのページは変更されません
 Replaces the GEN.* parts in the database with the current example catalog (including models)	データベース内の GEN.* 部品を現在のサンプルカタログで置換します (モデルを含む)
 Replaces the company library with the project's own title blocks, report schemes and plot frames (editors of the parts server)	会社ライブラリをプロジェクト独自の表題欄、レポートスキーム、図枠で置き換えます（部品サーバーの編集者）
 Replaces the content of the macro boxes whose macro changed in the library	ライブラリ内でマクロが変更されたマクロボックスの内容を置き換えます
+Replaces the current version with yours as a change you can undo; the next save stores it	現在の版をあなたの版に置き換えます (元に戻せる変更として)。次回の保存で保存されます
 Replaces the pages of this block	このブロックのページを置き換えます
 Reply	返信
 Reply…	返信…
+Report a bug	不具合を報告
+Report a bug…	不具合を報告…
 Report block {}: {} pages generated	レポートブロック {}: {} ページを生成しました
 Report blocks start new pages for every value of this column	レポートブロックは、この列の値ごとに新しいページを開始します
 Report blocks updated: {} pages	レポートブロックを更新しました: {} ページ
@@ -1573,7 +1683,6 @@ Report blocks…	レポートブロック…
 Report forms	レポートフォーム
 Report name (page heading)	レポート名 (ページ見出し)
 Report with all harness wires	すべてのハーネス電線を含むレポート
-Reports	レポート
 Representation	表示
 Requester	依頼者
 Reservation	予約領域
@@ -1610,8 +1719,12 @@ Right edges	右端
 Right neighbour	右隣
 Rights	権限
 Risers	蹴上げ数
+Rod holder	突針支持金具
+Roof pitch	屋根勾配
 Roof window	天窓
 Roof windows	天窓
+Roof {} of building {}	建物 {1} の屋根 {0}
+Roof {} of building {}: the layout properties add a PV array or a roof window where it was clicked	建物 {1} の屋根 {0}：レイアウトのプロパティで、クリックした位置にPVアレイまたは天窓を追加します
 Roofs	屋根
 Room	部屋
 Room added on level {}: drag its walls or draw new ones in the floor plan, put cabinets into it in their properties	フロア {} に部屋を追加しました: 平面図で壁をドラッグするか新しい壁を描き、キャビネットはそのプロパティで部屋に入れます
@@ -1638,6 +1751,8 @@ Row	行
 Row distance	列間隔
 Row drawing	行図形
 Row labels	行ラベル
+Rows of tables behind each other	前後に並ぶ架台の列
+Rows of tilted tables on posts in front of what stands in the plant, facing the front; move it to its place	施設内にあるものの手前に、杭の上の傾斜した架台を前向きに列に並べます。所定の位置へ移動してください
 Rows on released pages cannot be changed. A line break in a text is written as \\n.	リリース済みのページ上の行は変更できません。テキスト内の改行は \\n と記述します。
 Rows per page	ページあたりの行数
 Rule libraries	ルールライブラリ
@@ -1659,12 +1774,14 @@ Save as local file	ローカルファイルとして保存
 Save as macro	マクロとして保存
 Save as project template…	プロジェクトテンプレートとして保存…
 Save as scheme	スキームとして保存
+Save as split project…	分割プロジェクトとして保存…
 Save as template	テンプレートとして保存
 Save as template…	テンプレートとして保存…
 Save asks for a file	「保存」でファイルを選択します
 Save as…	名前を付けて保存…
 Save current page as template…	現在のページをテンプレートとして保存…
 Save current…	現在の状態を保存…
+Save failed	保存に失敗
 Save file…	ファイルを保存…
 Save locally	ローカルに保存
 Save locally to {}	ローカルの {} に保存
@@ -1673,12 +1790,15 @@ Save page as macro…	ページをマクロとして保存…
 Save page as template	ページをテンプレートとして保存
 Save page as template…	ページをテンプレートとして保存…
 Save selection as macro…	選択範囲をマクロとして保存…
+Save shared projects to the project server automatically	共有プロジェクトをプロジェクトサーバーに自動保存する
 Save the box content as the macro in the library	ボックスの内容をマクロとしてライブラリに保存
 Save to project server	プロジェクトサーバーに保存
 Save to project server: {}	プロジェクトサーバーに保存：{}
 Save to project server: {} – the connection is lost, saving tries again	プロジェクトサーバーに保存：{} – 接続が切れています。保存は再試行します
 Save workspace	ワークスペースを保存
 Save workspace…	ワークスペースを保存…
+Saved	保存済み
+Saved the properties of {} (revision {})	{} のプロパティを保存しました (リビジョン {})
 Saved to	保存先
 Saved to the project server (revision {})	プロジェクトサーバーに保存しました (リビジョン {})
 Saved workspaces	保存されたワークスペース
@@ -1686,8 +1806,10 @@ Saves the placed properties as a placement scheme of the project	配置された
 Saves the project without revisions, baselines, review and wiring marks as a template for new projects	リビジョン、ベースライン、レビュー、配線マークを除いてプロジェクトを新規プロジェクト用のテンプレートとして保存します
 Saves the project's own properties, function definitions and schemes for other projects	プロジェクト独自のプロパティ、機能定義、スキームを他のプロジェクト用に保存します
 Saves the workspace, the arrangement of the panels and the open windows	ワークスペース、パネルの配置、開いているウィンドウを保存します
+Saves your version of the whole project as a project file	プロジェクト全体のあなたの版をプロジェクトファイルとして保存します
 Saving failed: {}	保存に失敗しました: {}
 Saving the project access…	プロジェクトへのアクセスを保存しています…
+Saving the properties of {}…	{} のプロパティを保存しています…
 Saving to the project server…	プロジェクトサーバーに保存しています…
 Schematic crosshair	回路図のクロスヘア
 Scheme	スキーム
@@ -1702,23 +1824,26 @@ Scrolling up and down zooms at the pointer, sideways (horizontal wheel, Shift + 
 Scrolling zooms, also where it pans	スクロールでズーム（パンする場所でも）
 Search (* and ? as placeholders)…	検索 (* と ? はワイルドカード)…
 Search below this folder	このフォルダーの下を検索
+Search number, description, maker	番号、説明、メーカーを検索
 Search the parts server by catalog, product group and technical data, add parts and check the database for updates	カタログ、製品グループ、技術データで部品サーバーを検索し、部品を追加して、データベースの更新を確認します
 Second channel	第 2 チャンネル
+Seconds from a change to its automatic save (10 to 600)	変更から自動保存までの秒数 (10 ～ 600)
 Section properties	セクションのプロパティ
 Section properties…	セクションのプロパティ…
 Section {} is now section {}	セクション {} はセクション {} になりました
+See-through PV modules	PVモジュールを透過表示
 Seen on the mating faces; the colours are those of the wires and cable cores at the pins.	嵌合面から見た図。色はピンの電線とケーブル心線の色です。
 Segment {}	セグメント {}
 Segments	区間
 Segregation	離隔
 Segregation factor	離隔係数
-Select	選択
 Select / move (Esc)	選択 / 移動 (Esc)
 Select a file to import it	インポートするファイルを選択してください
 Select a function definition. Project definitions (bold) can be changed and are kept in property libraries.	機能定義を選択してください。プロジェクト定義 (太字) は変更でき、プロパティライブラリに保存されます。
 Select a macro.	マクロを選択してください。
 Select a part. Double click adds it to the device.	部品を選択してください。ダブルクリックするとデバイスに追加されます。
 Select a placement scheme. A scheme places properties beside symbols; symbols using it are updated when it changes.	配置スキームを選択してください。スキームはシンボルの横にプロパティを配置します。スキームを変更すると、使用しているシンボルが更新されます。
+Select a project in the list	一覧からプロジェクトを選択してください
 Select a report block.	レポートブロックを選択してください。
 Select a request.	依頼を選択してください。
 Select a segment.	セグメントを選択してください。
@@ -1740,6 +1865,7 @@ Semicolon	セミコロン
 Separator	分離器
 Server URL	サーバー URL
 Server address and sign-in	サーバーのアドレスとサインイン
+Server project properties	サーバープロジェクトのプロパティ
 Server type	サーバーの種類
 Servers	サーバー
 Service space in front	前面のサービススペース
@@ -1761,6 +1887,7 @@ Shielded analogue cables	シールド付きアナログケーブル
 Shielded drive cables	シールド付きドライブケーブル
 Short circuit and selectivity	短絡と選択遮断
 Short circuit, selectivity, loads, EMC, functional safety and verification against rule sets	短絡、選択遮断、負荷、EMC、機能安全、ルールセットに対する検証
+Short-circuit current	短絡電流
 Short-circuit currents	短絡電流
 Short-circuit power of the network	系統の短絡容量
 Shortest profile	最短プロファイル
@@ -1771,7 +1898,6 @@ Show as tiles	タイルで表示
 Show connection point designations	接続ポイントの名称を表示
 Show connectors	コネクターを表示
 Show device tag and cross references	デバイスタグと相互参照を表示
-Show everything (Home)	すべて表示 (Home)
 Show in panel layout ({})	盤レイアウトで表示 ({})
 Show in schematic	回路図で表示
 Show in the schematic	回路図で表示
@@ -1780,6 +1906,7 @@ Show or hide panes; drag a tab to dock it elsewhere	ペインの表示と非表�
 Show project manager	プロジェクトマネージャーを表示
 Show the enclosures bayed to this one as well	このエンクロージャーに連結されたエンクロージャーも表示
 Show the messages accepted as checked	確認済みとして承認したメッセージを表示
+Show the modules of the PV arrays see-through in the 3D view: the wiring of the modules to each other under them is seen	3D ビューで PVアレイのモジュールを透過表示します。下にあるモジュール間の配線が見えます
 Show the other wires	他の電線を表示
 Show the pane as a window	ペインをウィンドウとして表示
 Show the ribbon	リボンを表示
@@ -1792,6 +1919,8 @@ Shown instead of the measured value	測定値の代わりに表示されます
 Shown now: {}	現在の表示: {}
 Shown on the cover page and by the image elements of title blocks that show the project logo	表紙と、プロジェクトのロゴを表示する表題欄の画像要素に表示されます
 Shows	表示
+Shows the differences of your version to the open project; selected ones can be taken over	あなたの版と開いているプロジェクトの差分を表示します。選択したものを取り込めます
+Shows the properties saved on the project server; you change them here if you may and nobody has locked the project data	プロジェクトサーバーに保存されているプロパティを表示します。権限があり、誰もプロジェクトデータをロックしていなければ、ここで変更できます
 Side walls, rear wall, roof and bottom seen from the outside: fans, cable glands, cutouts	外側から見た側板、背板、天板、底板: ファン、ケーブルグランド、切り欠き
 Sign in in the Project server pane; the project opens afterwards	「プロジェクトサーバー」ペインでサインインしてください。その後プロジェクトが開きます
 Sign in…	サインイン…
@@ -1799,7 +1928,6 @@ Signed in to {} as {}	{} に {} としてサインインしました
 Signed out of Vault	Vault からサインアウトしました
 Single-line	単線
 Single-line symbols for the power devices of the schematic that have none yet, on a new overview page	単線シンボルがまだない回路図の動力デバイスの単線シンボル (新しい概要ページに作成)
-Site	敷地
 Site plan, building {}	配置図、建物 {}
 Size {} × {} mm	サイズ {} × {} mm
 Slot	長穴
@@ -1809,6 +1937,7 @@ Smallest cross-section of control circuits	制御回路の最小断面積
 Smallest cross-section of power circuits	動力回路の最小断面積
 Socket outlets, data and antenna outlets	コンセント、データおよびアンテナコンセント
 Solid	実線
+Some of your changes were not taken by the project server. Your version stays in the Project server pane, also after discarding.	一部の変更はプロジェクトサーバーに取り込まれませんでした。破棄した後も、あなたの版はプロジェクトサーバーのペインに残ります。
 Some wires have no length: place their devices in the panel layout or set the field length.	一部の電線に長さがありません: 盤レイアウトでそのデバイスを配置するか、フィールド長を設定してください。
 Sort by designation	名称で並べ替え
 Sort order	並べ替え順
@@ -1872,6 +2001,7 @@ Surge protection	サージ保護
 Swing the enclosure door open or shut (door devices and their wires move with it)	エンクロージャーの扉を開閉します (扉取付機器とその電線も一緒に動きます)
 Switch off the check \"{}\"	チェック「{}」をオフにする
 Switched off on this computer ({})	このコンピューターではオフになっています（{}）
+Switches	スイッチ
 Switches the options with a condition by the configurator options	条件付きのオプションをコンフィギュレーターのオプションに従って切り替えます
 Switches to this workspace with its panes at their default places	このワークスペースに切り替え、ペインを既定の位置に戻します
 Switches, push buttons and room thermostats	スイッチ、押しボタン、室温サーモスタット
@@ -1896,6 +2026,7 @@ Tag placed by hand	手動で配置したタグ
 Take out a subproject	サブプロジェクトを切り出し
 Take out of the building	建物から外す
 Take out {} pages…	{} ページを切り出し…
+Take over again	再び取り込む
 Take over cut lengths	切断長を反映
 Take over selected ({})	選択した項目を反映 ({})
 Take over {} changes	{} 件の変更を反映
@@ -1920,6 +2051,7 @@ Terminals at least	端子の最低高さ
 Terminals with the same jumper number are bridged (same potential). Spare terminals are counted in the bill of materials.	同じジャンパー番号の端子はジャンパー接続されます (同電位)。予備端子は部品表に計上されます。
 Terms separated by ';': key=value (equal), key~text (contains) or text found anywhere	条件は ';' で区切ります: キー=値 (一致)、キー~テキスト (含む)、または任意の位置にあるテキスト
 Test connection	接続をテスト
+Test joints	試験用接続端子
 Text offset	テキストのオフセット
 Text size	テキストサイズ
 Texts	テキスト
@@ -1930,37 +2062,51 @@ The aspect ratio is kept.	縦横比は維持されます。
 The check warns about cable ducts filled above this level	この充填率を超えた配線ダクトについてチェックで警告します
 The checks keep the distances between classes and let classes overlap as set in Layout checks	チェックでは、レイアウトチェックの設定に従ってクラス間の距離を確保し、クラスの重なりを許可します
 The commands of all plugins by plugin, with a search; the star pins a command to the Plugins tab	すべてのプラグインのコマンドをプラグインごとに検索付きで表示します。星を付けるとコマンドがプラグインタブに固定されます
+The copy is created from the state saved on the project server. Changes other users have not saved yet are not part of it. Sessions, locks and access rights are not copied; the original stays as it is.	コピーはプロジェクトサーバーに保存されている状態から作成されます。他のユーザーがまだ保存していない変更は含まれません。セッション、ロック、アクセス権はコピーされません。元のプロジェクトはそのままです。
 The crossed wires get free cores of the cable in order	横切った電線にケーブルの空き心線が順番に割り当てられます
 The current page belongs to option {}.	現在のページはオプション {} に属しています。
 The devices do not fit onto the rail	デバイスがレールに収まりません
 The dictionary is empty: collect the texts from the project.	辞書が空です: プロジェクトからテキストを収集してください。
 The door seen from the front: door devices and cutouts	前面から見た扉: 扉取付機器と切り欠き
-The door seen from the inside (hinges on the right): cable ducts and the wiring behind the door	内側から見た扉 (ヒンジは右): 配線ダクトと扉裏の配線
+The door seen from the inside (mirrored): cable ducts and the wiring behind the door	内側から見た扉 (左右反転): 配線ダクトと扉裏の配線
 The element is drawn only when this text with its placeholders is not empty, e.g. the rows of a revision table	このプレースホルダー付きの文字が空でないときだけ要素を描きます（例: リビジョン表の行）
 The enclosure stands with its left side against the right side of the chosen one; wires run between them through cable passages	エンクロージャーの左側を選択したエンクロージャーの右側に接して設置します。電線はケーブル貫通口を通って両者の間を通ります
 The horizontal wire	水平の配線
 The items are selected and moved together	アイテムはまとめて選択、移動されます
+The last save failed: {}. Your changes are not saved on the project server; the automatic save tries again.	最後の保存に失敗しました: {}。変更はプロジェクトサーバーに保存されていません。自動保存が再試行します。
+The local recovery copy is of {}: your latest changes are not in it yet	ローカル復元コピーは {} のものです: 最新の変更はまだ含まれていません
+The lock was refused	ロックが拒否されました
 The logo is fitted into this area keeping its aspect ratio	ロゴは縦横比を保ってこの領域に収まります
 The logo of the project properties, e.g. the customer's	プロジェクトのプロパティのロゴ（例: 顧客のロゴ）
+The logos of the manufacturers' catalogs on the parts server, beside the details of a part	部品サーバーにあるメーカーのカタログのロゴを、部品の詳細の横に表示します
 The macro library has no page macros (Macros › Save page as macro…).	マクロライブラリにページマクロがありません (マクロ › ページをマクロとして保存…)。
 The modifiers that turn the wheel sideways or make it zoom are set under Modifier keys.	ホイールで横にパンまたはズームするモディファイアキーは「モディファイアキー」で設定します。
 The modules no string takes yet in series, on the first inverter	まだどのストリングにも属さないモジュールを直列に、最初のインバーターへ
+The name on the server needs letters, digits, space, - _ . (up to 64 characters).	サーバー上の名前には、文字、数字、スペース、- _ . を使用します (最大 64 文字)。
 The names of its pages follow	そのページの名前も変わります
+The open project already has your version	開いているプロジェクトには既にあなたの版があります
+The open project has changes that are not saved on the project server yet. You are asked whether to save them first; only saved changes are part of the copy.	開いているプロジェクトには、まだプロジェクトサーバーに保存されていない変更があります。先に保存するかどうかを確認します。コピーに含まれるのは保存済みの変更だけです。
+The open project is a local recovery copy of this project. Its changes are not on the project server and not part of the copy.	開いているプロジェクトは、このプロジェクトのローカル復元コピーです。その変更はプロジェクトサーバーになく、コピーにも含まれません。
 The open project is a local recovery copy. Its changes are not saved on the project server; before the shared project opens, you decide whether to save them locally or discard them.	開いているプロジェクトはローカル復元コピーです。その変更はプロジェクトサーバーに保存されていません。共有プロジェクトを開く前に、ローカルに保存するか破棄するかを決めます。
 The page name gets the section number	ページ名にセクション番号が付きます
 The page type, plot frame, title block, structure, description and the whole content are saved.	ページタイプ、図枠、表題欄、構造、説明、すべての内容が保存されます。
 The pages it generated stay	生成されたページは残ります
 The parts database is shared by all projects. Parts are copied into a project when they are assigned to a device.	部品データベースはすべてのプロジェクトで共有されます。部品はデバイスに割り当てられたときにプロジェクトにコピーされます。
 The point's coordinates in the coordinate reference system	座標参照系での点の座標
+The post; its accessories are the table beams, rails and clamps	杭。付属品は架台の梁、レール、クランプです
 The project changed since the search.	検索後にプロジェクトが変更されました。
 The project check	プロジェクトのチェック
+The project data is locked by {}: the properties cannot be changed now.	プロジェクトデータは {} によってロックされています: 現在プロパティは変更できません。
 The project database needs the desktop version: the browser cannot search folders.	プロジェクトデータベースにはデスクトップ版が必要です。ブラウザーではフォルダーを検索できません。
 The project server does not answer: changes are not saved on it until the connection is back	プロジェクトサーバーが応答しません：接続が戻るまで変更はサーバーに保存されません
+The project server has confirmed no save of this session yet	プロジェクトサーバーはこのセッションの保存をまだ確認していません
 The project server {} could not open {}.	プロジェクトサーバー {} は {} を開けませんでした。
 The project's own page templates as a file	プロジェクト独自のページテンプレート (ファイル)
 The project's own title blocks	プロジェクト独自の表題欄
 The project's own title blocks and report schemes	プロジェクト独自の表題欄とレポートスキーム
+The properties of the open project; changing them locks the project data	開いているプロジェクトのプロパティ。変更するとプロジェクトデータがロックされます
 The properties of the selection in a window beside the page	ページの横のウィンドウに選択範囲のプロパティ
+The properties were changed on the project server meanwhile. Reload shows them; your entries are replaced.	その間にプロジェクトサーバーでプロパティが変更されました。再読み込みすると表示されます。入力した内容は置き換えられます。
 The rail or mounting base; its accessories are the hooks, clamps and ballast	レールまたは架台。付属品はフック、クランプ、バラスト
 The recalculation keeps frozen routes as long as they are still possible	再計算では、可能な限り固定されたルートが維持されます
 The ribbon with the File tab replaces the menus; Ctrl+Shift+P finds any command.	ファイルタブ付きのリボンがメニューに代わります。Ctrl+Shift+P で任意のコマンドを検索できます。
@@ -1968,6 +2114,7 @@ The rooms of the level side by side; click the level again for all of the plant	
 The second fault is checked at the line-to-earth voltage	二重地絡は対地電圧でチェックされます
 The selected devices side by side on the selected rail, from its left end	選択したデバイスを、選択したレール上に左端から並べて配置します
 The side of {} is open	{} の側面は開放されています
+The state of the save shows in the status bar and in the Project server pane: saved, not saved yet, saving, waiting for the server, failed or partly saved. The local recovery copy is kept besides; it is no save on the project server.	保存の状態はステータスバーとプロジェクトサーバーのペインに表示されます: 保存済み、未保存、保存中、サーバー待ち、失敗、一部保存。ローカル復元コピーは別に保持されますが、プロジェクトサーバーへの保存ではありません。
 The symbol is placed in the project	シンボルはプロジェクト内で使用されています
 The terminal parts name no end brackets or end plates (tech data End bracket, End plate).	端子部品にエンドクランプまたはエンドカバーの指定がありません (技術データ End bracket、End plate)。
 The update failed	更新に失敗しました
@@ -1976,6 +2123,7 @@ The web version is updated on its server.	Web 版はそのサーバー上で更�
 The wire tool routes around symbols and other wires	電線ツールはシンボルや他の電線を回避してルートを決めます
 The wires get the free cores of the cable in order (left to right)	電線にはケーブルの空き心線が順番に (左から右へ) 割り当てられます
 The wires of the connection take these values again	接続の電線がこれらの値を再び引き継ぎます
+Their places, sizes and busbars are set in the Buildings pane.	位置、寸法、ブスバーは建物ペインで設定します。
 Theme	テーマ
 These settings are edited in their panes:	これらの設定は各ペインで編集します:
 Thickness	厚さ
@@ -1997,7 +2145,6 @@ Title blocks, report schemes and plot frames shared by all projects on the parts
 To do	未完了
 Toggle corner direction while drawing wires	電線描画中にコーナーの向きを切り替え
 Toggle routing around symbols (wire tool)	シンボル回避ルーティングの切り替え (電線ツール)
-Top	上
 Top edges	上端
 Top left	左上
 Top right	右上
@@ -2005,16 +2152,15 @@ Total selectivity	完全選択遮断
 Touch screen	タッチスクリーン
 Transfer project parts to database	プロジェクト部品をデータベースに転送
 Translate the project texts; documentation per language	プロジェクトテキストを翻訳します。言語ごとのドキュメント
+Try again	再試行
 Turn about the vertical, counter-clockwise seen from above (90 °: the fronts face to the right)	鉛直軸まわりの回転 (上から見て反時計回り、90 °: 正面が右向き)
 Turn the 3D view to the point	3D ビューをその点に向ける
-Tutorial	チュートリアル
 Twin ferrules where two wires share a connection point	2本の電線が接続ポイントを共有する場合はツインフェルール
 Two fingers	2 本指
 Two wires must meet here at a right angle. With Auto-connect on, connection points facing its arms are wired to it.	ここで2本の接続線が直角に交わる必要があります。自動接続が有効なとき、その側に向き合う接続点がここへ配線されます。
 Type a point and press Enter: x y in mm, or @dx dy relative to the last point; it acts like a click of the current tool	点を入力して Enter キーを押します: x y (mm)、または最後の点からの相対位置 @dx dy。現在のツールでのクリックと同じように動作します
 U {} / {} / {} V, I {} A, {} kWp	U {} / {} / {} V、I {} A、{} kWp
 UI scale	UI の拡大率
-Undo	元に戻す
 Undo brings it back.	元に戻すで復元できます。
 Undo list	元に戻す一覧
 Undo {} steps	{} ステップ元に戻す
@@ -2072,8 +2218,10 @@ Via:	経由:
 View	表示
 Visible	表示
 Voltage (line to line)	電圧 (線間)
+Voltage at maximum power	最大出力時の電圧
 Voltage drop	電圧降下
 WGS 84, written into the site of IFC exports	WGS 84。IFC エクスポートの敷地に書き込まれます
+Waiting for the server	サーバー待ち
 Wall {}, {} m: drag to move it, a double-click shows it to equip it	壁 {}、{} m: ドラッグで移動、ダブルクリックで表示して取り付け
 Wall {}, {} m: the wall shown in the wall view (highlighted); drag to move it	壁 {}、{} m: 壁ビューに表示中の壁 (強調表示)、ドラッグで移動
 Wall-mounted part	壁取付部品
@@ -2092,8 +2240,10 @@ When it differs from the page	ページと異なる場合
 Where	位置
 Where neither wire has a termination chosen for it	どちらの電線にも端末処理が選ばれていない場合
 Where the point is in the plant; y: its height above the ground level of the plant	設備内の点の位置。y：設備の地盤面からの高さ
+Where the roof was clicked in the 3D view	3D ビューで屋根をクリックした位置
 Where the structure of the device comes from: aspects equal to the structure around the symbol are inherited and follow when it moves into or out of a structure box; other aspects are the device's own and stay.	デバイスの構造の由来: シンボル周囲の構造と等しいアスペクトは継承され、構造ボックスへの出し入れに追従します。その他のアスペクトはデバイス固有のもので、変わりません。
 Where the wire starts and ends: a connection point from the part data, one generated from the function template, or the device centre if no connection point matches	電線の始点と終点: 部品データの接続ポイント、機能テンプレートから生成された接続ポイント、または一致する接続ポイントがない場合はデバイスの中心
+Who created the project on the project server and when; not the drawing author below	プロジェクトサーバーでプロジェクトを作成したユーザーと日時。下の図面作成者ではありません
 Whole building	建物全体
 Whole words	単語単位
 Width / going	幅 / 踏面
@@ -2130,6 +2280,7 @@ Wiring assistant: checklist of the wires with 3D view and progress (tablet: open
 Wiring space between devices and ducts	デバイスとダクトの間の配線スペース
 With a user account of the server; replaces the access token	サーバーのユーザーアカウントを使用 (アクセストークンの代わり)
 With everything below it	下位のすべてを含む
+With its middle where the roof was clicked in the 3D view	中心を 3D ビューで屋根をクリックした位置に置く
 With the current pages; the approvals so far become void	現在のページで再提出します。これまでの承認は無効になります
 With values only	値があるもののみ
 Withdraw	取り下げ
@@ -2150,6 +2301,9 @@ YYYY-MM-DD	YYYY-MM-DD
 You may only view this project.	このプロジェクトは閲覧のみ可能です。
 You may review this project: comments, markup and approvals, no other changes.	このプロジェクトはレビューのみ可能です: コメント、マークアップ、承認のみで、その他の変更はできません。
 Your unsaved changes of it are taken back	未保存の変更は取り消されます
+Your version of {}	{} のあなたの版
+Your version taken over: {}. Save to store it on the project server.	あなたの版を取り込みました: {}。プロジェクトサーバーに保存してください。
+Your versions of changes that were replaced by the version on the project server. They stay here until you discard them.	プロジェクトサーバーの版に置き換えられた変更のあなたの版です。破棄するまでここに残ります。
 Zoom	ズーム
 Zoom in in the 3D view (held)	3D ビューを拡大（押したまま）
 Zoom out in the 3D view (held)	3D ビューを縮小（押したまま）
@@ -2254,7 +2408,10 @@ x y	x y
 {} (default)	{} (既定)
 {} (first column)	{} (最初の列)
 {} (locked by {})	{} ({} がロック中)
+{} (no such device)	{} (デバイスが存在しません)
+{} (not placed in the layout)	{} (レイアウトに配置されていません)
 {} (project server, revision {})	{} (プロジェクトサーバー、リビジョン {})
+{} (revision {})	{} (リビジョン {})
 {} (spare)	{} (予備)
 {} (subproject of {})	{} ({} のサブプロジェクト)
 {} (unused)	{} (未使用)
@@ -2263,7 +2420,10 @@ x y	x y
 {} PLC function texts updated	{} 件の PLC 機能テキストを更新しました
 {} Vault items found for the project parts	プロジェクト部品の Vault アイテムが {} 件見つかりました
 {} Vault items found: review the changes in the integration window	Vault アイテムが {} 件見つかりました: 統合ウィンドウで変更を確認してください
+{} added to building {}	{0} を建物 {1} に追加しました
 {} addresses changed	{} 個のアドレスを変更しました
+{} air-termination rods	突針 {} 本
+{} already exists on the project server.	{} はプロジェクトサーバーに既に存在します。
 {} bundles, {} branch points	束 {} 個、分岐点 {} 個
 {} bus cables created	{} 本のバスケーブルを作成しました
 {} bus connections	{} 件のバス接続
@@ -2301,6 +2461,7 @@ x y	x y
 {} devices renamed	{} 個のデバイスの名前を変更しました
 {} differences to {}	{1} との相違点: {0} 件
 {} doors	ドア {}
+{} down conductors with test joints, {} m of conductors	試験用接続端子付き引下げ導線 {} 本、導体 {} m
 {} entries in {}	{1} 内のエントリ {0} 件
 {} errors	{} 件のエラー
 {} errors, {} warnings	エラー {} 件、警告 {} 件
@@ -2315,6 +2476,7 @@ x y	x y
 {} has no function with a symbol; assign it to a device in its properties	{} にはシンボル付きの機能がありません。デバイスのプロパティでデバイスに割り当ててください
 {} has unsaved changes. Discard them?	{} には未保存の変更があります。破棄しますか?
 {} imported into the parts database and placed as {}	{} を部品データベースにインポートし、{} として配置しました
+{} in {}	{1} 内の {0}
 {} is neither in the parts database nor on the parts server	{} は部品データベースにも部品サーバーにもありません
 {} is not in the disk image	ディスクイメージに {} がありません
 {} is not made for wall mounting: place it on a mounting rail	{} は壁取付用ではありません: 取付レールに配置してください
@@ -2344,11 +2506,13 @@ x y	x y
 {} of {} entries shown: search to narrow the list	{} / {} 件のエントリを表示中: 検索して一覧を絞り込んでください
 {} of {} items	{} / {} 個のアイテム
 {} of {} pages locked	{} / {} ページをロック済み
+{} of {} parts · double-click: place	{} / {} 部品 · ダブルクリック: 配置
 {} of {} pins used	{} / {} ピン使用
 {} of {} rows	{} / {} 行
 {} of {} wires	{} / {} 本の電線
 {} of {} wires assigned to cores of {}	{} / {} 本の電線を {} の心線に割り当てました
 {} on released pages were left as they are	リリース済みページ上の {} 個は変更されませんでした
+{} on {}	{} ({})
 {} options switched	{} 個のオプションを切り替えました
 {} pages generated	{} ページを生成しました
 {} pages generated; page macros not found: {}	{} ページを生成しました。見つからなかったページマクロ: {}
@@ -2373,6 +2537,7 @@ x y	x y
 {} renamed: {} pages and devices	{} の名前を変更しました: {} 個のページとデバイス
 {} report pages output to {}	{} ページのレポートページを {} に出力しました
 {} routes frozen	{} 件のルートを固定しました
+{} rows of tables of {} × {} = {}, {}	架台 {} 列、{} × {} = {}、{}
 {} segments created, {} devices added, {} updated	セグメント {} 個を作成、デバイス {} 個を追加、{} 個を更新しました
 {} stations, {} bus systems, {} cards assigned, {} addresses changed, {} connections, {} cables	ステーション {} 個、バスシステム {} 個、割り当てたカード {} 個、変更したアドレス {} 個、接続 {} 件、ケーブル {} 本
 {} structure identifiers added	{} 個の構造識別子を追加しました
@@ -2386,6 +2551,7 @@ x y	x y
 {} unused structure identifiers removed	{} 個の未使用の構造識別子を削除しました
 {} values taken over	{} 件の値を反映しました
 {} warnings	{} 件の警告
+{} was changed on the project server meanwhile. Your entries are kept; create the copy again to copy the current saved state.	その間に {} がプロジェクトサーバーで変更されました。入力した内容は保持されます。現在保存されている状態をコピーするには、もう一度コピーを作成してください。
 {} was imported into the parts database; its page no longer exists	{} を部品データベースにインポートしました。ページはもう存在しません
 {} windows	ウィンドウ {} 個
 {} wire pieces joined	{} 個の電線部分を結合しました
@@ -2393,15 +2559,21 @@ x y	x y
 {} wires changed	{} 本の電線を変更しました
 {} wires, {} cables and {} tubes routed	電線 {} 本、ケーブル {} 本、チューブ {} 本を配線しました
 {} wires, {} – {} mm	電線 {} 本、{} – {} mm
+{} {} of building {}	建物 {2} の{0} {1}
 {} °C (max. {} °C)	{} °C (最大 {} °C)
 {} °C (max.)	{} °C (最大)
+{} × {} = {}, {}	{} × {} = {}、{}
 {} × {} pixels, {}	{} × {} ピクセル、{}
+{} – revision {}, {}	{} – リビジョン {}、{}
 {} – {} ({} pages)	{} – {} ({} ページ)
 {} – {} here (Esc cancels)	{} – ここで{}（Esc でキャンセル）
+{}, freestanding	{}、野立て
+{}, {} (copy of {}, revision {})	{}、{} ({} のコピー、リビジョン {})
 {}: click to show its floor plan	{}：クリックで平面図を表示
 {}: crimp together with the wire to {}	{}: {} への電線と一緒に圧着
 {}: drag to move it, R turns it, a double-click opens it	{}: ドラッグで移動、R で回転、ダブルクリックで開く
 {}: drag to move it, a double-click shows the floor	{}: ドラッグで移動、ダブルクリックで床を表示
+{}: drag to move, R: turn by 90°	{}：ドラッグで移動、R：90° 回転
 {}: nothing to change	{}: 変更なし
 {}: pin {}	{}: ピン {}
 {}: strip {} mm, {}	{}：被覆除去 {} mm、{}

@@ -1,9 +1,12 @@
 # English<TAB>한국어 – texts shown by several areas (texts without a line are shown in English). Sorted by the English text: cargo run -p openecraft-i18n --example tidy
 (all)	(모두)
 (no entries)	(항목 없음)
+(no structure)	(구조 없음)
+(optional)	(선택 사항)
 --json needs a JSON object	--json에는 JSON 개체가 필요합니다
 3D model	3D 모델
 3D routing	3D 배선 경로
+3D view	3D 보기
 A page named {} already exists	이름이 {}인 페이지가 이미 있습니다
 A page needs a name	페이지에는 이름이 필요합니다
 A routing path needs {} points at least	배선 경로에는 점이 {}개 이상 필요합니다
@@ -12,14 +15,18 @@ Above	위
 Access token	액세스 토큰
 Accessories	부속품
 Accessory	부속품
+Add	추가
 Add a PDF of all pages	모든 페이지의 PDF 추가
 Add to favorites	즐겨찾기에 추가
 Address	주소
+Administrator	관리자
 Angle	각도
 Apply	적용
 Approve	승인
 Approvers	승인자
 Automatic	자동
+Automation	자동화
+Aux	보조
 Below	아래
 Bold	굵게
 Bottom	바닥
@@ -39,11 +46,13 @@ Cable tag, e.g. -W20	케이블 태그, 예: -W20
 Cables	케이블
 Cancel	취소
 Cannot read {}: {}	{0}을(를) 읽을 수 없음: {1}
+Cannot write {}: {}	{0}을(를) 쓸 수 없음: {1}
 Catalog	카탈로그
 Catalog id	카탈로그 ID
 Category	범주
 Centred	가운데
 Certificates	인증서
+Change	변경
 Channel	채널
 Characteristic	특성
 Check settings	검사 설정
@@ -54,6 +63,7 @@ Clear filters	필터 지우기
 Clearance bottom	아래쪽 이격 거리
 Clearance top	위쪽 이격 거리
 Clearances	이격 거리
+Close	닫기
 Coding: {}	코딩: {}
 Coil voltage	코일 전압
 Collision class	충돌 클래스
@@ -83,6 +93,7 @@ Created by	작성자
 Cross references	상호 참조
 Cross-section	단면적
 Crossing	교차
+Currency	통화
 Current	전류
 Cutout	컷아웃
 Cutouts	컷아웃
@@ -104,19 +115,24 @@ Device (PV generator) the modules belong to; its parts then count them in the bi
 Device connection point	장치 연결 지점
 Device description	장치 설명
 Device tag	장치 태그
+Device the earthing conductor of the mounting runs to (earthing or equipotential bonding busbar); empty: none	가대의 접지 도체가 연결되는 장치 (접지 또는 등전위 본딩 부스바); 비어 있음: 없음
 Device {}	장치 {}
 Devices	장치
+Dimensions	치수
 Direction	방향
 Discard	폐기
 Discard changes	변경 내용 취소
 Display	표시
+Documents	문서
 Done	완료
 Door	도어
 Door cutout	도어 컷아웃
+Download	다운로드
 Downloading {}…	{} 다운로드 중…
 Drag to turn the model	끌어서 모델 회전
 EMC clearance	EMC 이격 거리
 Edit	편집
+Editor	편집자
 Electro-fluid cross reference	전기-유체 상호 참조
 Enclosure	외함
 Enclosures	외함
@@ -136,10 +152,13 @@ Field wiring	필드 배선
 File	파일
 Files	파일
 Filter	필터
+Filter devices…	장치 필터…
+Fit	맞춤
 Fits	호환 대상
 Fitting at the end	끝 쪽 피팅
 Fitting at the start	시작 쪽 피팅
 Floor	바닥
+Floor plan	평면도
 Fluid device	유체 장치
 Fluid device groups	유체 장치 그룹
 Fluid netlist	유체 네트 목록
@@ -152,10 +171,12 @@ Function text	기능 텍스트
 Functional safety	기능 안전
 Functions	기능
 General	일반
+Generator junction box (device) the strings run to, from there a DC main cable to each inverter; empty: none	스트링이 연결되는 접속함 (장치), 거기서 각 인버터로 직류 간선이 갑니다; 비어 있음: 없음
 Gives up a subproject: its pages are unlocked again	하위 프로젝트를 포기합니다. 해당 페이지의 잠금이 다시 해제됩니다
 Gland plate	글랜드 플레이트
 Graphics	그래픽
 Group	그룹
+Group the pages by structure	구조별로 페이지 그룹화
 Groups	그룹
 Harness	하네스
 Harness data	하네스 데이터
@@ -183,9 +204,12 @@ Kind	종류
 Language	언어
 Languages	언어
 Last change	마지막 변경
+Last changed	마지막 변경
+Last changed by	마지막 변경자
 Layers	레이어
 Leave out stored baselines and wiring marks	저장된 기준선과 배선 표시 제외
 Left	왼쪽
+Left side	왼쪽 측면
 Length	길이
 Level	레벨
 Lifecycle	수명 주기
@@ -195,13 +219,20 @@ Link	링크
 Linked	연결됨
 Load	부하
 Loaded circuits bunched together	함께 묶인 부하 회로
+Loading…	로드 중…
 Location	위치
 Location (+)	위치 (+)
+Locked	잠김
+Locked by {}	{}이(가) 잠금
+Logo	로고
 MTTFd (years)	MTTFd(년)
 Machine	기계
+Main	주
+Main earthing busbar (device) it is connected to; empty: none	연결된 주 접지 부스바 (장치); 비어 있음: 없음
 Main earthing terminal	주 접지 단자
 Main switch	주 스위치
 Manufacturer	제조업체
+Manufacturers	제조업체
 Manufacturing	제조
 Marking	마킹
 Match case	대/소문자 구분
@@ -212,6 +243,8 @@ Minimum digits of the counter (leading zeros)	카운터의 최소 자릿수(앞�
 Missing parameter: {}	매개 변수 누락: {}
 Missing value for --{}	--{}의 값 누락
 Model import failed: {}	모델 가져오기 실패: {}
+Module	모듈
+Modules	모듈
 Modules in series	직렬 모듈
 Modules side by side in a row	한 열에 나란히 놓인 모듈
 Mounted	장착됨
@@ -221,6 +254,8 @@ Mounting holes	장착 구멍
 Mounting layout {}	장착 레이아웃 {}
 Mounting plate	장착 플레이트
 Mounting rail	장착 레일
+NC contact	b접점
+NO contact	a접점
 Name	이름
 Name of the block	블록 이름
 Name of the plot, e.g. the cadastral parcel	부지 이름 (예: 지번)
@@ -228,6 +263,7 @@ Name of the point, e.g. a survey point	점 이름 (예: 측량점)
 Name of the scheme	스키마 이름
 Net	네트
 Never	안 함
+New group	새 그룹
 New name	새 이름
 Next page	다음 페이지
 No	아니요
@@ -249,6 +285,7 @@ No plug {}	플러그 {} 없음
 No report block named {}	이름이 {}인 보고서 블록 없음
 No segment {}	세그먼트 {}이(가) 없습니다
 No station {}	스테이션 {} 없음
+No such PV array	해당 태양광 어레이 없음
 No such page	해당 페이지가 없습니다
 No such section	해당 구역이 없습니다
 No symbol with id {}	ID가 {}인 심볼 없음
@@ -263,12 +300,14 @@ Not in the schematic	회로도에 없음
 Note	참고
 Notes	메모
 Number	번호
+Number of down conductors (0: as many as the class needs for the walls)	인하 도선 수 (0: 등급이 벽에 요구하는 만큼)
 Number the sections 1, 2, 3 … on every level first	먼저 각 수준의 구역에 1, 2, 3 … 번호 매기기
 Numbers the device tags per structure and identifying letter in schematic order (page, column, top to bottom)	구조 및 식별 문자별로 회로도 순서(페이지, 열, 위에서 아래)에 따라 장치 태그에 번호를 매깁니다
 Only rows containing this text	이 텍스트가 포함된 행만
 Operating pressure	작동 압력
 Option {}: {} is not one of its choices	옵션 {0}: {1}은(는) 선택 항목에 없습니다
 Order number	주문 번호
+Other	기타
 Outer diameter	외경
 Output	출력
 Overview	개요
@@ -297,7 +336,7 @@ Part number	부품 번호
 Part number already exists	부품 번호가 이미 있습니다
 Part {}	부품 {}
 Parts	부품
-Parts (CSV, JSON, BMEcat, EPLAN XML, EDZ)	부품(CSV, JSON, BMEcat, EPLAN XML, EDZ)
+Parts (CSV, JSON, BMEcat, EPLAN XML, EDZ, ZIP)	부품(CSV, JSON, BMEcat, EPLAN XML, EDZ, ZIP)
 Parts import failed: {}	부품 가져오기 실패: {}
 Password	암호
 Picture	이미지
@@ -308,9 +347,11 @@ Pin side	핀 측
 Place	자리
 Placement scheme	배치 스키마
 Plinth	받침대
+Plot	부지
 Plot frame	플롯 프레임
 Plug	플러그
 Plug diagram	플러그 다이어그램
+Plugins	플러그인
 Plugs	플러그
 Poles	극수
 Ports	포트
@@ -333,9 +374,11 @@ Product subgroup	제품 하위 그룹
 Product top group	제품 상위 그룹
 Profile	프로필
 Project	프로젝트
+Project data	프로젝트 데이터
 Project languages	프로젝트 언어
 Project logo	프로젝트 로고
 Project management	프로젝트 관리
+Project manager	프로젝트 관리자
 Project name	프로젝트 이름
 Project properties	프로젝트 속성
 Properties	속성
@@ -349,8 +392,11 @@ Rail	레일
 Range	범위
 Rated current	정격 전류
 Rated power	정격 전력
+Rear wall	후면벽
 Rectangle	사각형
 Rectangular	사각형
+Redo	다시 실행
+Refresh	새로 고침
 Reject	거부
 Relative humidity	상대 습도
 Relay	릴레이
@@ -359,17 +405,22 @@ Released pages cannot be moved	릴리스된 페이지는 이동할 수 없습니
 Remove	제거
 Remove from favorites	즐겨찾기에서 제거
 Remove the boundary	경계 제거
+Remove the lightning protection system	피뢰 시스템 삭제
 Remove the reference point	기준점 제거
 Report	보고서
 Report blocks	보고서 블록
 Report: {}	보고서: {}
+Reports	보고서
 Required	필요
 Reserve	예비
+Reviewer	검토자
 Revision	개정
 Revision {}	개정 {}
 Rework	재작업
 Right	오른쪽
+Right side	오른쪽 측면
 Role	역할
+Roof	지붕
 Rooms	방
 Round	원형
 Route	경로 설정
@@ -390,6 +441,7 @@ Search parts	부품 검색
 Searching…	검색 중…
 Section	구역
 Segment	구간
+Select	선택
 Select a part in the tree or create a new one.	트리에서 부품을 선택하거나 새 부품을 만드세요.
 Sensor	센서
 Sensors, switches, pushbuttons	센서, 스위치, 푸시버튼
@@ -399,19 +451,23 @@ Settings	설정
 Shape	모양
 Short-circuit voltage	단락 전압
 Show history	기록 표시
+Show the logos of the catalogs	카탈로그 로고 표시
 Show the row after the column	열 다음에 행 표시
 Side	측
 Sign in	로그인
 Sign out	로그아웃
 Signed in as {}	{}(으)로 로그인됨
 Signed in as {} ({})	{}({})(으)로 로그인됨
+Signed out	로그아웃됨
 Signing in…	로그인 중…
 Single-line / multi-line	단선 / 복선
+Site	부지
 Size	크기
 Socket side	소켓 측
 Solenoid not linked	솔레노이드 연결되지 않음
 Sort by	정렬 기준
 Source	원본
+Started	시작됨
 State	상태
 Status	상태
 String	스트링
@@ -438,6 +494,7 @@ Terminal type	단자 유형
 Terminals	단자
 Text	텍스트
 Text to find	찾을 텍스트
+The freestanding PV array {} stands outside the plot boundary	지상형 태양광 어레이 {}이(가) 부지 경계 밖에 있습니다
 The identifier must not be empty	식별자는 비워 둘 수 없습니다
 The long side of the modules along the rows	모듈의 긴 변을 열 방향으로
 The page is released	페이지가 릴리스되었습니다
@@ -447,11 +504,15 @@ Time	시간
 Title block	표제란
 To	끝
 Tools	공구
+Top	위쪽
 Total	총계
 Transformer	변압기
+Tutorial	튜토리얼
 Type	유형
 Type number	형식 번호
 Underline	밑줄
+Undo	실행 취소
+Unexpected argument: {}	예기치 않은 인수: {}
 Unit	단위
 Unknown column: {}	알 수 없는 열: {}
 Unknown connector: {}	알 수 없는 커넥터: {}
@@ -459,10 +520,12 @@ Unknown enclosure system: {}	알 수 없는 외함 시스템: {}
 Unknown face: {}	알 수 없는 면: {}
 Unknown format: {}	알 수 없는 형식: {}
 Unknown function definition: {}	알 수 없는 기능 정의: {}
+Unknown language: {}	알 수 없는 언어: {}
 Unknown option {}	알 수 없는 옵션 {}
 Unknown parameter: {}	알 수 없는 매개 변수: {}
 Unknown part: {}	알 수 없는 부품: {}
 Unknown property: {}	알 수 없는 속성: {}
+Unknown report: {}	알 수 없는 보고서: {}
 Unknown scheme: {}	알 수 없는 스키마: {}
 Unknown segment	알 수 없는 세그먼트
 Unknown symbol {}	알 수 없는 심볼 {}
@@ -473,6 +536,7 @@ User	사용자
 User name	사용자 이름
 Users	사용자
 Version	버전
+Viewer	뷰어
 Voltage	전압
 Warning	경고
 Warnings	경고
@@ -500,6 +564,7 @@ not bonded	본딩 안 됨
 not connected	연결되지 않음
 open	열림
 pcs	개
+portrait	세로
 rejected	거부됨
 right	오른쪽
 spare	예비
@@ -513,6 +578,7 @@ yes	예
 {} exists already	{}이(가) 이미 있습니다
 {} is not a PNG or JPEG image	{}은(는) PNG 또는 JPEG 이미지가 아닙니다
 {} parts	부품 {}개
+{} users	사용자 {}개
 {} wires	전선 {}개
 {}, together with the wire to {}	{}, {}(으)로 가는 전선과 함께
 {}: {} does not stand on the floor, choose a floor-standing part	{}: {}은(는) 바닥 설치형이 아닙니다. 바닥 설치형 부품을 선택하십시오

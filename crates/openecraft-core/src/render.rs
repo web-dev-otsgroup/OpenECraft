@@ -98,6 +98,9 @@ fn link_text(d: &mut dyn Draw, pos: P, text: &str, size: f32, h: Anchor, page: u
     d.link(p(x0, pos.y - size * 0.7), p(x0 + w, pos.y + size * 0.7), page);
 }
 
+mod cable_labels;
+pub use cable_labels::{core_labels, core_labels_with_index, core_text_bounds, preview_core_labels, align_core_labels, CoreLabel};
+
 mod interruption;
 pub mod jumps;
 mod pin_labels;
@@ -129,6 +132,12 @@ pub struct Opts {
 
 /// Draws a complete page including frame and title block.
 pub fn draw_page(d: &mut dyn Draw, prj: &Project, idx: &Index, an: &Analysis, page_i: usize, opts: &Opts) {
+    let labels = core_labels_with_index(prj, idx, page_i);
+    draw_page_with_core_labels(d, prj, idx, an, page_i, opts, &labels);
+}
+
+/// The editor shares one page layout between drawing, hit testing and dragging.
+pub fn draw_page_with_core_labels(d: &mut dyn Draw, prj: &Project, idx: &Index, an: &Analysis, page_i: usize, opts: &Opts, labels: &[CoreLabel]) {
     let page = &prj.pages[page_i];
     draw_frame(d, prj, page_i);
     crate::forms::draw_stamp(d, prj, page_i);
@@ -221,7 +230,7 @@ pub fn draw_page(d: &mut dyn Draw, prj: &Project, idx: &Index, an: &Analysis, pa
         let ink = if opts.selected.contains(&j.id) { Ink::Selected } else { Ink::Wire };
         draw_junction(d, prj, page, j, ink);
     }
-    draw_wire_labels(d, prj, an, page_i);
+    draw_wire_labels(d, prj, an, page_i, labels);
     let structured = !structure::page_structure(page).is_empty() || !page.structure_boxes.is_empty();
     for s in &page.symbols {
         let Some(def) = prj.symbol(&s.sym) else { continue };
@@ -506,19 +515,37 @@ fn draw_cable_def(d: &mut dyn Draw, prj: &Project, page: &Page, cd: &CableDef, i
         d.poly(&pts, true, SYMBOL_W * 0.7, ink, false);
     }
     let text_ink = if ink == Ink::Line { Ink::CrossRef } else { ink };
+    for (t, q, size, anchor) in cable_def_texts(prj, page, cd) {
+        d.text(q, &t, size, anchor, VAnchor::Middle, text_ink);
+    }
+}
+
+fn cable_def_texts(prj: &Project, page: &Page, cd: &CableDef) -> Vec<(String, P, f32, Anchor)> {
+    let v = cd.b - cd.a;
+    if v.len() < 0.1 { return Vec::new(); }
+    let u = v * (1.0 / v.len());
     let lines = crate::cabledef::label(prj, page, cd);
     let horizontal = u.x.abs() >= u.y.abs();
-    for (i, t) in lines.iter().enumerate() {
+    lines.iter().enumerate().map(|(i, t)| {
         let size = if i == 0 { TAG_SIZE } else { SMALL_SIZE };
         if horizontal {
             let anchor = if u.x >= 0.0 { Anchor::Left } else { Anchor::Right };
             let q = cd.b + u * 1.2 + p(0.0, i as f32 * 3.0 - (lines.len() as f32 - 1.0) * 1.5);
-            d.text(q, t, size, anchor, VAnchor::Middle, text_ink);
+            (t.clone(), q, size, anchor)
         } else {
             let q = cd.b + u * 2.0 + p(0.0, if u.y >= 0.0 { i as f32 * 3.0 + 1.0 } else { -((lines.len() - 1 - i) as f32) * 3.0 - 1.0 });
-            d.text(q, t, size, Anchor::Center, VAnchor::Middle, text_ink);
+            (t.clone(), q, size, Anchor::Center)
         }
-    }
+    }).collect()
+}
+
+/// The same label positions used by the canvas and exports, for picking a cable.
+pub fn cable_def_text_bounds(prj: &Project, page: &Page, cd: &CableDef) -> Vec<R> {
+    cable_def_texts(prj, page, cd).into_iter().map(|(text, q, size, anchor)| {
+        let width = text_width(&text, size).max(size);
+        let x = match anchor { Anchor::Left => q.x, Anchor::Center => q.x - width / 2.0, Anchor::Right => q.x - width };
+        R::from_points(p(x, q.y - size * 0.6), p(x + width, q.y + size * 0.6))
+    }).collect()
 }
 
 /// Draws only the symbol graphics (used for canvas, ghost and library previews).
@@ -794,45 +821,9 @@ fn cabled_wires(page: &Page) -> Vec<(&Wire, bool)> {
         .collect()
 }
 
-/// Text, position and alignment of a cable core text of wire `w` (`tagged`: the wire
-/// shows the cable tag); None when the wire does not show it. The stroke is where a
-/// cable definition line of the cable crosses the wire (`cabledef::core_position`), a
-/// text placed by hand keeps its offset from there.
-fn core_text(page: &Page, w: &Wire, tagged: bool, which: CoreText) -> Option<(String, P, Anchor, VAnchor)> {
-    let text = match which {
-        CoreText::Core => w.core.clone(),
-        CoreText::Cable if tagged => structure::relative(page, &w.cable),
-        CoreText::Cable => String::new(),
-    };
-    if w.cable.is_empty() || w.hide_labels || text.is_empty() {
-        return None;
-    }
-    let (q, anchor, v) = wire_text_place(w, crate::cabledef::core_position(page, w), which == CoreText::Core);
-    Some((text, q + which.offset(w).unwrap_or_default(), anchor, v))
-}
-
-/// Area of a cable core text of wire `w` (the handle to drag it); None when the wire
-/// does not show it.
-pub fn core_text_bounds(page: &Page, w: &Wire, which: CoreText) -> Option<R> {
-    let tagged = which == CoreText::Cable && cabled_wires(page).iter().any(|(x, first)| *first && x.id == w.id);
-    let (text, q, anchor, v) = core_text(page, w, tagged, which)?;
-    let wd = text_width(&text, SMALL_SIZE).max(SMALL_SIZE);
-    let x0 = match anchor {
-        Anchor::Left => q.x,
-        Anchor::Center => q.x - wd / 2.0,
-        Anchor::Right => q.x - wd,
-    };
-    let (y0, y1) = match v {
-        VAnchor::Top => (q.y, q.y + SMALL_SIZE * 1.2),
-        VAnchor::Middle => (q.y - SMALL_SIZE * 0.6, q.y + SMALL_SIZE * 0.6),
-        VAnchor::Bottom => (q.y - SMALL_SIZE * 1.2, q.y),
-    };
-    Some(R::from_points(p(x0, y0), p(x0 + wd, y1)))
-}
-
 /// Wire numbers (once per connection and page, on its longest wire) and cable cores
 /// (a stroke across the wire, the core and once per page the cable tag).
-fn draw_wire_labels(d: &mut dyn Draw, prj: &Project, an: &Analysis, page_i: usize) {
+fn draw_wire_labels(d: &mut dyn Draw, prj: &Project, an: &Analysis, page_i: usize, labels: &[CoreLabel]) {
     let page = &prj.pages[page_i];
     for w in &page.wires {
         for label in &w.labels {
@@ -871,15 +862,13 @@ fn draw_wire_labels(d: &mut dyn Draw, prj: &Project, an: &Analysis, page_i: usiz
             wire_text(d, w, t.clamp(0.0, 1.0), &number, false, Ink::Text);
         }
     }
-    for (w, tagged) in cabled_wires(page) {
+    for (w, _) in cabled_wires(page) {
         let t = crate::cabledef::core_position(page, w);
         let q = p(w.a.x + (w.b.x - w.a.x) * t, w.a.y + (w.b.y - w.a.y) * t);
         d.line(q + p(-1.0, 0.8), q + p(1.0, -0.8), SYMBOL_W, Ink::Line, false);
-        for which in [CoreText::Cable, CoreText::Core] {
-            if let Some((text, q, anchor, v)) = core_text(page, w, tagged, which) {
-                d.text(q, &text, SMALL_SIZE, anchor, v, Ink::CrossRef);
-            }
-        }
+    }
+    for label in labels {
+        d.text(label.pos, &label.text, SMALL_SIZE, label.anchor, label.v, Ink::CrossRef);
     }
 }
 
@@ -1507,6 +1496,24 @@ fn draw_lineup(d: &mut dyn Draw, boxes: &[crate::report_blocks::LineupBox], orig
 
 // ---------------------------------------------------------------------- panel layout
 
+/// Hatches a rectangle with lines at 45°, `step` apart (page mm): rising to the right
+/// or falling.
+fn hatch(d: &mut dyn Draw, r: R, step: f32, rising: bool) {
+    let (a, b) = (r.min, r.max);
+    if step <= 0.0 || b.x - a.x < 0.01 || b.y - a.y < 0.01 {
+        return;
+    }
+    // Rising lines are x + y = c (y down), falling ones x - y = c.
+    let (from, to) = if rising { (a.x + a.y, b.x + b.y) } else { (a.x - b.y, b.x - a.y) };
+    let mut c = from + step / 2.0;
+    while c < to {
+        let (x0, x1) = if rising { ((c - b.y).max(a.x), (c - a.y).min(b.x)) } else { ((c + a.y).max(a.x), (c + b.y).min(b.x)) };
+        let y = |x: f32| if rising { c - x } else { x - c };
+        d.line(p(x0, y(x0)), p(x1, y(x1)), 0.1, Ink::Frame, false);
+        c += step;
+    }
+}
+
 /// Draws an enclosure in front view: its mounting plate or its door (seen from the
 /// front). `origin` is the page position of the enclosure's top left corner, `k` the
 /// scale (page mm per real mm). From the front, the cable ducts behind the door are
@@ -1558,19 +1565,26 @@ pub fn draw_enclosure(
             d.rect(tf(0.0, 0.0), tf(pw, ph), 0.25, Ink::Frame, false);
         }
         Face::Door => {
-            // Door frame, hinges on the left, handle on the right.
+            // Door frame, hinges on the hinge side, handle on the other.
             let f = panel::DOOR_FRAME;
             let (a, b) = (tf(f, f), tf(e.width - f, e.height - f));
             for (s, t) in [(a, p(b.x, a.y)), (p(b.x, a.y), b), (b, p(a.x, b.y)), (p(a.x, b.y), a)] {
                 d.line(s, t, 0.15, Ink::Frame, true);
             }
+            // x from the hinge edge.
+            let right = e.door_hinge == panel::DoorHinge::Right;
+            let x = |from_hinge: f32| if right { e.width - from_hinge } else { from_hinge };
+            // A rectangle between two distances from the hinge edge, its corners in order.
+            let rect = |a: f32, b: f32, y0: f32, y1: f32| (tf(x(a).min(x(b)), y0), tf(x(a).max(x(b)), y1));
             for y in [0.15, 0.85] {
                 let hy = e.height * y;
-                d.rect(tf(-3.0, hy - 25.0), tf(3.0, hy + 25.0), 0.25, Ink::Frame, false);
+                let (s, t) = rect(-3.0, 3.0, hy - 25.0, hy + 25.0);
+                d.rect(s, t, 0.25, Ink::Frame, false);
             }
             let hy = e.height / 2.0;
-            d.rect(tf(e.width - 32.0, hy - 50.0), tf(e.width - 14.0, hy + 50.0), 0.0, Ink::Fill, true);
-            d.rect(tf(e.width - 32.0, hy - 50.0), tf(e.width - 14.0, hy + 50.0), 0.25, Ink::Line, false);
+            let (h0, h1) = rect(e.width - 32.0, e.width - 14.0, hy - 50.0, hy + 50.0);
+            d.rect(h0, h1, 0.0, Ink::Fill, true);
+            d.rect(h0, h1, 0.25, Ink::Line, false);
         }
         wall => {
             // The sheet, its mounting area inside the flanges (dashed) and, for walls
@@ -1599,6 +1613,18 @@ pub fn draw_enclosure(
                 if vw > 2.0 * g && vh > 2.0 * g {
                     d.rect(tf(g, g / 2.0), tf(vw - g, vh - g / 2.0), 0.2, Ink::Frame, false);
                 }
+            }
+        }
+    }
+    // The restricted areas of the enclosure (its maker's data): placing areas hatched
+    // rising, cut-out areas falling.
+    for (kind, rising) in [(crate::parts::Restriction::Placing, true), (crate::parts::Restriction::Cutout, false)] {
+        for a in panel::restricted_areas(prj, e, face, kind) {
+            let (s, t) = (tf(a.min.x, a.min.y), tf(a.max.x, a.max.y));
+            // 10 mm of the enclosure apart: as wide on screen as on paper.
+            hatch(d, R::from_points(s, t), 10.0 * k, rising);
+            for (u, v) in [(s, p(t.x, s.y)), (p(t.x, s.y), t), (t, p(s.x, t.y)), (p(s.x, t.y), s)] {
+                d.line(u, v, 0.1, Ink::Frame, true);
             }
         }
     }

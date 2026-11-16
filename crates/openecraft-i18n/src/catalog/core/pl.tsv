@@ -48,7 +48,6 @@ Address {} is used by {} and {}	Adres {} jest używany przez {} i {}
 Adhesive	Klejenie
 Adjustable output voltage	Regulowane napięcie wyjściowe
 Administer the server	Administrowanie serwerem
-Administrator	Administrator
 Alarm limit H	Próg alarmowy H
 Alarm limit HH	Próg alarmowy HH
 Alarm limit L	Próg alarmowy L
@@ -188,7 +187,7 @@ Cell temperatures: {} °C (U max), {} °C (U mean), {} °C (U min)	Temperatury o
 Centre horizontally	Wyśrodkuj w poziomie
 Centre vertically	Wyśrodkuj w pionie
 Centrifugal pump	Pompa odśrodkowa
-Change	Zmiana
+Changed in the project folder by another program and also in the open project: {}{}. Save the project under another name, or open it again and repeat the changes	Zmienione w folderze projektu przez inny program, a także w otwartym projekcie: {}{}. Zapisz projekt pod inną nazwą albo otwórz go ponownie i powtórz zmiany
 Changed since mounted	Zmienione od montażu
 Changed since wired	Zmienione od podłączenia
 Changeover contact	Styk przełączny
@@ -293,6 +292,7 @@ Copper bar {}: segment {} is {} mm straight, at least {} mm are needed for bendi
 Copper bar {}: {} mm are longer than the stock length of {} mm	Szyna miedziana {}: {} mm to więcej niż długość handlowa {} mm
 Copper bar {}: {} mm are too thick for {}	Szyna miedziana {}: {} mm to zbyt duża grubość dla {}
 Copper bar {}: {} segments need {} bends	Szyna miedziana {}: {} odcinków wymaga {} gięć
+Copper-bonded steel	Stal miedziowana
 Cores used	Użyte żyły
 Corner on page {} does not fit its wires: it needs one wire in each of its two directions and no connection point there	Narożnik na stronie {} nie pasuje do swoich przewodów: potrzebuje jednego przewodu w każdym ze swoich dwu kierunków i braku punktu przyłączenia w tym miejscu
 Counter contact NC	Styk licznika, rozwierny
@@ -310,7 +310,6 @@ Create projects	Tworzenie projektów
 Creation date	Data utworzenia
 Cross-section {} carries {} A, less than the {} A of {}	Przekrój {} przenosi {} A, mniej niż {} A z {}
 Crossing on page {} does not fit its wires: it needs a wire in all four directions and no connection point there	Skrzyżowanie na stronie {} nie pasuje do swoich przewodów: potrzebuje przewodu we wszystkich czterech kierunkach i braku punktu przyłączenia w tym miejscu
-Currency	Waluta
 Current (A)	Prąd (A)
 Current capacity (A)	Obciążalność prądowa (A)
 Current consumption	Pobór prądu
@@ -434,10 +433,10 @@ ERP item master and bill of materials (CSV)	Kartoteka artykułów ERP i zestawie
 ERP number	Numer ERP
 ETIM class	Klasa ETIM
 Earth electrode	Uziom
+Earth rod	Uziom pionowy
 East-west on a flat roof	Wschód-zachód na dachu płaskim
 Edit pages	Edycja stron
 Edit project data	Edycja danych projektu
-Editor	Redaktor
 Efficiency	Sprawność
 Efficiency class	Klasa sprawności
 Electrical data	Dane elektryczne
@@ -551,10 +550,12 @@ Foot switch NO (NFPA)	Łącznik nożny, zwierny (NFPA)
 Force	Siła
 Fork terminal	Końcówka widełkowa
 Format (placeholders)	Format (symbole zastępcze)
+Foundation earth electrode	Uziom fundamentowy
 Frame size	Wielkość mechaniczna
 Free	Swobodnie
 Free air (mm)	Swobodnie w powietrzu (mm)
 Free run	Ułożenie swobodne
+Freestanding on posts	Naziemne na słupach
 Frequency converter	Przemiennik częstotliwości
 Frequency meter	Częstościomierz
 From end	Od końca
@@ -757,7 +758,6 @@ Latitude is within ±90° and longitude within ±180°	Szerokość geograficzna 
 Lead time (days)	Czas dostawy (dni)
 Leakage current	Prąd upływu
 Leakage line	Przewód przecieku
-Left side	Lewa strona
 Left side panel	Lewa ściana boczna
 Legend plate text	Tekst tabliczki opisowej
 Length (m)	Długość (m)
@@ -818,7 +818,6 @@ Manual switch NO	Łącznik ręczny, zwierny
 Manual switch NO, latching	Łącznik ręczny, zwierny, z zatrzaskiem
 Manual work	Praca ręczna
 Manufacturer's table	Tabela producenta
-Manufacturers	Producenci
 Marking (CSV)	Oznaczenia (CSV)
 Marking (Excel)	Oznaczenia (Excel)
 Mating faces	Strony styku
@@ -849,8 +848,6 @@ Minimum operating temperature	Minimalna temperatura pracy
 Mirror contacts	Styki lustrzane
 Mirrored	Odbite lustrzanie
 Mission time	Czas misji
-Module	Moduł
-Modules	Moduły
 Moisture	Wilgotność
 Moment of inertia	Moment bezwładności
 Motion detector	Czujnik ruchu
@@ -893,7 +890,6 @@ Mounting site	Miejsce zamocowania
 Mounting type	Sposób mocowania
 Multi-line text	Tekst wielowierszowy
 N terminal	Zacisk N
-NC contact	Styk rozwierny
 NC contact (NFPA)	Styk rozwierny (NFPA)
 NC contact K (GOST)	Styk rozwierny K (GOST)
 NC contact KA (GB)	Styk rozwierny KA (GB)
@@ -908,7 +904,6 @@ NC contact, on-delay KT (GOST)	Styk rozwierny, opóźnione zadziałanie KT (GOST
 NC contact, on-delay TLR (JIS)	Styk rozwierny, opóźnione zadziałanie TLR (JIS)
 NC contact, timed opening (NFPA)	Styk rozwierny, otwieranie z opóźnieniem (NFPA)
 NFPA / JIC	NFPA / JIC
-NO contact	Styk zwierny
 NO contact (NFPA)	Styk zwierny (NFPA)
 NO contact K (GOST)	Styk zwierny K (GOST)
 NO contact KA (GB)	Styk zwierny KA (GB)
@@ -940,7 +935,6 @@ No plugs	Brak złączy
 No report block {}	Brak bloku raportu {}
 No segment template named {}	Brak szablonu segmentu o nazwie {}
 No subproject {}	Brak podprojektu {}
-No such PV array	Brak takiej instalacji PV
 No such object: {}	Brak obiektu: {}
 No surge protective device at the supply (IEC 60364-4-44)	Brak ogranicznika przepięć na zasilaniu (IEC 60364-4-44)
 No terminal {}	Brak zacisku {}
@@ -1006,7 +1000,6 @@ Optocoupler	Transoptor
 Order numbers	Numery zamówieniowe
 Order status	Status zamówienia
 Ordered	Zamówione
-Other	Inne
 Other bus device	Inne urządzenie magistrali
 Other module	Inny moduł
 Other properties	Inne właściwości
@@ -1227,7 +1220,6 @@ Product	Produkt
 Production of {}{} failed: {}	Produkcja {}{} nie powiodła się: {}
 Production wire list (CSV)	Produkcyjna lista przewodów (CSV)
 Project description	Opis projektu
-Project manager	Kierownik projektu
 Project number	Numer projektu
 Project property of the property database (by key)	Właściwość projektu z bazy danych właściwości (według klucza)
 Project revision	Rewizja projektu
@@ -1300,7 +1292,6 @@ Rated short-time withstand current	Znamionowy prąd krótkotrwały wytrzymywany
 Rated speed	Prędkość znamionowa
 Rated torque	Moment znamionowy
 Rated voltage	Napięcie znamionowe
-Rear wall	Ściana tylna
 Rectangular punch	Stempel prostokątny
 Rectifier / inverter AC/DC, bidirectional	Prostownik / falownik AC/DC, dwukierunkowy
 Redline	Redline
@@ -1338,21 +1329,19 @@ Resolution	Rozdzielczość
 Response time	Czas reakcji
 Result	Wynik
 Return / exhaust line	Przewód powrotny / odpowietrzający
-Reviewer	Recenzent
 Revision overview (changes)	Przegląd rewizji (zmiany)
 Revision table: author of the last revision (2: the one before …)	Tabela rewizji: autor ostatniej rewizji (2: poprzedniej …)
 Revision table: date of the last revision (2: the one before …)	Tabela rewizji: data ostatniej rewizji (2: poprzedniej …)
 Revision table: description of the last revision (2: the one before …)	Tabela rewizji: opis ostatniej rewizji (2: poprzedniej …)
 Revision table: index of the last revision (2: the one before …)	Tabela rewizji: indeks ostatniej rewizji (2: poprzedniej …)
-Right side	Prawa strona
 Right side panel	Prawa ściana boczna
+Ring earth electrode	Uziom otokowy
 Ring terminal	Końcówka oczkowa
 Rivet nut	Nitonakrętka
 RoHS compliant	Zgodny z RoHS
 Rockwell (Local:1:I.Data.0)	Rockwell (Local:1:I.Data.0)
 Roller switch NC	Łącznik rolkowy, rozwierny
 Roller switch NO	Łącznik rolkowy, zwierny
-Roof	Dach
 Roof top	Dach
 Room floor	Podłoga pomieszczenia
 Room {} stands outside the plot boundary	Pomieszczenie {} stoi poza granicą działki
@@ -1485,10 +1474,10 @@ Spare terminal	Zacisk rezerwowy
 Speed	Prędkość obrotowa
 Spiral	Kręcone
 Stainless steel	Stal nierdzewna
+Stainless steel V4A	Stal nierdzewna V4A
 Standard	Norma
 Start / stop circuit with a relay: coil and contacts form one device with cross references and contact image, terminal strip, wire numbers, terminal diagram and connection list.	Obwód start / stop z przekaźnikiem: cewka i styki tworzą jedno urządzenie z odsyłaczami i obrazem styków, listwa zaciskowa, numery przewodów, schemat listwy i lista połączeń.
 Start date	Data rozpoczęcia
-Started	Rozpoczęto
 Starting current ratio	Krotność prądu rozruchowego
 Starting torque	Moment rozruchowy
 State of the project: draft, in review, approved, released	Stan projektu: projekt, w przeglądzie, zatwierdzony, wydany
@@ -1497,6 +1486,7 @@ Station name {} is used {} times	Nazwa stacji {} jest używana {} razy
 Station {} is not connected to bus {}	Stacja {} nie jest połączona z magistralą {}
 Station {}: bus system {} does not exist	Stacja {}: system magistrali {} nie istnieje
 Steam	Para
+Steel, hot-dip galvanised	Stal ocynkowana ogniowo
 Stock	Stan magazynowy
 Stop category	Kategoria zatrzymania
 Storage temperature range	Zakres temperatury składowania
@@ -1586,6 +1576,7 @@ The archive contains no project	Archiwum nie zawiera projektu
 The archive has no manifest	Archiwum nie ma manifestu
 The archive is damaged	Archiwum jest uszkodzone
 The archive unpacks to more than {} MB	Archiwum po rozpakowaniu zajmuje ponad {} MB
+The archive was written by a newer version (archive version {})	Archiwum zostało zapisane przez nowszą wersję (wersja archiwum {})
 The assembly manufacturer must be named (IEC 61439-1, 6.1)	Należy podać producenta zestawu (IEC 61439-1, 6.1)
 The cabinet line-up in its room: L-shaped floor plan, inner wall, door and window, the line-up at its place, a mounting rail with a socket outlet on a wall, a wall-mounted emergency light and a cable tray under the ceiling.	Szereg szaf w swoim pomieszczeniu: rzut w kształcie litery L, ściana wewnętrzna, drzwi i okno, szereg szaf na swoim miejscu, szyna z gniazdem na ścianie, oprawa awaryjna montowana na ścianie i korytko kablowe pod sufitem.
 The configuration is not a JSON object	Konfiguracja nie jest obiektem JSON
@@ -1598,7 +1589,10 @@ The embedded document {} is damaged	Osadzony dokument {} jest uszkodzony
 The file is empty	Plik jest pusty
 The file was written by a newer version (format {}): data this version does not know is lost when saving	Plik został zapisany przez nowszą wersję (format {}): dane nieznane tej wersji zostaną utracone podczas zapisywania
 The first column must be Key	Pierwsza kolumna musi być Key
+The folder {} already holds the project {}: a split project needs a folder of its own	Folder {} zawiera już projekt {}: projekt podzielony wymaga własnego folderu
+The folder {} holds files that belong to no project ({}): a split project needs a folder of its own	Folder {} zawiera pliki, które nie należą do żadnego projektu ({}): projekt podzielony wymaga własnego folderu
 The function definition needs a key and a name	Definicja funkcji wymaga klucza i nazwy
+The index of the project names no file layout: it was not written by OpenECraft	Indeks projektu nie podaje układu plików: nie został zapisany przez OpenECraft
 The last page cannot be deleted	Nie można usunąć ostatniej strony
 The macro box has no items left	Ramka makra nie zawiera już żadnych elementów
 The next free id is already in use	Następny wolny identyfikator jest już zajęty
@@ -1608,7 +1602,10 @@ The pages were changed after the submission; submit the revision again	Strony zo
 The plot boundary crosses itself	Granica działki przecina samą siebie
 The plot boundary encloses no area	Granica działki nie obejmuje żadnej powierzchni
 The plot boundary is no polygon: it crosses itself or has fewer than three corners	Granica działki nie jest wielokątem: przecina samą siebie lub ma mniej niż trzy narożniki
+The project cannot be written as files: {}	Projektu nie można zapisać jako plików: {}
+The project file {} is missing	Brak pliku projektu {}
 The project has no panel layout	Projekt nie ma zabudowy szafy
+The project was written by a newer version (file layout {})	Projekt został zapisany przez nowszą wersję (układ plików {})
 The property needs a name	Właściwość wymaga nazwy
 The pump station built into two bayed floor-standing enclosures: busbar system, rails and ducts, door devices and handles, filter fan, light, PE bar, cable glands, a cable passage, climate calculation, duct fill and 3D routing.	Przepompownia zabudowana w dwóch szeregowanych szafach stojących: system szyn zbiorczych, szyny i korytka, urządzenia na drzwiach i uchwyty, wentylator z filtrem, oświetlenie, szyna PE, dławnice kablowe, przepust kablowy, obliczenia klimatyzacji, zapełnienie korytek i trasowanie 3D.
 The revision is already released	Rewizja jest już wydana
@@ -1749,7 +1746,6 @@ Vessel	Zbiornik ciśnieniowy
 Vibration	Drgania
 Vibration resistance	Odporność na wibracje
 View projects	Wyświetlanie projektów
-Viewer	Przeglądający
 Violations	Naruszenia
 Voltage (V)	Napięcie (V)
 Voltage drop (%)	Spadek napięcia (%)
@@ -1890,7 +1886,6 @@ page properties	właściwości strony
 pigtail {} mm	pigtail {} mm
 pilot	sterowanie
 pink	różowy
-portrait	pionowo
 pressure	ciśnienie
 red	czerwony
 released	wydana
@@ -1928,6 +1923,7 @@ yellow	żółty
 {} has no MTTFd, B10d, PL or PFHd	{} nie ma MTTFd, B10d, PL ani PFHd
 {} has no door or window {}	{} nie ma drzwi ani okna {}
 {} has nothing to manufacture	{} nie ma nic do wyprodukowania
+{} holds an unresolved merge conflict of git: the file was merged as text. Take one version of the file (git checkout --ours or --theirs), then set up the merge driver for split projects (merge_project_file) before merging again	{} zawiera nierozwiązany konflikt scalania git: plik został scalony jako tekst. Wybierz jedną wersję pliku (git checkout --ours lub --theirs), a następnie skonfiguruj sterownik scalania dla projektów podzielonych (merge_project_file) przed ponownym scaleniem
 {} is a built-in function definition	{} jest wbudowaną definicją funkcji
 {} is a built-in property	{} jest wbudowaną właściwością
 {} is a built-in scheme	{} jest wbudowanym schematem
@@ -1973,6 +1969,7 @@ yellow	żółty
 {}: PV array {} covers a roof window	{}: instalacja PV {} zakrywa okno dachowe
 {}: PV array {} has {} modules, its device {} has {}	{}: instalacja PV {} ma {} modułów, jej urządzenie {} ma {}
 {}: PV array {} is mounted tilted on a pitched roof	{}: instalacja PV {} jest zamontowana pochylona na dachu skośnym
+{}: PV array {} lies outside the protection of the air-termination system	{}: pole PV {} leży poza ochroną urządzenia piorunochronnego
 {}: PV array {} of roof {} lies across a ridge, a hip or the edge of the roof	{}: instalacja PV {} dachu {} leży na kalenicy, narożu lub krawędzi dachu
 {}: PV array {} of roof {} lies outside the roof	{}: instalacja PV {} dachu {} leży poza dachem
 {}: PV arrays {} and {} lie over each other	{}: instalacje PV {} i {} nachodzą na siebie
@@ -1982,6 +1979,7 @@ yellow	żółty
 {}: a wire of {} mm² is thinner than the connection point takes (at least {} mm²)	{}: przewód {} mm² jest cieńszy, niż przyjmuje punkt połączenia (co najmniej {} mm²)
 {}: accessory {} fits none of the device's parts	{}: akcesorium {} nie pasuje do żadnej części urządzenia
 {}: actuator {} is {} mm above the floor, recommended {} … {} mm	{}: element sterowniczy {} znajduje się {} mm nad podłogą, zalecane {} … {} mm
+{}: air-termination rod {} stands off the roofs	{}: iglica odgromowa {} stoi poza dachami
 {}: auxiliary function(s) without main function	{}: funkcje pomocnicze bez funkcji głównej
 {}: breaking capacity {} kA below the short-circuit current {} kA	{}: zdolność wyłączania {} kA poniżej prądu zwarciowego {} kA
 {}: cable duct at {} mm filled {} % (limit {} %)	{}: kanał kablowy na {} mm wypełniony w {} % (wartość graniczna {} %)
@@ -1998,13 +1996,17 @@ yellow	żółty
 {}: cross-section {} below the {} mm² of power circuits	{}: przekrój {} poniżej {} mm² obwodów mocy
 {}: cross-section {} differs from the potential definition ({})	{}: przekrój {} różni się od definicji potencjału ({})
 {}: cutout of {} on the {} is {} mm from the edge, at least {} mm required	{}: wycięcie elementu {} na {} znajduje się {} mm od krawędzi, wymagane co najmniej {} mm
+{}: cutout of {} on the {} lies in a restricted cut-out area	{}: wycięcie elementu {} na {} leży w obszarze zastrzeżonym dla wycięć
 {}: cutout of {} on the {} reaches {} mm beyond its front	{}: wycięcie {} na {} wystaje {} mm poza jego front
 {}: cutouts of {} and {} on the {} are too close ({} mm web, at least {} mm)	{}: wycięcia elementów {} i {} na {} są zbyt blisko siebie (mostek {} mm, co najmniej {} mm)
 {}: designation '{}' used more than once	{}: oznaczenie '{}' użyte więcej niż raz
 {}: device tag without device name	{}: oznaczenie urządzenia bez nazwy urządzenia
+{}: earth electrode {} has no walls to run along: the building has no rooms or roofs	{}: uziom {} nie ma ścian, wzdłuż których biegnie: budynek nie ma pomieszczeń ani dachów
+{}: earth rod {} stands inside the walls of the building	{}: uziom pionowy {} stoi wewnątrz ścian budynku
 {}: fault current {} A at {} does not disconnect within {} s (needs {} A)	{}: prąd zwarciowy {} A w {} nie powoduje wyłączenia w ciągu {} s (wymagane {} A)
 {}: function texts differ in the single-line diagram and the schematic	{}: teksty funkcji na schemacie jednokreskowym i schemacie elektrycznym różnią się
 {}: hole of {} is too close to the cutout of {} on the {}	{}: otwór elementu {} jest zbyt blisko wycięcia elementu {} na {}
+{}: hole of {} on the {} lies in a restricted cut-out area	{}: otwór elementu {} na {} leży w obszarze zastrzeżonym dla wycięć
 {}: hole Ø{} of {} on the {} is {} mm from the edge, at least {} mm required	{}: otwór Ø{} elementu {} na {} znajduje się {} mm od krawędzi, wymagane co najmniej {} mm
 {}: holes of {} and {} on the {} are too close ({} mm web, at least {} mm)	{}: otwory elementów {} i {} na {} są zbyt blisko siebie (mostek {} mm, co najmniej {} mm)
 {}: hot spot of about {} °C at x = {} mm, y = {} mm of the mounting plate (inside temperature at most {} °C)	{}: gorący punkt ok. {} °C przy x = {} mm, y = {} mm płyty montażowej (temperatura wewnętrzna maks. {} °C)
@@ -2062,7 +2064,14 @@ yellow	żółty
 {}: terminal {} uses {} levels, its part {} has {}	{}: zacisk {} wykorzystuje {} pięter, jego artykuł {} ma {}
 {}: terminals {} are {} mm above the floor, at least {} mm required	{}: zaciski {} znajdują się {} mm nad podłogą, wymagane co najmniej {} mm
 {}: the busbar system with {} bars joins {} conductors ({}): short circuit	{}: system szyn zbiorczych z {} szynami łączy {} przewody ({}): zwarcie
+{}: the busbar {} of earth electrode {} does not exist	{}: szyna {} uziomu {} nie istnieje
 {}: the device {} of PV array {} does not exist	{}: urządzenie {} instalacji PV {} nie istnieje
+{}: the earthing busbar {} of PV array {} does not exist	{}: szyna uziemiająca {} pola PV {} nie istnieje
+{}: the freestanding PV array {} stands on {}	{}: naziemne pole PV {} stoi na {}
+{}: the freestanding PV arrays {} and {} stand on each other	{}: naziemne pola PV {} i {} nachodzą na siebie
+{}: the generator junction box {} of PV array {} does not exist	{}: skrzynka przyłączeniowa generatora {} pola PV {} nie istnieje
+{}: the lightning protection has no earth electrode	{}: ochrona odgromowa nie ma uziomu
+{}: the lightning protection has no walls to run along: the building has no rooms or roofs	{}: ochrona odgromowa nie ma ścian, wzdłuż których biegnie: budynek nie ma pomieszczeń ani dachów
 {}: the module {} of PV array {} has no electrical data	{}: moduł {} instalacji PV {} nie ma danych elektrycznych
 {}: the station has no port {}	{}: stacja nie ma portu {}
 {}: the strings of PV array {} connect {} modules, the array has {}	{}: łańcuchy instalacji PV {} łączą {} modułów, instalacja ma {}
@@ -2079,6 +2088,7 @@ yellow	żółty
 {}: {} carries {} A, the load {} needs {} A	{}: {} przenosi {} A, odbiornik {} wymaga {} A
 {}: {} changed after it was mounted	{}: {} zmieniono po zamontowaniu
 {}: {} collides with {}	{}: {} koliduje z {}
+{}: {} down conductors, class {} needs {} round the building	{}: {} przewodów odprowadzających, klasa {} wymaga {} wokół budynku
 {}: {} inputs used, the module has {}	{}: użyte wejścia: {}, moduł ma {}
 {}: {} is a fluid device, not an electrical one	{}: {} jest urządzeniem płynowym, a nie elektrycznym
 {}: {} is closer than {} mm to a cable duct	{}: {} znajduje się bliżej niż {} mm od kanału kablowego
@@ -2091,6 +2101,7 @@ yellow	żółty
 {}: {} is not made for wall mounting, mount it on a rail	{}: {} nie jest przeznaczony do montażu naściennego, zamontuj go na szynie
 {}: {} is {} … {} mm above the floor, allowed {} … {} mm	{}: {} znajduje się {} … {} mm nad podłogą, dopuszczalne {} … {} mm
 {}: {} kg on the {} exceed its load of {} kg	{}: {} kg na {} przekracza jej nośność {} kg
+{}: {} lies in a restricted placing area of the {}	{}: {} leży w obszarze zastrzeżonym dla montażu na {}
 {}: {} modules of PV array {} are not connected to a string	{}: {} modułów instalacji PV {} nie jest podłączonych do łańcucha
 {}: {} modules, the head has {} slots	{}: moduły: {}, głowica ma {} gniazd
 {}: {} of {} mm is longer than the stock length of {} mm and has to be joined	{}: {} o długości {} mm jest dłuższy niż długość handlowa {} mm i musi być łączony

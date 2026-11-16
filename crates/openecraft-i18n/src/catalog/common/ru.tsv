@@ -1,9 +1,12 @@
 # English<TAB>Русский – texts shown by several areas (texts without a line are shown in English). Sorted by the English text: cargo run -p openecraft-i18n --example tidy
 (all)	(все)
 (no entries)	(нет записей)
+(no structure)	(без структуры)
+(optional)	(необязательно)
 --json needs a JSON object	--json требует объект JSON
 3D model	3D-модель
 3D routing	3D-прокладка
+3D view	3D-вид
 A page named {} already exists	Лист с именем {} уже существует
 A page needs a name	Странице нужно имя
 A routing path needs {} points at least	Пути прокладки нужно не менее {} точек
@@ -12,14 +15,18 @@ Above	Сверху
 Access token	Маркер доступа
 Accessories	Принадлежности
 Accessory	Принадлежность
+Add	Добавить
 Add a PDF of all pages	Добавить PDF всех листов
 Add to favorites	Добавить в избранное
 Address	Адрес
+Administrator	Администратор
 Angle	Угол
 Apply	Применить
 Approve	Утвердить
 Approvers	Утверждающие
 Automatic	Автоматически
+Automation	Автоматизация
+Aux	Вспом.
 Below	Снизу
 Bold	Полужирный
 Bottom	Дно
@@ -41,11 +48,13 @@ Cable tag, e.g. -W20	Обозначение кабеля, напр. -W20
 Cables	Кабели
 Cancel	Отмена
 Cannot read {}: {}	Не удаётся прочитать {}: {}
+Cannot write {}: {}	Не удаётся записать {}: {}
 Catalog	Каталог
 Catalog id	ID каталога
 Category	Категория
 Centred	По центру
 Certificates	Сертификаты
+Change	Изменение
 Channel	Канал
 Characteristic	Характеристика
 Check settings	Настройки проверки
@@ -56,6 +65,7 @@ Clear filters	Сбросить фильтры
 Clearance bottom	Зазор снизу
 Clearance top	Зазор сверху
 Clearances	Зазоры
+Close	Закрыть
 Coding: {}	Кодировка: {}
 Coil voltage	Напряжение катушки
 Collision class	Класс коллизий
@@ -85,6 +95,7 @@ Created by	Создал
 Cross references	Перекрёстные ссылки
 Cross-section	Сечение
 Crossing	Пересечение
+Currency	Валюта
 Current	Ток
 Cutout	Вырез
 Cutouts	Вырезы
@@ -106,19 +117,24 @@ Device (PV generator) the modules belong to; its parts then count them in the bi
 Device connection point	Точка подключения устройства
 Device description	Описание устройства
 Device tag	Обозначение устройства
+Device the earthing conductor of the mounting runs to (earthing or equipotential bonding busbar); empty: none	Устройство, к которому идёт заземляющий проводник конструкции (шина заземления или уравнивания потенциалов); пусто: нет
 Device {}	Устройство {}
 Devices	Устройства
+Dimensions	Размеры
 Direction	Направление
 Discard	Отменить
 Discard changes	Отменить изменения
 Display	Отображение
+Documents	Документы
 Done	Выполнено
 Door	Дверь
 Door cutout	Вырез в двери
+Download	Скачать
 Downloading {}…	Скачивание {}…
 Drag to turn the model	Перетащите, чтобы повернуть модель
 EMC clearance	Зазор ЭМС
 Edit	Правка
+Editor	Редактор
 Electro-fluid cross reference	Перекрёстные ссылки электрика – гидропневматика
 Enclosure	Корпус
 Enclosures	Корпуса
@@ -138,10 +154,13 @@ Field wiring	Полевой монтаж
 File	Файл
 Files	Файлы
 Filter	Фильтр
+Filter devices…	Фильтр устройств…
+Fit	Вписать
 Fits	Подходит к
 Fitting at the end	Фитинг в конце
 Fitting at the start	Фитинг в начале
 Floor	Днище
+Floor plan	План помещения
 Fluid device	Устройство гидропневматики
 Fluid device groups	Группы устройств гидропневматики
 Fluid netlist	Список цепей гидропневматики
@@ -154,10 +173,12 @@ Function text	Текст функции
 Functional safety	Функциональная безопасность
 Functions	Функции
 General	Общие
+Generator junction box (device) the strings run to, from there a DC main cable to each inverter; empty: none	Генераторная соединительная коробка (устройство), к которой идут стринги, оттуда главный кабель DC к каждому инвертору; пусто: нет
 Gives up a subproject: its pages are unlocked again	Отменяет подпроект: его листы снова разблокируются
 Gland plate	Кабельный ввод (фланец)
 Graphics	Графика
 Group	Группа
+Group the pages by structure	Группировать листы по структуре
 Groups	Группы
 Harness	Жгут
 Harness data	Данные жгута
@@ -185,9 +206,12 @@ Kind	Вид
 Language	Язык
 Languages	Языки
 Last change	Последнее изменение
+Last changed	Последнее изменение
+Last changed by	Последнее изменение внёс
 Layers	Слои
 Leave out stored baselines and wiring marks	Не включать сохранённые базовые версии и отметки проводки
 Left	Слева
+Left side	Левая сторона
 Length	Длина
 Level	Уровень
 Lifecycle	Жизненный цикл
@@ -197,13 +221,20 @@ Link	Связь
 Linked	Связано
 Load	Нагрузка
 Loaded circuits bunched together	Нагруженные цепи, проложенные пучком
+Loading…	Загрузка…
 Location	Место установки
 Location (+)	Место установки (+)
+Locked	Заблокирован
+Locked by {}	Заблокировано: {}
+Logo	Логотип
 MTTFd (years)	MTTFd (лет)
 Machine	Машина
+Main	Главн.
+Main earthing busbar (device) it is connected to; empty: none	Главная заземляющая шина (устройство), к которой он подключён; пусто: нет
 Main earthing terminal	Главная заземляющая шина
 Main switch	Главный выключатель
 Manufacturer	Производитель
+Manufacturers	Производители
 Manufacturing	Изготовление
 Marking	Маркировка
 Match case	С учётом регистра
@@ -214,6 +245,8 @@ Minimum digits of the counter (leading zeros)	Минимальное число 
 Missing parameter: {}	Отсутствует параметр: {}
 Missing value for --{}	Отсутствует значение для --{}
 Model import failed: {}	Ошибка импорта модели: {}
+Module	Модуль
+Modules	Модули
 Modules in series	Модули последовательно
 Modules side by side in a row	Модули рядом в ряду
 Mounted	Смонтировано
@@ -223,6 +256,8 @@ Mounting holes	Крепежные отверстия
 Mounting layout {}	Монтажный план {}
 Mounting plate	Монтажная панель
 Mounting rail	Монтажная рейка
+NC contact	Размыкающий контакт
+NO contact	Замыкающий контакт
 Name	Имя
 Name of the block	Имя блока
 Name of the plot, e.g. the cadastral parcel	Название участка, напр. кадастровый участок
@@ -230,6 +265,7 @@ Name of the point, e.g. a survey point	Название точки, напр. г
 Name of the scheme	Имя схемы
 Net	Цепь
 Never	Никогда
+New group	Новая группа
 New name	Новое имя
 Next page	Следующий лист
 No	Нет
@@ -251,6 +287,7 @@ No plug {}	Нет штекера {}
 No report block named {}	Нет блока отчёта с именем {}
 No segment {}	Нет сегмента {}
 No station {}	Нет станции {}
+No such PV array	Нет такого фотоэлектрического поля
 No such page	Такого листа нет
 No such section	Нет такого раздела
 No symbol with id {}	Нет символа с ID {}
@@ -265,12 +302,14 @@ Not in the schematic	Нет на схеме
 Note	Примечание
 Notes	Примечания
 Number	Номер
+Number of down conductors (0: as many as the class needs for the walls)	Число токоотводов (0: столько, сколько требует класс для стен)
 Number the sections 1, 2, 3 … on every level first	Сначала пронумеровать разделы 1, 2, 3 … на каждом уровне
 Numbers the device tags per structure and identifying letter in schematic order (page, column, top to bottom)	Нумерует обозначения устройств по структуре и буквенному коду в порядке схемы (лист, столбец, сверху вниз)
 Only rows containing this text	Только строки с этим текстом
 Operating pressure	Рабочее давление
 Option {}: {} is not one of its choices	Параметр {}: {} не входит в его варианты выбора
 Order number	Номер для заказа
+Other	Прочее
 Outer diameter	Наружный диаметр
 Output	Выход
 Overview	Обзор
@@ -299,7 +338,7 @@ Part number	Номер изделия
 Part number already exists	Номер изделия уже существует
 Part {}	Изделие {}
 Parts	Изделия
-Parts (CSV, JSON, BMEcat, EPLAN XML, EDZ)	Изделия (CSV, JSON, BMEcat, EPLAN XML, EDZ)
+Parts (CSV, JSON, BMEcat, EPLAN XML, EDZ, ZIP)	Изделия (CSV, JSON, BMEcat, EPLAN XML, EDZ, ZIP)
 Parts import failed: {}	Ошибка импорта изделий: {}
 Password	Пароль
 Picture	Изображение
@@ -310,9 +349,11 @@ Pin side	Сторона штырей
 Place	Место
 Placement scheme	Схема размещения
 Plinth	Цоколь
+Plot	Участок
 Plot frame	Рамка листа
 Plug	Штекер
 Plug diagram	Схема штекеров
+Plugins	Плагины
 Plugs	Штекеры
 Poles	Полюсы
 Ports	Порты
@@ -335,9 +376,11 @@ Product subgroup	Подгруппа продуктов
 Product top group	Основная группа продуктов
 Profile	Профиль
 Project	Проект
+Project data	Данные проекта
 Project languages	Языки проекта
 Project logo	Логотип проекта
 Project management	Управление проектами
+Project manager	Руководитель проекта
 Project name	Имя проекта
 Project properties	Свойства проекта
 Properties	Свойства
@@ -351,8 +394,11 @@ Rail	Рейка
 Range	Диапазон
 Rated current	Номинальный ток
 Rated power	Номинальная мощность
+Rear wall	Задняя стенка
 Rectangle	Прямоугольник
 Rectangular	Прямоугольный
+Redo	Повторить
+Refresh	Обновить
 Reject	Отклонить
 Relative humidity	Относительная влажность
 Relay	Реле
@@ -361,17 +407,22 @@ Released pages cannot be moved	Выпущенные листы нельзя пе
 Remove	Удалить
 Remove from favorites	Удалить из избранного
 Remove the boundary	Удалить границу
+Remove the lightning protection system	Удалить молниезащиту
 Remove the reference point	Удалить опорную точку
 Report	Отчёт
 Report blocks	Блоки отчётов
 Report: {}	Отчёт: {}
+Reports	Отчёты
 Required	Требуется
 Reserve	Резерв
+Reviewer	Рецензент
 Revision	Ревизия
 Revision {}	Ревизия {}
 Rework	Доработка
 Right	Справа
+Right side	Правая сторона
 Role	Роль
+Roof	Крыша
 Rooms	Помещения
 Round	Круглый
 Route	Обход
@@ -392,6 +443,7 @@ Search parts	Поиск изделий
 Searching…	Поиск…
 Section	Раздел
 Segment	Участок
+Select	Выбрать
 Select a part in the tree or create a new one.	Выберите изделие в дереве или создайте новое.
 Sensor	Датчик
 Sensors, switches, pushbuttons	Датчики, выключатели, кнопки
@@ -401,19 +453,24 @@ Settings	Настройки
 Shape	Форма
 Short-circuit voltage	Напряжение короткого замыкания
 Show history	Показать историю
+Show the logos of the catalogs	Показывать логотипы каталогов
 Show the row after the column	Показывать строку после столбца
 Side	Сторона
 Sign in	Войти
 Sign out	Выйти
 Signed in as {}	Вход выполнен как {}
 Signed in as {} ({})	Вход выполнен как {} ({})
+Signed out	Выход выполнен
 Signing in…	Вход…
 Single-line / multi-line	Однолинейная / многолинейная
+Site	Участок
+Site plan	Генплан
 Size	Размер
 Socket side	Сторона гнёзд
 Solenoid not linked	Катушка не связана
 Sort by	Сортировать по
 Source	Источник
+Started	Начато
 State	Состояние
 Status	Состояние
 String	Цепочка
@@ -440,6 +497,7 @@ Terminal type	Тип клеммы
 Terminals	Клеммы
 Text	Текст
 Text to find	Искомый текст
+The freestanding PV array {} stands outside the plot boundary	Наземное фотоэлектрическое поле {} стоит за границей участка
 The identifier must not be empty	Идентификатор не может быть пустым
 The long side of the modules along the rows	Длинная сторона модулей вдоль рядов
 The page is released	Лист выпущен
@@ -449,11 +507,15 @@ Time	Время
 Title block	Основная надпись
 To	К
 Tools	Инструменты
+Top	Сверху
 Total	Итого
 Transformer	Трансформатор
+Tutorial	Учебник
 Type	Тип
 Type number	Номер типа
 Underline	Подчеркнутый
+Undo	Отменить
+Unexpected argument: {}	Непредвиденный аргумент: {}
 Unit	Единица
 Unknown column: {}	Неизвестный столбец: {}
 Unknown connector: {}	Неизвестный коннектор: {}
@@ -461,10 +523,12 @@ Unknown enclosure system: {}	Неизвестная система корпус�
 Unknown face: {}	Неизвестная поверхность: {}
 Unknown format: {}	Неизвестный формат: {}
 Unknown function definition: {}	Неизвестное определение функции: {}
+Unknown language: {}	Неизвестный язык: {}
 Unknown option {}	Неизвестный параметр {}
 Unknown parameter: {}	Неизвестный параметр: {}
 Unknown part: {}	Неизвестное изделие: {}
 Unknown property: {}	Неизвестное свойство: {}
+Unknown report: {}	Неизвестный отчёт: {}
 Unknown scheme: {}	Неизвестная схема: {}
 Unknown segment	Неизвестный сегмент
 Unknown symbol {}	Неизвестный символ {}
@@ -475,6 +539,7 @@ User	Пользователь
 User name	Имя пользователя
 Users	Пользователи
 Version	Версия
+Viewer	Наблюдатель
 Voltage	Напряжение
 Warning	Предупреждение
 Warnings	Предупреждения
@@ -497,11 +562,13 @@ file or folder not found	файл или папка не найдены
 landscape	альбомная
 left	влево
 mm	мм
+none	нет
 normal	обычный
 not bonded	не подключён
 not connected	не подключено
 open	открыто
 pcs	шт.
+portrait	книжная
 rejected	отклонено
 right	вправо
 spare	резерв
@@ -515,6 +582,7 @@ yes	да
 {} exists already	{} уже существует
 {} is not a PNG or JPEG image	{} не является изображением PNG или JPEG
 {} parts	Изделий: {}
+{} users	Пользователей: {}
 {} wires	Проводов: {}
 {}, together with the wire to {}	{}, вместе с проводом к {}
 {}: {} does not stand on the floor, choose a floor-standing part	{}: {} не устанавливается на пол, выберите напольное изделие

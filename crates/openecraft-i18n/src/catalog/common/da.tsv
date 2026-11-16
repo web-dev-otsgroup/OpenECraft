@@ -1,9 +1,12 @@
 # English<TAB>Dansk – texts shown by several areas (texts without a line are shown in English). Sorted by the English text: cargo run -p openecraft-i18n --example tidy
 (all)	(alle)
 (no entries)	(ingen poster)
+(no structure)	(ingen struktur)
+(optional)	(valgfri)
 --json needs a JSON object	--json kræver et JSON-objekt
 3D model	3D-model
 3D routing	3D-føring
+3D view	3D-visning
 A page named {} already exists	Der findes allerede en side med navnet {}
 A page needs a name	En side skal have et navn
 A routing path needs {} points at least	En føringsvej kræver mindst {} punkter
@@ -12,14 +15,18 @@ Above	Over
 Access token	Adgangstoken
 Accessories	Tilbehør
 Accessory	Tilbehør
+Add	Tilføj
 Add a PDF of all pages	Tilføj en PDF med alle sider
 Add to favorites	Føj til favoritter
 Address	Adresse
+Administrator	Administrator
 Angle	Vinkel
 Apply	Anvend
 Approve	Godkend
 Approvers	Godkendere
 Automatic	Automatisk
+Automation	Automatisering
+Aux	Hjælpe
 Below	Under
 Bold	Fed
 Bottom	Bund
@@ -41,11 +48,13 @@ Cable tag, e.g. -W20	Kabelbetegnelse, f.eks. -W20
 Cables	Kabler
 Cancel	Annuller
 Cannot read {}: {}	{} kan ikke læses: {}
+Cannot write {}: {}	{} kan ikke skrives: {}
 Catalog	Katalog
 Catalog id	Katalog-id
 Category	Kategori
 Centred	Centreret
 Certificates	Certifikater
+Change	Ændring
 Channel	Kanal
 Characteristic	Karakteristik
 Check settings	Kontrolindstillinger
@@ -56,6 +65,7 @@ Clear filters	Ryd filtre
 Clearance bottom	Afstand nederst
 Clearance top	Afstand øverst
 Clearances	Afstande
+Close	Luk
 Coding: {}	Kodning: {}
 Coil voltage	Spolespænding
 Collision class	Kollisionsklasse
@@ -85,6 +95,7 @@ Created by	Oprettet af
 Cross references	Krydsreferencer
 Cross-section	Tværsnit
 Crossing	Krydsning
+Currency	Valuta
 Current	Strøm
 Cutout	Udskæring
 Cutouts	Udskæringer
@@ -106,19 +117,24 @@ Device (PV generator) the modules belong to; its parts then count them in the bi
 Device connection point	Enhedstilslutningspunkt
 Device description	Enhedsbeskrivelse
 Device tag	Enhedsmærkning
+Device the earthing conductor of the mounting runs to (earthing or equipotential bonding busbar); empty: none	Apparat, som stativets jordleder går til (jord- eller potentialudligningsskinne); tom: ingen
 Device {}	Enhed {}
 Devices	Enheder
+Dimensions	Dimensioner
 Direction	Retning
 Discard	Kassér
 Discard changes	Kassér ændringerne
 Display	Visning
+Documents	Dokumenter
 Done	Udført
 Door	Dør
 Door cutout	Dørudskæring
+Download	Download
 Downloading {}…	Downloader {}…
 Drag to turn the model	Træk for at dreje modellen
 EMC clearance	EMC-afstand
 Edit	Rediger
+Editor	Redaktør
 Electro-fluid cross reference	Elektro-fluid-krydsreference
 Enclosure	Kapsling
 Enclosures	Kapslinger
@@ -138,10 +154,13 @@ Field wiring	Feltledningsføring
 File	Filer
 Files	Filer
 Filter	Filter
+Filter devices…	Filtrer enheder…
+Fit	Tilpas
 Fits	Passer til
 Fitting at the end	Fitting i slutningen
 Fitting at the start	Fitting i starten
 Floor	Bund
+Floor plan	Plantegning
 Fluid device	Fluidenhed
 Fluid device groups	Fluidenhedsgrupper
 Fluid netlist	Fluidnetliste
@@ -154,10 +173,12 @@ Function text	Funktionstekst
 Functional safety	Funktionel sikkerhed
 Functions	Funktioner
 General	Generelt
+Generator junction box (device) the strings run to, from there a DC main cable to each inverter; empty: none	Generatortilslutningsboks (apparat), som strengene går til, derfra et DC-hovedkabel til hver inverter; tom: ingen
 Gives up a subproject: its pages are unlocked again	Opgiver et delprojekt: dets sider låses op igen
 Gland plate	Flangeplade
 Graphics	Grafik
 Group	Gruppe
+Group the pages by structure	Gruppér siderne efter struktur
 Groups	Grupper
 Harness	Ledningsnet
 Harness data	Ledningsnetdata
@@ -185,9 +206,12 @@ Kind	Type
 Language	Sprog
 Languages	Sprog
 Last change	Seneste ændring
+Last changed	Sidst ændret
+Last changed by	Sidst ændret af
 Layers	Lag
 Leave out stored baselines and wiring marks	Udelad gemte baselines og ledningsmarkeringer
 Left	Venstre
+Left side	Venstre side
 Length	Længde
 Level	Niveau
 Lifecycle	Livscyklus
@@ -197,13 +221,20 @@ Link	Link
 Linked	Tilknyttet
 Load	Belastning
 Loaded circuits bunched together	Belastede kredse samlet i bundt
+Loading…	Indlæser…
 Location	Placering
 Location (+)	Placering (+)
+Locked	Låst
+Locked by {}	Låst af {}
+Logo	Logo
 MTTFd (years)	MTTFd (år)
 Machine	Maskine
+Main	Hoved
+Main earthing busbar (device) it is connected to; empty: none	Hovedjordskinne (apparat), som den er tilsluttet; tom: ingen
 Main earthing terminal	Hovedjordskinne
 Main switch	Hovedafbryder
 Manufacturer	Producent
+Manufacturers	Producenter
 Manufacturing	Produktion
 Marking	Mærkater
 Match case	Forskel på store og små bogstaver
@@ -214,6 +245,8 @@ Minimum digits of the counter (leading zeros)	Mindste antal cifre i tælleren (f
 Missing parameter: {}	Manglende parameter: {}
 Missing value for --{}	Manglende værdi for --{}
 Model import failed: {}	Modelimporten mislykkedes: {}
+Module	Modul
+Modules	Moduler
 Modules in series	Moduler i serie
 Modules side by side in a row	Moduler side om side i en række
 Mounted	Monteret
@@ -223,6 +256,8 @@ Mounting holes	Monteringshuller
 Mounting layout {}	Monteringslayout {}
 Mounting plate	Monteringsplade
 Mounting rail	Monteringsskinne
+NC contact	Brydekontakt
+NO contact	Sluttekontakt
 Name	Navn
 Name of the block	Blokkens navn
 Name of the plot, e.g. the cadastral parcel	Grundens navn, f.eks. matriklen
@@ -230,6 +265,7 @@ Name of the point, e.g. a survey point	Punktets navn, f.eks. et målepunkt
 Name of the scheme	Skemaets navn
 Net	Net
 Never	Aldrig
+New group	Ny gruppe
 New name	Nyt navn
 Next page	Næste side
 No	Nej
@@ -251,6 +287,7 @@ No plug {}	Intet stik {}
 No report block named {}	Ingen rapportblok med navnet {}
 No segment {}	Intet segment {}
 No station {}	Ingen station {}
+No such PV array	Intet sådant solcelleanlæg
 No such page	Siden findes ikke
 No such section	Afsnittet findes ikke
 No symbol with id {}	Intet symbol med id {}
@@ -265,12 +302,14 @@ Not in the schematic	Ikke i diagrammet
 Note	Bemærkning
 Notes	Noter
 Number	Nummer
+Number of down conductors (0: as many as the class needs for the walls)	Antal nedledere (0: så mange som klassen kræver for væggene)
 Number the sections 1, 2, 3 … on every level first	Nummerér først afsnittene 1, 2, 3 … på hvert niveau
 Numbers the device tags per structure and identifying letter in schematic order (page, column, top to bottom)	Nummererer enhedsmærkningerne pr. struktur og kendebogstav i diagramrækkefølge (side, kolonne, oppefra og ned)
 Only rows containing this text	Kun rækker, der indeholder denne tekst
 Operating pressure	Driftstryk
 Option {}: {} is not one of its choices	Indstillingen {}: {} er ikke en af dens valgmuligheder
 Order number	Bestillingsnummer
+Other	Andet
 Outer diameter	Udvendig diameter
 Output	Udgang
 Overview	Oversigt
@@ -299,7 +338,7 @@ Part number	Artikelnummer
 Part number already exists	Artikelnummeret findes allerede
 Part {}	Artikel {}
 Parts	Artikler
-Parts (CSV, JSON, BMEcat, EPLAN XML, EDZ)	Artikler (CSV, JSON, BMEcat, EPLAN XML, EDZ)
+Parts (CSV, JSON, BMEcat, EPLAN XML, EDZ, ZIP)	Artikler (CSV, JSON, BMEcat, EPLAN XML, EDZ, ZIP)
 Parts import failed: {}	Artikelimporten mislykkedes: {}
 Password	Adgangskode
 Picture	Billede
@@ -310,9 +349,11 @@ Pin side	Benside
 Place	Plads
 Placement scheme	Placeringsskema
 Plinth	Sokkel
+Plot	Grund
 Plot frame	Plotramme
 Plug	Stik
 Plug diagram	Stikdiagram
+Plugins	Plugins
 Plugs	Stik
 Poles	Poler
 Ports	Porte
@@ -335,9 +376,11 @@ Product subgroup	Produktundergruppe
 Product top group	Produkthovedgruppe
 Profile	Profil
 Project	Projekt
+Project data	Projektdata
 Project languages	Projektsprog
 Project logo	Projektets logo
 Project management	Projektstyring
+Project manager	Projektleder
 Project name	Projektnavn
 Project properties	Projektegenskaber
 Properties	Egenskaber
@@ -351,8 +394,11 @@ Rail	Skinne
 Range	Område
 Rated current	Mærkestrøm
 Rated power	Mærkeeffekt
+Rear wall	Bagvæg
 Rectangle	Rektangel
 Rectangular	Rektangulær
+Redo	Annuller fortryd
+Refresh	Opdater
 Reject	Afvis
 Relative humidity	Relativ luftfugtighed
 Relay	Relæ
@@ -361,17 +407,22 @@ Released pages cannot be moved	Frigivne sider kan ikke flyttes
 Remove	Fjern
 Remove from favorites	Fjern fra favoritter
 Remove the boundary	Fjern grænsen
+Remove the lightning protection system	Fjern lynbeskyttelsen
 Remove the reference point	Fjern referencepunktet
 Report	Rapport
 Report blocks	Rapportblokke
 Report: {}	Rapport: {}
+Reports	Rapporter
 Required	Påkrævet
 Reserve	Reserve
+Reviewer	Korrekturlæser
 Revision	Revision
 Revision {}	Revision {}
 Rework	Efterbearbejdning
 Right	Højre
+Right side	Højre side
 Role	Rolle
+Roof	Tag
 Rooms	Rum
 Round	Rund
 Route	Før
@@ -392,6 +443,7 @@ Search parts	Søg efter artikler
 Searching…	Søger…
 Section	Afsnit
 Segment	Afsnit
+Select	Vælg
 Select a part in the tree or create a new one.	Vælg en artikel i træet, eller opret en ny.
 Sensor	Sensor
 Sensors, switches, pushbuttons	Sensorer, afbrydere, trykknapper
@@ -401,19 +453,24 @@ Settings	Indstillinger
 Shape	Form
 Short-circuit voltage	Kortslutningsspænding
 Show history	Vis historik
+Show the logos of the catalogs	Vis katalogernes logoer
 Show the row after the column	Vis rækken efter kolonnen
 Side	Side
 Sign in	Log på
 Sign out	Log af
 Signed in as {}	Logget på som {}
 Signed in as {} ({})	Logget på som {} ({})
+Signed out	Logget af
 Signing in…	Logger på…
 Single-line / multi-line	Enstreget / flerstreget
+Site	Grund
+Site plan	Situationsplan
 Size	Størrelse
 Socket side	Bøsningsside
 Solenoid not linked	Magnetspole ikke tilknyttet
 Sort by	Sortér efter
 Source	Kilde
+Started	Startet
 State	Tilstand
 Status	Status
 String	Streng
@@ -440,6 +497,7 @@ Terminal type	Klemmetype
 Terminals	Klemmer
 Text	Tekst
 Text to find	Tekst, der skal søges efter
+The freestanding PV array {} stands outside the plot boundary	Det jordmonterede solcellefelt {} står uden for grundgrænsen
 The identifier must not be empty	Betegnelsen må ikke være tom
 The long side of the modules along the rows	Modulernes lange side langs rækkerne
 The page is released	Siden er frigivet
@@ -449,11 +507,15 @@ Time	Tid
 Title block	Tegningshoved
 To	Til
 Tools	Værktøjer
+Top	Øverst
 Total	I alt
 Transformer	Transformer
+Tutorial	Selvstudium
 Type	Type
 Type number	Typenummer
 Underline	Understreget
+Undo	Fortryd
+Unexpected argument: {}	Uventet argument: {}
 Unit	Enhed
 Unknown column: {}	Ukendt kolonne: {}
 Unknown connector: {}	Ukendt connector: {}
@@ -461,10 +523,12 @@ Unknown enclosure system: {}	Ukendt kapslingssystem: {}
 Unknown face: {}	Ukendt flade: {}
 Unknown format: {}	Ukendt format: {}
 Unknown function definition: {}	Ukendt funktionsdefinition: {}
+Unknown language: {}	Ukendt sprog: {}
 Unknown option {}	Ukendt indstilling {}
 Unknown parameter: {}	Ukendt parameter: {}
 Unknown part: {}	Ukendt artikel: {}
 Unknown property: {}	Ukendt egenskab: {}
+Unknown report: {}	Ukendt rapport: {}
 Unknown scheme: {}	Ukendt skema: {}
 Unknown segment	Ukendt segment
 Unknown symbol {}	Ukendt symbol {}
@@ -475,6 +539,7 @@ User	Bruger
 User name	Brugernavn
 Users	Brugere
 Version	Version
+Viewer	Fremviser
 Voltage	Spænding
 Warning	Advarsel
 Warnings	Advarsler
@@ -497,11 +562,13 @@ file or folder not found	filen eller mappen blev ikke fundet
 landscape	liggende
 left	venstre
 mm	mm
+none	ingen
 normal	normal
 not bonded	ikke tilsluttet
 not connected	ikke tilsluttet
 open	åben
 pcs	stk.
+portrait	stående
 rejected	afvist
 right	højre
 spare	reserve
@@ -515,6 +582,7 @@ yes	ja
 {} exists already	{} findes allerede
 {} is not a PNG or JPEG image	{} er ikke et PNG- eller JPEG-billede
 {} parts	{} artikler
+{} users	{} brugere
 {} wires	{} ledninger
 {}, together with the wire to {}	{}, sammen med lederen til {}
 {}: {} does not stand on the floor, choose a floor-standing part	{}: {} står ikke på gulvet, vælg en gulvstående artikel

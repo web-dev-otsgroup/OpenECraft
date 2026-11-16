@@ -48,7 +48,6 @@ Address {} is used by {} and {}	Adressen {} bruges af {} og {}
 Adhesive	Lim
 Adjustable output voltage	Justerbar udgangsspænding
 Administer the server	Administrer serveren
-Administrator	Administrator
 Alarm limit H	Alarmgrænse H
 Alarm limit HH	Alarmgrænse HH
 Alarm limit L	Alarmgrænse L
@@ -188,7 +187,7 @@ Cell temperatures: {} °C (U max), {} °C (U mean), {} °C (U min)	Celletemperat
 Centre horizontally	Centrer vandret
 Centre vertically	Centrer lodret
 Centrifugal pump	Centrifugalpumpe
-Change	Ændring
+Changed in the project folder by another program and also in the open project: {}{}. Save the project under another name, or open it again and repeat the changes	Ændret i projektmappen af et andet program og også i det åbne projekt: {}{}. Gem projektet under et andet navn, eller åbn det igen og gentag ændringerne
 Changed since mounted	Ændret siden montering
 Changed since wired	Ændret siden trækning
 Changeover contact	Skiftekontakt
@@ -293,6 +292,7 @@ Copper bar {}: segment {} is {} mm straight, at least {} mm are needed for bendi
 Copper bar {}: {} mm are longer than the stock length of {} mm	Kobberskinne {}: {} mm er længere end lagerlængden på {} mm
 Copper bar {}: {} mm are too thick for {}	Kobberskinne {}: {} mm er for tykt til {}
 Copper bar {}: {} segments need {} bends	Kobberskinne {}: {} afsnit kræver {} bukninger
+Copper-bonded steel	Forkobret stål
 Cores used	Ledere i brug
 Corner on page {} does not fit its wires: it needs one wire in each of its two directions and no connection point there	Hjørnet på side {} passer ikke til sine ledere: det kræver en leder i hver af dets to retninger og intet tilslutningspunkt der
 Counter contact NC	Tællerkontakt, bryde
@@ -310,7 +310,6 @@ Create projects	Opret projekter
 Creation date	Oprettelsesdato
 Cross-section {} carries {} A, less than the {} A of {}	Tværsnittet {} kan bære {} A, mindre end de {} A for {}
 Crossing on page {} does not fit its wires: it needs a wire in all four directions and no connection point there	Krydsningen på side {} passer ikke til sine ledere: den kræver en leder i alle fire retninger og intet tilslutningspunkt der
-Currency	Valuta
 Current (A)	Strøm (A)
 Current capacity (A)	Strømbelastningsevne (A)
 Current consumption	Strømforbrug
@@ -434,10 +433,10 @@ ERP item master and bill of materials (CSV)	ERP-varestamdata og stykliste (CSV)
 ERP number	ERP-nummer
 ETIM class	ETIM-klasse
 Earth electrode	Jordelektrode
+Earth rod	Jordspyd
 East-west on a flat roof	Øst-vest på fladt tag
 Edit pages	Redigér sider
 Edit project data	Redigér projektdata
-Editor	Redaktør
 Efficiency	Virkningsgrad
 Efficiency class	Effektivitetsklasse
 Electrical data	Elektriske data
@@ -551,10 +550,12 @@ Foot switch NO (NFPA)	Fodafbryder, slutte (NFPA)
 Force	Kraft
 Fork terminal	Gaffelkabelsko
 Format (placeholders)	Format (pladsholdere)
+Foundation earth electrode	Fundamentjord
 Frame size	Byggestørrelse
 Free	Fri
 Free air (mm)	Fri luft (mm)
 Free run	Fri føring
+Freestanding on posts	Jordmonteret på stolper
 Frequency converter	Frekvensomformer
 Frequency meter	Frekvensmåler
 From end	Fra slut
@@ -757,7 +758,6 @@ Latitude is within ±90° and longitude within ±180°	Breddegraden ligger inden
 Lead time (days)	Leveringstid (dage)
 Leakage current	Lækstrøm
 Leakage line	Lækolieledning
-Left side	Venstre side
 Left side panel	Venstre sideplade
 Legend plate text	Skilttekst
 Length (m)	Længde (m)
@@ -818,7 +818,6 @@ Manual switch NO	Manuel afbryder, slutte
 Manual switch NO, latching	Manuel afbryder, slutte, låsende
 Manual work	Manuelt arbejde
 Manufacturer's table	Producenttabel
-Manufacturers	Producenter
 Marking (CSV)	Mærkater (CSV)
 Marking (Excel)	Mærkater (Excel)
 Mating faces	Stiksider
@@ -849,8 +848,6 @@ Minimum operating temperature	Minimal driftstemperatur
 Mirror contacts	Spejlkontakter
 Mirrored	Spejlvendt
 Mission time	Brugstid
-Module	Modul
-Modules	Moduler
 Moisture	Fugt
 Moment of inertia	Inertimoment
 Motion detector	Bevægelsesmelder
@@ -893,7 +890,6 @@ Mounting site	Monteringssted
 Mounting type	Fastgørelsesmetode
 Multi-line text	Flerlinjet tekst
 N terminal	N-klemme
-NC contact	Brydekontakt
 NC contact (NFPA)	Brydekontakt (NFPA)
 NC contact K (GOST)	Brydekontakt K (GOST)
 NC contact KA (GB)	Brydekontakt KA (GB)
@@ -908,7 +904,6 @@ NC contact, on-delay KT (GOST)	Brydekontakt, tiltrækningsforsinket KT (GOST)
 NC contact, on-delay TLR (JIS)	Brydekontakt, tiltrækningsforsinket TLR (JIS)
 NC contact, timed opening (NFPA)	Brydekontakt, forsinket åbning (NFPA)
 NFPA / JIC	NFPA / JIC
-NO contact	Sluttekontakt
 NO contact (NFPA)	Sluttekontakt (NFPA)
 NO contact K (GOST)	Sluttekontakt K (GOST)
 NO contact KA (GB)	Sluttekontakt KA (GB)
@@ -940,7 +935,6 @@ No plugs	Ingen stik
 No report block {}	Ingen rapportblok {}
 No segment template named {}	Ingen segmentskabelon med navnet {}
 No subproject {}	Intet delprojekt {}
-No such PV array	Intet sådant solcelleanlæg
 No such object: {}	Intet sådant objekt: {}
 No surge protective device at the supply (IEC 60364-4-44)	Ingen overspændingsbeskyttelse ved forsyningen (IEC 60364-4-44)
 No terminal {}	Ingen klemme {}
@@ -1006,7 +1000,6 @@ Optocoupler	Optokobler
 Order numbers	Bestillingsnumre
 Order status	Ordrestatus
 Ordered	Bestilt
-Other	Andet
 Other bus device	Anden busenhed
 Other module	Andet modul
 Other properties	Andre egenskaber
@@ -1227,7 +1220,6 @@ Product	Produkt
 Production of {}{} failed: {}	Produktion af {}{} mislykkedes: {}
 Production wire list (CSV)	Ledningsliste til produktion (CSV)
 Project description	Projektbeskrivelse
-Project manager	Projektleder
 Project number	Projektnummer
 Project property of the property database (by key)	Projektegenskab i egenskabsdatabasen (via nøgle)
 Project revision	Projektrevision
@@ -1300,7 +1292,6 @@ Rated short-time withstand current	Mærkekorttidsholdestrøm
 Rated speed	Mærkeomdrejningstal
 Rated torque	Mærkemoment
 Rated voltage	Mærkespænding
-Rear wall	Bagvæg
 Rectangular punch	Rektangulært stempel
 Rectifier / inverter AC/DC, bidirectional	Ensretter / vekselretter AC/DC, tovejs
 Redline	Redline
@@ -1338,21 +1329,19 @@ Resolution	Opløsning
 Response time	Reaktionstid
 Result	Resultat
 Return / exhaust line	Retur- / udluftningsledning
-Reviewer	Korrekturlæser
 Revision overview (changes)	Revisionsoversigt (ændringer)
 Revision table: author of the last revision (2: the one before …)	Revisionstabel: forfatter af den seneste revision (2: den før …)
 Revision table: date of the last revision (2: the one before …)	Revisionstabel: dato for den seneste revision (2: den før …)
 Revision table: description of the last revision (2: the one before …)	Revisionstabel: beskrivelse af den seneste revision (2: den før …)
 Revision table: index of the last revision (2: the one before …)	Revisionstabel: indeks for den seneste revision (2: den før …)
-Right side	Højre side
 Right side panel	Højre sideplade
+Ring earth electrode	Ringjord
 Ring terminal	Ringkabelsko
 Rivet nut	Nittemøtrik
 RoHS compliant	RoHS-kompatibel
 Rockwell (Local:1:I.Data.0)	Rockwell (Local:1:I.Data.0)
 Roller switch NC	Rulleafbryder, bryde
 Roller switch NO	Rulleafbryder, slutte
-Roof	Tag
 Roof top	Tag
 Room floor	Rummets gulv
 Room {} stands outside the plot boundary	Rum {} står uden for grundgrænsen
@@ -1485,10 +1474,10 @@ Spare terminal	Reserveklemme
 Speed	Hastighed
 Spiral	Spindeltrappe
 Stainless steel	Rustfrit stål
+Stainless steel V4A	Rustfrit stål V4A
 Standard	Standard
 Start / stop circuit with a relay: coil and contacts form one device with cross references and contact image, terminal strip, wire numbers, terminal diagram and connection list.	Start-/stopkreds med et relæ: spole og kontakter udgør én komponent med krydshenvisninger og kontaktbillede, klemrække, ledningsnumre, klemplan og forbindelsesliste.
 Start date	Startdato
-Started	Startet
 Starting current ratio	Startstrømsforhold
 Starting torque	Startmoment
 State of the project: draft, in review, approved, released	Projektets status: udkast, til gennemgang, godkendt, frigivet
@@ -1497,6 +1486,7 @@ Station name {} is used {} times	Stationsnavnet {} bruges {} gange
 Station {} is not connected to bus {}	Stationen {} er ikke forbundet med bussen {}
 Station {}: bus system {} does not exist	Station {}: Bussystemet {} findes ikke
 Steam	Damp
+Steel, hot-dip galvanised	Varmforzinket stål
 Stock	Lager
 Stop category	Stopkategori
 Storage temperature range	Opbevaringstemperaturområde
@@ -1586,6 +1576,7 @@ The archive contains no project	Arkivet indeholder intet projekt
 The archive has no manifest	Arkivet har intet manifest
 The archive is damaged	Arkivet er beskadiget
 The archive unpacks to more than {} MB	Arkivet udpakkes til mere end {} MB
+The archive was written by a newer version (archive version {})	Arkivet er skrevet af en nyere version (arkivversion {})
 The assembly manufacturer must be named (IEC 61439-1, 6.1)	Tavlefabrikanten skal være angivet (IEC 61439-1, 6.1)
 The cabinet line-up in its room: L-shaped floor plan, inner wall, door and window, the line-up at its place, a mounting rail with a socket outlet on a wall, a wall-mounted emergency light and a cable tray under the ceiling.	Tavlerækken i sit rum: L-formet plan, indervæg, dør og vindue, tavlerækken på sin plads, en skinne med en stikkontakt på en væg, en vægmonteret nødbelysning og en kabelbakke under loftet.
 The configuration is not a JSON object	Konfigurationen er ikke et JSON-objekt
@@ -1598,7 +1589,10 @@ The embedded document {} is damaged	Det integrerede dokument {} er beskadiget
 The file is empty	Filen er tom
 The file was written by a newer version (format {}): data this version does not know is lost when saving	Filen er skrevet af en nyere version (format {}): data, som denne version ikke kender, går tabt ved lagring
 The first column must be Key	Den første kolonne skal være Key
+The folder {} already holds the project {}: a split project needs a folder of its own	Mappen {} indeholder allerede projektet {}: et opdelt projekt skal have sin egen mappe
+The folder {} holds files that belong to no project ({}): a split project needs a folder of its own	Mappen {} indeholder filer, der ikke hører til noget projekt ({}): et opdelt projekt skal have sin egen mappe
 The function definition needs a key and a name	Funktionsdefinitionen skal have en nøgle og et navn
+The index of the project names no file layout: it was not written by OpenECraft	Projektets indeks angiver intet fillayout: det er ikke skrevet af OpenECraft
 The last page cannot be deleted	Den sidste side kan ikke slettes
 The macro box has no items left	Makroboksen har ikke flere elementer
 The next free id is already in use	Det næste ledige id er allerede i brug
@@ -1608,7 +1602,10 @@ The pages were changed after the submission; submit the revision again	Siderne b
 The plot boundary crosses itself	Grundgrænsen krydser sig selv
 The plot boundary encloses no area	Grundgrænsen omslutter intet areal
 The plot boundary is no polygon: it crosses itself or has fewer than three corners	Grundgrænsen er ingen polygon: den krydser sig selv eller har færre end tre hjørner
+The project cannot be written as files: {}	Projektet kan ikke skrives som filer: {}
+The project file {} is missing	Projektfilen {} mangler
 The project has no panel layout	Projektet har intet tavlelayout
+The project was written by a newer version (file layout {})	Projektet er skrevet af en nyere version (fillayout {})
 The property needs a name	Egenskaben skal have et navn
 The pump station built into two bayed floor-standing enclosures: busbar system, rails and ducts, door devices and handles, filter fan, light, PE bar, cable glands, a cable passage, climate calculation, duct fill and 3D routing.	Pumpestationen bygget ind i to sammenbyggede gulvskabe: skinnesystem, skinner og kabelkanaler, dørkomponenter og greb, filterventilator, lys, PE-skinne, kabelforskruninger, en kabelgennemføring, klimaberegning, kanalfyldning og 3D-føring.
 The revision is already released	Revisionen er allerede frigivet
@@ -1749,7 +1746,6 @@ Vessel	Beholder
 Vibration	Vibration
 Vibration resistance	Vibrationsbestandighed
 View projects	Se projekter
-Viewer	Fremviser
 Violations	Overtrædelser
 Voltage (V)	Spænding (V)
 Voltage drop (%)	Spændingsfald (%)
@@ -1890,7 +1886,6 @@ page properties	sideegenskaber
 pigtail {} mm	pigtail {} mm
 pilot	styre
 pink	lyserød
-portrait	stående
 pressure	tryk
 red	rød
 released	frigivet
@@ -1928,6 +1923,7 @@ yellow	gul
 {} has no MTTFd, B10d, PL or PFHd	{} har hverken MTTFd, B10d, PL eller PFHd
 {} has no door or window {}	{} har ingen dør eller vindue {}
 {} has nothing to manufacture	{} har intet at producere
+{} holds an unresolved merge conflict of git: the file was merged as text. Take one version of the file (git checkout --ours or --theirs), then set up the merge driver for split projects (merge_project_file) before merging again	{} indeholder en uløst flettekonflikt fra git: filen blev flettet som tekst. Tag én version af filen (git checkout --ours eller --theirs), og sæt derefter flettedriveren til opdelte projekter op (merge_project_file), før du fletter igen
 {} is a built-in function definition	{} er en indbygget funktionsdefinition
 {} is a built-in property	{} er en indbygget egenskab
 {} is a built-in scheme	{} er et indbygget skema
@@ -1973,6 +1969,7 @@ yellow	gul
 {}: PV array {} covers a roof window	{}: solcelleanlæg {} dækker et ovenlysvindue
 {}: PV array {} has {} modules, its device {} has {}	{}: solcelleanlæg {} har {} moduler, dets enhed {} har {}
 {}: PV array {} is mounted tilted on a pitched roof	{}: solcelleanlæg {} er monteret skråt på et skråtag
+{}: PV array {} lies outside the protection of the air-termination system	{}: solcellefelt {} ligger uden for fangsystemets beskyttelse
 {}: PV array {} of roof {} lies across a ridge, a hip or the edge of the roof	{}: solcelleanlæg {} på tag {} ligger hen over en kip, en grat eller tagkanten
 {}: PV array {} of roof {} lies outside the roof	{}: solcelleanlæg {} på tag {} ligger uden for taget
 {}: PV arrays {} and {} lie over each other	{}: solcelleanlæg {} og {} ligger over hinanden
@@ -1982,6 +1979,7 @@ yellow	gul
 {}: a wire of {} mm² is thinner than the connection point takes (at least {} mm²)	{}: en ledning på {} mm² er tyndere, end tilslutningspunktet tager (mindst {} mm²)
 {}: accessory {} fits none of the device's parts	{}: tilbehøret {} passer ikke til nogen af enhedens artikler
 {}: actuator {} is {} mm above the floor, recommended {} … {} mm	{}: betjeningselement {} er {} mm over gulvet, anbefalet {} … {} mm
+{}: air-termination rod {} stands off the roofs	{}: fangstang {} står uden for tagene
 {}: auxiliary function(s) without main function	{}: hjælpefunktion(er) uden hovedfunktion
 {}: breaking capacity {} kA below the short-circuit current {} kA	{}: Brydeevnen {} kA er under kortslutningsstrømmen {} kA
 {}: cable duct at {} mm filled {} % (limit {} %)	{}: Kabelkanal ved {} mm fyldt {} % (grænse {} %)
@@ -1998,13 +1996,17 @@ yellow	gul
 {}: cross-section {} below the {} mm² of power circuits	{}: Tværsnittet {} er under de {} mm² for kraftkredse
 {}: cross-section {} differs from the potential definition ({})	{}: Tværsnittet {} afviger fra potentialedefinitionen ({})
 {}: cutout of {} on the {} is {} mm from the edge, at least {} mm required	{}: udskæring for {} på {} er {} mm fra kanten, mindst {} mm påkrævet
+{}: cutout of {} on the {} lies in a restricted cut-out area	{}: udskæring for {} på {} ligger i et område, hvor der ikke må skæres ud
 {}: cutout of {} on the {} reaches {} mm beyond its front	{}: udskæringen for {} på {} rækker {} mm ud over dens front
 {}: cutouts of {} and {} on the {} are too close ({} mm web, at least {} mm)	{}: udskæringer for {} og {} på {} er for tæt på hinanden ({} mm materiale, mindst {} mm)
 {}: designation '{}' used more than once	{}: Betegnelsen '{}' bruges mere end én gang
 {}: device tag without device name	{}: enhedsmærkning uden enhedsnavn
+{}: earth electrode {} has no walls to run along: the building has no rooms or roofs	{}: jordelektrode {} har ingen vægge at løbe langs: bygningen har ingen rum eller tage
+{}: earth rod {} stands inside the walls of the building	{}: jordspyd {} står inden for bygningens vægge
 {}: fault current {} A at {} does not disconnect within {} s (needs {} A)	{}: Fejlstrømmen {} A ved {} udkobler ikke inden for {} s (kræver {} A)
 {}: function texts differ in the single-line diagram and the schematic	{}: funktionsteksterne er forskellige i enstregsdiagrammet og diagrammet
 {}: hole of {} is too close to the cutout of {} on the {}	{}: hul for {} er for tæt på udskæringen for {} på {}
+{}: hole of {} on the {} lies in a restricted cut-out area	{}: hul for {} på {} ligger i et område, hvor der ikke må skæres ud
 {}: hole Ø{} of {} on the {} is {} mm from the edge, at least {} mm required	{}: hul Ø{} for {} på {} er {} mm fra kanten, mindst {} mm påkrævet
 {}: holes of {} and {} on the {} are too close ({} mm web, at least {} mm)	{}: huller for {} og {} på {} er for tæt på hinanden ({} mm materiale, mindst {} mm)
 {}: hot spot of about {} °C at x = {} mm, y = {} mm of the mounting plate (inside temperature at most {} °C)	{}: varmepunkt på ca. {} °C ved x = {} mm, y = {} mm på monteringspladen (indvendig temperatur højst {} °C)
@@ -2062,7 +2064,14 @@ yellow	gul
 {}: terminal {} uses {} levels, its part {} has {}	{}: klemme {} bruger {} etager, dens artikel {} har {}
 {}: terminals {} are {} mm above the floor, at least {} mm required	{}: klemmer {} er {} mm over gulvet, mindst {} mm påkrævet
 {}: the busbar system with {} bars joins {} conductors ({}): short circuit	{}: skinnesystemet med {} skinner forbinder {} ledere ({}): kortslutning
+{}: the busbar {} of earth electrode {} does not exist	{}: skinnen {} til jordelektrode {} findes ikke
 {}: the device {} of PV array {} does not exist	{}: enheden {} for solcelleanlæg {} findes ikke
+{}: the earthing busbar {} of PV array {} does not exist	{}: jordskinnen {} for solcellefelt {} findes ikke
+{}: the freestanding PV array {} stands on {}	{}: det jordmonterede solcellefelt {} står på {}
+{}: the freestanding PV arrays {} and {} stand on each other	{}: de jordmonterede solcellefelter {} og {} overlapper hinanden
+{}: the generator junction box {} of PV array {} does not exist	{}: generatortilslutningsboksen {} for solcellefelt {} findes ikke
+{}: the lightning protection has no earth electrode	{}: lynbeskyttelsen har ingen jordelektrode
+{}: the lightning protection has no walls to run along: the building has no rooms or roofs	{}: lynbeskyttelsen har ingen vægge at løbe langs: bygningen har ingen rum eller tage
 {}: the module {} of PV array {} has no electrical data	{}: modulet {} i solcelleanlæg {} har ingen elektriske data
 {}: the station has no port {}	{}: Stationen har ingen port {}
 {}: the strings of PV array {} connect {} modules, the array has {}	{}: strengene i solcelleanlæg {} forbinder {} moduler, anlægget har {}
@@ -2079,6 +2088,7 @@ yellow	gul
 {}: {} carries {} A, the load {} needs {} A	{}: {} kan bære {} A, belastningen {} kræver {} A
 {}: {} changed after it was mounted	{}: {} er ændret, efter at det blev monteret
 {}: {} collides with {}	{}: {} kolliderer med {}
+{}: {} down conductors, class {} needs {} round the building	{}: {} nedledere, klasse {} kræver {} rundt om bygningen
 {}: {} inputs used, the module has {}	{}: {} indgange i brug, modulet har {}
 {}: {} is a fluid device, not an electrical one	{}: {} er en fluidenhed, ikke en elektrisk enhed
 {}: {} is closer than {} mm to a cable duct	{}: {} er tættere end {} mm på en kabelkanal
@@ -2091,6 +2101,7 @@ yellow	gul
 {}: {} is not made for wall mounting, mount it on a rail	{}: {} er ikke beregnet til vægmontage, monter den på en skinne
 {}: {} is {} … {} mm above the floor, allowed {} … {} mm	{}: {} er {} … {} mm over gulvet, tilladt {} … {} mm
 {}: {} kg on the {} exceed its load of {} kg	{}: {} kg på {} overskrider dens bæreevne på {} kg
+{}: {} lies in a restricted placing area of the {}	{}: {} ligger i et område på {}, hvor intet må placeres
 {}: {} modules of PV array {} are not connected to a string	{}: {} moduler i solcelleanlæg {} er ikke tilsluttet nogen streng
 {}: {} modules, the head has {} slots	{}: {} moduler, hovedet har {} slots
 {}: {} of {} mm is longer than the stock length of {} mm and has to be joined	{}: {} på {} mm er længere end lagerlængden på {} mm og skal samles

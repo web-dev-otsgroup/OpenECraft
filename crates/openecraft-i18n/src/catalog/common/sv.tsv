@@ -1,9 +1,12 @@
 # English<TAB>Svenska – texts shown by several areas (texts without a line are shown in English). Sorted by the English text: cargo run -p openecraft-i18n --example tidy
 (all)	(alla)
 (no entries)	(inga poster)
+(no structure)	(ingen struktur)
+(optional)	(valfritt)
 --json needs a JSON object	--json kräver ett JSON-objekt
 3D model	3D-modell
 3D routing	3D-dragning
+3D view	3D-vy
 A page named {} already exists	Det finns redan en sida med namnet {}
 A page needs a name	En sida behöver ett namn
 A routing path needs {} points at least	En dragningsväg kräver minst {} punkter
@@ -12,14 +15,18 @@ Above	Ovanför
 Access token	Åtkomsttoken
 Accessories	Tillbehör
 Accessory	Tillbehör
+Add	Lägg till
 Add a PDF of all pages	Lägg till en PDF med alla sidor
 Add to favorites	Lägg till i favoriter
 Address	Adress
+Administrator	Administratör
 Angle	Vinkel
 Apply	Verkställ
 Approve	Godkänn
 Approvers	Godkännare
 Automatic	Automatisk
+Automation	Automatisering
+Aux	Hjälp
 Below	Nedanför
 Bold	Fet
 Bottom	Botten
@@ -41,11 +48,13 @@ Cable tag, e.g. -W20	Kabelbeteckning, t.ex. -W20
 Cables	Kablar
 Cancel	Avbryt
 Cannot read {}: {}	Det går inte att läsa {}: {}
+Cannot write {}: {}	Det går inte att skriva {}: {}
 Catalog	Katalog
 Catalog id	Katalog-ID
 Category	Kategori
 Centred	Centrerad
 Certificates	Certifikat
+Change	Ändring
 Channel	Kanal
 Characteristic	Karakteristik
 Check settings	Kontrollinställningar
@@ -56,6 +65,7 @@ Clear filters	Rensa filter
 Clearance bottom	Avstånd nedåt
 Clearance top	Avstånd uppåt
 Clearances	Avstånd
+Close	Stäng
 Coding: {}	Kodning: {}
 Coil voltage	Spolspänning
 Collision class	Kollisionsklass
@@ -85,6 +95,7 @@ Created by	Skapad av
 Cross references	Korsreferenser
 Cross-section	Tvärsnitt
 Crossing	Korsning
+Currency	Valuta
 Current	Ström
 Cutout	Urtag
 Cutouts	Urtag
@@ -106,19 +117,24 @@ Device (PV generator) the modules belong to; its parts then count them in the bi
 Device connection point	Apparatanslutningspunkt
 Device description	Enhetsbeskrivning
 Device tag	Apparatbeteckning
+Device the earthing conductor of the mounting runs to (earthing or equipotential bonding busbar); empty: none	Apparat som stativets jordledare går till (jordnings- eller potentialutjämningsskena); tom: ingen
 Device {}	Apparat {}
 Devices	Apparater
+Dimensions	Mått
 Direction	Riktning
 Discard	Ignorera
 Discard changes	Släng ändringarna
 Display	Visning
+Documents	Dokument
 Done	Klar
 Door	Dörr
 Door cutout	Dörrurtag
+Download	Ladda ned
 Downloading {}…	Laddar ned {}…
 Drag to turn the model	Dra för att vrida modellen
 EMC clearance	EMC-avstånd
 Edit	Redigera
+Editor	Redigerare
 Electro-fluid cross reference	Elektro-fluid-korsreferens
 Enclosure	Kapsling
 Enclosures	Kapslingar
@@ -138,10 +154,13 @@ Field wiring	Fältkablage
 File	Arkiv
 Files	Filer
 Filter	Filter
+Filter devices…	Filtrera apparater…
+Fit	Anpassa
 Fits	Passar till
 Fitting at the end	Koppling i slutet
 Fitting at the start	Koppling i början
 Floor	Golv
+Floor plan	Planritning
 Fluid device	Fluidapparat
 Fluid device groups	Fluidapparatgrupper
 Fluid netlist	Fluidnätlista
@@ -154,10 +173,12 @@ Function text	Funktionstext
 Functional safety	Funktionssäkerhet
 Functions	Funktioner
 General	Allmänt
+Generator junction box (device) the strings run to, from there a DC main cable to each inverter; empty: none	Generatoranslutningslåda (apparat) som strängarna går till, därifrån en DC-huvudkabel till varje växelriktare; tom: ingen
 Gives up a subproject: its pages are unlocked again	Överger ett delprojekt: dess sidor låses upp igen
 Gland plate	Genomföringsplåt
 Graphics	Grafik
 Group	Grupp
+Group the pages by structure	Gruppera sidorna efter struktur
 Groups	Grupper
 Harness	Kabelstam
 Harness data	Kabelstamsdata
@@ -185,9 +206,12 @@ Kind	Typ
 Language	Språk
 Languages	Språk
 Last change	Senaste ändring
+Last changed	Senast ändrad
+Last changed by	Senast ändrad av
 Layers	Lager
 Leave out stored baselines and wiring marks	Utelämna sparade baslinjer och inkopplingsmarkeringar
 Left	Vänster
+Left side	Vänster sida
 Length	Längd
 Level	Nivå
 Lifecycle	Livscykel
@@ -197,13 +221,20 @@ Link	Länk
 Linked	Länkad
 Load	Last
 Loaded circuits bunched together	Belastade kretsar förlagda tillsammans
+Loading…	Läser in…
 Location	Placering
 Location (+)	Placering (+)
+Locked	Låst
+Locked by {}	Låst av {}
+Logo	Logotyp
 MTTFd (years)	MTTFd (år)
 Machine	Maskin
+Main	Huvud
+Main earthing busbar (device) it is connected to; empty: none	Huvudjordningsskena (apparat) som det är anslutet till; tom: ingen
 Main earthing terminal	Huvudjordningsskena
 Main switch	Huvudbrytare
 Manufacturer	Tillverkare
+Manufacturers	Tillverkare
 Manufacturing	Tillverkning
 Marking	Märkning
 Match case	Matcha versaler/gemener
@@ -214,6 +245,8 @@ Minimum digits of the counter (leading zeros)	Minsta antal siffror i räknaren (
 Missing parameter: {}	Parameter saknas: {}
 Missing value for --{}	Värde saknas för --{}
 Model import failed: {}	Modellimporten misslyckades: {}
+Module	Modul
+Modules	Moduler
 Modules in series	Moduler i serie
 Modules side by side in a row	Moduler bredvid varandra i en rad
 Mounted	Monterad
@@ -223,6 +256,8 @@ Mounting holes	Fästhål
 Mounting layout {}	Monteringslayout {}
 Mounting plate	Monteringsplåt
 Mounting rail	Monteringsskena
+NC contact	Brytande kontakt
+NO contact	Slutande kontakt
 Name	Namn
 Name of the block	Blockets namn
 Name of the plot, e.g. the cadastral parcel	Tomtens namn, t.ex. fastighetsbeteckningen
@@ -230,6 +265,7 @@ Name of the point, e.g. a survey point	Punktens namn, t.ex. en mätpunkt
 Name of the scheme	Schemats namn
 Net	Nät
 Never	Aldrig
+New group	Ny grupp
 New name	Nytt namn
 Next page	Nästa sida
 No	Nej
@@ -251,6 +287,7 @@ No plug {}	Inget kontaktdon {}
 No report block named {}	Inget rapportblock med namnet {}
 No segment {}	Inget segment {}
 No station {}	Ingen station {}
+No such PV array	Inget sådant solcellsfält
 No such page	Sidan finns inte
 No such section	Avsnittet finns inte
 No symbol with id {}	Ingen symbol med ID {}
@@ -265,12 +302,14 @@ Not in the schematic	Inte i schemat
 Note	Obs!
 Notes	Anteckningar
 Number	Nummer
+Number of down conductors (0: as many as the class needs for the walls)	Antal nedledare (0: så många som klassen kräver för väggarna)
 Number the sections 1, 2, 3 … on every level first	Numrera först avsnitten 1, 2, 3 … på varje nivå
 Numbers the device tags per structure and identifying letter in schematic order (page, column, top to bottom)	Numrerar apparatbeteckningarna per struktur och kodbokstav i schemaordning (sida, kolumn, uppifrån och ned)
 Only rows containing this text	Endast rader som innehåller den här texten
 Operating pressure	Drifttryck
 Option {}: {} is not one of its choices	Alternativ {}: {} är inte ett av dess val
 Order number	Beställningsnummer
+Other	Övrigt
 Outer diameter	Ytterdiameter
 Output	Utgång
 Overview	Översikt
@@ -299,7 +338,7 @@ Part number	Artikelnummer
 Part number already exists	Artikelnumret finns redan
 Part {}	Artikel {}
 Parts	Artiklar
-Parts (CSV, JSON, BMEcat, EPLAN XML, EDZ)	Artiklar (CSV, JSON, BMEcat, EPLAN XML, EDZ)
+Parts (CSV, JSON, BMEcat, EPLAN XML, EDZ, ZIP)	Artiklar (CSV, JSON, BMEcat, EPLAN XML, EDZ, ZIP)
 Parts import failed: {}	Artikelimporten misslyckades: {}
 Password	Lösenord
 Picture	Bild
@@ -310,9 +349,11 @@ Pin side	Stiftsida
 Place	Plats
 Placement scheme	Placeringsschema
 Plinth	Sockel
+Plot	Tomt
 Plot frame	Ritningsram
 Plug	Kontaktdon
 Plug diagram	Kontaktdonsschema
+Plugins	Plugins
 Plugs	Kontaktdon
 Poles	Poler
 Ports	Portar
@@ -335,9 +376,11 @@ Product subgroup	Produktundergrupp
 Product top group	Produkthuvudgrupp
 Profile	Profil
 Project	Projekt
+Project data	Projektdata
 Project languages	Projektspråk
 Project logo	Projektets logotyp
 Project management	Projekthantering
+Project manager	Projektledare
 Project name	Projektnamn
 Project properties	Projektegenskaper
 Properties	Egenskaper
@@ -351,8 +394,11 @@ Rail	Skena
 Range	Område
 Rated current	Märkström
 Rated power	Märkeffekt
+Rear wall	Bakvägg
 Rectangle	Rektangel
 Rectangular	Rektangulär
+Redo	Gör om
+Refresh	Uppdatera
 Reject	Avvisa
 Relative humidity	Relativ luftfuktighet
 Relay	Relä
@@ -361,17 +407,22 @@ Released pages cannot be moved	Frisläppta sidor kan inte flyttas
 Remove	Ta bort
 Remove from favorites	Ta bort från favoriter
 Remove the boundary	Ta bort gränsen
+Remove the lightning protection system	Ta bort åskskyddet
 Remove the reference point	Ta bort referenspunkten
 Report	Rapport
 Report blocks	Rapportblock
 Report: {}	Rapport: {}
+Reports	Rapporter
 Required	Krävs
 Reserve	Reserv
+Reviewer	Granskare
 Revision	Revision
 Revision {}	Revision {}
 Rework	Omarbetning
 Right	Höger
+Right side	Höger sida
 Role	Roll
+Roof	Tak
 Rooms	Rum
 Round	Rund
 Route	Dra runt
@@ -392,6 +443,7 @@ Search parts	Sök artiklar
 Searching…	Söker…
 Section	Avsnitt
 Segment	Avsnitt
+Select	Markera
 Select a part in the tree or create a new one.	Välj en artikel i trädet eller skapa en ny.
 Sensor	Givare
 Sensors, switches, pushbuttons	Givare, brytare, tryckknappar
@@ -401,19 +453,24 @@ Settings	Inställningar
 Shape	Form
 Short-circuit voltage	Kortslutningsspänning
 Show history	Visa historik
+Show the logos of the catalogs	Visa katalogernas logotyper
 Show the row after the column	Visa raden efter kolumnen
 Side	Sida
 Sign in	Logga in
 Sign out	Logga ut
 Signed in as {}	Inloggad som {}
 Signed in as {} ({})	Inloggad som {} ({})
+Signed out	Utloggad
 Signing in…	Loggar in…
 Single-line / multi-line	Enlinje / flerlinje
+Site	Tomt
+Site plan	Situationsplan
 Size	Storlek
 Socket side	Hylssida
 Solenoid not linked	Magnetspole inte länkad
 Sort by	Sortera efter
 Source	Källa
+Started	Påbörjad
 State	Tillstånd
 Status	Status
 String	Sträng
@@ -440,6 +497,7 @@ Terminal type	Plinttyp
 Terminals	Plintar
 Text	Text
 Text to find	Text att söka efter
+The freestanding PV array {} stands outside the plot boundary	Det markmonterade solcellsfältet {} står utanför tomtgränsen
 The identifier must not be empty	Beteckningen får inte vara tom
 The long side of the modules along the rows	Modulernas långsida längs raderna
 The page is released	Sidan är frisläppt
@@ -449,11 +507,15 @@ Time	Tid
 Title block	Namnruta
 To	Till
 Tools	Verktyg
+Top	Överkant
 Total	Totalt
 Transformer	Transformator
+Tutorial	Handledning
 Type	Typ
 Type number	Typnummer
 Underline	Understruken
+Undo	Ångra
+Unexpected argument: {}	Oväntat argument: {}
 Unit	Enhet
 Unknown column: {}	Okänd kolumn: {}
 Unknown connector: {}	Okänd anslutning: {}
@@ -461,10 +523,12 @@ Unknown enclosure system: {}	Okänt kapslingssystem: {}
 Unknown face: {}	Okänd yta: {}
 Unknown format: {}	Okänt format: {}
 Unknown function definition: {}	Okänd funktionsdefinition: {}
+Unknown language: {}	Okänt språk: {}
 Unknown option {}	Okänt alternativ {}
 Unknown parameter: {}	Okänd parameter: {}
 Unknown part: {}	Okänd artikel: {}
 Unknown property: {}	Okänd egenskap: {}
+Unknown report: {}	Okänd rapport: {}
 Unknown scheme: {}	Okänt schema: {}
 Unknown segment	Okänt segment
 Unknown symbol {}	Okänd symbol {}
@@ -475,6 +539,7 @@ User	Användare
 User name	Användarnamn
 Users	Användare
 Version	Version
+Viewer	Visare
 Voltage	Spänning
 Warning	Varning
 Warnings	Varningar
@@ -497,11 +562,13 @@ file or folder not found	filen eller mappen hittades inte
 landscape	liggande
 left	vänster
 mm	mm
+none	inget
 normal	normal
 not bonded	inte ansluten
 not connected	inte ansluten
 open	öppen
 pcs	st.
+portrait	stående
 rejected	avvisad
 right	höger
 spare	reserv
@@ -515,6 +582,7 @@ yes	ja
 {} exists already	{} finns redan
 {} is not a PNG or JPEG image	{} är inte en PNG- eller JPEG-bild
 {} parts	{} artiklar
+{} users	{} användare
 {} wires	{} ledningar
 {}, together with the wire to {}	{}, tillsammans med ledaren till {}
 {}: {} does not stand on the floor, choose a floor-standing part	{}: {} står inte på golvet, välj en golvstående artikel

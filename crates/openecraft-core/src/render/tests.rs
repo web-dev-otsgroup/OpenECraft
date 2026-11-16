@@ -1,6 +1,30 @@
 use super::*;
 
 #[test]
+fn cable_label_hit_areas_follow_the_drawn_text_without_changing_its_layout() {
+    let mut prj = Project::default();
+    prj.cables.push(Cable { id: 10, tag: "-W1".into(), cable_type: "NYM-J".into(), cores: "BN BU GNYE".into(), cross_section: "1.5".into(), ..Default::default() });
+    for (a, b) in [(p(40., 60.), p(80., 60.)), (p(80., 60.), p(40., 60.)), (p(60., 40.), p(60., 80.)), (p(60., 80.), p(60., 40.))] {
+        let cd = CableDef { id: 20, a, b, cable: "-W1".into(), shield: false };
+        let mut draw = Rec::default();
+        draw_cable_def(&mut draw, &prj, &prj.pages[0], &cd, Ink::Line);
+        let areas = cable_def_text_bounds(&prj, &prj.pages[0], &cd);
+        assert_eq!(draw.texts.len(), 3);
+        assert_eq!(draw.line_positions, [(a, b)]);
+        for ((q, text, size, anchor), area) in draw.texts.iter().zip(&areas) {
+            let width = text_width(text, *size).max(*size);
+            let offset = match anchor { Anchor::Left => width / 2., Anchor::Center => 0., Anchor::Right => -width / 2. };
+            assert!(area.center().dist(*q + p(offset, 0.)) < 0.001);
+        }
+        if a == p(40., 60.) {
+            assert_eq!(draw.texts[0].0, p(81.2, 57.));
+            assert_eq!(draw.texts[1].0, p(81.2, 60.));
+            assert_eq!(draw.texts[2].0, p(81.2, 63.));
+        }
+    }
+}
+
+#[test]
 fn frame_artwork_uses_live_page_properties_without_page_objects() {
     use crate::symbols::{PropertyBlock,BlockAlign};
     let mut project=Project::default();
@@ -89,7 +113,7 @@ fn placed_wire_labels_render_live_values_despite_hidden_automatic_labels_after_r
         prj.pages[0].wires[0].core=value.into();
         prj=Project::from_json(&prj.to_json()).unwrap();
         let an=Analysis::with_builtin(&prj);let mut draw=Rec::default();
-        draw_wire_labels(&mut draw,&prj,&an,0);
+        draw_wire_labels(&mut draw,&prj,&an,0,&core_labels_with_index(&prj,&an.index,0));
         if value.is_empty() {assert!(draw.styled.is_empty());}
         else {
             assert_eq!(draw.styled.len(),1);
@@ -162,13 +186,13 @@ fn separately_annotated_wires_keep_properties_without_duplicate_labels() {
     let prj = Project::from_json(&prj.to_json()).unwrap();
     let analysis = Analysis::with_builtin(&prj);
     let mut hidden = Rec::default();
-    draw_wire_labels(&mut hidden, &prj, &analysis, 0);
+    draw_wire_labels(&mut hidden, &prj, &analysis, 0, &core_labels_with_index(&prj, &analysis.index, 0));
     assert!(hidden.texts.is_empty() && hidden.lines.is_empty());
     assert_eq!(prj.pages[0].wires[0].number, "101");
     let mut visible = prj.clone();
     visible.pages[0].wires[0].hide_labels = false;
     let mut draw = Rec::default();
-    draw_wire_labels(&mut draw, &visible, &analysis, 0);
+    draw_wire_labels(&mut draw, &visible, &analysis, 0, &core_labels_with_index(&visible, &analysis.index, 0));
     assert!(draw.texts.iter().any(|(_,text,_,_)| text == "101"));
     assert!(draw.texts.iter().any(|(_,text,_,_)| text == "-W1"));
     assert!(draw.texts.iter().any(|(_,text,_,_)| text == "BN"));
@@ -696,20 +720,73 @@ fn cable_cores_line_up_at_the_cable_definition_line_and_keep_their_offset() {
         ["L1", "L2", "L3", "N", "PE"].map(|c| d.texts.iter().find(|t| t.1 == c).map(|t| t.0).expect(c))
     };
     let at = cores(&prj);
-    assert!(at.iter().all(|q| (q.x - 130.0).abs() < 1e-3), "cores at the cable definition line: {at:?}");
+    assert!(at.iter().all(|q| q.x < 130.), "cores clear of the definition line: {at:?}");
+    assert!(at.iter().all(|q| (q.x - at[0].x).abs() < 1e-4), "unobstructed core texts share a column: {at:?}");
+    let labels = core_labels(&prj, 0);
     let w = &prj.pages[0].wires[2];
-    assert!(core_text_bounds(&prj.pages[0], w, CoreText::Core).is_some_and(|r| r.contains(at[2])));
-    assert!(core_text_bounds(&prj.pages[0], w, CoreText::Cable).is_none(), "the cable tag is on the first wire only");
-    assert!(core_text_bounds(&prj.pages[0], &prj.pages[0].wires[0], CoreText::Cable).is_some_and(|r| (r.center().x - 130.0).abs() < 1e-3));
+    assert!(core_text_bounds(&labels, w, CoreText::Core).is_some_and(|r| r.contains(at[2])));
+    assert!(core_text_bounds(&labels, w, CoreText::Cable).is_none(), "the cable tag is on the first wire only");
+    assert!(core_text_bounds(&labels, &prj.pages[0].wires[0], CoreText::Cable).is_some_and(|r| r.max.x < 130.));
 
     prj.pages[0].wires[2].core_offset = Some(p(3.0, 1.5));
     let moved = cores(&prj);
-    assert_eq!(moved[2], at[2] + p(3.0, 1.5));
+    let legacy = wire_text_place(&prj.pages[0].wires[2], 0.375, true).0;
+    assert_eq!(moved[2], legacy + p(3.0, 1.5), "existing manual offsets retain their legacy meaning");
     assert_eq!(moved[1], at[1], "the other cores stay");
     // The offset follows the cable definition line.
     prj.pages[0].cable_defs[0].a.x = 120.0;
     prj.pages[0].cable_defs[0].b.x = 120.0;
-    assert_eq!(cores(&prj)[2], at[2] + p(-7.0, 1.5));
+    assert_eq!(cores(&prj)[2], moved[2] + p(-10., 0.));
     prj.pages[0].cable_defs.clear();
     assert!((cores(&prj)[4].x - (100.0 + 0.3 * 120.0)).abs() < 1e-3, "without a cable definition line at 30 %");
+}
+
+#[test]
+fn hatches_stay_in_their_rectangle() {
+    for rising in [true, false] {
+        let mut d = Rec::default();
+        hatch(&mut d, R::from_points(p(10.0, 20.0), p(30.0, 25.0)), 2.5, rising);
+        assert!(d.line_positions.len() >= 9, "{}", d.line_positions.len());
+        for (a, b) in &d.line_positions {
+            for q in [a, b] {
+                assert!((9.99..=30.01).contains(&q.x) && (19.99..=25.01).contains(&q.y), "{q:?}");
+            }
+            // 45°: rising to the right goes up (y down).
+            let slope = (b.y - a.y) / (b.x - a.x);
+            assert!((slope - if rising { -1.0 } else { 1.0 }).abs() < 1e-4, "{slope}");
+        }
+    }
+    let mut d = Rec::default();
+    hatch(&mut d, R::from_points(p(0.0, 0.0), p(0.0, 5.0)), 2.5, true);
+    assert!(d.line_positions.is_empty());
+}
+
+#[test]
+fn restricted_areas_are_drawn_on_their_face() {
+    let mut prj = Project::default();
+    let mut part = crate::parts::Part { number: "ENC".into(), ..Default::default() };
+    part.mounting_data.restricted = vec![crate::parts::RestrictedArea { kind: crate::parts::Restriction::Cutout, face: "door".into(), x: 0.0, y: 0.0, w: 20.0, h: 20.0 }];
+    prj.parts.push(part);
+    let count = |part: &str, face: Face| {
+        let e = Enclosure { part: part.into(), ..Default::default() };
+        let mut d = Rec::default();
+        draw_enclosure(&mut d, &e, face, false, p(0.0, 0.0), 1.0, &BTreeSet::new(), &BTreeSet::new(), &prj);
+        d.lines.iter().filter(|i| matches!(i, Ink::Frame)).count()
+    };
+    assert!(count("ENC", Face::Door) > count("", Face::Door) + 4, "outline and hatch");
+    assert_eq!(count("ENC", Face::Plate), count("", Face::Plate));
+}
+
+#[test]
+fn the_door_shows_its_hinges_on_the_hinge_side() {
+    let prj = Project::default();
+    let hinges = |hinge: panel::DoorHinge| {
+        let e = Enclosure { width: 600.0, height: 800.0, door_hinge: hinge, ..Default::default() };
+        let mut d = Rec::default();
+        draw_enclosure(&mut d, &e, Face::Door, false, p(0.0, 0.0), 1.0, &BTreeSet::new(), &BTreeSet::new(), &prj);
+        // The hinges: 6 mm wide on the door's edge.
+        d.rects.iter().filter(|(a, b)| (b.x - a.x - 6.0).abs() < 1e-3).map(|(a, _)| a.x).collect::<Vec<f32>>()
+    };
+    assert_eq!(hinges(panel::DoorHinge::Left), [-3.0, -3.0]);
+    assert_eq!(hinges(panel::DoorHinge::Right), [597.0, 597.0]);
 }

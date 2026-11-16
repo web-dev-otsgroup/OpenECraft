@@ -27,7 +27,9 @@ impl App {
 
     pub(super) fn layout_properties_pane(&mut self, ui: &mut egui::Ui) {
         egui::ScrollArea::vertical().id_salt("panel_props").auto_shrink([false, false]).show(ui, |ui| {
-            self.panel_ui.properties(ui, &mut self.session.prj, &self.session.analysis, &self.parts_db);
+            if !self.roof_properties(ui) {
+                self.panel_ui.properties(ui, &mut self.session.prj, &self.session.analysis, &self.parts_db);
+            }
         });
     }
 
@@ -55,6 +57,8 @@ impl App {
     /// After the panes: the requests of the panel layout and the assistants.
     pub(super) fn layout_requests(&mut self, ctx: &egui::Context, idx: &Index) {
         self.panel_ui.dialogs(ctx, &mut self.session.prj, &self.parts_db);
+        self.pv_properties(ctx);
+        self.earthing_properties(ctx);
         if std::mem::take(&mut self.mounting_ui.export) {
             let content = openecraft_core::mounting::csv(&self.session.prj, self.mounting_ui.enclosure);
             self.export(ctx, "mounting.csv".into(), ("CSV", "csv"), content);

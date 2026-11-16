@@ -376,6 +376,9 @@ impl App {
             // Cores of the wire's cable already used by other connections
             let own: Vec<u64> = open_net.as_ref().map(|n| n.wires.iter().map(|w| w.1).collect()).unwrap_or_default();
             let cable_now = self.session.prj.pages[pi].wires[wi].cable.clone();
+            if let Some(cable) = self.session.prj.cable(&cable_now).map(|c| c.id) {
+                if ui.button(tr("Rename cable…")).clicked() { self.open_cable_rename(cable); }
+            }
             let used: Vec<String> = self
                 .session.prj
                 .pages
@@ -465,7 +468,7 @@ impl App {
                             w.cable_offset = None;
                         }
                     } else {
-                        ui.weak(tr("Drag the core designation or the cable tag of the selected wire to place it."));
+                        ui.weak(tr("Drag a core designation or cable tag directly to move only the text; no prior wire selection is needed."));
                     }
                 });
             }
@@ -500,7 +503,7 @@ impl App {
                 openecraft_core::harness::assign(&mut self.session.prj, &a, &b, &tag);
             }
         } else {
-            self.graphic_properties(ui, id);
+            self.graphic_properties(ui, idx, id);
         }
     }
 

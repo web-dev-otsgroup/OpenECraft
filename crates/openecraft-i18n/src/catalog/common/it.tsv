@@ -1,9 +1,12 @@
 # English<TAB>Italiano – texts shown by several areas (texts without a line are shown in English). Sorted by the English text: cargo run -p openecraft-i18n --example tidy
 (all)	(tutti)
 (no entries)	(nessuna voce)
+(no structure)	(nessuna struttura)
+(optional)	(facoltativo)
 --json needs a JSON object	--json richiede un oggetto JSON
 3D model	Modello 3D
 3D routing	Instradamento 3D
+3D view	Vista 3D
 A page named {} already exists	Esiste già una pagina denominata {}
 A page needs a name	Una pagina ha bisogno di un nome
 A routing path needs {} points at least	Un percorso di instradamento richiede almeno {} punti
@@ -12,14 +15,18 @@ Above	Sopra
 Access token	Token di accesso
 Accessories	Accessori
 Accessory	Accessorio
+Add	Aggiungi
 Add a PDF of all pages	Aggiungi un PDF di tutte le pagine
 Add to favorites	Aggiungi ai preferiti
 Address	Indirizzo
+Administrator	Amministratore
 Angle	Angolo
 Apply	Applica
 Approve	Approva
 Approvers	Approvatori
 Automatic	Automatico
+Automation	Automazione
+Aux	Aus.
 Below	Sotto
 Bold	Grassetto
 Bottom	Fondo
@@ -41,11 +48,13 @@ Cable tag, e.g. -W20	Sigla del cavo, ad es. -W20
 Cables	Cavi
 Cancel	Annulla
 Cannot read {}: {}	Impossibile leggere {}: {}
+Cannot write {}: {}	Impossibile scrivere {}: {}
 Catalog	Catalogo
 Catalog id	ID catalogo
 Category	Categoria
 Centred	Centrato
 Certificates	Certificati
+Change	Modifica
 Channel	Canale
 Characteristic	Caratteristica
 Check settings	Impostazioni della verifica
@@ -56,6 +65,7 @@ Clear filters	Cancella filtri
 Clearance bottom	Distanza in basso
 Clearance top	Distanza in alto
 Clearances	Distanze
+Close	Chiudi
 Coding: {}	Codifica: {}
 Coil voltage	Tensione della bobina
 Collision class	Classe di collisione
@@ -85,6 +95,7 @@ Created by	Creato da
 Cross references	Riferimenti incrociati
 Cross-section	Sezione
 Crossing	Incrocio
+Currency	Valuta
 Current	Corrente
 Cutout	Apertura
 Cutouts	Forature
@@ -106,19 +117,24 @@ Device (PV generator) the modules belong to; its parts then count them in the bi
 Device connection point	Punto di connessione del dispositivo
 Device description	Descrizione dispositivo
 Device tag	Sigla dispositivo
+Device the earthing conductor of the mounting runs to (earthing or equipotential bonding busbar); empty: none	Apparecchio a cui va il conduttore di terra della struttura (barra di terra o equipotenziale); vuoto: nessuno
 Device {}	Dispositivo {}
 Devices	Dispositivi
+Dimensions	Dimensioni
 Direction	Direzione
 Discard	Scarta
 Discard changes	Scarta le modifiche
 Display	Visualizzazione
+Documents	Documenti
 Done	Completato
 Door	Porta
 Door cutout	Foratura della porta
+Download	Scarica
 Downloading {}…	Download di {}…
 Drag to turn the model	Trascina per ruotare il modello
 EMC clearance	Distanza EMC
 Edit	Modifica
+Editor	Editor
 Electro-fluid cross reference	Riferimenti incrociati elettro-fluidici
 Enclosure	Armadio
 Enclosures	Armadi
@@ -138,10 +154,13 @@ Field wiring	Cablatura di campo
 File	File
 Files	File
 Filter	Filtro
+Filter devices…	Filtra dispositivi…
+Fit	Adatta
 Fits	Compatibile con
 Fitting at the end	Raccordo alla fine
 Fitting at the start	Raccordo all'inizio
 Floor	Fondo
+Floor plan	Pianta
 Fluid device	Dispositivo fluidico
 Fluid device groups	Gruppi di dispositivi fluidici
 Fluid netlist	Netlist fluidica
@@ -154,10 +173,12 @@ Function text	Testo funzione
 Functional safety	Sicurezza funzionale
 Functions	Funzioni
 General	Generale
+Generator junction box (device) the strings run to, from there a DC main cable to each inverter; empty: none	Quadro di campo (apparecchio) a cui vanno le stringhe, da lì un cavo principale DC verso ogni inverter; vuoto: nessuno
 Gives up a subproject: its pages are unlocked again	Abbandona un sottoprogetto: le sue pagine vengono sbloccate di nuovo
 Gland plate	Piastra passacavi
 Graphics	Grafica
 Group	Gruppo
+Group the pages by structure	Raggruppa le pagine per struttura
 Groups	Gruppi
 Harness	Cablaggio
 Harness data	Dati cablaggio
@@ -185,9 +206,12 @@ Kind	Tipo
 Language	Lingua
 Languages	Lingue
 Last change	Ultima modifica
+Last changed	Ultima modifica
+Last changed by	Ultima modifica di
 Layers	Livelli
 Leave out stored baselines and wiring marks	Ometti le baseline salvate e i contrassegni di cablatura
 Left	Sinistra
+Left side	Lato sinistro
 Length	Lunghezza
 Level	Livello
 Lifecycle	Ciclo di vita
@@ -197,13 +221,20 @@ Link	Link
 Linked	Collegato
 Load	Utenza
 Loaded circuits bunched together	Circuiti caricati raggruppati
+Loading…	Caricamento…
 Location	Luogo
 Location (+)	Luogo (+)
+Locked	Bloccato
+Locked by {}	Bloccato da {}
+Logo	Logo
 MTTFd (years)	MTTFd (anni)
 Machine	Macchina
+Main	Princ.
+Main earthing busbar (device) it is connected to; empty: none	Collettore principale di terra (apparecchio) a cui è collegato; vuoto: nessuno
 Main earthing terminal	Collettore principale di terra
 Main switch	Interruttore generale
 Manufacturer	Produttore
+Manufacturers	Produttori
 Manufacturing	Produzione
 Marking	Marcatura
 Match case	Maiuscole/minuscole
@@ -214,6 +245,8 @@ Minimum digits of the counter (leading zeros)	Numero minimo di cifre del contato
 Missing parameter: {}	Parametro mancante: {}
 Missing value for --{}	Valore mancante per --{}
 Model import failed: {}	Importazione del modello non riuscita: {}
+Module	Modulo
+Modules	Moduli
 Modules in series	Moduli in serie
 Modules side by side in a row	Moduli affiancati in una fila
 Mounted	Montato
@@ -223,6 +256,8 @@ Mounting holes	Fori di fissaggio
 Mounting layout {}	Layout di montaggio {}
 Mounting plate	Piastra di montaggio
 Mounting rail	Guida di montaggio
+NC contact	Contatto NC
+NO contact	Contatto NA
 Name	Nome
 Name of the block	Nome del blocco
 Name of the plot, e.g. the cadastral parcel	Nome del lotto, p. es. la particella catastale
@@ -230,6 +265,7 @@ Name of the point, e.g. a survey point	Nome del punto, p. es. un caposaldo
 Name of the scheme	Nome dello schema
 Net	Rete
 Never	Mai
+New group	Nuovo gruppo
 New name	Nuovo nome
 Next page	Pagina successiva
 No	No
@@ -251,6 +287,7 @@ No plug {}	Nessun connettore {}
 No report block named {}	Nessun blocco di report denominato {}
 No segment {}	Nessun segmento {}
 No station {}	Nessuna stazione {}
+No such PV array	Campo fotovoltaico inesistente
 No such page	Pagina inesistente
 No such section	Sezione inesistente
 No symbol with id {}	Nessun simbolo con ID {}
@@ -265,12 +302,14 @@ Not in the schematic	Non nello schema
 Note	Nota
 Notes	Note
 Number	Numero
+Number of down conductors (0: as many as the class needs for the walls)	Numero di calate (0: quante ne richiede la classe per i muri)
 Number the sections 1, 2, 3 … on every level first	Numerare prima le sezioni 1, 2, 3 … a ogni livello
 Numbers the device tags per structure and identifying letter in schematic order (page, column, top to bottom)	Numera le sigle dispositivo per struttura e lettera identificativa nell'ordine dello schema (pagina, colonna, dall'alto verso il basso)
 Only rows containing this text	Solo righe che contengono questo testo
 Operating pressure	Pressione di esercizio
 Option {}: {} is not one of its choices	Opzione {}: {} non è una delle sue scelte
 Order number	Codice d'ordine
+Other	Altro
 Outer diameter	Diametro esterno
 Output	Uscita
 Overview	Panoramica
@@ -299,7 +338,7 @@ Part number	Codice articolo
 Part number already exists	Il codice articolo esiste già
 Part {}	Articolo {}
 Parts	Articoli
-Parts (CSV, JSON, BMEcat, EPLAN XML, EDZ)	Articoli (CSV, JSON, BMEcat, EPLAN XML, EDZ)
+Parts (CSV, JSON, BMEcat, EPLAN XML, EDZ, ZIP)	Articoli (CSV, JSON, BMEcat, EPLAN XML, EDZ, ZIP)
 Parts import failed: {}	Importazione articoli non riuscita: {}
 Password	Password
 Picture	Immagine
@@ -310,9 +349,11 @@ Pin side	Lato maschio
 Place	Posto
 Placement scheme	Schema di posizionamento
 Plinth	Zoccolo
+Plot	Lotto
 Plot frame	Cornice di stampa
 Plug	Connettore
 Plug diagram	Schema connettori
+Plugins	Plugin
 Plugs	Connettori
 Poles	Poli
 Ports	Porte
@@ -335,9 +376,11 @@ Product subgroup	Sottogruppo prodotti
 Product top group	Gruppo prodotti principale
 Profile	Profilo
 Project	Progetto
+Project data	Dati di progetto
 Project languages	Lingue del progetto
 Project logo	Logo del progetto
 Project management	Gestione progetti
+Project manager	Capo progetto
 Project name	Nome progetto
 Project properties	Proprietà progetto
 Properties	Proprietà
@@ -351,8 +394,11 @@ Rail	Guida
 Range	Campo
 Rated current	Corrente nominale
 Rated power	Potenza nominale
+Rear wall	Parete posteriore
 Rectangle	Rettangolo
 Rectangular	Rettangolare
+Redo	Ripeti
+Refresh	Aggiorna
 Reject	Rifiuta
 Relative humidity	Umidità relativa
 Relay	Relè
@@ -361,17 +407,22 @@ Released pages cannot be moved	Le pagine rilasciate non possono essere spostate
 Remove	Rimuovi
 Remove from favorites	Rimuovi dai preferiti
 Remove the boundary	Rimuovi il confine
+Remove the lightning protection system	Rimuovi il sistema di protezione contro i fulmini
 Remove the reference point	Rimuovi il punto di riferimento
 Report	Report
 Report blocks	Blocchi di report
 Report: {}	Report: {}
+Reports	Report
 Required	Richiesto
 Reserve	Riserva
+Reviewer	Revisore
 Revision	Revisione
 Revision {}	Revisione {}
 Rework	Rilavorazione
 Right	Destra
+Right side	Lato destro
 Role	Ruolo
+Roof	Tetto
 Rooms	Locali
 Round	Rotondo
 Route	Instrada
@@ -392,6 +443,7 @@ Search parts	Cerca articoli
 Searching…	Ricerca in corso…
 Section	Sezione
 Segment	Tratto
+Select	Seleziona
 Select a part in the tree or create a new one.	Seleziona un articolo nell'albero o creane uno nuovo.
 Sensor	Sensore
 Sensors, switches, pushbuttons	Sensori, interruttori, pulsanti
@@ -401,19 +453,24 @@ Settings	Impostazioni
 Shape	Forma
 Short-circuit voltage	Tensione di cortocircuito
 Show history	Mostra cronologia
+Show the logos of the catalogs	Mostra i loghi dei cataloghi
 Show the row after the column	Mostra la riga dopo la colonna
 Side	Lato
 Sign in	Accedi
 Sign out	Esci
 Signed in as {}	Accesso eseguito come {}
 Signed in as {} ({})	Accesso eseguito come {} ({})
+Signed out	Disconnesso
 Signing in…	Accesso in corso…
 Single-line / multi-line	Unifilare / multifilare
+Site	Lotto
+Site plan	Planimetria
 Size	Dimensione
 Socket side	Lato femmina
 Solenoid not linked	Bobina non collegata
 Sort by	Ordina per
 Source	Fonte
+Started	Avviato
 State	Stato
 Status	Stato
 String	Stringa
@@ -440,6 +497,7 @@ Terminal type	Tipo di morsetto
 Terminals	Morsetti
 Text	Testo
 Text to find	Testo da trovare
+The freestanding PV array {} stands outside the plot boundary	Il campo FV a terra {} è fuori dal confine del lotto
 The identifier must not be empty	L'identificatore non può essere vuoto
 The long side of the modules along the rows	Il lato lungo dei moduli lungo le file
 The page is released	La pagina è rilasciata
@@ -449,11 +507,15 @@ Time	Tempo
 Title block	Cartiglio
 To	A
 Tools	Utensili
+Top	In alto
 Total	Totale
 Transformer	Trasformatore
+Tutorial	Tutorial
 Type	Tipo
 Type number	Codice tipo
 Underline	Sottolineato
+Undo	Annulla
+Unexpected argument: {}	Argomento imprevisto: {}
 Unit	Unità
 Unknown column: {}	Colonna sconosciuta: {}
 Unknown connector: {}	Connettore sconosciuto: {}
@@ -461,10 +523,12 @@ Unknown enclosure system: {}	Sistema di armadi sconosciuto: {}
 Unknown face: {}	Faccia sconosciuta: {}
 Unknown format: {}	Formato sconosciuto: {}
 Unknown function definition: {}	Definizione di funzione sconosciuta: {}
+Unknown language: {}	Lingua sconosciuta: {}
 Unknown option {}	Opzione sconosciuta {}
 Unknown parameter: {}	Parametro sconosciuto: {}
 Unknown part: {}	Articolo sconosciuto: {}
 Unknown property: {}	Proprietà sconosciuta: {}
+Unknown report: {}	Report sconosciuto: {}
 Unknown scheme: {}	Schema sconosciuto: {}
 Unknown segment	Segmento sconosciuto
 Unknown symbol {}	Simbolo sconosciuto {}
@@ -475,6 +539,7 @@ User	Utente
 User name	Nome utente
 Users	Utenti
 Version	Versione
+Viewer	Visualizzatore
 Voltage	Tensione
 Warning	Avviso
 Warnings	Avvisi
@@ -497,11 +562,13 @@ file or folder not found	file o cartella non trovati
 landscape	orizzontale
 left	verso sinistra
 mm	mm
+none	nessuno
 normal	normale
 not bonded	non collegato
 not connected	non collegato
 open	aperto
 pcs	pz.
+portrait	verticale
 rejected	rifiutato
 right	verso destra
 spare	riserva
@@ -515,6 +582,7 @@ yes	sì
 {} exists already	{} esiste già
 {} is not a PNG or JPEG image	{} non è un'immagine PNG o JPEG
 {} parts	{} articoli
+{} users	{} utenti
 {} wires	{} conduttori
 {}, together with the wire to {}	{}, insieme al conduttore verso {}
 {}: {} does not stand on the floor, choose a floor-standing part	{}: {} non poggia sul pavimento, scegli un articolo a pavimento

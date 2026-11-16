@@ -18,7 +18,13 @@ openecraft-step = { path = "../openecraft-step" }
 openecraft-jt = { path = "../openecraft-jt" }
 openecraft-i18n = { path = "../openecraft-i18n" }
 openecraft-fonts = { path = "../openecraft-fonts" }
-image = { version = "0.25", default-features = false, features = ["png", "jpeg"] }
+image = { version = "0.25", default-features = false, features = ["png", "jpeg", "gif", "webp"] }
+# Catalog logos are SVG; text is drawn with egui's own font (no system fonts, also in the browser).
+resvg = { version = "0.45", default-features = false, features = ["text", "raster-images"] }
+
+# The colour scheme of the desktop (settings portal), see `theme`; also used by egui's accessibility.
+[target.'cfg(target_os = "linux")'.dependencies]
+zbus = { version = "5.19", default-features = false, features = ["async-io", "blocking-api"] }
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 wasm-bindgen = "0.2"
@@ -27,5 +33,5 @@ js-sys = "0.3"
 web-sys = { version = "0.3", features = [
     "Window", "Document", "Element", "HtmlAnchorElement", "Blob", "BlobPropertyBag", "Url",
     "DomStringList", "Event", "EventTarget", "IdbDatabase", "IdbFactory", "IdbObjectStore", "IdbOpenDbRequest",
-    "IdbRequest", "IdbTransaction", "IdbTransactionMode", "IdbVersionChangeEvent",
+    "IdbRequest", "IdbTransaction", "IdbTransactionMode", "IdbVersionChangeEvent", "Navigator",
 ] }

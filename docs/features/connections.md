@@ -32,6 +32,78 @@ used twice or not in the cable.
 
 ## Connection and cable definitions
 
+Cable core labels keep clear of the definition line and their wire automatically.
+Layout checks estimated text areas, other cable labels, wires, nearby symbol
+graphics, pin/property/tag texts and free texts. It tries a bounded set of nearby
+positions in a deterministic order; it does not guarantee that every crowded
+drawing has a free place. Remaining conflicts have a red outline in the editor.
+Existing manual offsets retain their original meaning and are never silently reset.
+
+This rendering change also applies to automatic labels in existing projects,
+including released pages and PDF/SVG exports. Releasing a page protects its data
+from edits; it does not freeze the renderer. Manual offsets keep their positions.
+For an unchanged record of an earlier release, keep the PDF exported at release.
+The editor calculates one page layout per frame and uses the actual drawn text
+areas for both selection and dragging. Multi-page exports reuse their project index.
+
+Hover a core text or the cable tag beside a wire to see its drag target. Drag it
+directly to move only the text, without first selecting the wire; this also works
+with a previous multiple selection. Wire ends remain separate geometry handles.
+Released pages and projects opened read-only cannot be changed this way.
+
+Select a cable definition and choose **Align core labels…** in its context menu,
+the Connections ribbon or its properties. Choose above/left or below/right and a
+minimum clearance. The page shows a preview; nothing changes until **Apply**.
+The crossed core labels of that cable on this page are aligned together, using a
+common clearance increased when needed to avoid obstacles. Applying deliberately
+replaces their manual positions in one undo step. Cable tag positions, wire
+geometry, cable/core assignments and other pages stay unchanged. If no clear
+placement is found, change the options or place the texts individually. Stored
+positions survive save/reopen and use the same rendering path for SVG/PDF export.
+
+To rename a cable, right-click its definition line or label and choose **Rename
+cable…**. The same action is in the cable navigator and in the properties opened
+with F2 or a double-click. The dialog selects the full tag: type the new tag and
+press Enter, or press Escape to cancel. References on all pages follow the rename,
+which can be undone in one step. Duplicate tags and changes to released pages are
+rejected. Shared projects acquire the project and affected page locks before
+applying the change. Cancelling releases only the locks newly requested by the
+dialog, after their request finishes; locks protecting other local edits remain.
+The action is also in *Connections › Cables*. Automation can use `rename_cable`
+with `cable` (current full tag) and `tag` (new full tag).
+Older project servers are supported: if the session snapshot endpoint is absent,
+the editor combines the older snapshot with the session's lock status at the same
+revision. A newer revision during loading is retried instead of mixing states.
+
+Drawing a cable definition previews the crossed wires and free cores. Its
+properties show assigned/unassigned counts and the assignment order, starting at
+the first point of the line. Reversing the line reverses the order for free cores;
+existing assignments keep their core. Cores already used elsewhere in the project
+are unavailable. The cable label (for example `4x1.5`) describes the entered cable,
+not the number of crossings.
+
+If there are too few free cores or a crossed wire already has a conflicting
+assignment, **none of the pending wires is assigned**. The line remains in the
+plan with a check warning and a correction hint in its properties. Edit the core
+list or select another cable, then choose **Assign crossed wires**. Existing
+assignments must be changed explicitly in the wire properties; another cable is
+never overwritten silently. The physical cable/core list is never enlarged
+automatically to make a mismatch disappear.
+
+When creating a new cable is blocked by a conflicting assignment, only the
+definition line is kept: no unused cable is created. Select a cable in its
+properties after correcting the conflict. An imported core designation without
+a cable is also a conflict; clear or change it explicitly in the wire properties.
+The disabled **Assign crossed wires** button explains shortages and conflicts
+when hovered. Interactive previews reuse the session's assignment index; applying
+always checks the current project again.
+
+Automation uses `preview_cable_definition` with `page`, two `points` and an
+optional `cable` for a read-only preview. `apply_cable_definition` takes `page` and
+the definition `id`, and reports `changed` plus its resulting `assignment`.
+`add_cable_definition` keeps its existing response fields and adds `assignment`,
+including counts, free cores, conflicts and ordered wire/core candidates.
+
 A connection definition point on a wire sets
 number, colour and cross-section of the whole connection and the core of its wire; a
 cable definition line drawn across wires makes them cores of a cable (new cable with

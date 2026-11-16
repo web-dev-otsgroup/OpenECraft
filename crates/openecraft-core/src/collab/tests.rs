@@ -185,6 +185,40 @@ fn locks_granted_on_an_old_state_are_checked_on_update() {
 }
 
 #[test]
+fn a_status_older_than_the_taken_state_keeps_the_locks() {
+    let (a, b) = ids(&project());
+    let (mut sh, _) = shared(vec![lock(Target::Page(a), "s1"), lock(Target::Project, "s2")]);
+    sh.requested.insert(Target::Page(b));
+    // Revision 2 was answered before revision 3 was taken: page A was not released.
+    let stale = vec![lock(Target::Page(b), "s1"), lock(Target::Page(a), "s2")];
+    assert!(!sh.status(Status { revision: 2, locks: stale }, &[Target::Page(b)]));
+    assert!(sh.owns(Target::Page(a)) && sh.owns(Target::Page(b)));
+    assert!(sh.holder(Target::Project).is_some() && sh.requested.is_empty());
+    assert_eq!(sh.revision, 3);
+    // An answer of the same revision is current.
+    assert!(!sh.status(Status { revision: 3, locks: Vec::new() }, &[]));
+    assert!(sh.locks.is_empty());
+}
+
+#[test]
+fn released_targets_changed_while_saving_stay_local() {
+    let (mut sh, mut prj) = shared(Vec::new());
+    let (a, b) = ids(&prj);
+    let mut saved = sh.base.clone();
+    saved.pages[0].description = "saved A".into();
+    prj.pages[0].description = "edited again A".into();
+    prj.pages[1].description = "unlocked B".into();
+    assert!(!sh.in_sync(&prj));
+    let (lost, apply) = sh.update_keeping(Snapshot { revision: 4, project: saved.clone(), ..Default::default() }, &[Target::Page(a)]);
+    assert!(lost.is_empty());
+    let out = apply(&prj);
+    assert_eq!(out.pages[0].description, "edited again A");
+    assert_eq!(out.pages[1].description, sh.base.pages[1].description);
+    assert!(!sh.owns(Target::Page(b)));
+    assert!(sh.in_sync(&apply(&saved)));
+}
+
+#[test]
 fn denied_locks_are_no_longer_requested() {
     let (mut sh, _) = shared(Vec::new());
     sh.requested.insert(Target::Project);
@@ -292,4 +326,102 @@ fn older_save_requests_still_parse() {
     assert_eq!((req.base_revision, req.strict), (0, false));
     let json = serde_json::to_string(&Snapshot::default()).unwrap();
     assert!(!json.contains("ignored"), "{json}");
+}
+
+#[test]
+fn failures_tell_the_state_of_the_connection() {
+    assert_eq!(Failure::of(None), Failure::Unreachable);
+    assert_eq!(Failure::of(Some(503)), Failure::Unreachable);
+    assert_eq!(Failure::of(Some(410)), Failure::SessionEnded);
+    assert_eq!(Failure::of(Some(401)), Failure::SignedOut);
+    for status in [403, 404, 409, 500] {
+        assert_eq!(Failure::of(Some(status)), Failure::Refused);
+    }
+    assert_eq!(Failed { why: Failure::Refused, error: "locked".into() }.to_string(), "locked");
+}
+
+#[test]
+fn reopening_keeps_local_changes_nobody_else_made() {
+    let (sh, mut prj) = shared(Vec::new());
+    let (a, b) = ids(&prj);
+    prj.pages[0].description = "mine A".into();
+    prj.pages[1].description = "mine B".into();
+    prj.info.name = "mine".into();
+    // Meanwhile another user changed page B and the project data.
+    let mut theirs = sh.base.clone();
+    theirs.pages[1].description = "theirs B".into();
+    theirs.info.name = "theirs".into();
+    let opened = Opened {
+        session: Session { user: "me".into(), session: "s2".into() },
+        first_id: 5_000_000,
+        snapshot: Snapshot { revision: 7, project: theirs, locks: vec![lock(Target::Page(a), "s9")], ..Default::default() },
+        rights: Vec::new(),
+    };
+    let (new, apply) = sh.reopen(opened, &prj);
+    assert_eq!((new.name.as_str(), new.session.session.as_str(), new.revision, new.id_end), ("plant", "s2", 7, 5_000_000 + ID_BLOCK));
+    assert!(new.locks.iter().all(|l| l.session != "s2"), "the new session holds no lock yet");
+    let out = apply(&prj);
+    assert_eq!(out.pages[0].description, "mine A", "a change nobody else made stays (it locks again)");
+    assert_eq!(out.pages[1].description, "theirs B");
+    assert_eq!(out.info.name, "theirs");
+    assert_eq!(out.next_id, 5_000_000);
+    assert_eq!(new.unlocked_changes(&out), vec![Target::Page(a)]);
+    let kept = Kept::capture(&sh.base, &prj, &out, KeptReason::Changed).unwrap();
+    assert_eq!(kept.targets, vec![Target::Project, Target::Page(b)]);
+}
+
+#[test]
+fn a_copy_starts_without_the_records_of_the_source() {
+    let mut source = project();
+    source.info.name = "Source".into();
+    source.workflow.approvers = vec!["anna".into()];
+    source.revisions.push(crate::model::revision::Revision { name: "A".into(), ..Default::default() });
+    source.baselines.push(Default::default());
+    source.review.comments.push(crate::model::review::Comment { id: 9, text: "check".into(), ..Default::default() });
+
+    let mut info = source.info.clone();
+    info.name = "Copy".into();
+    let copy = copy_of(&source, Some(info), false);
+    assert_eq!(copy.info.name, "Copy");
+    assert_eq!(copy.pages, source.pages);
+    assert!(copy.review.is_empty() && copy.revisions.is_empty() && copy.baselines.is_empty());
+    assert_eq!(copy.workflow, source.workflow, "settings stay");
+    // The same but for the info and the records.
+    let mut same = copy.clone();
+    same.info = source.info.clone();
+    same.review = source.review.clone();
+    same.revisions = source.revisions.clone();
+    same.baselines = source.baselines.clone();
+    assert_eq!(same, source);
+
+    assert_eq!(copy_of(&source, None, true), source);
+}
+
+#[test]
+fn names_of_copies_are_free_and_valid() {
+    assert_eq!(copy_name("Plant 1", &["Plant 1"]), "Plant 1 copy");
+    assert_eq!(copy_name("Plant 1", &["Plant 1", "plant 1 COPY", "Plant 1 copy 2"]), "Plant 1 copy 3");
+    // At most 64 characters.
+    let long = "x".repeat(64);
+    let name = copy_name(&long, &[&long]);
+    assert_eq!(name, format!("{} copy", "x".repeat(59)));
+    assert!(valid_name(&name));
+    assert_eq!(properties_path("Plant 1"), "/api/v1/projects/Plant%201/properties");
+    assert_eq!(copy_path("Plant 1"), "/api/v1/projects/Plant%201/copy");
+}
+
+#[test]
+fn older_servers_and_clients_understand_each_other() {
+    // A list entry of a server without creation records.
+    let old: ProjectSummary = serde_json::from_str(r#"{"name":"p","title":"P","pages":2,"revision":3,"users":[],"rights":["view"]}"#).unwrap();
+    assert_eq!((old.meta.clone(), old.copied_from.clone()), (ProjectMeta::default(), None));
+    let json = serde_json::to_string(&old).unwrap();
+    assert!(!json.contains("created") && !json.contains("copied_from"), "{json}");
+    // The answer about the properties has the record of the list, flat.
+    let props = ProjectProperties { meta: ProjectMeta::created("anna", 5), copied_from: Some(CopySource { name: "p".into(), revision: 3 }), ..Default::default() };
+    let json = serde_json::to_value(&props).unwrap();
+    assert_eq!((json["created_by"].as_str(), json["copied_from"]["revision"].as_u64()), (Some("anna"), Some(3)));
+    assert_eq!(serde_json::from_value::<ProjectProperties>(json).unwrap(), props);
+    let copy = CopyRequest { name: "p copy".into(), user: "ben".into(), ..Default::default() };
+    assert_eq!(serde_json::to_string(&copy).unwrap(), r#"{"name":"p copy","user":"ben"}"#);
 }

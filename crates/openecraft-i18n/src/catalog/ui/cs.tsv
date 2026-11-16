@@ -5,6 +5,7 @@
 2D front view	2D čelní pohled
 2D front view (SVG)	2D čelní pohled (SVG)
 3D model (STL, OBJ, STEP, IGES, Parasolid, IFC, JT)	3D model (STL, OBJ, STEP, IGES, Parasolid, IFC, JT)
+A short title for the problem (optional)	Krátký název problému (volitelné)
 Accessories of this part	Příslušenství tohoto dílu
 Accessories only work together with the parts they fit. A part lists its accessories, an accessory the parts it fits; either side is enough.	Příslušenství funguje jen s díly, ke kterým se hodí. Díl uvádí své příslušenství, příslušenství díly, ke kterým se hodí; stačí jedna strana.
 Accessory, mounted: {}	Příslušenství, montáž: {}
@@ -12,34 +13,43 @@ Add connection point	Přidat přípojný bod
 Add cutout	Přidat výřez
 Add function	Přidat funkci
 Add marked parts to the parts database ({})	Přidat označené artikly do databáze artiklů ({})
+Add restricted area	Přidat zakázanou oblast
 Add to the parts database	Přidat do databáze artiklů
 Adds the macros of the file to the macro library	Přidá makra ze souboru do knihovny maker
 All parts are up to date	Všechny artikly jsou aktuální
 Already in the parts database	Již v databázi artiklů
 Apply {} updates	Použít aktualizace ({})
+Areas of the enclosure kept free of devices (placing) or of cutouts and holes (cut-out); place and size in the coordinates of the face, as its items have them.	Oblasti skříně bez přístrojů (umístění) nebo bez výřezů a otvorů (výřez); poloha a velikost v souřadnicích plochy, stejně jako její prvky.
 Check the parts database for updates	Zkontrolovat aktualizace databáze artiklů
 Checking for part updates…	Kontrola aktualizací artiklů…
 Clearance front	Odstup vpředu
 Clearance left	Odstup vlevo
 Clearance right	Odstup vpravo
+Click a face, edge or corner to look from there; drag to orbit	Klepnutím na stěnu, hranu nebo roh se podíváte odtud; tažením otáčíte
 Compared with {} parts of the server	Porovnáno s {} artikly serveru
 Compares the local parts with the parts server: newer versions, phase-out, discontinued and removed parts	Porovná místní artikly se serverem artiklů: novější verze, dobíhající, s ukončenou výrobou a odebrané artikly
 Connect to a parts server and search.	Připojte se k serveru artiklů a vyhledávejte.
 Connected: {} {} – {} parts, revision {}, {}	Připojeno: {} {} – artikly: {}, revize {}, {}
 Connection designations	Označení přípojů
+Copy report	Kopírovat hlášení
+Copy screenshot	Kopírovat snímek obrazovky
 Corner radius	Poloměr rohu
+Could not save the screenshot: {}	Snímek obrazovky nelze uložit: {}
+Cut-out	Výřez
 Datasheet (URL)	Katalogový list (URL)
 Deleted catalog {}	Katalog {} odstraněn
 Deleted part {}	Artikl {} odstraněn
 Deleted user {}	Uživatel {} odstraněn
 Deleting {}…	Odstraňování {}…
-Dimensions	Rozměry
+Describe the problem you saw	Popište problém, který jste viděli
+Describe what happened before continuing.	Než budete pokračovat, popište, co se stalo.
 Door cutouts	Výřezy ve dveřích
 Downloaded {} ({} bytes)	Staženo {} ({} bajtů)
 Downloading parts…	Stahování artiklů…
 Drag it onto a schematic page to place it	Přetažením na stránku schématu jej umístíte
 EPLAN numbers	Čísla EPLAN
 EPLAN product groups	Skupiny produktů EPLAN
+Expected result (optional)	Očekávaný výsledek (volitelné)
 FLOOR	PODLAHA
 Faces	Plochy
 Filter (number, type, manufacturer, text …)	Filtr (číslo, typ, výrobce, text …)
@@ -49,11 +59,13 @@ Floor mounting	Montáž na podlahu
 Functions the part provides. Used for device selection, the contact image (reserve contacts), the project check and to assign connection designations. Designations are listed in symbol connection order, separated by blanks.	Funkce, které artikl poskytuje. Používají se pro výběr přístroje, zrcadlo kontaktů (rezervní kontakty), kontrolu projektu a přidělování označení přípojů. Označení se uvádějí v pořadí přípojů symbolu, oddělená mezerami.
 Generate from function template	Vytvořit ze šablony funkce
 Group by	Seskupit podle
+Hides this form and takes a screenshot of the window as it is now	Skryje tento formulář a pořídí snímek okna v jeho nynějším stavu
 Identifying letter of devices using this part (K, Q, S …)	Kódové písmeno přístrojů s tímto artiklem (K, Q, S …)
 Import STL / OBJ / STEP / IGES / IFC / JT…	Importovat STL / OBJ / STEP / IGES / IFC / JT…
 Import SVG…	Importovat SVG…
 In the door, when they differ from the cutouts	Ve dveřích, pokud se liší od výřezů
 Internal values of the EPLAN part exchange (0: undefined)	Interní hodnoty výměny artiklů EPLAN (0: nedefinováno)
+Isometric view, everything shown	Izometrický pohled, vše viditelné
 It only works attached to one of the parts it fits; the project check reports it on a device without such a part	Funguje jen připevněné k jednomu z dílů, ke kterým se hodí; kontrola projektu je hlásí u přístroje bez takového dílu
 Largest conductor the clamp takes (0: not known)	Největší vodič, který svorka pojme (0: neznámý)
 Loaded the library {}	Knihovna {} načtena
@@ -72,10 +84,15 @@ Moves lines such as Power loss: 3 W into the typed fields	Přesune řádky jako 
 No own connection points – the generated ones are shown.	Žádné vlastní přípojné body – zobrazují se vygenerované.
 No part of the database comes from the EPLAN Data Portal	Žádný artikl databáze nepochází z EPLAN Data Portal
 No parts found.	Nebyly nalezeny žádné artikly.
+No screenshot could be taken of this window.	Z tohoto okna nelze pořídit snímek obrazovky.
+Offline, or GitHub does not open? Copy the report and submit it later.	Jste offline, nebo se GitHub neotevře? Zkopírujte hlášení a odešlete ho později.
 Only floor-standing parts	Pouze artikly stojící na podlaze
 Only parts for direct wall mounting	Pouze díly pro přímou montáž na stěnu
+Open GitHub issue form	Otevřít formulář issue na GitHubu
 Open datasheet	Otevřít katalogový list
 Open in the browser	Otevřít v prohlížeči
+Opens your browser and copies the report for you to paste into the GitHub issue form.	Otevře prohlížeč a zkopíruje hlášení, abyste ho vložili do formuláře issue na GitHubu.
+Opens your browser with the report filled in and copies it. Review and submit it on GitHub.	Otevře prohlížeč s vyplněným hlášením a zkopíruje ho. Zkontrolujte ho a odešlete na GitHubu.
 Outside the face	Mimo plochu
 Pan and zoom together	Posouvat a přibližovat současně
 Pan only	Jen posouvat
@@ -84,38 +101,59 @@ Parts server: {}	Server artiklů: {}
 Parts this part is assembled from; the bill of materials lists them under it	Artikly, ze kterých je tento artikl sestaven; kusovník je uvádí pod ním
 Personal access token	Osobní přístupový token
 Place by clicking into the view	Umístit kliknutím do pohledu
+Placing	Umístění
 Prices / other	Ceny / ostatní
+Rear	Zadní
 Remove all	Odebrat vše
 Remove picture	Odebrat obrázek
+Remove screenshot	Odebrat snímek obrazovky
 Removing the file…	Odebírání souboru…
 Replaces the connection points by the IEC convention: odd designations at the top, even ones at the bottom	Nahradí přípojné body podle konvence IEC: lichá označení nahoře, sudá dole
+Report copied. Keep it to submit on GitHub when you are online.	Hlášení zkopírováno. Uschovejte si ho a odešlete na GitHubu, až budete online.
+Report copied. Paste it into the GitHub issue form and submit it there.	Hlášení zkopírováno. Vložte ho do formuláře issue na GitHubu a odešlete ho tam.
+Reports are public. A GitHub account is needed to submit them.	Hlášení jsou veřejná. K jejich odeslání je potřeba účet GitHub.
 Reset filter	Obnovit filtr
+Restricted areas: {}	Zakázané oblasti: {}
+Retake screenshot	Pořídit snímek obrazovky znovu
+Review your report on GitHub and submit it there.	Zkontrolujte hlášení na GitHubu a odešlete ho tam.
 Rotate 90°:	Otočit o 90°:
+Save screenshot…	Uložit snímek obrazovky…
 Save the file	Uložit soubor
 Saved part {}	Artikl {} uložen
 Saved the library {}	Knihovna {} uložena
 Saving favorites…	Ukládání oblíbených…
 Saving {}…	Ukládání {}…
 Scale ×	Měřítko ×
+Screenshot (optional)	Snímek obrazovky (volitelné)
+Screenshot copied. Paste it into the GitHub issue form.	Snímek obrazovky zkopírován. Vložte ho do formuláře issue na GitHubu.
+Screenshot removed from this report.	Snímek obrazovky odebrán z tohoto hlášení.
+Screenshot saved. Attach the PNG file in the GitHub issue form.	Snímek obrazovky uložen. Připojte soubor PNG ve formuláři issue na GitHubu.
 Select a part to see its details.	Vyberte artikl a zobrazte jeho podrobnosti.
 Select a row, then click into the view to place it.	Vyberte řádek a pak jej kliknutím do pohledu umístěte.
 Server revision	Revize serveru
-Signed out	Odhlášeno
+Show everything (Home)	Zobrazit vše (Home)
 Signing out…	Odhlašování…
 Smallest conductor the clamp takes (0: not known)	Nejmenší vodič, který svorka pojme (0: neznámý)
 Stands on the floor of a room	Stojí na podlaze místnosti
 Stands on the floor of a room, like pumps, tanks and compressors	Stojí na podlaze místnosti, jako čerpadla, nádrže a kompresory
+Steps to reproduce (optional)	Kroky k reprodukci (volitelné)
 Successor {}	Nástupce {}
+Summary	Shrnutí
 Take {} values from the technical data	Převzít {} hodnot z technických údajů
+Technical details	Technické údaje
 The 2D front view is used in the panel front view and on mounting layout pages, the 3D model in the 3D panel view. Both are fitted to the mounting data (width × height × depth).	2D čelní pohled se používá v čelním pohledu rozváděče a na stránkách montážního plánu, 3D model ve 3D pohledu rozváděče. Oba se přizpůsobí montážním datům (šířka × výška × hloubka).
 The model ({} × {} × {}) differs from the mounting data ({} × {} × {}); it is stretched to the mounting data.	Model ({} × {} × {}) se liší od montážních dat ({} × {} × {}); bude roztažen podle montážních dat.
 The parts server has no library {} yet	Server dílů zatím nemá knihovnu {}
 The price refers to this many units	Cena se vztahuje na tento počet jednotek
+The report includes the version, the system and counts of what the open project holds, but no project contents. Review the details before sharing them.	Hlášení obsahuje verzi, systém a počty toho, co otevřený projekt obsahuje, ale žádný obsah projektu. Před sdílením údaje zkontrolujte.
+The screenshot is not attached by itself: copy or save it, then add it to the GitHub issue form.	Snímek obrazovky se nepřipojí sám: zkopírujte ho nebo uložte a pak ho přidejte do formuláře issue na GitHubu.
 The successor is not in this parts list	Nástupce není v tomto seznamu artiklů
 This part is an accessory	Tento díl je příslušenství
 Top group	Hlavní skupina
 Top group {}, product group {}, subgroup {}	Hlavní skupina {}, skupina produktů {}, podskupina {}
 Turn the model so that its front faces the viewer (+Z) and its top is +Y	Otočte model tak, aby jeho přední strana směřovala k pozorovateli (+Z) a horní strana byla +Y
+Turn the view 90° to the left	Otočit pohled o 90° doleva
+Turn the view 90° to the right	Otočit pohled o 90° doprava
 Uploaded {} parts, server revision {}	Nahráno artiklů: {}, revize serveru {}
 Uploading parts file…	Nahrávání souboru artiklů…
 Uploading {} parts…	Nahrávání artiklů ({})…
@@ -125,6 +163,9 @@ Use model size as mounting data	Převzít velikost modelu jako montážní data
 Voltage / current	Napětí / proud
 WALL	STĚNA
 Wall mounting	Montáž na stěnu
+What did you do just before the problem? A short list is enough	Co jste udělali těsně před problémem? Stačí krátký seznam
+What did you expect to see?	Co jste očekávali, že uvidíte?
+What happened?	Co se stalo?
 Where the accessory sits on the part it fits, in the panel layout and the 3D view	Kde příslušenství sedí na dílu, ke kterému se hodí, v rozvržení rozváděče a ve 3D zobrazení
 Where the cutouts are: the centre from the middle of the front view (x to the right, y down), the turn counter-clockwise.	Poloha výřezů: střed od středu čelního pohledu (x doprava, y dolů), natočení proti směru hodinových ručiček.
 Where the wires are connected in the panel layout: the designation as in the function template, the position in the front view (x from the left, y from the top, z above the mounting surface) and the direction the wire leaves in. Parts without own connection points get them from the function template.	Kde se vodiče v rozvržení rozváděče připojují: označení jako v šabloně funkce, poloha v čelním pohledu (x zleva, y shora, z nad montážní plochou) a směr, kterým vodič odchází. Artikly bez vlastních přípojných bodů je dostanou ze šablony funkce.
@@ -160,7 +201,6 @@ up to {} mm²	do {} mm²
 {} mm right	{} mm vpravo
 {} of {} parts	{} z {} artiklů
 {} parts found	Nalezené artikly: {}
-{} users	Uživatelé: {}
 {} wires per connection point	{} vodičů na přípojný bod
 {} × {} mm, {} elements	{} × {} mm, prvky: {}
 {} × {} × {} mm	{} × {} × {} mm

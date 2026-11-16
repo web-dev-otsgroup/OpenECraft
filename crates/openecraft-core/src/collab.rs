@@ -20,13 +20,18 @@
 //! | PUT | `/api/v1/projects/{name}` | [`SaveRequest`] → [`Snapshot`] |
 //! | POST | `/api/v1/projects/{name}/open` | [`OpenRequest`] → [`Opened`] |
 //! | POST | `/api/v1/projects/{name}/status` | [`Session`] → [`Status`] (keeps the session alive) |
+//! | POST | `/api/v1/projects/{name}/snapshot` | [`Session`] → [`Snapshot`] (identifies own locks; foreign session ids stay hidden) |
 //! | POST | `/api/v1/projects/{name}/lock` | [`LockRequest`] → [`Status`] |
 //! | POST | `/api/v1/projects/{name}/release` | [`LockRequest`] → [`Status`] |
 //! | POST | `/api/v1/projects/{name}/close` | [`Session`] → [`Status`] (releases all locks) |
 //! | DELETE | `/api/v1/projects/{name}` | deletes a project without sessions ([`ProjectRight::Delete`]) |
 //! | GET | `/api/v1/projects/{name}/access` | [`ProjectAccess`] ([`ProjectRight::ManageAccess`]) |
 //! | PUT | `/api/v1/projects/{name}/access` | [`Grant`] list → [`ProjectAccess`] |
+//! | GET | `/api/v1/projects/{name}/properties` | [`ProjectProperties`] (the project info as saved, without opening the project) |
+//! | PUT | `/api/v1/projects/{name}/properties` | [`PropertiesUpdate`] → [`ProjectProperties`] (changes only the project info; [`ProjectRight::EditProject`], refused while the project data is locked) |
+//! | POST | `/api/v1/projects/{name}/copy` | [`CopyRequest`] → [`Opened`] (a new project from the saved state, [`copy_of`]) |
 //! | POST | `/api/v1/login` | [`LoginRequest`] → [`LoginResponse`] |
+//! | GET | `/api/v1/session` | [`CurrentAccount`] (signed-in user sessions only) |
 //! | POST | `/api/v1/logout` | ends the session of the bearer token |
 //! | GET | `/api/v1/users` | [`ProjectUser`] list (administrators) |
 //! | PUT | `/api/v1/users/{name}` | [`UserUpdate`] → [`ProjectUser`] (administrators) |
@@ -42,12 +47,15 @@
 //! (`openecraft_parts::access`); the scope of a grant is a project name. Errors are
 //! returned as `openecraft_parts::api::ApiError` JSON.
 
-use crate::model::{Page, Project};
+use crate::model::{Page, Project, ProjectInfo};
 use openecraft_i18n::tr_const;
 pub use openecraft_parts::access::{Access, Grant, Identity, Policy, Right, Settings, Subject, SERVER};
 use openecraft_parts::api::encode_component;
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeSet;
+
+mod kept;
+pub use kept::{keep, restore, Kept, KeptReason, MAX_KEPT};
 
 pub const API_PREFIX: &str = "/api/v1";
 pub const DEFAULT_PORT: u16 = 8091;
@@ -93,6 +101,13 @@ pub struct ServerInfo {
     pub name: String,
     pub version: String,
     pub projects: usize,
+    /// The signed-in user of the request (`None`: anonymous or the server token).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub user: Option<ProjectUser>,
+    /// What the caller may do.
+    pub access: Access<ProjectRight>,
+    /// The server has a web page (`--web`).
+    pub web: bool,
 }
 
 #[derive(Clone, Debug, Default, PartialEq, Serialize, Deserialize)]
@@ -108,6 +123,141 @@ pub struct ProjectSummary {
     pub users: Vec<String>,
     /// What the caller may do with the project.
     pub rights: Vec<ProjectRight>,
+    /// Who created and last changed the project; nothing from older servers.
+    #[serde(flatten)]
+    pub meta: ProjectMeta,
+    /// The project it was copied from.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub copied_from: Option<CopySource>,
+}
+
+/// Who created a shared project and who changed it last, as the server saw it: the
+/// signed-in user (on servers without accounts the user name of the session), never
+/// `ProjectInfo::creator`, which the users edit. Empty names and times of 0 are not
+/// known (projects of earlier servers). Times are seconds since 1970 (UTC).
+#[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(default)]
+pub struct ProjectMeta {
+    #[serde(skip_serializing_if = "String::is_empty")]
+    pub created_by: String,
+    #[serde(skip_serializing_if = "is_zero")]
+    pub created_at: u64,
+    /// The user of the last save that changed the project (its creator before that).
+    #[serde(skip_serializing_if = "String::is_empty")]
+    pub changed_by: String,
+    #[serde(skip_serializing_if = "is_zero")]
+    pub changed_at: u64,
+}
+
+impl ProjectMeta {
+    /// A project created by `user` at `now`.
+    pub fn created(user: &str, now: u64) -> ProjectMeta {
+        ProjectMeta { created_by: user.into(), created_at: now, changed_by: user.into(), changed_at: now }
+    }
+
+    /// The project was changed by `user` at `now`.
+    pub fn changed(&mut self, user: &str, now: u64) {
+        self.changed_by = user.into();
+        self.changed_at = now;
+    }
+}
+
+/// Where a copied project comes from.
+#[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(default)]
+pub struct CopySource {
+    pub name: String,
+    /// Revision of the source that was copied.
+    pub revision: u64,
+}
+
+/// The project info of a project as saved on the server, with what decides whether
+/// the caller can change it now.
+#[derive(Clone, Debug, Default, PartialEq, Serialize, Deserialize)]
+#[serde(default)]
+pub struct ProjectProperties {
+    /// Name on the server.
+    pub name: String,
+    pub revision: u64,
+    pub info: ProjectInfo,
+    /// User whose session has locked the project data: the info cannot be changed now.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub locked_by: Option<String>,
+    /// What the caller may do with the project.
+    pub rights: Vec<ProjectRight>,
+    /// Who created and last changed the project.
+    #[serde(flatten)]
+    pub meta: ProjectMeta,
+    /// The project it was copied from.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub copied_from: Option<CopySource>,
+}
+
+/// Changes the project info of a project that the caller has not opened.
+#[derive(Clone, Debug, Default, PartialEq, Serialize, Deserialize)]
+#[serde(default)]
+pub struct PropertiesUpdate {
+    /// Who changes them, where the caller is not signed in (as in [`OpenRequest`]).
+    pub user: String,
+    /// Revision the info was loaded at ([`ProjectProperties::revision`]): the change is
+    /// refused (`412`) if the info was changed since.
+    pub revision: u64,
+    pub info: ProjectInfo,
+}
+
+/// Creates a project from the saved state of another one and opens it.
+#[derive(Clone, Debug, Default, PartialEq, Serialize, Deserialize)]
+#[serde(default)]
+pub struct CopyRequest {
+    /// Name of the new project on the server.
+    pub name: String,
+    pub user: String,
+    /// Revision of the source the copy was prepared from; the copy is refused (`412`)
+    /// if the source has another one now. 0: whatever is saved now.
+    #[serde(skip_serializing_if = "is_zero")]
+    pub revision: u64,
+    /// Project info of the copy; none: that of the source.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub info: Option<ProjectInfo>,
+    /// Also copy the records of the source's reviews and releases ([`copy_of`]).
+    #[serde(skip_serializing_if = "std::ops::Not::not")]
+    pub records: bool,
+}
+
+/// HTTP status of a properties change or a copy refused because the project was
+/// changed since the revision the request names.
+pub const CHANGED_STATUS: u16 = 412;
+
+/// The project a copy of `source` starts as, with the project info `info`. A copy is a
+/// project of its own: without `records` it has no review records (comments, markup,
+/// approvals with their signatures, change requests), released revisions or baselines
+/// of the source. The approvers of the release workflow stay, like all other settings.
+pub fn copy_of(source: &Project, info: Option<ProjectInfo>, records: bool) -> Project {
+    let mut prj = source.clone();
+    if let Some(info) = info {
+        prj.info = info;
+    }
+    if !records {
+        prj.review = Default::default();
+        prj.revisions.clear();
+        prj.baselines.clear();
+    }
+    prj
+}
+
+/// A free name for a copy of the project `source`: "`source` copy", then numbered.
+/// `taken` are the names on the server.
+pub fn copy_name(source: &str, taken: &[&str]) -> String {
+    let free = |name: &str| valid_name(name) && !taken.iter().any(|t| name_key(t) == name_key(name));
+    for n in 1..1000 {
+        let suffix = if n == 1 { " copy".to_string() } else { format!(" copy {n}") };
+        let stem: String = source.chars().take(64 - suffix.chars().count()).collect();
+        let name = format!("{}{suffix}", stem.trim_end());
+        if free(&name) {
+            return name;
+        }
+    }
+    String::new()
 }
 
 #[derive(Clone, Debug, Default, PartialEq, Serialize, Deserialize)]
@@ -176,6 +326,95 @@ pub struct SaveRequest {
 
 fn is_zero(v: &u64) -> bool {
     *v == 0
+}
+
+/// A session on a project as administrators see it (`GET /api/v1/sessions`): open
+/// or ended. Times are seconds since 1970 (UTC).
+#[derive(Clone, Debug, Default, PartialEq, Serialize, Deserialize)]
+#[serde(default)]
+pub struct SessionRecord {
+    /// Number of the session, counted from the start of the server (the public part of
+    /// its id; the rest is the key to it and never shown).
+    pub number: u64,
+    pub user: String,
+    pub project: String,
+    pub started: u64,
+    /// Last request of the session.
+    pub last_seen: u64,
+    /// Saves to the server during the session.
+    pub saves: u32,
+    /// What the session holds locked (open sessions).
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub locks: Vec<Target>,
+    /// Names of the locked pages (open sessions; filled in by the server).
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub pages: Vec<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub ended: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub end: Option<SessionEnd>,
+}
+
+/// How a session ended.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum SessionEnd {
+    /// The project was closed.
+    Closed,
+    /// No request for [`SESSION_TIMEOUT_SECS`].
+    Expired,
+    /// The user signed out.
+    SignedOut,
+    /// The account was deleted.
+    UserDeleted,
+}
+
+/// The open sessions and the history of ended ones, newest first.
+#[derive(Clone, Debug, Default, PartialEq, Serialize, Deserialize)]
+#[serde(default)]
+pub struct SessionList {
+    pub active: Vec<SessionRecord>,
+    pub history: Vec<SessionRecord>,
+    /// Ended sessions the server keeps (the oldest are dropped).
+    pub kept: usize,
+}
+
+/// Why a request failed, for the state of the connection of a session.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Failure {
+    /// The server was not reached (no connection, timeout, a proxy without server).
+    Unreachable,
+    /// The session ended on the server (`410`: expired, or the server restarted).
+    SessionEnded,
+    /// The access token or the sign-in is not valid (any more) (`401`).
+    SignedOut,
+    /// The server answered with another error (conflict, missing right, not found, …).
+    Refused,
+}
+
+impl Failure {
+    /// From the HTTP status of the answer; None: no answer.
+    pub fn of(status: Option<u16>) -> Failure {
+        match status {
+            None | Some(408 | 502 | 503 | 504) => Failure::Unreachable,
+            Some(410) => Failure::SessionEnded,
+            Some(401) => Failure::SignedOut,
+            Some(_) => Failure::Refused,
+        }
+    }
+}
+
+/// A failed request: why, and the error as shown.
+#[derive(Clone, Debug, PartialEq)]
+pub struct Failed {
+    pub why: Failure,
+    pub error: String,
+}
+
+impl std::fmt::Display for Failed {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str(&self.error)
+    }
 }
 
 #[derive(Clone, Debug, Default, PartialEq, Serialize, Deserialize)]
@@ -281,13 +520,14 @@ pub enum ProjectRole {
 impl ProjectRole {
     pub const ALL: [ProjectRole; 5] = [ProjectRole::Viewer, ProjectRole::Reviewer, ProjectRole::Editor, ProjectRole::Manager, ProjectRole::Admin];
 
+    /// English title, translated where it is shown.
     pub fn title(self) -> &'static str {
         match self {
-            ProjectRole::Viewer => openecraft_i18n::tr("Viewer"),
-            ProjectRole::Reviewer => openecraft_i18n::tr("Reviewer"),
-            ProjectRole::Editor => openecraft_i18n::tr("Editor"),
-            ProjectRole::Manager => openecraft_i18n::tr("Project manager"),
-            ProjectRole::Admin => openecraft_i18n::tr("Administrator"),
+            ProjectRole::Viewer => tr_const!("Viewer"),
+            ProjectRole::Reviewer => tr_const!("Reviewer"),
+            ProjectRole::Editor => tr_const!("Editor"),
+            ProjectRole::Manager => tr_const!("Project manager"),
+            ProjectRole::Admin => tr_const!("Administrator"),
         }
     }
 
@@ -373,6 +613,14 @@ pub struct LoginResponse {
     pub access: Access<ProjectRight>,
 }
 
+/// Current identity and permissions of a signed-in user, without credentials.
+#[derive(Clone, Debug, Default, PartialEq, Serialize, Deserialize)]
+#[serde(default)]
+pub struct CurrentAccount {
+    pub user: ProjectUser,
+    pub access: Access<ProjectRight>,
+}
+
 /// Creates or changes a user; a new local user needs a password (users of a
 /// directory have none on the server).
 #[derive(Clone, Debug, Default, PartialEq, Serialize, Deserialize)]
@@ -406,6 +654,16 @@ pub fn user_path(name: &str) -> String {
 /// Path of the grants of a project, e.g. `/api/v1/projects/Plant%201/access`.
 pub fn access_path(name: &str) -> String {
     format!("{}/access", project_path(name))
+}
+
+/// Path of the project info of a project, e.g. `/api/v1/projects/Plant%201/properties`.
+pub fn properties_path(name: &str) -> String {
+    format!("{}/properties", project_path(name))
+}
+
+/// Path that copies a project, e.g. `/api/v1/projects/Plant%201/copy`.
+pub fn copy_path(name: &str) -> String {
+    format!("{}/copy", project_path(name))
 }
 
 /// Path of a project, e.g. `/api/v1/projects/Plant%201`.
@@ -605,6 +863,7 @@ fn with_data(out: &mut Project, src: &Project) {
         preplanning,
         review: _,
         next_id: _,
+        id_floor: _,
         symbol_cache: _,
     } = src;
     out.info = info.clone();
@@ -701,6 +960,7 @@ fn same_data(a: &Project, b: &Project) -> bool {
         preplanning,
         review: _,
         next_id: _,
+        id_floor: _,
         symbol_cache: _,
     } = a;
     pages.iter().map(|p| p.id).eq(b.pages.iter().map(|p| p.id))
@@ -857,8 +1117,49 @@ impl Shared {
                 self.fresh.insert(*t);
             }
         }
-        self.locks = status.locks;
+        if status.revision < self.revision {
+            // Answered before a newer state this session already took (answers out of
+            // order): its locks are out of date, only the granted ones are taken.
+            for l in status.locks.into_iter().filter(|l| granted.contains(&l.target) && l.session == self.session.session) {
+                if !self.locks.iter().any(|m| m.target == l.target) {
+                    self.locks.push(l);
+                }
+            }
+        } else {
+            self.locks = status.locks;
+        }
         newer
+    }
+
+    /// `prj` is the server's project as this session knows it: nothing to save.
+    pub fn in_sync(&self, prj: &Project) -> bool {
+        self.base.review == prj.review && changes(&self.base, prj).is_empty()
+    }
+
+    /// A new session of the project after this one ended on the server (it expired or
+    /// the server restarted), and the function that brings a local version (`prj`,
+    /// edited from `base`, and its undo steps) onto the server's current project. Local
+    /// changes stay where nobody else changed the same target meanwhile; they need their
+    /// locks again. Where another user changed it too or removed the page, the server's
+    /// version replaces them (found with [`Kept::capture`]). New objects get ids of the
+    /// new session's range.
+    pub fn reopen(&self, opened: Opened, prj: &Project) -> (Shared, impl Fn(&Project) -> Project) {
+        let first_id = opened.first_id;
+        let (shared, _) = Shared::open(&self.name, opened);
+        let theirs = changes(&self.base, &shared.base);
+        let mut owned = Owned::default();
+        for t in changes(&self.base, prj) {
+            let gone = matches!(t, Target::Page(id) if page(&shared.base, id).is_none());
+            if !gone && !theirs.contains(&t) {
+                owned.add(t);
+            }
+        }
+        let base = shared.base.clone();
+        (shared, move |mine: &Project| {
+            let mut out = merge(&base, mine, &owned);
+            out.next_id = out.next_id.max(first_id);
+            out
+        })
     }
 
     /// A lock request was refused.
@@ -871,15 +1172,28 @@ impl Shared {
     /// Takes a newer server state. Returns the fresh locks whose target another user
     /// changed in the meantime (the local change of them is replaced), and the
     /// function that brings a local version of the project (the edited one and the
-    /// undo steps) up to date: it keeps what this session owns, the rest comes from
-    /// the server.
-    pub fn update(&mut self, mut snapshot: Snapshot) -> (Vec<Target>, impl Fn(&Project) -> Project) {
+    /// undo steps) up to date: it keeps what this session owns or is requesting, the
+    /// rest comes from the server. What it replaces of the edited project is found with
+    /// [`Kept::capture`].
+    pub fn update(&mut self, snapshot: Snapshot) -> (Vec<Target>, impl Fn(&Project) -> Project) {
+        self.update_keeping(snapshot, &[])
+    }
+
+    /// [`Shared::update`] that also keeps the local version of `keep`: targets the save
+    /// answered by `snapshot` released, changed again while it was under way (their
+    /// lock is requested again).
+    pub fn update_keeping(&mut self, mut snapshot: Snapshot, keep: &[Target]) -> (Vec<Target>, impl Fn(&Project) -> Project) {
         snapshot.project.normalize();
         let changed = changes(&self.base, &snapshot.project);
         let lost: Vec<Target> = self.fresh.iter().copied().filter(|t| changed.contains(t)).collect();
         let mut owned = Owned::of(&snapshot.locks, &self.session.session);
         for t in &lost {
             owned.remove(*t);
+        }
+        // A lock still being requested: the local change waits for the answer, unless
+        // another user changed the target meanwhile.
+        for t in self.requested.iter().filter(|t| !changed.contains(t)).chain(keep) {
+            owned.add(*t);
         }
         self.fresh.clear();
         self.revision = snapshot.revision;

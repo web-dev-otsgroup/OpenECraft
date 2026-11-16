@@ -45,7 +45,6 @@ Address {} is used by {} and {}	주소 {0}을(를) {1}와(과) {2}이(가) 사�
 Adhesive	접착
 Adjustable output voltage	조정 가능한 출력 전압
 Administer the server	서버 관리
-Administrator	관리자
 Alarm limit H	경보 한계 H
 Alarm limit HH	경보 한계 HH
 Alarm limit L	경보 한계 L
@@ -181,7 +180,6 @@ Cell temperatures: {} °C (U max), {} °C (U mean), {} °C (U min)	셀 온도: {
 Centre horizontally	가로 가운데 맞춤
 Centre vertically	세로 가운데 맞춤
 Centrifugal pump	원심 펌프
-Change	변경
 Changed since mounted	장착 후 변경됨
 Changed since wired	배선 후 변경됨
 Changeover contact	c접점
@@ -286,6 +284,7 @@ Copper bar {}: segment {} is {} mm straight, at least {} mm are needed for bendi
 Copper bar {}: {} mm are longer than the stock length of {} mm	동바 {}: {} mm가 재고 길이 {} mm보다 깁니다
 Copper bar {}: {} mm are too thick for {}	동바 {}: {} mm는 {}에 비해 너무 두껍습니다
 Copper bar {}: {} segments need {} bends	동바 {}: 구간 {}개에는 굽힘 {}개가 필요합니다
+Copper-bonded steel	동피복강
 Cores used	사용된 심선
 Corner on page {} does not fit its wires: it needs one wire in each of its two directions and no connection point there	페이지 {}의 모서리가 연결선과 맞지 않습니다: 두 방향에 각각 하나의 연결선이 필요하며 그 지점에 접속점이 없어야 합니다
 Counter contact NC	카운터 접점 b접점
@@ -303,7 +302,6 @@ Create projects	프로젝트 만들기
 Creation date	작성 날짜
 Cross-section {} carries {} A, less than the {} A of {}	단면적 {0}의 허용 전류 {1} A가 {3}의 {2} A보다 작습니다
 Crossing on page {} does not fit its wires: it needs a wire in all four directions and no connection point there	페이지 {}의 교차가 연결선과 맞지 않습니다: 네 방향 모두에 연결선이 필요하며 그 지점에 접속점이 없어야 합니다
-Currency	통화
 Current (A)	전류(A)
 Current capacity (A)	허용 전류(A)
 Current consumption	소비 전류
@@ -427,10 +425,10 @@ ERP item master and bill of materials (CSV)	ERP 품목 마스터 및 부품 목�
 ERP number	ERP 번호
 ETIM class	ETIM 클래스
 Earth electrode	접지극
+Earth rod	접지봉
 East-west on a flat roof	평지붕에 동서 방향
 Edit pages	페이지 편집
 Edit project data	프로젝트 데이터 편집
-Editor	편집자
 Efficiency	효율
 Efficiency class	효율 등급
 Electrical data	전기 데이터
@@ -544,10 +542,12 @@ Foot switch NO (NFPA)	풋 스위치 a접점(NFPA)
 Force	힘
 Fork terminal	Y형 단자
 Format (placeholders)	형식(자리 표시자)
+Foundation earth electrode	기초 접지극
 Frame size	프레임 크기
 Free	자유
 Free air (mm)	자유 공간(mm)
 Free run	자유 포설
+Freestanding on posts	말뚝 위 지상형
 Frequency converter	주파수 변환기
 Frequency meter	주파수계
 From end	끝부터
@@ -749,7 +749,6 @@ Latitude is within ±90° and longitude within ±180°	위도는 ±90°, 경도�
 Lead time (days)	리드 타임(일)
 Leakage current	누설 전류
 Leakage line	누유 라인
-Left side	왼쪽 측면
 Left side panel	왼쪽 측면 패널
 Legend plate text	명판 텍스트
 Length (m)	길이(m)
@@ -810,7 +809,6 @@ Manual switch NO	수동 스위치 a접점
 Manual switch NO, latching	수동 스위치 a접점, 래칭
 Manual work	수작업
 Manufacturer's table	제조업체 표
-Manufacturers	제조업체
 Marking (CSV)	마킹(CSV)
 Marking (Excel)	마킹(Excel)
 Mating faces	결합면
@@ -841,8 +839,6 @@ Minimum operating temperature	최소 작동 온도
 Mirror contacts	미러 접점
 Mirrored	대칭됨
 Mission time	사용 기간
-Module	모듈
-Modules	모듈
 Moisture	습도
 Moment of inertia	관성 모멘트
 Motion detector	동작 감지기
@@ -884,7 +880,6 @@ Mounting site	장착 장소
 Mounting type	고정 방식
 Multi-line text	여러 줄 텍스트
 N terminal	N 단자
-NC contact	b접점
 NC contact (NFPA)	b접점(NFPA)
 NC contact K (GOST)	b접점 K(GOST)
 NC contact KA (GB)	b접점 KA(GB)
@@ -899,7 +894,6 @@ NC contact, on-delay KT (GOST)	b접점, 온 딜레이 KT(GOST)
 NC contact, on-delay TLR (JIS)	b접점, 온 딜레이 TLR(JIS)
 NC contact, timed opening (NFPA)	b접점, 지연 열림(NFPA)
 NFPA / JIC	NFPA / JIC
-NO contact	a접점
 NO contact (NFPA)	a접점(NFPA)
 NO contact K (GOST)	a접점 K(GOST)
 NO contact KA (GB)	a접점 KA(GB)
@@ -931,7 +925,6 @@ No plugs	플러그 없음
 No report block {}	보고서 블록 {} 없음
 No segment template named {}	이름이 {}인 세그먼트 템플릿이 없습니다
 No subproject {}	하위 프로젝트 {}이(가) 없습니다
-No such PV array	해당 태양광 어레이 없음
 No such object: {}	해당 개체가 없습니다: {}
 No surge protective device at the supply (IEC 60364-4-44)	전원 공급부에 서지 보호 장치가 없습니다(IEC 60364-4-44)
 No terminal {}	단자 {} 없음
@@ -997,7 +990,6 @@ Optocoupler	포토커플러
 Order numbers	주문 번호
 Order status	주문 상태
 Ordered	주문됨
-Other	기타
 Other bus device	기타 버스 장치
 Other module	기타 모듈
 Other properties	기타 속성
@@ -1216,7 +1208,6 @@ Product	제품
 Production of {}{} failed: {}	{}{}의 생산에 실패했습니다: {}
 Production wire list (CSV)	생산용 전선 목록(CSV)
 Project description	프로젝트 설명
-Project manager	프로젝트 관리자
 Project number	프로젝트 번호
 Project property of the property database (by key)	속성 데이터베이스의 프로젝트 속성(키 기준)
 Project revision	프로젝트 개정
@@ -1289,7 +1280,6 @@ Rated short-time withstand current	정격 단시간 내전류
 Rated speed	정격 속도
 Rated torque	정격 토크
 Rated voltage	정격 전압
-Rear wall	후면벽
 Rectangular punch	사각 펀치
 Rectifier / inverter AC/DC, bidirectional	정류기 / 인버터 AC/DC, 양방향
 Redline	레드라인
@@ -1327,21 +1317,19 @@ Resolution	분해능
 Response time	응답 시간
 Result	결과
 Return / exhaust line	리턴 / 배기 라인
-Reviewer	검토자
 Revision overview (changes)	개정 개요(변경 내용)
 Revision table: author of the last revision (2: the one before …)	개정 표: 마지막 개정의 작성자(2: 그 이전 …)
 Revision table: date of the last revision (2: the one before …)	개정 표: 마지막 개정의 날짜(2: 그 이전 …)
 Revision table: description of the last revision (2: the one before …)	개정 표: 마지막 개정의 설명(2: 그 이전 …)
 Revision table: index of the last revision (2: the one before …)	개정 표: 마지막 개정의 색인(2: 그 이전 …)
-Right side	오른쪽 측면
 Right side panel	오른쪽 측면 패널
+Ring earth electrode	환상 접지극
 Ring terminal	링 단자
 Rivet nut	리벳 너트
 RoHS compliant	RoHS 준수
 Rockwell (Local:1:I.Data.0)	Rockwell (Local:1:I.Data.0)
 Roller switch NC	롤러 스위치 b접점
 Roller switch NO	롤러 스위치 a접점
-Roof	지붕
 Room floor	방 바닥
 Room {} stands outside the plot boundary	실 {}이(가) 부지 경계 밖에 있습니다
 Rotation	회전
@@ -1473,10 +1461,10 @@ Spare terminal	예비 단자
 Speed	속도
 Spiral	나선형
 Stainless steel	스테인리스강
+Stainless steel V4A	스테인리스강 V4A
 Standard	표준
 Start / stop circuit with a relay: coil and contacts form one device with cross references and contact image, terminal strip, wire numbers, terminal diagram and connection list.	릴레이를 이용한 시작 / 정지 회로: 코일과 접점이 상호 참조 및 접점 이미지와 함께 하나의 장치를 구성; 단자대, 전선 번호, 단자도 및 연결 목록.
 Start date	시작일
-Started	시작됨
 Starting current ratio	기동 전류비
 Starting torque	기동 토크
 State of the project: draft, in review, approved, released	프로젝트 상태: 초안, 검토 중, 승인됨, 릴리스됨
@@ -1485,6 +1473,7 @@ Station name {} is used {} times	스테이션 이름 {}이(가) {}번 사용됨
 Station {} is not connected to bus {}	스테이션 {0}이(가) 버스 {1}에 연결되어 있지 않습니다
 Station {}: bus system {} does not exist	스테이션 {0}: 버스 시스템 {1}이(가) 없습니다
 Steam	증기
+Steel, hot-dip galvanised	용융 아연 도금강
 Stock	재고
 Stop category	정지 범주
 Storage temperature range	보관 온도 범위
@@ -1574,6 +1563,7 @@ The archive contains no project	아카이브에 프로젝트가 없습니다
 The archive has no manifest	아카이브에 매니페스트가 없습니다
 The archive is damaged	아카이브가 손상되었습니다
 The archive unpacks to more than {} MB	압축을 풀면 {} MB보다 큰 압축 파일입니다
+The archive was written by a newer version (archive version {})	이 아카이브는 더 새로운 버전으로 기록되었습니다(아카이브 버전 {})
 The assembly manufacturer must be named (IEC 61439-1, 6.1)	조립품 제조업체를 명시해야 합니다(IEC 61439-1, 6.1)
 The cabinet line-up in its room: L-shaped floor plan, inner wall, door and window, the line-up at its place, a mounting rail with a socket outlet on a wall, a wall-mounted emergency light and a cable tray under the ceiling.	방 안의 외함 열: L자형 평면도, 내벽, 문과 창문, 제자리에 놓인 외함 열, 벽의 콘센트가 있는 레일, 벽에 설치된 비상등 및 천장 아래의 케이블 트레이.
 The configuration is not a JSON object	구성이 JSON 개체가 아닙니다
@@ -1586,6 +1576,7 @@ The embedded document {} is damaged	포함된 문서 {}이(가) 손상되었습�
 The file is empty	파일이 비어 있습니다
 The file was written by a newer version (format {}): data this version does not know is lost when saving	이 파일은 최신 버전(형식 {})에서 작성되었습니다. 이 버전에서 알 수 없는 데이터는 저장할 때 손실됩니다
 The first column must be Key	첫 번째 열은 Key여야 합니다
+The folder {} already holds the project {}: a split project needs a folder of its own	폴더 {}에 이미 프로젝트 {}이(가) 있습니다. 분할 프로젝트에는 전용 폴더가 필요합니다
 The function definition needs a key and a name	기능 정의에는 키와 이름이 필요합니다
 The last page cannot be deleted	마지막 페이지는 삭제할 수 없습니다
 The macro box has no items left	매크로 박스에 남은 항목이 없습니다
@@ -1737,7 +1728,6 @@ Vessel	용기
 Vibration	진동
 Vibration resistance	내진동성
 View projects	프로젝트 보기
-Viewer	뷰어
 Violations	위반
 Voltage (V)	전압(V)
 Voltage drop (%)	전압 강하(%)
@@ -1877,7 +1867,6 @@ page properties	페이지 속성
 pigtail {} mm	피그테일 {} mm
 pilot	파일럿
 pink	분홍
-portrait	세로
 pressure	압력
 red	빨강
 released	릴리스됨
@@ -1959,6 +1948,7 @@ yellow	노랑
 {}: PV array {} covers a roof window	{}: 태양광 어레이 {}이(가) 지붕창을 덮습니다
 {}: PV array {} has {} modules, its device {} has {}	{}: 태양광 어레이 {}의 모듈은 {}개, 그 장치 {}의 모듈은 {}개
 {}: PV array {} is mounted tilted on a pitched roof	{}: 태양광 어레이 {}이(가) 경사 지붕에 기울여 설치되어 있습니다
+{}: PV array {} lies outside the protection of the air-termination system	{}: 태양광 어레이 {}이(가) 수뢰부의 보호 범위 밖에 있습니다
 {}: PV array {} of roof {} lies across a ridge, a hip or the edge of the roof	{0}: 지붕 {2}의 태양광 어레이 {1}이(가) 용마루, 추녀마루 또는 지붕 가장자리에 걸쳐 있습니다
 {}: PV array {} of roof {} lies outside the roof	{0}: 지붕 {2}의 태양광 어레이 {1}이(가) 지붕 밖에 있습니다
 {}: PV arrays {} and {} lie over each other	{}: 태양광 어레이 {}와(과) {}이(가) 겹칩니다
@@ -1968,6 +1958,7 @@ yellow	노랑
 {}: a wire of {} mm² is thinner than the connection point takes (at least {} mm²)	{}: {} mm² 전선이 연결 지점이 받는 것보다 작습니다 (최소 {} mm²)
 {}: accessory {} fits none of the device's parts	{}: 액세서리 {}은(는) 장치의 어떤 부품에도 맞지 않습니다
 {}: actuator {} is {} mm above the floor, recommended {} … {} mm	{}: 조작부 {}이(가) 바닥에서 {} mm 높이에 있습니다. 권장 {} … {} mm
+{}: air-termination rod {} stands off the roofs	{}: 피뢰침 {}이(가) 지붕 밖에 있습니다
 {}: auxiliary function(s) without main function	{}: 주 기능 없는 보조 기능
 {}: breaking capacity {} kA below the short-circuit current {} kA	{0}: 차단 용량 {1} kA가 단락 전류 {2} kA보다 작음
 {}: cable duct at {} mm filled {} % (limit {} %)	{0}: {1} mm 위치의 케이블 덕트 충전율 {2} %(한계 {3} %)
@@ -1984,13 +1975,17 @@ yellow	노랑
 {}: cross-section {} below the {} mm² of power circuits	{0}: 단면적 {1}이(가) 전력 회로의 {2} mm²보다 작음
 {}: cross-section {} differs from the potential definition ({})	{0}: 단면적 {1}이(가) 전위 정의({2})와 다릅니다
 {}: cutout of {} on the {} is {} mm from the edge, at least {} mm required	{0}: {2}에 있는 {1}의 컷아웃이 가장자리에서 {3} mm 떨어져 있습니다. 최소 {4} mm가 필요합니다
+{}: cutout of {} on the {} lies in a restricted cut-out area	{0}: {2}에 있는 {1}의 컷아웃이 컷아웃 금지 영역에 있습니다
 {}: cutout of {} on the {} reaches {} mm beyond its front	{}: {}의 {} 컷아웃이 앞면보다 {} mm 벗어납니다
 {}: cutouts of {} and {} on the {} are too close ({} mm web, at least {} mm)	{0}: {3}에 있는 {1}과(와) {2}의 컷아웃이 너무 가깝습니다(웹 {4} mm, 최소 {5} mm)
 {}: designation '{}' used more than once	{}: 명칭 '{}'이(가) 두 번 이상 사용됨
 {}: device tag without device name	{}: 장치 이름 없는 장치 태그
+{}: earth electrode {} has no walls to run along: the building has no rooms or roofs	{}: 접지극 {}이(가) 따라갈 벽이 없습니다: 건물에 방이나 지붕이 없습니다
+{}: earth rod {} stands inside the walls of the building	{}: 접지봉 {}이(가) 건물 벽 안쪽에 있습니다
 {}: fault current {} A at {} does not disconnect within {} s (needs {} A)	{0}: {2}의 고장 전류 {1} A로는 {3} s 이내에 차단되지 않음({4} A 필요)
 {}: function texts differ in the single-line diagram and the schematic	{}: 단선도와 회로도의 기능 텍스트가 다릅니다
 {}: hole of {} is too close to the cutout of {} on the {}	{0}: {1}의 구멍이 {3}에 있는 {2}의 컷아웃에 너무 가깝습니다
+{}: hole of {} on the {} lies in a restricted cut-out area	{0}: {2}에 있는 {1}의 구멍이 컷아웃 금지 영역에 있습니다
 {}: hole Ø{} of {} on the {} is {} mm from the edge, at least {} mm required	{0}: {3}에 있는 {2}의 구멍 Ø{1}이(가) 가장자리에서 {4} mm 떨어져 있습니다. 최소 {5} mm가 필요합니다
 {}: holes of {} and {} on the {} are too close ({} mm web, at least {} mm)	{0}: {3}에 있는 {1}과(와) {2}의 구멍이 너무 가깝습니다(웹 {4} mm, 최소 {5} mm)
 {}: hot spot of about {} °C at x = {} mm, y = {} mm of the mounting plate (inside temperature at most {} °C)	{}: 약 {} °C의 핫스팟이 장착 플레이트의 x = {} mm, y = {} mm 위치에 있습니다(내부 온도 최대 {} °C)
@@ -2047,7 +2042,14 @@ yellow	노랑
 {}: terminal {} is on level {}, but no terminal block is before it	{}: 단자 {}이(가) {}단에 있지만 그 앞에 단자 블록이 없습니다
 {}: terminal {} uses {} levels, its part {} has {}	{}: 단자 {}은(는) {}단을 사용하지만 해당 부품 {}은(는) {}단입니다
 {}: terminals {} are {} mm above the floor, at least {} mm required	{}: 단자 {}이(가) 바닥에서 {} mm 높이에 있습니다. 최소 {} mm가 필요합니다
+{}: the busbar {} of earth electrode {} does not exist	{0}: 접지극 {2}의 부스바 {1}이(가) 없습니다
 {}: the device {} of PV array {} does not exist	{0}: 태양광 어레이 {2}의 장치 {1}이(가) 없습니다
+{}: the earthing busbar {} of PV array {} does not exist	{0}: 태양광 어레이 {2}의 접지 부스바 {1}이(가) 없습니다
+{}: the freestanding PV array {} stands on {}	{}: 지상형 태양광 어레이 {}이(가) {} 위에 있습니다
+{}: the freestanding PV arrays {} and {} stand on each other	{}: 지상형 태양광 어레이 {}와(과) {}이(가) 겹칩니다
+{}: the generator junction box {} of PV array {} does not exist	{0}: 태양광 어레이 {2}의 접속함 {1}이(가) 없습니다
+{}: the lightning protection has no earth electrode	{}: 피뢰에 접지극이 없습니다
+{}: the lightning protection has no walls to run along: the building has no rooms or roofs	{}: 피뢰가 따라갈 벽이 없습니다: 건물에 방이나 지붕이 없습니다
 {}: the module {} of PV array {} has no electrical data	{0}: 태양광 어레이 {2}의 모듈 {1}에 전기 데이터가 없습니다
 {}: the station has no port {}	{0}: 스테이션에 포트 {1}이(가) 없습니다
 {}: the strings of PV array {} connect {} modules, the array has {}	{}: 태양광 어레이 {}의 스트링이 모듈 {}개를 연결하지만 어레이에는 {}개가 있습니다
@@ -2064,6 +2066,7 @@ yellow	노랑
 {}: {} carries {} A, the load {} needs {} A	{0}: {1}의 허용 전류는 {2} A이며, 부하 {3}에는 {4} A가 필요합니다
 {}: {} changed after it was mounted	{}: 장착 후 {}이(가) 변경되었습니다
 {}: {} collides with {}	{0}: {1}이(가) {2}와(과) 충돌함
+{}: {} down conductors, class {} needs {} round the building	{}: 인하 도선 {}개, 등급 {}에는 건물 주위에 {}개가 필요합니다
 {}: {} inputs used, the module has {}	{0}: 입력 {1}개 사용됨, 모듈의 입력은 {2}개
 {}: {} is a fluid device, not an electrical one	{0}: {1}은(는) 전기 장치가 아니라 유체 장치입니다
 {}: {} is closer than {} mm to a cable duct	{}: {}이(가) 케이블 덕트에 {} mm보다 가깝게 있습니다
@@ -2075,6 +2078,7 @@ yellow	노랑
 {}: {} is made for a mounting rail but sits directly on the plate	{}: {}은(는) 장착 레일용이지만 플레이트에 직접 장착되어 있습니다
 {}: {} is {} … {} mm above the floor, allowed {} … {} mm	{}: {}이(가) 바닥에서 {} … {} mm 높이에 있습니다. 허용 {} … {} mm
 {}: {} kg on the {} exceed its load of {} kg	{}: {} kg이(가) {}의 허용 하중 {} kg을 초과합니다
+{}: {} lies in a restricted placing area of the {}	{0}: {1}이(가) {2}의 배치 금지 영역에 있습니다
 {}: {} modules of PV array {} are not connected to a string	{0}: 태양광 어레이 {2}의 모듈 {1}개가 스트링에 연결되어 있지 않습니다
 {}: {} modules, the head has {} slots	{0}: 모듈 {1}개, 헤드의 슬롯은 {2}개
 {}: {} of {} mm is longer than the stock length of {} mm and has to be joined	{}: {}({} mm)이(가) 재고 길이 {} mm보다 길어 이어 붙여야 합니다

@@ -1,9 +1,12 @@
 # English<TAB>日本語 – texts shown by several areas (texts without a line are shown in English). Sorted by the English text: cargo run -p openecraft-i18n --example tidy
 (all)	(すべて)
 (no entries)	(エントリなし)
+(no structure)	(構造なし)
+(optional)	(省略可能)
 --json needs a JSON object	--json には JSON オブジェクトが必要です
 3D model	3D モデル
 3D routing	3D 配線ルート
+3D view	3D ビュー
 A page named {} already exists	{} という名前のページは既に存在します
 A page needs a name	ページには名前が必要です
 A routing path needs {} points at least	配線経路には少なくとも {} 個の点が必要です
@@ -12,14 +15,18 @@ Above	上
 Access token	アクセストークン
 Accessories	付属品
 Accessory	付属品
+Add	追加
 Add a PDF of all pages	全ページの PDF を追加
 Add to favorites	お気に入りに追加
 Address	アドレス
+Administrator	管理者
 Angle	角度
 Apply	適用
 Approve	承認
 Approvers	承認者
 Automatic	自動
+Automation	自動化
+Aux	補助
 Below	下
 Bold	太字
 Bottom	底板
@@ -39,11 +46,13 @@ Cable tag, e.g. -W20	ケーブルのタグ、例: -W20
 Cables	ケーブル
 Cancel	キャンセル
 Cannot read {}: {}	{} を読み取れません: {}
+Cannot write {}: {}	{} に書き込めません: {}
 Catalog	カタログ
 Catalog id	カタログ ID
 Category	カテゴリ
 Centred	中央
 Certificates	証明書
+Change	変更
 Channel	チャンネル
 Characteristic	特性
 Check settings	チェックの設定
@@ -54,6 +63,7 @@ Clear filters	フィルターをクリア
 Clearance bottom	下のクリアランス
 Clearance top	上のクリアランス
 Clearances	クリアランス
+Close	閉じる
 Coding: {}	コーディング: {}
 Coil voltage	コイル電圧
 Collision class	干渉クラス
@@ -83,6 +93,7 @@ Created by	作成者
 Cross references	相互参照
 Cross-section	断面積
 Crossing	交差
+Currency	通貨
 Current	電流
 Cutout	切り欠き
 Cutouts	切り欠き
@@ -104,19 +115,24 @@ Device (PV generator) the modules belong to; its parts then count them in the bi
 Device connection point	機器接続ポイント
 Device description	デバイス記述
 Device tag	デバイスタグ
+Device the earthing conductor of the mounting runs to (earthing or equipotential bonding busbar); empty: none	架台の接地導体の接続先デバイス (接地ブスバーまたは等電位ボンディングブスバー)。空欄: なし
 Device {}	デバイス {}
 Devices	デバイス
+Dimensions	寸法
 Direction	方向
 Discard	破棄
 Discard changes	変更を破棄
 Display	表示
+Documents	ドキュメント
 Done	完了
 Door	扉
 Door cutout	扉の切り欠き
+Download	ダウンロード
 Downloading {}…	{} をダウンロードしています…
 Drag to turn the model	ドラッグしてモデルを回転
 EMC clearance	EMC クリアランス
 Edit	編集
+Editor	編集者
 Electro-fluid cross reference	電気-流体相互参照
 Enclosure	エンクロージャー
 Enclosures	エンクロージャー
@@ -136,10 +152,13 @@ Field wiring	フィールド配線
 File	ファイル
 Files	ファイル
 Filter	フィルター
+Filter devices…	デバイスをフィルター…
+Fit	全体表示
 Fits	適合先
 Fitting at the end	終端の継手
 Fitting at the start	始端の継手
 Floor	底板
+Floor plan	平面図
 Fluid device	流体デバイス
 Fluid device groups	流体デバイスグループ
 Fluid netlist	流体ネットリスト
@@ -152,10 +171,12 @@ Function text	機能テキスト
 Functional safety	機能安全
 Functions	機能
 General	全般
+Generator junction box (device) the strings run to, from there a DC main cable to each inverter; empty: none	ストリングの接続先の接続箱 (デバイス)。そこから各インバーターへ直流幹線が通ります。空欄: なし
 Gives up a subproject: its pages are unlocked again	サブプロジェクトを破棄します。そのページのロックが再び解除されます
 Gland plate	グランドプレート
 Graphics	図形
 Group	グループ
+Group the pages by structure	ページを構造でグループ化
 Groups	グループ
 Harness	ハーネス
 Harness data	ハーネスデータ
@@ -183,9 +204,12 @@ Kind	種類
 Language	言語
 Languages	言語
 Last change	最終変更
+Last changed	最終変更
+Last changed by	最終変更者
 Layers	レイヤー
 Leave out stored baselines and wiring marks	保存されたベースラインと配線マークを除外
 Left	左
+Left side	左側
 Length	長さ
 Level	レベル
 Lifecycle	ライフサイクル
@@ -195,13 +219,20 @@ Link	リンク
 Linked	リンク済み
 Load	負荷
 Loaded circuits bunched together	束ねられた負荷回路数
+Loading…	読み込み中…
 Location	取付場所
 Location (+)	取付場所 (+)
+Locked	ロック
+Locked by {}	{} がロック中
+Logo	ロゴ
 MTTFd (years)	MTTFd (年)
 Machine	機械
+Main	メイン
+Main earthing busbar (device) it is connected to; empty: none	接続先の主接地ブスバー (デバイス)。空欄: なし
 Main earthing terminal	主接地端子
 Main switch	主開閉器
 Manufacturer	メーカー
+Manufacturers	メーカー
 Manufacturing	製造
 Marking	マーキング
 Match case	大文字と小文字を区別する
@@ -212,6 +243,8 @@ Minimum digits of the counter (leading zeros)	カウンターの最小桁数 (�
 Missing parameter: {}	パラメーターがありません: {}
 Missing value for --{}	--{} の値がありません
 Model import failed: {}	モデルのインポートに失敗しました: {}
+Module	モジュール
+Modules	モジュール
 Modules in series	直列のモジュール
 Modules side by side in a row	1列に並ぶモジュール
 Mounted	取付済み
@@ -221,6 +254,8 @@ Mounting holes	取付穴
 Mounting layout {}	取付図 {}
 Mounting plate	取付板
 Mounting rail	取付レール
+NC contact	b接点
+NO contact	a接点
 Name	名前
 Name of the block	ブロックの名前
 Name of the plot, e.g. the cadastral parcel	敷地の名前（例：地番）
@@ -228,6 +263,7 @@ Name of the point, e.g. a survey point	点の名前（例：測量点）
 Name of the scheme	スキームの名前
 Net	ネット
 Never	表示しない
+New group	新しいグループ
 New name	新しい名前
 Next page	次のページ
 No	いいえ
@@ -249,6 +285,7 @@ No plug {}	プラグ {} はありません
 No report block named {}	{} という名前のレポートブロックはありません
 No segment {}	セグメント {} がありません
 No station {}	ステーション {} はありません
+No such PV array	そのPVアレイはありません
 No such page	該当するページはありません
 No such section	そのセクションはありません
 No symbol with id {}	ID {} のシンボルはありません
@@ -263,12 +300,14 @@ Not in the schematic	回路図にありません
 Note	注記
 Notes	メモ
 Number	番号
+Number of down conductors (0: as many as the class needs for the walls)	引下げ導線の数 (0: クラスが壁に必要とする数)
 Number the sections 1, 2, 3 … on every level first	最初に各レベルのセクションを 1, 2, 3 … と番号付けする
 Numbers the device tags per structure and identifying letter in schematic order (page, column, top to bottom)	デバイスタグを構造と識別文字ごとに回路図の順序 (ページ、列、上から下) で番号付けします
 Only rows containing this text	このテキストを含む行のみ
 Operating pressure	使用圧力
 Option {}: {} is not one of its choices	オプション {}: {} は選択肢にありません
 Order number	注文番号
+Other	その他
 Outer diameter	外径
 Output	出力
 Overview	概要
@@ -297,7 +336,7 @@ Part number	部品番号
 Part number already exists	部品番号は既に存在します
 Part {}	部品 {}
 Parts	部品
-Parts (CSV, JSON, BMEcat, EPLAN XML, EDZ)	部品 (CSV、JSON、BMEcat、EPLAN XML、EDZ)
+Parts (CSV, JSON, BMEcat, EPLAN XML, EDZ, ZIP)	部品 (CSV、JSON、BMEcat、EPLAN XML、EDZ、ZIP)
 Parts import failed: {}	部品のインポートに失敗しました: {}
 Password	パスワード
 Picture	画像
@@ -308,9 +347,11 @@ Pin side	ピン側
 Place	位置
 Placement scheme	配置スキーム
 Plinth	台座
+Plot	敷地
 Plot frame	図枠
 Plug	プラグ
 Plug diagram	プラグ図
+Plugins	プラグイン
 Plugs	プラグ
 Poles	極数
 Ports	ポート
@@ -333,9 +374,11 @@ Product subgroup	製品サブグループ
 Product top group	製品トップグループ
 Profile	プロファイル
 Project	プロジェクト
+Project data	プロジェクトデータ
 Project languages	プロジェクト言語
 Project logo	プロジェクトのロゴ
 Project management	プロジェクト管理
+Project manager	プロジェクトマネージャー
 Project name	プロジェクト名
 Project properties	プロジェクトプロパティ
 Properties	プロパティ
@@ -349,8 +392,11 @@ Rail	レール
 Range	範囲
 Rated current	定格電流
 Rated power	定格出力
+Rear wall	背板
 Rectangle	四角形
 Rectangular	四角形
+Redo	やり直し
+Refresh	最新の情報に更新
 Reject	却下
 Relative humidity	相対湿度
 Relay	リレー
@@ -359,17 +405,22 @@ Released pages cannot be moved	リリース済みのページは移動できま�
 Remove	削除
 Remove from favorites	お気に入りから削除
 Remove the boundary	境界を削除
+Remove the lightning protection system	雷保護システムを削除
 Remove the reference point	基準点を削除
 Report	レポート
 Report blocks	レポートブロック
 Report: {}	レポート: {}
+Reports	レポート
 Required	必要
 Reserve	予備
+Reviewer	レビュー担当者
 Revision	リビジョン
 Revision {}	リビジョン {}
 Rework	手直し
 Right	右
+Right side	右側
 Role	ロール
+Roof	天板
 Rooms	部屋
 Round	円形
 Route	ルート
@@ -390,6 +441,7 @@ Search parts	部品を検索
 Searching…	検索しています…
 Section	セクション
 Segment	区間
+Select	選択
 Select a part in the tree or create a new one.	ツリーで部品を選択するか、新しい部品を作成してください。
 Sensor	センサー
 Sensors, switches, pushbuttons	センサー、スイッチ、押しボタン
@@ -399,19 +451,23 @@ Settings	設定
 Shape	形状
 Short-circuit voltage	短絡インピーダンス電圧
 Show history	履歴を表示
+Show the logos of the catalogs	カタログのロゴを表示
 Show the row after the column	列の後に行を表示
 Side	側
 Sign in	サインイン
 Sign out	サインアウト
 Signed in as {}	{} としてサインイン中
 Signed in as {} ({})	{} ({}) としてサインイン中
+Signed out	サインアウトしました
 Signing in…	サインインしています…
 Single-line / multi-line	単線 / 複線
+Site	敷地
 Size	サイズ
 Socket side	ソケット側
 Solenoid not linked	ソレノイド未リンク
 Sort by	並べ替え
 Source	ソース
+Started	開始済み
 State	状態
 Status	ステータス
 String	ストリング
@@ -438,6 +494,7 @@ Terminal type	端子タイプ
 Terminals	端子
 Text	テキスト
 Text to find	検索するテキスト
+The freestanding PV array {} stands outside the plot boundary	野立てPVアレイ {} は敷地境界の外にあります
 The identifier must not be empty	識別子は空にできません
 The long side of the modules along the rows	モジュールの長辺を列に沿わせる
 The page is released	ページはリリース済みです
@@ -447,11 +504,15 @@ Time	時間
 Title block	表題欄
 To	接続先
 Tools	工具
+Top	上
 Total	合計
 Transformer	変圧器
+Tutorial	チュートリアル
 Type	タイプ
 Type number	型番
 Underline	下線
+Undo	元に戻す
+Unexpected argument: {}	予期しない引数: {}
 Unit	単位
 Unknown column: {}	不明な列: {}
 Unknown connector: {}	不明なコネクター: {}
@@ -459,10 +520,12 @@ Unknown enclosure system: {}	不明なエンクロージャーシステム: {}
 Unknown face: {}	不明な面: {}
 Unknown format: {}	不明な形式: {}
 Unknown function definition: {}	不明な機能定義: {}
+Unknown language: {}	不明な言語: {}
 Unknown option {}	不明なオプション {}
 Unknown parameter: {}	不明なパラメーター: {}
 Unknown part: {}	不明な部品: {}
 Unknown property: {}	不明なプロパティ: {}
+Unknown report: {}	不明なレポート: {}
 Unknown scheme: {}	不明なスキーム: {}
 Unknown segment	不明なセグメント
 Unknown symbol {}	不明なシンボル {}
@@ -473,6 +536,7 @@ User	ユーザー
 User name	ユーザー名
 Users	ユーザー
 Version	バージョン
+Viewer	ビューアー
 Voltage	電圧
 Warning	警告
 Warnings	警告
@@ -499,6 +563,7 @@ not bonded	未ボンディング
 not connected	未接続
 open	開
 pcs	個
+portrait	縦
 rejected	却下
 right	右
 spare	予備
@@ -512,6 +577,7 @@ yes	はい
 {} exists already	{} は既に存在します
 {} is not a PNG or JPEG image	{} は PNG または JPEG 画像ではありません
 {} parts	{} 個の部品
+{} users	ユーザー {} 人
 {} wires	{} 本の電線
 {}, together with the wire to {}	{}、{} への電線と共用
 {}: {} does not stand on the floor, choose a floor-standing part	{}: {} は床置きではありません。床置き部品を選択してください

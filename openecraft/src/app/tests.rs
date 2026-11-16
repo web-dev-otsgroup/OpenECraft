@@ -33,6 +33,70 @@ fn the_schematic_crosshair_setting_is_stored_with_the_shell() {
 }
 
 #[test]
+<<<<<<< HEAD
+=======
+fn catalog_logos_are_shown_unless_switched_off() {
+    let shell = ShellState { catalog_logos: false, ..Default::default() };
+    let stored: ShellState = serde_json::from_str(&serde_json::to_string(&shell).unwrap()).unwrap();
+    assert!(!stored.catalog_logos);
+    let old: ShellState = serde_json::from_str("{}").unwrap();
+    assert!(old.catalog_logos, "stores written before show the logos");
+}
+
+#[test]
+fn wheel_source_policy_is_stored_with_the_shell() {
+    let shell = ShellState {
+        nav: openecraft_ui::nav::Settings {
+            wheel_source_policy: openecraft_ui::nav::WheelSourcePolicy::AssumeWindowsTrackpad,
+            ..Default::default()
+        },
+        ..Default::default()
+    };
+    let stored = serde_json::to_value(&shell).unwrap();
+    let restored: ShellState = serde_json::from_value(stored.clone()).unwrap();
+    assert_eq!(
+        restored.nav.wheel_source_policy,
+        openecraft_ui::nav::WheelSourcePolicy::AssumeWindowsTrackpad
+    );
+
+    let mut old_value = serde_json::to_value(ShellState {
+        nav: openecraft_ui::nav::Settings {
+            wheel_source_policy: openecraft_ui::nav::WheelSourcePolicy::Strict,
+            ..Default::default()
+        },
+        ..Default::default()
+    })
+    .unwrap();
+    old_value
+        .as_object_mut()
+        .unwrap()
+        .remove("wheel_source_policy_migrated");
+    let mut old: ShellState = serde_json::from_value(old_value).unwrap();
+    old.migrate_wheel_source_policy();
+    assert_eq!(
+        old.nav.wheel_source_policy,
+        openecraft_ui::nav::WheelSourcePolicy::AssumeWindowsTrackpad,
+        "previously saved default settings pan on unknown-source input"
+    );
+
+    let mut customized = ShellState {
+        wheel_source_policy_migrated: true,
+        nav: openecraft_ui::nav::Settings {
+            wheel_source_policy: openecraft_ui::nav::WheelSourcePolicy::Strict,
+            ..Default::default()
+        },
+        ..Default::default()
+    };
+    customized.migrate_wheel_source_policy();
+    assert_eq!(
+        customized.nav.wheel_source_policy,
+        openecraft_ui::nav::WheelSourcePolicy::Strict,
+        "an explicit user choice is preserved"
+    );
+}
+
+#[test]
+>>>>>>> 971c82b6cf3a9dd36f46ab572d373b585e6a70ad
 fn the_startup_setting_is_stored_with_the_shell() {
     use crate::startup::{ServerProject, Startup, Target};
     let startup = Startup::Project(Target::Server(ServerProject { url: "http://srv:8091".into(), name: "plant".into() }));

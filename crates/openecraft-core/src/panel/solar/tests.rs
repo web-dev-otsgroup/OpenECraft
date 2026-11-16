@@ -52,7 +52,7 @@ fn rails_hooks_and_clamps_follow_the_modules() {
     let a = array(5000.0, 6000.0);
     let m: Vec<(Role, f32)> = mounting(&prj, &a);
     // Four rails of 4696 mm: two pieces of 4.2 m each, joined once.
-    assert_eq!(m, vec![(Role::Rail, 8.0), (Role::Connector, 4.0), (Role::Hook, 20.0), (Role::EndClamp, 8.0), (Role::MidClamp, 12.0)]);
+    assert_eq!(m, vec![(Role::Rail, 8.0), (Role::Connector, 4.0), (Role::Hook, 20.0), (Role::EndClamp, 8.0), (Role::MidClamp, 12.0), (Role::Earthing, 4.0)]);
     let mat = material(&prj, &a);
     assert_eq!(mat[0], ("GEN.PV-430W".to_string(), 8.0));
     assert!(mat.contains(&("GEN.PV-RAIL-40".to_string(), 8.0)) && mat.contains(&("GEN.PV-HOOK".to_string(), 20.0)));
@@ -114,7 +114,7 @@ fn flat_roofs_take_tilted_and_east_west_rows() {
     let t = 15f32.to_radians();
     assert!((row_pitch(&a) - (1134.0 * t.cos() + 1134.0 * t.sin() / 17f32.to_radians().tan())).abs() < 0.1);
     let m = mounting(&prj, &a);
-    assert_eq!(m, vec![(Role::Base, 15.0), (Role::EndClamp, 12.0), (Role::MidClamp, 18.0), (Role::Ballast, 20.0), (Role::Deflector, 12.0)]);
+    assert_eq!(m, vec![(Role::Base, 15.0), (Role::EndClamp, 12.0), (Role::MidClamp, 18.0), (Role::Ballast, 20.0), (Role::Deflector, 12.0), (Role::Earthing, 3.0)]);
     assert_eq!(part_for(&prj, &a, Role::Base), "GEN.PV-BASE-S15");
     // East-west: pairs facing both ways on one base each.
     let ew = PvArray { mounting: PvMounting::EastWest, azimuth: 90.0, tilt: 10.0, ..a };
@@ -122,7 +122,7 @@ fn flat_roofs_take_tilted_and_east_west_rows() {
     assert_eq!(g.modules.len(), 24);
     assert_eq!(g.modules.iter().filter(|m| normal_of(&m[..])[0] > 0.0).count(), 12, "half of them facing +x");
     let m = mounting(&prj, &ew);
-    assert_eq!(m, vec![(Role::Base, 15.0), (Role::EndClamp, 24.0), (Role::MidClamp, 36.0), (Role::Ballast, 39.0)]);
+    assert_eq!(m, vec![(Role::Base, 15.0), (Role::EndClamp, 24.0), (Role::MidClamp, 36.0), (Role::Ballast, 39.0), (Role::Earthing, 3.0)]);
     assert_eq!(part_for(&prj, &ew, Role::Base), "GEN.PV-BASE-EW10");
     assert!(problems(&prj).is_empty(), "{:?}", problems(&prj));
 }
@@ -169,9 +169,20 @@ fn modules_and_mounting_are_drawn_on_the_roof() {
     let b = &prj.layout.buildings[bi];
     let f = faces(b, &b.roofs[0]);
     let count = |k: RoofFaceKind| f.iter().filter(|x| x.kind == k).count();
-    // Each module: the cells, four frame pieces on top, four sides and the bottom.
-    assert_eq!((count(RoofFaceKind::Module), count(RoofFaceKind::ModuleFrame)), (8, 8 * 9));
-    assert_eq!(count(RoofFaceKind::Mounting), 4 * 4, "four sides of each rail");
+    // Each module: the cells, four frame pieces on top, four sides and the bottom, and
+    // its junction box (a box of six faces).
+    assert_eq!((count(RoofFaceKind::Module), count(RoofFaceKind::ModuleFrame)), (8, 8 * 9 + 8 * 6));
+    // The four rails and the 20 roof hooks under them (the hook and its plate), as many as
+    // the bill of materials counts.
+    let g = geometry(&b.roofs[0], &b.roofs[0].solar[0]).unwrap();
+    assert_eq!((g.rails.len(), g.hooks.len()), (4, 20));
+    assert!(mounting(&prj, &b.roofs[0].solar[0]).contains(&(Role::Hook, 20.0)));
+    assert_eq!(count(RoofFaceKind::Mounting), 4 * 6 + 20 * 2 * 6);
+    // The hooks stand on the covering and carry the rails.
+    let cover = |q: V3| g.plane.at([q[0], q[2]]) + 300.0 * (1.0 + g.plane.slope() * g.plane.slope()).sqrt();
+    assert!(g.hooks.iter().all(|(foot, top)| (foot[1] - cover(*foot)).abs() < 0.5 && top[1] > foot[1] + 50.0));
+    // An earthing clamp on each rail.
+    assert_eq!((g.earth.len(), count(RoofFaceKind::Earthing)), (4, 4 * 6));
     // A module's part sets its size.
     let mut a = array(0.0, 0.0);
     set_module(&prj, &mut a, "GEN.PV-400W-FB").unwrap();
@@ -188,4 +199,99 @@ fn a_literal_zero_quantity_counts_no_modules() {
     prj.layout.buildings[bi].roofs[0].solar.push(PvArray { device: "=PV-G1".into(), ..array(5000.0, 6000.0) });
     let texts: Vec<String> = problems(&prj).iter().map(|i| i.message()).collect();
     assert_eq!(texts, vec!["+B1: PV array PV1 has 8 modules, its device =PV-G1 has 0".to_string()]);
+}
+
+/// A building with a room of 4 × 3 m at the origin and a freestanding array added in
+/// front of it.
+fn plot_with_array() -> (Project, u64) {
+    let mut prj = Project::default();
+    let bi = add_building(&mut prj, "+B1").unwrap();
+    let l0 = prj.layout.buildings[bi].levels[0].id;
+    crate::panel::buildings::add_room(&mut prj, "+ROOM1", Some(l0)).unwrap();
+    let id = add_ground_array(&mut prj, None).unwrap();
+    (prj, id)
+}
+
+#[test]
+fn freestanding_arrays_stand_on_tables_of_posts() {
+    let (prj, id) = plot_with_array();
+    let a = &prj.layout.plot.solar[0];
+    assert_eq!((a.id, a.name.as_str(), a.mounting, a.columns, a.rows, a.stack, a.tilt), (id, "PV1", PvMounting::Ground, 10, 2, 2, 25.0));
+    assert_eq!(module_count(a), 40);
+    let g = ground_geometry(a);
+    assert_eq!(g.modules.len(), 40);
+    // Facing the front, tilted by 25°, the lower edge 800 mm above the ground.
+    let low = g.modules.iter().flatten().map(|v| v[1]).fold(f32::MAX, f32::min);
+    assert!((low - crate::model::panel::DEFAULT_CLEARANCE).abs() < 0.5, "{low}");
+    for m in &g.modules {
+        let n = normal_of(m);
+        assert!(n[2] > 0.0 && (n[1] - 25f32.to_radians().cos()).abs() < 1e-3, "{n:?}");
+    }
+    // Six post places along each table of 11.52 m (at most 2.5 m apart): a front and a
+    // rear post on the ground under each table beam; two rails under each row of modules.
+    assert_eq!((g.posts.len(), g.beams.len(), g.rails.len(), g.earth.len()), (24, 12, 8, 2));
+    let (table, t) = (2.0 * 1722.0 + CLAMP_GAP, 25f32.to_radians());
+    let high = low + table * t.sin();
+    assert!(g.posts.iter().all(|(foot, top)| foot[1].abs() < 0.01 && top[1] > low - 200.0 && top[1] < high));
+    assert_eq!(g.posts.iter().filter(|(_, top)| top[1] < (low + high) / 2.0).count(), 12, "a front post at each beam");
+    // The rows far enough apart not to shade each other at 17° sun.
+    assert!((row_pitch(a) - (table * t.cos() + table * t.sin() / 17f32.to_radians().tan())).abs() < 0.1);
+    // In front of the room (its front wall at z 3000 + the wall) with the free space.
+    let (lo, _) = crate::panel::bounds(&g.outline);
+    let (_, room) = crate::panel::bounds(&crate::panel::plot::footprints(&prj).into_iter().filter(|f| matches!(f.0, crate::panel::plot::Standing::Room(_))).flat_map(|f| f.1).collect::<Vec<_>>());
+    assert!((lo[1] - room[1] - GROUND_GAP).abs() < 1.0, "{} {}", lo[1], room[1]);
+    assert!(problems(&prj).is_empty(), "{:?}", problems(&prj));
+    // Drawn with their posts and table beams.
+    let f = faces_on(Support::Ground, &prj.layout.plot.solar);
+    assert_eq!(f.iter().filter(|x| x.kind == RoofFaceKind::Module).count(), 40);
+    assert_eq!(f.iter().filter(|x| x.kind == RoofFaceKind::Mounting).count(), (24 + 12 + 8) * 6);
+}
+
+#[test]
+fn freestanding_tables_need_posts_beams_and_rails() {
+    let (mut prj, _) = plot_with_array();
+    let a = prj.layout.plot.solar[0].clone();
+    // Eight rails of 11.62 m in three pieces of 4.2 m, joined twice.
+    let m = mounting(&prj, &a);
+    assert_eq!(m, vec![(Role::Post, 24.0), (Role::Beam, 12.0), (Role::Rail, 24.0), (Role::Connector, 16.0), (Role::EndClamp, 16.0), (Role::MidClamp, 72.0), (Role::Earthing, 2.0)]);
+    assert_eq!((part_for(&prj, &a, Role::Post), part_for(&prj, &a, Role::Beam)), ("GEN.PV-POST-RAM".to_string(), "GEN.PV-TABLE-BEAM".to_string()));
+    // The generic post names its accessories as a mounting system.
+    let sys = PvArray { system: "GEN.PV-POST-RAM".into(), ..a.clone() };
+    assert_eq!(part_for(&prj, &sys, Role::Beam), "GEN.PV-TABLE-BEAM");
+    // In the bill of materials of the layout, named after the plot.
+    prj.layout.plot.name = "Flur 3".into();
+    let all = crate::panel::layout_material(&prj);
+    let posts = all.iter().find(|(p, ..)| p == "GEN.PV-POST-RAM").expect("the posts");
+    assert_eq!((posts.1, posts.2.clone()), (24.0, vec!["Flur 3 PV1".to_string()]));
+    assert!(all.iter().any(|(p, q, _)| p == "GEN.PV-430W" && *q == 40.0));
+}
+
+#[test]
+fn freestanding_arrays_on_each_other_on_a_room_or_off_the_plot_are_reported() {
+    let (mut prj, _) = plot_with_array();
+    let first = prj.layout.plot.solar[0].clone();
+    add_ground_array(&mut prj, Some([first.x + 1000.0, first.z])).unwrap();
+    add_ground_array(&mut prj, Some([2000.0, 1500.0])).unwrap();
+    let texts: Vec<String> = problems(&prj).iter().map(|i| i.message()).collect();
+    assert!(texts.contains(&"Plot: the freestanding PV arrays PV1 and PV2 stand on each other".to_string()), "{texts:?}");
+    assert!(texts.contains(&"Plot: the freestanding PV array PV3 stands on +ROOM1".to_string()), "{texts:?}");
+    // Off the plot boundary.
+    prj.layout.plot.solar.truncate(1);
+    crate::panel::plot::set_outline(&mut prj, vec![[-20_000.0, -20_000.0], [20_000.0, -20_000.0], [20_000.0, 10_000.0], [-20_000.0, 10_000.0]]).unwrap();
+    assert_eq!(crate::panel::plot::outside(&prj), vec![crate::panel::plot::Standing::PvArray(0)]);
+    let texts: Vec<String> = crate::panel::plot::problems(&prj).iter().map(|i| i.message()).collect();
+    assert_eq!(texts, vec!["The freestanding PV array PV1 stands outside the plot boundary".to_string()]);
+}
+
+#[test]
+fn arrays_are_found_on_the_roofs_and_on_the_plot() {
+    let (mut prj, ground) = plot_with_array();
+    prj.layout.buildings[0].roofs.push(Roof { name: "R1".into(), width: 10_000.0, depth: 8000.0, ..Default::default() });
+    let roof = add_array(&mut prj, 0, 0, None).unwrap();
+    let all = all_arrays(&prj.layout);
+    assert_eq!(all.iter().map(|t| (t.0, t.2.id)).collect::<Vec<_>>(), vec![(ArrayRef { roof: Some((0, 0)), index: 0 }, roof), (ArrayRef { roof: None, index: 0 }, ground)]);
+    assert_eq!(find(&prj.layout, ground), Some(ArrayRef { roof: None, index: 0 }));
+    assert_eq!(super::array(&prj.layout, ArrayRef { roof: Some((0, 0)), index: 0 }).map(|a| a.id), Some(roof));
+    assert_eq!((place_name(&prj.layout, all[0].1), place_name(&prj.layout, all[1].1)), ("+B1".to_string(), "Plot".to_string()));
+    assert!(array_mut(&mut prj.layout, ArrayRef { roof: Some((0, 3)), index: 0 }).is_none());
 }

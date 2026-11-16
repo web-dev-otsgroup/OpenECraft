@@ -48,7 +48,6 @@ Address {} is used by {} and {}	Adres {} wordt gebruikt door {} en {}
 Adhesive	Lijm
 Adjustable output voltage	Instelbare uitgangsspanning
 Administer the server	De server beheren
-Administrator	Beheerder
 Alarm limit H	Alarmgrens H
 Alarm limit HH	Alarmgrens HH
 Alarm limit L	Alarmgrens L
@@ -188,7 +187,7 @@ Cell temperatures: {} °C (U max), {} °C (U mean), {} °C (U min)	Celtemperatur
 Centre horizontally	Horizontaal centreren
 Centre vertically	Verticaal centreren
 Centrifugal pump	Centrifugaalpomp
-Change	Wijziging
+Changed in the project folder by another program and also in the open project: {}{}. Save the project under another name, or open it again and repeat the changes	In de projectmap door een ander programma en ook in het geopende project gewijzigd: {}{}. Sla het project onder een andere naam op, of open het opnieuw en herhaal de wijzigingen
 Changed since mounted	Gewijzigd sinds montage
 Changed since wired	Gewijzigd sinds bedraden
 Changeover contact	Wisselcontact
@@ -293,6 +292,7 @@ Copper bar {}: segment {} is {} mm straight, at least {} mm are needed for bendi
 Copper bar {}: {} mm are longer than the stock length of {} mm	Koperrail {}: {} mm is langer dan de voorraadlengte van {} mm
 Copper bar {}: {} mm are too thick for {}	Koperrail {}: {} mm is te dik voor {}
 Copper bar {}: {} segments need {} bends	Koperrail {}: {} segmenten hebben {} buigingen nodig
+Copper-bonded steel	Verkoperd staal
 Cores used	Gebruikte aders
 Corner on page {} does not fit its wires: it needs one wire in each of its two directions and no connection point there	De hoek op pagina {} past niet bij zijn draden: hij heeft één draad in elk van zijn twee richtingen en geen aansluitpunt daar nodig
 Counter contact NC	Tellercontact verbreekcontact
@@ -310,7 +310,6 @@ Create projects	Projecten maken
 Creation date	Aanmaakdatum
 Cross-section {} carries {} A, less than the {} A of {}	Doorsnede {} voert {} A, minder dan de {} A van {}
 Crossing on page {} does not fit its wires: it needs a wire in all four directions and no connection point there	De kruising op pagina {} past niet bij zijn draden: hij heeft een draad in alle vier richtingen en geen aansluitpunt daar nodig
-Currency	Valuta
 Current (A)	Stroom (A)
 Current capacity (A)	Stroombelastbaarheid (A)
 Current consumption	Stroomopname
@@ -434,10 +433,10 @@ ERP item master and bill of materials (CSV)	ERP-artikelstamgegevens en stuklijst
 ERP number	ERP-nummer
 ETIM class	ETIM-klasse
 Earth electrode	Aardelektrode
+Earth rod	Aardpen
 East-west on a flat roof	Oost-west op een plat dak
 Edit pages	Pagina's bewerken
 Edit project data	Projectgegevens bewerken
-Editor	Bewerker
 Efficiency	Rendement
 Efficiency class	Efficiëntieklasse
 Electrical data	Elektrische gegevens
@@ -551,10 +550,12 @@ Foot switch NO (NFPA)	Voetschakelaar maakcontact (NFPA)
 Force	Kracht
 Fork terminal	Vorkkabelschoen
 Format (placeholders)	Indeling (tijdelijke aanduidingen)
+Foundation earth electrode	Funderingsaarde
 Frame size	Bouwgrootte
 Free	Vrij
 Free air (mm)	Vrij in de lucht (mm)
 Free run	Vrije installatie
+Freestanding on posts	Vrijstaand op palen
 Frequency converter	Frequentieomvormer
 Frequency meter	Frequentiemeter
 From end	Vanaf einde
@@ -757,7 +758,6 @@ Latitude is within ±90° and longitude within ±180°	De breedtegraad ligt binn
 Lead time (days)	Levertijd (dagen)
 Leakage current	Lekstroom
 Leakage line	Lekolieleiding
-Left side	Linkerzijde
 Left side panel	Linkerzijwand
 Legend plate text	Tekst naamplaatje
 Length (m)	Lengte (m)
@@ -818,7 +818,6 @@ Manual switch NO	Handschakelaar maakcontact
 Manual switch NO, latching	Handschakelaar maakcontact, vergrendelend
 Manual work	Handwerk
 Manufacturer's table	Fabrikanttabel
-Manufacturers	Fabrikanten
 Marking (CSV)	Markering (CSV)
 Marking (Excel)	Markering (Excel)
 Mating faces	Steekzijden
@@ -849,8 +848,6 @@ Minimum operating temperature	Minimale bedrijfstemperatuur
 Mirror contacts	Spiegelcontacten
 Mirrored	Gespiegeld
 Mission time	Gebruiksduur
-Module	Module
-Modules	Modules
 Moisture	Vochtigheid
 Moment of inertia	Traagheidsmoment
 Motion detector	Bewegingsmelder
@@ -893,7 +890,6 @@ Mounting site	Montageplaats
 Mounting type	Bevestigingswijze
 Multi-line text	Tekst met meerdere regels
 N terminal	N-klem
-NC contact	Verbreekcontact
 NC contact (NFPA)	Verbreekcontact (NFPA)
 NC contact K (GOST)	Verbreekcontact K (GOST)
 NC contact KA (GB)	Verbreekcontact KA (GB)
@@ -908,7 +904,6 @@ NC contact, on-delay KT (GOST)	Verbreekcontact, opkomvertraagd KT (GOST)
 NC contact, on-delay TLR (JIS)	Verbreekcontact, opkomvertraagd TLR (JIS)
 NC contact, timed opening (NFPA)	Verbreekcontact, vertraagd openend (NFPA)
 NFPA / JIC	NFPA / JIC
-NO contact	Maakcontact
 NO contact (NFPA)	Maakcontact (NFPA)
 NO contact K (GOST)	Maakcontact K (GOST)
 NO contact KA (GB)	Maakcontact KA (GB)
@@ -940,7 +935,6 @@ No plugs	Geen connectoren
 No report block {}	Geen rapportblok {}
 No segment template named {}	Geen segmentsjabloon met de naam {}
 No subproject {}	Geen deelproject {}
-No such PV array	Geen dergelijk PV-veld
 No such object: {}	Object bestaat niet: {}
 No surge protective device at the supply (IEC 60364-4-44)	Geen overspanningsbeveiliging bij de voeding (IEC 60364-4-44)
 No terminal {}	Geen klem {}
@@ -1006,7 +1000,6 @@ Optocoupler	Optocoupler
 Order numbers	Bestelnummers
 Order status	Bestelstatus
 Ordered	Besteld
-Other	Overig
 Other bus device	Overig busapparaat
 Other module	Overige module
 Other properties	Overige eigenschappen
@@ -1227,7 +1220,6 @@ Product	Product
 Production of {}{} failed: {}	Productie van {}{} mislukt: {}
 Production wire list (CSV)	Productiedraadlijst (CSV)
 Project description	Projectbeschrijving
-Project manager	Projectleider
 Project number	Projectnummer
 Project property of the property database (by key)	Projecteigenschap van de eigenschappendatabase (via de sleutel)
 Project revision	Projectrevisie
@@ -1300,7 +1292,6 @@ Rated short-time withstand current	Nominale kortstondig toelaatbare stroom
 Rated speed	Nominaal toerental
 Rated torque	Nominaal koppel
 Rated voltage	Nominale spanning
-Rear wall	Achterwand
 Rectangular punch	Rechthoekige stempel
 Rectifier / inverter AC/DC, bidirectional	Gelijkrichter / omvormer AC/DC, bidirectioneel
 Redline	Redline
@@ -1338,21 +1329,19 @@ Resolution	Resolutie
 Response time	Reactietijd
 Result	Resultaat
 Return / exhaust line	Retour- / ontluchtingsleiding
-Reviewer	Reviewer
 Revision overview (changes)	Revisieoverzicht (wijzigingen)
 Revision table: author of the last revision (2: the one before …)	Revisietabel: auteur van de laatste revisie (2: die daarvoor …)
 Revision table: date of the last revision (2: the one before …)	Revisietabel: datum van de laatste revisie (2: die daarvoor …)
 Revision table: description of the last revision (2: the one before …)	Revisietabel: beschrijving van de laatste revisie (2: die daarvoor …)
 Revision table: index of the last revision (2: the one before …)	Revisietabel: index van de laatste revisie (2: die daarvoor …)
-Right side	Rechterzijde
 Right side panel	Rechterzijwand
+Ring earth electrode	Ringaarde
 Ring terminal	Ringkabelschoen
 Rivet nut	Blindklinkmoer
 RoHS compliant	RoHS-conform
 Rockwell (Local:1:I.Data.0)	Rockwell (Local:1:I.Data.0)
 Roller switch NC	Rolschakelaar verbreekcontact
 Roller switch NO	Rolschakelaar maakcontact
-Roof	Dak
 Roof top	Dak
 Room floor	Vloer van de ruimte
 Room {} stands outside the plot boundary	Ruimte {} staat buiten de perceelgrens
@@ -1485,10 +1474,10 @@ Spare terminal	Reserveklem
 Speed	Toerental
 Spiral	Wenteltrap
 Stainless steel	Roestvrij staal
+Stainless steel V4A	Roestvast staal V4A
 Standard	Norm
 Start / stop circuit with a relay: coil and contacts form one device with cross references and contact image, terminal strip, wire numbers, terminal diagram and connection list.	Start-/stopschakeling met een relais: spoel en contacten vormen één apparaat met kruisverwijzingen en contactbeeld, klemmenstrook, draadnummers, klemmenschema en verbindingslijst.
 Start date	Begindatum
-Started	Gestart
 Starting current ratio	Verhouding aanloopstroom
 Starting torque	Aanloopkoppel
 State of the project: draft, in review, approved, released	Status van het project: concept, in beoordeling, goedgekeurd, vrijgegeven
@@ -1497,6 +1486,7 @@ Station name {} is used {} times	Stationsnaam {} wordt {} keer gebruikt
 Station {} is not connected to bus {}	Station {} is niet verbonden met bus {}
 Station {}: bus system {} does not exist	Station {}: bussysteem {} bestaat niet
 Steam	Stoom
+Steel, hot-dip galvanised	Staal, thermisch verzinkt
 Stock	Voorraad
 Stop category	Stopcategorie
 Storage temperature range	Opslagtemperatuurbereik
@@ -1586,6 +1576,7 @@ The archive contains no project	Het archief bevat geen project
 The archive has no manifest	Het archief heeft geen manifest
 The archive is damaged	Het archief is beschadigd
 The archive unpacks to more than {} MB	Het archief pakt uit tot meer dan {} MB
+The archive was written by a newer version (archive version {})	Het archief is geschreven door een nieuwere versie (archiefversie {})
 The assembly manufacturer must be named (IEC 61439-1, 6.1)	De fabrikant van de verdeelinrichting moet worden vermeld (IEC 61439-1, 6.1)
 The cabinet line-up in its room: L-shaped floor plan, inner wall, door and window, the line-up at its place, a mounting rail with a socket outlet on a wall, a wall-mounted emergency light and a cable tray under the ceiling.	De kastenrij in haar ruimte: L-vormige plattegrond, binnenwand, deur en raam, de kastenrij op haar plaats, een montagerail met een wandcontactdoos, een op de wand gemonteerde noodverlichting en een kabelgoot onder het plafond.
 The configuration is not a JSON object	De configuratie is geen JSON-object
@@ -1598,7 +1589,10 @@ The embedded document {} is damaged	Het ingesloten document {} is beschadigd
 The file is empty	Het bestand is leeg
 The file was written by a newer version (format {}): data this version does not know is lost when saving	Het bestand is geschreven door een nieuwere versie (indeling {}): gegevens die deze versie niet kent, gaan bij het opslaan verloren
 The first column must be Key	De eerste kolom moet Key zijn
+The folder {} already holds the project {}: a split project needs a folder of its own	De map {} bevat al het project {}: een gesplitst project heeft een eigen map nodig
+The folder {} holds files that belong to no project ({}): a split project needs a folder of its own	De map {} bevat bestanden die bij geen project horen ({}): een gesplitst project heeft een eigen map nodig
 The function definition needs a key and a name	De functiedefinitie heeft een sleutel en een naam nodig
+The index of the project names no file layout: it was not written by OpenECraft	De index van het project noemt geen bestandsindeling: hij is niet door OpenECraft geschreven
 The last page cannot be deleted	De laatste pagina kan niet worden verwijderd
 The macro box has no items left	Het macrokader heeft geen elementen meer
 The next free id is already in use	De volgende vrije ID is al in gebruik
@@ -1608,7 +1602,10 @@ The pages were changed after the submission; submit the revision again	De pagina
 The plot boundary crosses itself	De perceelgrens snijdt zichzelf
 The plot boundary encloses no area	De perceelgrens omsluit geen oppervlak
 The plot boundary is no polygon: it crosses itself or has fewer than three corners	De perceelgrens is geen veelhoek: ze snijdt zichzelf of heeft minder dan drie hoeken
+The project cannot be written as files: {}	Het project kan niet als bestanden worden geschreven: {}
+The project file {} is missing	Het projectbestand {} ontbreekt
 The project has no panel layout	Het project heeft geen kastlay-out
+The project was written by a newer version (file layout {})	Het project is geschreven door een nieuwere versie (bestandsindeling {})
 The property needs a name	De eigenschap heeft een naam nodig
 The pump station built into two bayed floor-standing enclosures: busbar system, rails and ducts, door devices and handles, filter fan, light, PE bar, cable glands, a cable passage, climate calculation, duct fill and 3D routing.	Het pompstation ingebouwd in twee aaneengeschakelde vloerkasten: railsysteem, montagerails en kabelgoten, deurapparaten en grepen, filterventilator, verlichting, aardrail, kabelwartels, een kabeldoorvoer, klimaatberekening, gootvulling en 3D-routing.
 The revision is already released	De revisie is al vrijgegeven
@@ -1749,7 +1746,6 @@ Vessel	Vat
 Vibration	Trilling
 Vibration resistance	Trillingsbestendigheid
 View projects	Projecten bekijken
-Viewer	Kijker
 Violations	Overtredingen
 Voltage (V)	Spanning (V)
 Voltage drop (%)	Spanningsval (%)
@@ -1890,7 +1886,6 @@ page properties	pagina-eigenschappen
 pigtail {} mm	pigtail {} mm
 pilot	stuur
 pink	roze
-portrait	staand
 pressure	druk
 red	rood
 released	vrijgegeven
@@ -1928,6 +1923,7 @@ yellow	geel
 {} has no MTTFd, B10d, PL or PFHd	{} heeft geen MTTFd, B10d, PL of PFHd
 {} has no door or window {}	{} heeft geen deur of raam {}
 {} has nothing to manufacture	{} heeft niets te produceren
+{} holds an unresolved merge conflict of git: the file was merged as text. Take one version of the file (git checkout --ours or --theirs), then set up the merge driver for split projects (merge_project_file) before merging again	{} bevat een onopgelost merge-conflict van git: het bestand is als tekst samengevoegd. Neem één versie van het bestand (git checkout --ours of --theirs) en stel daarna het merge-stuurprogramma voor gesplitste projecten in (merge_project_file) voordat u opnieuw samenvoegt
 {} is a built-in function definition	{} is een ingebouwde functiedefinitie
 {} is a built-in property	{} is een ingebouwde eigenschap
 {} is a built-in scheme	{} is een ingebouwd schema
@@ -1973,6 +1969,7 @@ yellow	geel
 {}: PV array {} covers a roof window	{}: PV-veld {} bedekt een dakraam
 {}: PV array {} has {} modules, its device {} has {}	{}: PV-veld {} heeft {} modules, zijn apparaat {} heeft er {}
 {}: PV array {} is mounted tilted on a pitched roof	{}: PV-veld {} is schuin gemonteerd op een hellend dak
+{}: PV array {} lies outside the protection of the air-termination system	{}: PV-veld {} ligt buiten de bescherming van de opvanginrichting
 {}: PV array {} of roof {} lies across a ridge, a hip or the edge of the roof	{}: PV-veld {} van dak {} ligt over een nok, een hoekkeper of de dakrand
 {}: PV array {} of roof {} lies outside the roof	{}: PV-veld {} van dak {} ligt buiten het dak
 {}: PV arrays {} and {} lie over each other	{}: PV-velden {} en {} liggen over elkaar
@@ -1982,6 +1979,7 @@ yellow	geel
 {}: a wire of {} mm² is thinner than the connection point takes (at least {} mm²)	{}: een draad van {} mm² is dunner dan het aansluitpunt opneemt (minstens {} mm²)
 {}: accessory {} fits none of the device's parts	{}: toebehoren {} past op geen enkel artikel van het apparaat
 {}: actuator {} is {} mm above the floor, recommended {} … {} mm	{}: bedieningselement {} ligt {} mm boven de vloer, aanbevolen {} … {} mm
+{}: air-termination rod {} stands off the roofs	{}: opvangstaaf {} staat naast de daken
 {}: auxiliary function(s) without main function	{}: hulpfunctie(s) zonder hoofdfunctie
 {}: breaking capacity {} kA below the short-circuit current {} kA	{}: uitschakelvermogen {} kA lager dan de kortsluitstroom {} kA
 {}: cable duct at {} mm filled {} % (limit {} %)	{}: kabelgoot bij {} mm voor {} % gevuld (grenswaarde {} %)
@@ -1998,13 +1996,17 @@ yellow	geel
 {}: cross-section {} below the {} mm² of power circuits	{}: doorsnede {} kleiner dan de {} mm² van hoofdstroomkringen
 {}: cross-section {} differs from the potential definition ({})	{}: doorsnede {} wijkt af van de potentiaaldefinitie ({})
 {}: cutout of {} on the {} is {} mm from the edge, at least {} mm required	{}: uitsparing van {} op {} ligt {} mm van de rand, minimaal {} mm vereist
+{}: cutout of {} on the {} lies in a restricted cut-out area	{}: uitsparing van {} op {} ligt in een verboden zone voor uitsparingen
 {}: cutout of {} on the {} reaches {} mm beyond its front	{}: uitsparing van {} op {} steekt {} mm buiten de voorkant uit
 {}: cutouts of {} and {} on the {} are too close ({} mm web, at least {} mm)	{}: uitsparingen van {} en {} op {} liggen te dicht bij elkaar ({} mm brug, minimaal {} mm)
 {}: designation '{}' used more than once	{}: benaming '{}' meer dan eens gebruikt
 {}: device tag without device name	{}: apparaataanduiding zonder apparaatnaam
+{}: earth electrode {} has no walls to run along: the building has no rooms or roofs	{}: aardelektrode {} heeft geen muren om langs te lopen: het gebouw heeft geen ruimten of daken
+{}: earth rod {} stands inside the walls of the building	{}: aardpen {} staat binnen de muren van het gebouw
 {}: fault current {} A at {} does not disconnect within {} s (needs {} A)	{}: foutstroom {} A bij {} schakelt niet binnen {} s uit (vereist {} A)
 {}: function texts differ in the single-line diagram and the schematic	{}: functieteksten verschillen in het eenlijnschema en het schema
 {}: hole of {} is too close to the cutout of {} on the {}	{}: boring van {} ligt te dicht bij de uitsparing van {} op {}
+{}: hole of {} on the {} lies in a restricted cut-out area	{}: gat van {} op {} ligt in een verboden zone voor uitsparingen
 {}: hole Ø{} of {} on the {} is {} mm from the edge, at least {} mm required	{}: boring Ø{} van {} op {} ligt {} mm van de rand, minimaal {} mm vereist
 {}: holes of {} and {} on the {} are too close ({} mm web, at least {} mm)	{}: boringen van {} en {} op {} liggen te dicht bij elkaar ({} mm brug, minimaal {} mm)
 {}: hot spot of about {} °C at x = {} mm, y = {} mm of the mounting plate (inside temperature at most {} °C)	{}: hotspot van ongeveer {} °C bij x = {} mm, y = {} mm van de montageplaat (binnentemperatuur maximaal {} °C)
@@ -2062,7 +2064,14 @@ yellow	geel
 {}: terminal {} uses {} levels, its part {} has {}	{}: klem {} gebruikt {} etages, het artikel {} ervan heeft er {}
 {}: terminals {} are {} mm above the floor, at least {} mm required	{}: klemmen {} liggen {} mm boven de vloer, minimaal {} mm vereist
 {}: the busbar system with {} bars joins {} conductors ({}): short circuit	{}: het railsysteem met {} rails verbindt {} geleiders ({}): kortsluiting
+{}: the busbar {} of earth electrode {} does not exist	{}: de rail {} van aardelektrode {} bestaat niet
 {}: the device {} of PV array {} does not exist	{}: het apparaat {} van PV-veld {} bestaat niet
+{}: the earthing busbar {} of PV array {} does not exist	{}: de aardrail {} van PV-veld {} bestaat niet
+{}: the freestanding PV array {} stands on {}	{}: het vrijstaande PV-veld {} staat op {}
+{}: the freestanding PV arrays {} and {} stand on each other	{}: de vrijstaande PV-velden {} en {} overlappen elkaar
+{}: the generator junction box {} of PV array {} does not exist	{}: de generatoraansluitkast {} van PV-veld {} bestaat niet
+{}: the lightning protection has no earth electrode	{}: de bliksembeveiliging heeft geen aardelektrode
+{}: the lightning protection has no walls to run along: the building has no rooms or roofs	{}: de bliksembeveiliging heeft geen muren om langs te lopen: het gebouw heeft geen ruimten of daken
 {}: the module {} of PV array {} has no electrical data	{}: de module {} van PV-veld {} heeft geen elektrische gegevens
 {}: the station has no port {}	{}: het station heeft geen poort {}
 {}: the strings of PV array {} connect {} modules, the array has {}	{}: de strings van PV-veld {} verbinden {} modules, het veld heeft er {}
@@ -2079,6 +2088,7 @@ yellow	geel
 {}: {} carries {} A, the load {} needs {} A	{}: {} voert {} A, de belasting {} heeft {} A nodig
 {}: {} changed after it was mounted	{}: {} is gewijzigd nadat het is gemonteerd
 {}: {} collides with {}	{}: {} botst met {}
+{}: {} down conductors, class {} needs {} round the building	{}: {} afleidingen, klasse {} heeft er {} nodig rond het gebouw
 {}: {} inputs used, the module has {}	{}: {} ingangen gebruikt, de module heeft er {}
 {}: {} is a fluid device, not an electrical one	{}: {} is een vloeistoftechnisch apparaat, geen elektrisch apparaat
 {}: {} is closer than {} mm to a cable duct	{}: {} ligt dichter dan {} mm bij een kabelgoot
@@ -2091,6 +2101,7 @@ yellow	geel
 {}: {} is not made for wall mounting, mount it on a rail	{}: {} is niet bedoeld voor wandmontage, monteer het op een rail
 {}: {} is {} … {} mm above the floor, allowed {} … {} mm	{}: {} ligt {} … {} mm boven de vloer, toegestaan {} … {} mm
 {}: {} kg on the {} exceed its load of {} kg	{}: {} kg op {} overschrijdt de draagkracht van {} kg
+{}: {} lies in a restricted placing area of the {}	{}: {} ligt in een verboden plaatsingszone op {}
 {}: {} modules of PV array {} are not connected to a string	{}: {} modules van PV-veld {} zijn op geen string aangesloten
 {}: {} modules, the head has {} slots	{}: {} modules, de kop heeft {} slots
 {}: {} of {} mm is longer than the stock length of {} mm and has to be joined	{}: {} van {} mm is langer dan de voorraadlengte van {} mm en moet worden samengevoegd

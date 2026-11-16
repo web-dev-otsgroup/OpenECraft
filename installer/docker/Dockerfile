@@ -1,14 +1,19 @@
-# Images of the OpenECraft parts server and project server, built from the repository root:
+# Images of the OpenECraft parts server, project server, web editor and website, built
+# from the repository root:
 #
 #   docker build -f installer/docker/Dockerfile --target parts-server -t openecraft-parts-server .
 #   docker build -f installer/docker/Dockerfile --target project-server -t openecraft-project-server .
+#   docker build -f installer/docker/Dockerfile --target editor-web -t openecraft-web .
+#   docker build -f installer/docker/Dockerfile --target website -t openecraft-website .
 #
-# CI builds them on every push and publishes them to ghcr.io/<owner>/openecraft-parts-server
-# and ghcr.io/<owner>/openecraft-project-server on master and for release tags
-# (docs/installation.md). The Rust version is the one pinned in .github/workflows/ci.yml,
-# cargo-about the one of the installer scripts (docs/releasing.md).
+# CI builds them on every push and publishes them to ghcr.io/<owner>/openecraft-parts-server,
+# ghcr.io/<owner>/openecraft-project-server, ghcr.io/<owner>/openecraft-web and
+# ghcr.io/<owner>/openecraft-website on master and for release tags (docs/installation.md). The Rust version is the one pinned in
+# .github/workflows/ci.yml, cargo-about and trunk the ones of the installer scripts and
+# the job `web` (docs/releasing.md).
 
 ARG RUST_VERSION=1.97.0
+ARG NGINX_VERSION=1.28
 
 FROM rust:${RUST_VERSION}-bookworm AS tools
 RUN cargo install cargo-about@0.9.3 --locked --features cli
@@ -57,3 +62,67 @@ COPY installer/docker/project-server.toml /etc/openecraft/project-server.toml
 ENV OPENECRAFT_PROJECT_SERVER_CONFIG=/etc/openecraft/project-server.toml
 EXPOSE 8091
 ENTRYPOINT ["openecraft-project-server"]
+
+# The web editor: the release build of trunk (as in the job `web`), with the license
+# files next to the page (installer/web/licenses.sh, run by trunk).
+FROM tools AS web-build
+RUN rustup target add wasm32-unknown-unknown \
+    && cargo install trunk@0.22.1 --locked
+WORKDIR /src
+COPY . .
+RUN cargo fetch --locked \
+    && cd openecraft \
+    && trunk build --release
+
+# Static files served by nginx as an unprivileged user on port 8080. The page reaches the
+# parts and project servers from the browser: give their addresses in the editor (the
+# servers allow requests from every origin).
+FROM nginxinc/nginx-unprivileged:${NGINX_VERSION}-alpine AS editor-web
+COPY installer/docker/editor-web.conf /etc/nginx/conf.d/default.conf
+COPY --from=web-build /src/openecraft/dist/ /usr/share/nginx/html/
+EXPOSE 8080
+
+# The website (website/, docs/website.md): the page with its live demos, and the web
+# editor built once more with relative addresses for the folder /editor/ beside it.
+# The WebAssembly, the scripts and the other big texts get a compressed copy beside
+# them, which nginx sends as it is (gzip_static of website.conf) instead of
+# compressing 40 MB for every visitor; config.js is written at every start.
+FROM web-build AS website-build
+RUN cd website \
+    && trunk build --release \
+    && cd ../openecraft \
+    && trunk build --release --public-url ./ --dist /src/target/website-editor \
+    && find /src/website/dist /src/target/website-editor -type f \
+        \( -name '*.wasm' -o -name '*.js' -o -name '*.css' -o -name '*.json' -o -name '*.svg' -o -name 'THIRD-PARTY-LICENSES.html' \) \
+        ! -name config.js -exec gzip -9 -k {} +
+
+# Static files served by nginx as an unprivileged user on port 8080: the website at /,
+# the web editor at /editor/. Where the links of the page lead and the legal notice
+# of the operator are set with the variables below (website/config.js; an empty link
+# takes the address named there, an empty OPENECRAFT_LEGAL_NAME hides the notice), the
+# public address of the site for search engines and link previews with
+# OPENECRAFT_SITE_URL: the image writes the settings of the page, the parts that need
+# the address and its nginx site at every start.
+FROM nginxinc/nginx-unprivileged:${NGINX_VERSION}-alpine AS website
+ENV OPENECRAFT_SITE_URL= \
+    OPENECRAFT_EDITOR_URL=editor/ \
+    OPENECRAFT_REPOSITORY_URL=https://github.com/nilres/OpenECraft \
+    OPENECRAFT_DOWNLOADS_URL= \
+    OPENECRAFT_DOCUMENTATION_URL= \
+    OPENECRAFT_ISSUES_URL= \
+    OPENECRAFT_LEGAL_NAME= \
+    OPENECRAFT_LEGAL_ADDRESS= \
+    OPENECRAFT_LEGAL_EMAIL= \
+    OPENECRAFT_LEGAL_PHONE= \
+    OPENECRAFT_LEGAL_REPRESENTATIVE= \
+    OPENECRAFT_LEGAL_REGISTER= \
+    OPENECRAFT_LEGAL_VAT_ID= \
+    OPENECRAFT_LEGAL_RESPONSIBLE= \
+    OPENECRAFT_LEGAL_TEXT= \
+    OPENECRAFT_LEGAL_PRIVACY=
+COPY installer/docker/website.conf /etc/nginx/templates/default.conf.template
+COPY --chmod=0755 installer/docker/website-config.sh /docker-entrypoint.d/40-openecraft-website-config.sh
+COPY --chmod=0755 installer/docker/website-site.sh /docker-entrypoint.d/41-openecraft-website-site.sh
+COPY --from=website-build /src/website/dist/ /usr/share/nginx/html/
+COPY --from=website-build /src/target/website-editor/ /usr/share/nginx/html/editor/
+EXPOSE 8080

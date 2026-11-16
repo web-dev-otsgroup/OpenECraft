@@ -1,4 +1,4 @@
-# English<TAB>한국어 – the editor (openecraft/) (texts without a line are shown in English). Sorted by the English text: cargo run -p openecraft-i18n --example tidy
+# English<TAB>한국어 – the editor (openecraft/) and its shell, session and views (openecraft-shell, -session, -canvas) (texts without a line are shown in English). Sorted by the English text: cargo run -p openecraft-i18n --example tidy
    |  Potential {}	   |  전위 {}
   (built-in)	  (기본 제공)
 (choose a part)	(부품 선택)
@@ -8,7 +8,6 @@
 (empty)	(비어 있음)
 (included)	(포함됨)
 (no cable highlighted)	(강조 표시된 케이블 없음)
-(no structure)	(구조 없음)
 (none)	(없음)
 (project default)	(프로젝트 기본값)
 (repairable)	(복구 가능)
@@ -42,13 +41,13 @@
 3D macro	3D 매크로
 3D macro {} inserted	3D 매크로 {} 삽입됨
 3D macro {} saved	3D 매크로 {} 저장됨
-3D view	3D 보기
 =A1+CAB1	=A1+CAB1
 ? = not in the schematic yet	? = 아직 회로도에 없음
 A baseline stores the whole project (pages, devices, parts, settings). Releasing a revision stores one.	기준선은 전체 프로젝트(페이지, 장치, 부품, 설정)를 저장합니다. 개정을 릴리스하면 기준선이 하나 저장됩니다.
 A cable of the bus type for every connection without cable	케이블이 없는 모든 연결에 버스 유형의 케이블
 A cutout of the same size at the same place in the neighbour's side wall: together they are a cable passage	인접 외함 측벽의 같은 위치에 있는 같은 크기의 컷아웃: 함께 케이블 통로를 이룹니다
 A file of the same name in the folder gets a new version (checked out and in), otherwise the file is added	폴더에 같은 이름의 파일이 있으면 새 버전이 생성되고(체크 아웃 후 체크 인), 그렇지 않으면 파일이 추가됩니다
+A folder with one small file per page, device and part instead of one project file, for version control such as git	하나의 프로젝트 파일 대신 페이지, 장치 및 부품마다 작은 파일이 하나 있는 폴더, git과 같은 버전 관리용
 A large text across every page, e.g. DRAFT while a revision is being prepared; texts take placeholders, empty: no stamp.	모든 페이지에 걸친 큰 텍스트(예: 개정 준비 중 '초안'). 자리 표시자 사용 가능, 비어 있음 = 없음.
 A level on top of the highest one	가장 높은 층 위의 층
 A local file opens locally, a server project is opened on the project server again	로컬 파일은 로컬에서 열리고, 서버 프로젝트는 프로젝트 서버에서 다시 열립니다
@@ -65,6 +64,8 @@ A reference point at the origin of the plant	설비 원점의 기준점
 A report block generates the pages of a report, e.g. one terminal diagram per strip, and updates them.	보고서 블록은 보고서의 페이지(예: 단자대별 단자 다이어그램 하나)를 생성하고 업데이트합니다.
 A schematic page 3.1, 3.2, … after the current page, kept as sub-page when renumbering	현재 페이지 다음의 회로도 페이지 3.1, 3.2, …(번호를 다시 매길 때 하위 페이지로 유지됨)
 A schematic page per planned device with a page macro that is not in the schematic yet (selected segment, otherwise all)	페이지 매크로가 있고 아직 회로도에 없는 계획된 장치마다 회로도 페이지 한 개(선택한 세그먼트, 없으면 모두)
+A split project (.oecp) is a folder with one small file per page, device, part and embedded file, for version control such as git: File › Save as split project.	분할 프로젝트(.oecp)는 페이지, 장치, 부품 및 포함된 파일마다 작은 파일이 하나 있는 폴더로, git과 같은 버전 관리용입니다: 파일 › 분할 프로젝트로 저장.
+A split project is a folder of files: the browser cannot open it. Convert it to a project file (.oec) or an archive (.oecz) first.	분할 프로젝트는 파일이 들어 있는 폴더입니다. 브라우저에서는 열 수 없습니다. 먼저 프로젝트 파일(.oec) 또는 아카이브(.oecz)로 변환하세요.
 A template of this name is replaced.	이 이름의 템플릿이 교체됩니다.
 A template sets the page type, plot frame, title block, structure and description of a new page and places its content.	템플릿은 새 페이지의 페이지 유형, 플롯 프레임, 표제란, 구조 및 설명을 설정하고 내용을 배치합니다.
 A way through free air costs this many times the way in a duct or routing path	자유 공간을 지나는 경로의 비용이 덕트나 배선 경로를 지나는 경우의 몇 배인지
@@ -77,7 +78,6 @@ Accept as checked	확인됨으로 승인
 Accepted messages ({})	승인된 메시지({})
 Active	활성
 Actuators on the door	도어의 조작부
-Add	추가
 Add a command	명령 추가
 Add a target language to translate the project texts.	프로젝트 텍스트를 번역하려면 대상 언어를 추가하세요.
 Add filter	필터 추가
@@ -110,6 +110,9 @@ Air at devices at most	장치 주변 공기 최대 온도
 Air temperature	공기 온도
 Air temperature at the devices	장치 주변 공기 온도
 Air temperature {} … {} °C	공기 온도 {} … {} °C
+Air-termination conductors on the ridges and hips (a mesh on flat roofs), down conductors along the outer walls with test joints, ending on the earth electrodes	용마루와 추녀마루의 수뢰 도체(평지붕에서는 메시), 외벽을 따라 시험 단자가 있는 인하 도선으로 접지극에서 끝납니다
+Air-termination rod	피뢰침
+Air-termination rod placed on building {}; click for the next one · Esc: stop	건물 {}에 피뢰침을 배치했습니다. 다음 것은 클릭 · Esc: 종료
 Align	맞춤
 Aligned	정렬
 Alignment	정렬
@@ -126,6 +129,7 @@ All pages	모든 페이지
 All report pages	모든 보고서 페이지
 All user symbols as library file	모든 사용자 심볼(라이브러리 파일)
 All wires of this potential are highlighted.	이 전위의 모든 전선이 강조 표시됩니다.
+Also copy revisions, baselines and review records	개정, 기준선 및 검토 기록도 복사
 Also the groups that do not fit the function definition	기능 정의에 맞지 않는 그룹도 포함
 Altitude	고도
 Always	항상
@@ -154,6 +158,7 @@ Arc	호
 Archive and version	아카이브 및 버전
 Archive project…	프로젝트 아카이브…
 Arms	가지
+Array	어레이
 As defined by the check	검사에서 정의한 대로
 As the rules say ({})	규칙에 따름 ({})
 Aspects of the pages	페이지의 측면
@@ -182,8 +187,7 @@ Automatic ({})	자동({})
 Automatic accessories	자동 부속품
 Automatic configuration	자동 구성
 Automatic placement	자동 배치
-Automation	자동화
-Aux	보조
+Automatic: {}	자동: {}
 Avoid:	회피:
 Back	뒤로
 Back to the project (Esc)	프로젝트로 돌아가기 (Esc)
@@ -218,6 +222,9 @@ Boundary	경계
 Breaking capacity against the short-circuit current at each protective device of the mains, disconnection at the lowest fault current at the end of its circuit, short-circuit withstand of the cables and selectivity with the device upstream.	전원의 각 보호 장치에서 단락 전류 대비 차단 용량, 회로 끝의 최소 고장 전류에서의 차단, 케이블의 단락 내량 및 상위 장치와의 선택 차단.
 Bridge: four wires; the connection comes in at one side and goes to the three others, the opposite side first	브리지: 네 연결선. 연결은 한쪽에서 들어와 다른 세 쪽으로, 먼저 반대쪽으로 갑니다
 Building {} added with a level at ground level	지상층 하나로 건물 {}을(를) 추가했습니다
+Building {} at x {} m, z {} m	건물 {} 위치 x {} m, z {} m
+Building {} at x {} m, z {} m, turned {}°	건물 {} 위치 x {} m, z {} m, {}° 회전
+Building {} at x {} m, z {} m, turned {}°: it stands outside the plot boundary	건물 {} 위치 x {} m, z {} m, {}° 회전: 부지 경계 밖에 있습니다
 Built-in frames cannot be changed; copy one to adapt it.	기본 제공 프레임은 변경할 수 없습니다. 수정하려면 복사하세요.
 Built-in scheme: copy it to change it.	기본 제공 스키마: 변경하려면 복사하세요.
 Built-in title blocks are read only – use “Copy as new” to make your own.	기본 제공 표제란은 읽기 전용입니다. 고유 표제란을 만들려면 “새로 복사”를 사용하세요.
@@ -252,12 +259,16 @@ Change request	변경 요청
 Change requests	변경 요청
 Change requests (CSV, JSON)	변경 요청(CSV, JSON)
 Changed against the frozen routes:	고정된 경로 대비 변경됨:
-Changed by another user in the meantime, your change was replaced: {}	그동안 다른 사용자가 변경하여 내 변경 내용이 교체되었습니다: {}
+Changed by another user before you got the lock	잠금을 받기 전에 다른 사용자가 변경함
+Changed by another user in the meantime: {}. Your version is kept in the Project server pane.	그동안 다른 사용자가 변경함: {}. 내 버전은 프로젝트 서버 창에 보관됩니다.
 Changed cells of a CSV or Excel file exported here (rows by their key)	여기에서 내보낸 CSV 또는 Excel 파일의 변경된 셀(행은 키로 식별)
 Changed message levels ({})	변경된 메시지 수준({})
 Changed since mounted: was at X {} mm, Y {} mm with part {}	장착 후 변경됨: 이전 위치 X {} mm, Y {} mm, 부품 {}
 Changed since wired: was {} · {} · {}	배선 후 변경됨: 이전 값 {} · {} · {}
 Changes	변경 내용
+Changes not saved on the project server yet: finished changes are saved automatically within {} s	변경 내용이 아직 프로젝트 서버에 저장되지 않았습니다: 완료된 변경 내용은 {}초 안에 자동으로 저장됩니다
+Changes not saved on the project server: save them when the server answers again.	변경 내용이 프로젝트 서버에 저장되지 않았습니다: 서버가 다시 응답하면 저장하십시오.
+Changes not saved on the project server: they are saved as soon as the server answers again.	변경 내용이 프로젝트 서버에 저장되지 않았습니다: 서버가 다시 응답하면 바로 저장됩니다.
 Changes since revision {}	개정 {} 이후 변경 내용
 Changes the page order; the name stays	페이지 순서를 바꿉니다. 이름은 그대로입니다
 Changes the tag of all functions of this device	이 장치의 모든 기능의 태그를 변경합니다
@@ -289,10 +300,14 @@ Choose another project	다른 프로젝트 선택
 Choose file…	파일 선택…
 Choose image…	이미지 선택…
 Choose pages	페이지 선택
+Choose the building.	건물을 선택하세요.
 Chooses the pages whose structure starts with this	구조가 이 값으로 시작하는 페이지를 선택합니다
 Circle	원
 Circuits of a generic manifold	일반 분배기의 회로 수
+Class of the lightning protection system: the distance of its down conductors, the mesh of flat roofs and the protection angle	피뢰 시스템 등급: 인하 도선 간격, 평지붕 메시 및 보호각
+Class {}	등급 {}
 Clear	지우기
+Clear the search	검색 지우기
 Clearance	이격 거리
 Click	클릭
 Click a text: open its link	텍스트 클릭: 링크 열기
@@ -301,6 +316,7 @@ Click centre, then a point on the circle	중심을 클릭한 후 원 위의 점�
 Click in the panel layout: a single item of an assembly	패널 레이아웃에서 클릭: 어셈블리의 단일 항목
 Click into the page to place the image	페이지를 클릭하여 이미지를 배치하세요
 Click into the page to place {}	페이지를 클릭하여 {}을(를) 배치하세요
+Click on a roof of building {}	건물 {}의 지붕을 클릭하세요
 Click on a wire to place the connection definition point	전선을 클릭하여 연결 정의점 배치
 Click on the 4 mm grid	4mm 그리드를 클릭하세요
 Click on the wall: the part goes there at its mounting height	벽을 클릭하십시오: 부품이 설치 높이에 놓입니다
@@ -324,17 +340,23 @@ Click two corners	두 모서리를 클릭하세요
 Click two corners of the structure box, then set its identifiers in the properties · Esc or right click to finish	구조 박스의 두 모서리를 클릭한 다음 속성에서 식별자를 설정합니다 · Esc 또는 오른쪽 클릭으로 종료
 Click two nodes to connect them	두 노드를 클릭하여 연결
 Click two points to measure from one to the other · Esc: stop	두 점을 클릭하여 한 점에서 다른 점까지 측정 · Esc: 중지
+Click where an air-termination rod goes on a roof · Esc: stop	지붕 위 피뢰침 위치를 클릭 · Esc: 종료
+Click where an earth rod goes, at or round a building · Esc: stop	건물 옆이나 주위의 접지봉 위치를 클릭 · Esc: 종료
 Click where four wires meet: the bridge leads the connection from one side to the three others, the opposite side first · {} turns it · Esc or right click to finish	네 연결선이 만나는 지점을 클릭: 브리지는 연결을 한쪽에서 다른 세 쪽으로, 먼저 반대쪽으로 이끕니다 · {} 로 회전 · Esc 또는 오른쪽 클릭으로 종료
 Click where it is in the site plan	배치도에서 해당 위치를 클릭하십시오
+Click where the air-termination rods go on the roofs in the site plan	배치도에서 지붕 위 피뢰침 위치를 클릭합니다
+Click where the earth rods go in the site plan	배치도에서 접지봉 위치를 클릭합니다
+Click where the middle of a freestanding PV array goes in the site plan	배치도에서 지상형 태양광 어레이의 중심이 놓일 위치를 클릭하십시오
+Click where the middle of a freestanding PV array goes · Esc: stop	지상형 태양광 어레이의 중심이 놓일 위치를 클릭 · Esc: 종료
 Click where the reference point is	기준점이 있는 곳을 클릭하십시오
 Click where three wires meet: the T-junction names the device the wires start from and the order of their targets · {} turns it where no wires meet yet · Esc or right click to finish	세 연결선이 만나는 지점을 클릭: T분기점은 전선이 출발하는 장치와 대상의 순서를 지정합니다 · 아직 연결선이 만나지 않는 곳에서는 {} 로 회전 · Esc 또는 오른쪽 클릭으로 종료
 Click where two wires cross: the crossing connects them and leads each end of its line straight on first, then across · {} turns it · Esc or right click to finish	두 연결선이 교차하는 지점을 클릭: 교차는 둘을 연결하고 선의 각 끝을 먼저 직진으로, 다음에 가로로 이끕니다 · {} 로 회전 · Esc 또는 오른쪽 클릭으로 종료
 Click where two wires meet at a right angle, or where connection points face each other across the corner: with Auto-connect on, wires are drawn to it · {} turns it · Esc or right click to finish	두 연결선이 직각으로 만나는 지점 또는 접속점이 모서리를 사이에 두고 마주하는 지점을 클릭: 자동 연결이 켜져 있으면 여기까지 연결선이 그려집니다 · {} 로 회전 · Esc 또는 오른쪽 클릭으로 종료
 Click while moving	이동하는 동안 클릭
 Click, or drag it into the page	클릭하거나 페이지로 끌어 놓기
+Clicked at x {} mm, z {} mm in the floor plan of the building: a new roof window or PV array goes there.	건물 평면도의 x {} mm, z {} mm를 클릭했습니다: 새 천창 또는 태양광 어레이가 그곳에 놓입니다.
 Climate (IEC 60890)	온도 관리(IEC 60890)
 Clipboard	클립보드
-Close	닫기
 Close door	도어 닫기
 Close page tab	페이지 탭 닫기
 Close shared project	공유 프로젝트 닫기
@@ -365,13 +387,16 @@ Comments ({})	주석({})
 Comments a reviewer made in a PDF export of the project (Acrobat or another PDF viewer)	검토자가 프로젝트의 PDF 내보내기에 작성한 주석(Acrobat 또는 다른 PDF 뷰어)
 Comments and markup	주석과 마크업
 Company library	회사 라이브러리
+Compare	비교
 Compare and baselines	비교 및 기준선
 Compare with	비교 대상
 Compare with a baseline, a revision or another project file and take differences over	기준선, 개정 또는 다른 프로젝트 파일과 비교하고 차이점 가져오기
 Complete tag: {}\nAspects missing here are taken from the page (=function +location) or the structure box the symbol lies in.	전체 태그: {}\n여기에 없는 측면은 페이지(=기능 +위치) 또는 기호가 있는 구조 박스에서 가져옵니다.
+Concrete base	콘크리트 받침
 Condition	조건
 Condition (OPTION=value & …)	조건(OPTION=값 & …)
 Conductive frame	도전성 프레임
+Conductor	도체
 Conflicts	충돌
 Connected devices	연결된 장치
 Connected to:	연결 대상:
@@ -404,6 +429,9 @@ Copy	복사
 Copy / cut / paste (devices get new tags)	복사 / 잘라내기 / 붙여넣기(장치에 새 태그가 지정됨)
 Copy as new	새로 복사
 Copy built-in…	기본 제공 항목 복사…
+Copy of	복사 원본
+Copy project	프로젝트 복사
+Copy project…	프로젝트 복사…
 Core designations separated by blanks	공백으로 구분된 심선 명칭
 Core labels placed by hand	수동으로 배치된 심선 레이블
 Cores 1, 2, 3 … for the wires crossed, plus GNYE	교차된 전선에 심선 1, 2, 3 …, 그리고 GNYE
@@ -415,14 +443,21 @@ Covers what is behind the text	텍스트 뒤에 있는 내용을 가립니다
 Create	만들기
 Create an enclosure in the panel layout first.	먼저 패널 레이아웃에서 외함을 만드세요.
 Create an enclosure or a room (Layout space › New enclosure, New room) to start the panel layout.	외함 또는 방을 만들어(레이아웃 공간 › 새 외함, 새 방) 레이아웃을 시작하십시오.
+Create and open	만들고 열기
 Create baseline	기준선 만들기
 Create bus cables	버스 케이블 만들기
 Create draft	초안 만들기
 Create revision	개정 만들기
+Created on the server	서버에서 만든 정보
+Created {}	생성: {}
+Created {} as a copy of {} and opened it	{}을(를) {}의 사본으로 만들고 열었습니다
+Creates a new project on the server from the saved state of this one; you set its name and properties first	이 프로젝트의 저장된 상태로 서버에 새 프로젝트를 만듭니다. 먼저 이름과 속성을 설정합니다
+Creating {} as a copy of {}…	{}을(를) {}의 사본으로 만드는 중…
 Cross references…	상호 참조…
 Crossed wires	교차된 전선
 Ctrl + click on the text opens it as well	텍스트를 Ctrl + 클릭해도 열립니다
 Ctrl+A	Ctrl+A
+Current at maximum power	최대 전력 시 전류
 Current-carrying capacity: {} × IEC 60204-1, table 6	허용 전류: {} × IEC 60204-1, 표 6
 Customer rule sets	고객 규칙 세트
 Customer, plant or standard	고객, 공장 또는 표준
@@ -435,6 +470,7 @@ Cut length step tubes	튜브 절단 길이 단위
 Cut length step wires	전선 절단 길이 단위
 Cutout {} × {} mm	컷아웃 {} × {} mm
 Cutting allowance per end	끝당 절단 여유
+DC leads	직류 케이블
 DRAFT	초안
 DRAFT, FOR APPROVAL and APPROVED in the current language; nothing once released	현재 언어의 '초안', '승인 대기', '승인됨'. 릴리스 후에는 없음
 DWG import failed: {}	DWG 가져오기 실패: {}
@@ -458,9 +494,11 @@ Define all used	사용된 항목 모두 정의
 Defined potentials	정의된 전위
 Del	Del
 Delete PV array	태양광 어레이 삭제
+Delete air-termination rod	피뢰침 삭제
 Delete cable (its wires are removed from it)	케이블 삭제(케이블의 전선은 케이블에서 제거됨)
 Delete comment	주석 삭제
 Delete connection point	연결 지점 삭제
+Delete earth electrode	접지극 삭제
 Delete element	요소 삭제
 Delete enclosure	외함 삭제
 Delete enclosure {} with everything placed in it?	외함 {}을(를) 그 안에 배치된 모든 것과 함께 삭제하시겠습니까?
@@ -484,10 +522,14 @@ Delete the property and all its values	속성 및 모든 값 삭제
 Delete this workspace	이 작업 공간 삭제
 Delete variant	변형 삭제
 Delete zone	구역 삭제
+Deletes this copy of your changes for good	이 변경 내용의 사본을 영구히 삭제합니다
 Depth / mounted at	깊이 / 장착 위치
+Depth below the ground	지면 아래 깊이
 Depth from / to	깊이 시작 / 끝
 Depth in the floor	바닥 안 깊이
+Depth of its top below the ground	윗단의 지면 아래 깊이
 Derive project definition	프로젝트 정의 파생
+Describe a problem with a screenshot and the technical details and open it as a new issue on GitHub	스크린샷과 기술 정보로 문제를 설명하고 GitHub에서 새 이슈로 엽니다
 Descriptions	설명
 Deselect	선택 해제
 Designations separated by blanks; empty: those of the symbol	공백으로 구분된 명칭, 비워 두면 심볼의 명칭
@@ -520,6 +562,8 @@ Devices, connections and terminals: filter, fill, find and replace, CSV	장치, 
 Dew point	이슬점
 Diameter	직경
 Diameter / bends	직경 / 굽힘
+Diameter of a round wire; 0: a flat strip 30 x 3.5 mm	원형 선의 직경; 0: 평형 띠 30 x 3.5 mm
+Diameter of the rod	피뢰침 직경
 Dictionary for translators: one column per language	번역자용 사전: 언어별 열 하나
 Digits	자릿수
 Dimension	치수
@@ -546,7 +590,6 @@ Divider	구분판
 Do the gesture…	제스처를 하세요…
 Dock	도킹
 Document {} embedded ({})	문서 {} 포함됨({})
-Documents	문서
 Done ones too	완료된 항목 포함
 Done.	완료.
 Door (front)	도어(앞면)
@@ -555,9 +598,11 @@ Door NC data (DWG)	도어 NC 데이터(DWG)
 Door NC data (DXF)	도어 NC 데이터(DXF)
 Door clearance	도어 이격 거리
 Door cutouts (CSV)	도어 컷아웃(CSV)
+Door hinge	도어 힌지
 Door: {} devices, {} cutouts	도어: 장치 {}개, 컷아웃 {}개
 Dot	점
 Double-click	두 번 클릭
+Down conductors	인하 도선
 Download into database	데이터베이스로 다운로드
 Download project	프로젝트 다운로드
 Downloaded {} (version {})	{}을(를) 다운로드했습니다(버전 {})
@@ -568,6 +613,7 @@ Draft	초안
 Draft of revision {} created	개정 {}의 초안 만들어짐
 Draft of revision {} discarded	개정 {}의 초안 취소됨
 Drag	끌기
+Drag a building to move it · R: turn the building under the pointer by 90° · Esc: stop	건물을 드래그하여 이동 · R: 포인터 아래 건물을 90° 회전 · Esc: 종료
 Drag a connection point designation of the selected symbol to place it.	선택한 심볼의 연결 지점 명칭을 끌어서 배치하세요.
 Drag an end of a selected wire to move only that end. Alt-drag reverses Keep connections.	선택한 전선의 끝을 드래그하면 그 끝만 이동합니다. Alt를 누른 채 드래그하면 연결 유지가 반대로 됩니다.
 Drag an entry into the page, or click it and then click into the page.	항목을 페이지로 끌어 놓거나, 항목을 클릭한 다음 페이지를 클릭하세요.
@@ -607,12 +653,21 @@ Duct fill limit	덕트 충전율 한계
 Duplicate	복제
 Each example builds on the one before and shows more of the features.	각 예제는 이전 예제를 기반으로 더 많은 기능을 표시합니다.
 Each point-to-point connection can belong to a harness	각 점대점 연결은 하네스에 속할 수 있습니다
+Earth electrodes	접지극
+Earth electrodes of a building (foundation and ring earth electrodes, earth rods clicked into the site plan) and its lightning protection with the air-termination rods clicked onto its roofs	건물의 접지극 (기초 및 환상 접지극, 배치도에서 클릭해 놓는 접지봉)과 지붕에 클릭해 놓는 피뢰침을 포함한 피뢰
+Earth rod placed at building {}; click for the next one · Esc: stop	건물 {}에 접지봉을 배치했습니다. 다음 것은 클릭 · Esc: 종료
+Earthing and lightning protection	접지 및 피뢰
+Earthing busbar	접지 부스바
+Earthing conductor	접지 도체
+Earthing points	접지점
 Earthing system	접지 계통
 Easting, northing	동쪽 좌표, 북쪽 좌표
 Eaves	처마
 Edge length of the routing grid: smaller is finer and slower	배선 경로 그리드의 모서리 길이: 작을수록 정밀하지만 느려짐
+Edge the door is hinged at, seen from the front: the 3D view opens the door there and the door wires run over it	정면에서 본 도어 힌지 쪽 가장자리: 3D 보기는 그곳에서 도어를 열고 도어 배선은 그곳을 지나갑니다
 Edit in table	표에서 편집
 Edit in table…	표에서 편집…
+Edit mode: drag the buildings to their places in the site plan and turn them; a click on a room no longer opens it	편집 모드: 배치도에서 건물을 제자리로 드래그하고 회전합니다. 방을 클릭해도 더 이상 열리지 않습니다
 Editable copy of this plot frame	이 플롯 프레임의 편집 가능한 복사본
 Editable copy of this title block	이 표제란의 편집 가능한 복사본
 Effective surface	유효 표면적
@@ -688,7 +743,6 @@ Fill	채우기
 Fill level	충전율
 Filled	채움
 Filter connections…	연결 필터…
-Filter devices…	장치 필터…
 Filter…	필터…
 Find	찾기
 Find a command	명령 찾기
@@ -700,13 +754,12 @@ Finds the Vault items of the project parts by item number or Part Number propert
 Find…	찾기…
 Finish a wire, polyline, polygon or wall	전선, 폴리선, 다각형 또는 벽 마치기
 Finish or cancel the drawing, then back to selecting	그리기를 끝내거나 취소한 뒤 선택으로 돌아가기
+Finished changes of a project opened from the project server are saved to it by themselves; input under way is saved once it is finished. Locks are kept. Save (Ctrl+S) still saves at once.	프로젝트 서버에서 연 프로젝트의 완료된 변경 내용은 자동으로 서버에 저장됩니다. 진행 중인 입력은 완료된 후 저장됩니다. 잠금은 유지됩니다. 저장 (Ctrl+S)은 계속 바로 저장합니다.
 First row	첫 행
-Fit	맞춤
 Fit page	페이지 맞춤
 Fits {}	{}에 호환
 Fitted into the rectangle keeping its aspect ratio (PNG, JPEG)	가로세로 비율을 유지하며 사각형에 맞춤(PNG, JPEG)
 Float	분리
-Floor plan	평면도
 Floor plan with {} walls	벽 {}개의 평면도
 Floor-standing part	바닥 설치 부품
 Fluid and process	유체 및 공정
@@ -728,6 +781,12 @@ Frame of all pages that do not choose one	프레임을 선택하지 않은 모�
 Free air	자유 공간
 Free air factor	자유 공간 계수
 Free space in front of every device on the plate up to the door; parts add theirs (Service space)	플레이트의 각 장치 앞에서 도어까지의 여유 공간. 부품은 자체 값을 추가합니다(Service space)
+Freestanding	지상형
+Freestanding PV array {}	지상형 태양광 어레이 {}
+Freestanding PV array {} placed; click for the next one · Esc: stop	지상형 태양광 어레이 {}을(를) 배치했습니다. 다음 것은 클릭 · Esc: 종료
+Freestanding PV array {}: {} modules	지상형 태양광 어레이 {}: 모듈 {}개
+Freestanding PV array {}: {} modules, {} kWp	지상형 태양광 어레이 {}: 모듈 {}개, {} kWp
+Freestanding PV arrays	지상형 태양광 어레이
 Freeze all routes	모든 경로 고정
 Freeze route	경로 고정
 Frequency	주파수
@@ -761,6 +820,7 @@ Generated page – edit via page properties	생성된 페이지 – 페이지 �
 Generates the pages of all report blocks again	모든 보고서 블록의 페이지를 다시 생성합니다
 Generates {} pages	페이지 {}개 생성
 Generation failed: {}	생성 실패: {}
+Generator junction box	접속함
 Generic	일반
 German zones (DIN 18015-3)	독일 구역 (DIN 18015-3)
 Getting started	시작하기
@@ -770,6 +830,8 @@ Go to page	페이지로 이동
 Graphic line	그래픽 선
 Graphic rectangle	그래픽 사각형
 Graphical form	그래픽 양식
+Greatest distance of the conductor holders on the roof and on the walls	지붕과 벽의 도체 지지대 최대 간격
+Greatest distance of the posts along a table	가대를 따라 말뚝의 최대 간격
 Greatest distance of the roof hooks along a rail	레일을 따른 지붕 후크의 최대 간격
 Grid	그리드
 Grid north	도북
@@ -778,7 +840,6 @@ Grid {} mm	그리드 {} mm
 Group as assembly	어셈블리로 그룹화
 Group column	그룹 열
 Group in the symbol list, e.g. your company	심볼 목록의 그룹(예: 회사 이름)
-Group the pages by structure	구조별로 페이지 그룹화
 Groups shown	표시되는 그룹
 HEATER=yes	HEATER=yes
 Hardware configuration and PLC tags for TIA Portal and other PLC tools	TIA Portal 및 기타 PLC 도구용 하드웨어 구성 및 PLC 태그
@@ -792,15 +853,22 @@ Height above sea level	해발 고도
 Height above the floor	바닥으로부터의 높이
 Height above the mounting plate	장착 플레이트 위 높이
 Height above the plate	플레이트 위 높이
+Height of the lower edge of the modules above the ground	지면에서 모듈 아래쪽 가장자리까지의 높이
 Height of the plinth, 0 without plinth	받침대 높이, 0이면 받침대 없음
+Height of the rod above the covering	지붕재 위 피뢰침 높이
+Height of the test joints above the ground	시험 단자의 지면 위 높이
 Heights above floor (IEC 60204-1)	바닥으로부터의 높이(IEC 60204-1)
 Held while clicking, moving or scrolling. Ctrl is Cmd on macOS.	클릭, 이동 또는 스크롤하는 동안 누릅니다. macOS에서 Ctrl은 Cmd입니다.
 Help	도움말
+Hide PV modules	태양광 모듈 숨기기
 Hide the groups you do not need and put the commands you use most into own groups.	필요 없는 그룹은 숨기고 자주 쓰는 명령은 자체 그룹에 넣습니다.
 Highest phase unbalance	최대 상 불평형
 Highest short-circuit current	최대 단락 전류
 Highest voltage (open circuit at the lowest temperature), mean and lowest voltage (at maximum power at the mean and the highest temperature), current at maximum power, peak power	최고 전압 (최저 온도에서의 개방 전압), 평균 및 최저 전압 (평균 및 최고 온도에서 최대 출력 시), 최대 출력 시 전류, 피크 출력
 Highest: the lowest voltage	최고: 최저 전압
+Holder distance	지지대 간격
+Holders on the roof	지붕 위 지지대
+Holders on the walls	벽의 지지대
 Hole to sheet edge	구멍과 판금 가장자리 간 거리
 Home	홈
 Hook distance	후크 간격
@@ -815,6 +883,8 @@ Hose defaults and PCT loops of the pre-planning	사전 계획의 호스 기본�
 Hose number	호스 번호
 Hoses and pipes	호스 및 배관
 Hoses rated below it are errors; 0 = not checked	정격이 이보다 낮은 호스는 오류입니다. 0 = 검사 안 함
+How far inside the outer walls	외벽 안쪽 거리
+How far outside the outer walls	외벽 바깥쪽 거리
 How the leaf opens: hinged at its left or right edge (seen from inside the room), into or out of the room, or sliding along the wall	문짝이 열리는 방식: 왼쪽 또는 오른쪽 가장자리에 경첩(실내에서 볼 때), 실내 쪽 또는 바깥쪽으로 열림, 또는 벽을 따라 미닫이
 How the wire is terminated at this end; by default as chosen for the connection point or its device, otherwise as the layout sets ferrules	이 끝단에서 전선을 마감하는 방식. 기본값은 연결점 또는 그 장치에 선택한 것, 없으면 레이아웃의 페룰 설정을 따릅니다
 How wires jump over the wires they cross, how T-connections are marked and whether moved items route their connections anew	전선이 교차하는 전선을 넘는 방식, T 연결을 표시하는 방식, 이동한 항목의 연결을 다시 배선할지 여부
@@ -848,6 +918,7 @@ Import symbol library…	심볼 라이브러리 가져오기…
 Import symbol table…	심볼 테이블 가져오기…
 Imported	가져옴
 Imported {} entries of the property library	속성 라이브러리 항목 {}개를 가져왔습니다
+Imported {} into the parts database	{}을(를) 부품 데이터베이스로 가져옴
 Imported {} macros	매크로 {}개 가져옴
 Imported {} page templates	페이지 템플릿 {}개 가져옴
 Imported {} parts into the database	부품 {}개를 데이터베이스로 가져옴
@@ -890,11 +961,11 @@ Instead of user name and password	사용자 이름 및 암호 대신
 Instruments in the P&ID carry function letters and loop number in their label (TIC 101); their device tag links them with the schematic.	P&ID의 계기는 레이블에 기능 문자와 루프 번호를 포함합니다(TIC 101). 장치 태그로 회로도와 연결됩니다.
 Insulation	절연
 Interruption points refer to	중단점의 참조 대상
+Interval	간격
 Introduction	소개
 Invalid value	잘못된 값
 Invert the direction of panning by scrolling	스크롤 이동 방향 반전
 Inverter or charge controller (devices with PV input data)	인버터 또는 충전 컨트롤러 (태양광 입력 데이터가 있는 장치)
-Isometric	등각
 Items copied: {}	복사한 요소: {}
 Items copied: {} (devices left out: {}, a device is placed once)	복사한 요소: {} (제외된 장치: {}, 장치는 한 번만 배치됩니다)
 Items cut: {}	잘라낸 요소: {}
@@ -914,6 +985,7 @@ Keep connections	연결 유지
 Keep sub-pages (3.a, 3.1) with the page before	하위 페이지(3.a, 3.1)를 이전 페이지와 함께 유지
 Keep the degree of protection	보호 등급 유지
 Keep this route when recalculating, as long as it is still possible	다시 계산할 때 가능한 한 이 경로를 유지
+Kept changes	보관된 변경 내용
 Key tips of the ribbon	리본의 액세스 키
 Key: {}	키: {}
 Keyboard shortcuts	바로 가기 키
@@ -927,6 +999,8 @@ Labeling scheme	라벨링 스키마
 Landscape	가로
 Large dot	큰 점
 Larger texts and buttons for a touch screen at the workbench	작업대 터치스크린을 위한 더 큰 글자와 버튼
+Largest mesh	최대 메시
+Last save confirmed by the project server: {}	프로젝트 서버가 확인한 마지막 저장: {}
 Latitude, longitude	위도, 경도
 Layer	레이어
 Layer {}	레이어 {}
@@ -940,6 +1014,7 @@ Layout space	레이아웃 공간
 Layout spaces	레이아웃 공간
 Leave out the ceilings of the rooms and the roofs in the 3D view	3D 보기에서 방의 천장과 지붕 생략
 Leave out the covers of all cable ducts in the 3D view: the wires in them are seen	3D 보기에서 모든 케이블 덕트의 덮개를 생략합니다: 안의 전선이 보입니다
+Leave out the modules of the PV arrays in the 3D view: their rails, roof hooks, mounting bases, earthing and cabling are seen	3D 보기에서 태양광 어레이의 모듈을 숨깁니다: 레일, 지붕 후크, 가대, 접지 및 케이블이 보입니다
 Leave repeated values of the first column blank	첫 번째 열의 반복 값을 비워 둠
 Left button	왼쪽 단추
 Left edges	왼쪽 가장자리
@@ -947,6 +1022,7 @@ Legend plates (door devices)	명판(도어 장치)
 Length from the node to the device	노드에서 장치까지의 길이
 Length inside an enclosure	외함 내부 길이
 Length of a shield pigtail where there is no shield clamp	차폐 클램프가 없는 곳의 차폐 피그테일 길이
+Length of the rod	접지봉 길이
 Length of wires that are not routed in the panel layout	패널 레이아웃에서 배선 경로가 지정되지 않은 전선의 길이
 Length {} mm	길이 {} mm
 Letters, digits, space, - _ . (up to 64 characters)	문자, 숫자, 공백, - _ .(최대 64자)
@@ -955,6 +1031,8 @@ Level of this kind of message	이 메시지 종류의 수준
 Level {} added to building {}; new rooms go onto it	건물 {1}에 층 {0}을(를) 추가했습니다. 새 실은 이 층에 놓입니다
 Level {} of building {}	건물 {1}의 {0}층
 Library	라이브러리
+Lightning protection	피뢰
+Lightning protection of building {}	건물 {}의 피뢰
 Like two fingers	두 손가락과 같게
 Limits	한계값
 Limits in effect	적용되는 한계값
@@ -973,28 +1051,29 @@ Load reserve	부하 여유
 Load template…	템플릿 로드…
 Loading changes…	변경 내용 로드 중…
 Loading the project access…	프로젝트 액세스를 로드하는 중…
+Loading the properties of {}…	{}의 속성을 불러오는 중…
 Loads	부하
 Local file	로컬 파일
 Local file: {}	로컬 파일: {}
 Local recovery copy of server project: {}	서버 프로젝트의 로컬 복구 사본: {}
+Local recovery copy with these changes written: {}	이 변경 내용이 포함된 로컬 복구 사본 기록됨: {}
 Lock all	모두 잠금
 Lock all pages	모든 페이지 잠금
 Lock current page	현재 페이지 잠금
 Lock page	페이지 잠금
 Lock project data	프로젝트 데이터 잠금
-Locked	잠김
 Locked by other users	다른 사용자가 잠금
 Locked by {} on the project server – read only	프로젝트 서버에서 {}이(가) 잠금 – 읽기 전용
 Locked by {} – read only	잠금: {} – 읽기 전용
 Locking…	잠그는 중…
 Logic	로직
-Logo	로고
 Logo on the cover page	표지의 로고
 Longer values are drawn smaller (0 = no limit)	더 긴 값은 더 작게 그려집니다(0 = 제한 없음)
 Look for updates when OpenECraft starts	OpenECraft 시작 시 업데이트 확인
 Looking for updates…	업데이트 확인 중…
 Looks for a new release of OpenECraft on GitHub and installs it in the background	GitHub에서 OpenECraft의 새 릴리스를 찾아 백그라운드에서 설치합니다
 Loop	루프
+Lower edge	아래쪽 가장자리
 Lowest fault current	최소 고장 전류
 Lowest: the highest open-circuit voltage	최저: 최고 개방 전압
 Macro boxes	매크로 박스
@@ -1004,8 +1083,9 @@ Macro {} saved	매크로 {} 저장됨
 Macros	매크로
 Macros ({})	매크로 ({})
 Macro…	매크로…
-Main	주
+Main earthing busbar	주 접지 부스바
 Make the selected elements of this project equal to the compared ones	이 프로젝트의 선택한 요소를 비교 대상과 같게 만듭니다
+Maker	제조업체
 Makes the current page content of the option	현재 페이지를 옵션의 내용으로 지정합니다
 Manage plugins	플러그인 관리
 Management	관리
@@ -1040,6 +1120,7 @@ Messages of this session	이 세션의 메시지
 Middle	가운데
 Middle button	가운데 단추
 Middle of the PV array in the floor plan of the building	건물 평면도에서 태양광 어레이의 중심
+Middle of the PV array in the plant	설비 안에서 태양광 어레이의 중심
 Min. bend radius	최소 굽힘 반경
 Minimize the ribbon	리본 최소화
 Mirror	대칭
@@ -1048,7 +1129,9 @@ Mixed	혼합
 Mode	모드
 Model of a part (2D / 3D)	부품의 모델(2D / 3D)
 Modifier keys	보조키
+Module area	모듈 면적
 Module part; its size comes from the part	모듈 부품; 크기는 부품에서 가져옴
+Modules on top of each other on a table	가대 하나에 위아래로 놓이는 모듈
 Motors feed the short circuit	모터가 단락 전류를 공급함
 Mounted on	장착 대상
 Mounting assistant: the panel items in mounting order with their place and part	장착 도우미: 장착 순서에 따른 패널 항목과 위치 및 부품
@@ -1060,6 +1143,7 @@ Mouse	마우스
 Move	이동
 Move ahead in the 3D view (held)	3D 보기에서 앞으로 이동(누른 채로)
 Move back in the 3D view (held)	3D 보기에서 뒤로 이동(누른 채로)
+Move buildings	건물 이동
 Move down	아래로 이동
 Move down in the 3D view (held)	3D 보기에서 아래로 이동(누른 채로)
 Move faster with the keys of the 3D view	3D 보기 키로 더 빠르게 이동
@@ -1105,7 +1189,6 @@ New document page…	새 문서 페이지…
 New empty	새로 만들기(빈 항목)
 New enclosure	새 외함
 New graphics page	새 그래픽 페이지
-New group	새 그룹
 New harness	새 하네스
 New items go onto this layer	새 항목이 이 레이어에 추가됩니다
 New mounting layout page	새 장착 레이아웃 페이지
@@ -1147,6 +1230,7 @@ No PLC cards in the project.	프로젝트에 PLC 카드가 없습니다.
 No PLC inputs / outputs placed.	배치된 PLC 입력 / 출력이 없습니다.
 No accessories: glands, connectors, shield clamps … go into the bill of materials and are checked against the cable.	부속품이 없습니다. 글랜드, 커넥터, 차폐 클램프 등은 부품 목록에 포함되며 케이블과 대조하여 검사됩니다.
 No bus systems.	버스 시스템이 없습니다.
+No busbar	부스바 없음
 No cable passage to {}: wires to it are not routed	{}(으)로의 케이블 통로 없음: 그쪽 전선은 배선 경로가 지정되지 않음
 No cables defined.	정의된 케이블이 없습니다.
 No cables yet. Draw a cable definition across wires or add a cable.	아직 케이블이 없습니다. 전선을 가로질러 케이블 정의를 그리거나 케이블을 추가하세요.
@@ -1158,18 +1242,22 @@ No device has mounting data yet: assign parts with dimensions to the devices (Pr
 No differences to {}.	{}와(과) 차이점이 없습니다.
 No document embedded	포함된 문서 없음
 No dot: plain T	점 없음: 단순 T
+No earth electrode yet: a foundation earth electrode in the foundation slab, a ring earth electrode round the walls or earth rods.	아직 접지극이 없습니다: 기초 슬래브의 기초 접지극, 벽 주위의 환상 접지극 또는 접지봉.
 No enclosure yet – create one with New enclosure, or a room for cabinets with New room.	아직 외함이 없습니다 – 새 외함으로 만들거나 새 방으로 외함용 방을 만드십시오.
 No field cables: place the enclosures and field devices at nodes of the route network.	필드 케이블이 없습니다. 외함과 필드 장치를 경로 네트워크의 노드에 배치하세요.
 No filter fans: an air/air heat exchanger or a cooling unit	필터 팬 없음: 공기/공기 열교환기 또는 냉각 장치
+No freestanding PV array yet: rows of tilted tables on rammed posts on the plot.	아직 지상형 태양광 어레이가 없습니다: 부지의 항타 말뚝 위에 기울어진 가대 열.
 No gesture	제스처 없음
 No harnesses defined.	정의된 하네스가 없습니다.
 No inverter	인버터 없음
 No jump: plain crossing, connections have dots	점프 없음: 단순 교차, 연결에 점 표시
+No local recovery copy of these changes has been written yet	이 변경 내용의 로컬 복구 사본이 아직 기록되지 않았습니다
 No longer reported	더 이상 보고되지 않음
 No macros yet. Select items in a schematic and save them as a macro.	아직 매크로가 없습니다. 회로도에서 항목을 선택하고 매크로로 저장하세요.
 No modules: plug in PLC cards of the schematic.	모듈이 없습니다. 회로도의 PLC 카드를 장착하세요.
 No numbers for	번호를 붙이지 않을 대상
 No panel items: place the devices in the panel layout.	패널 항목이 없습니다. 패널 레이아웃에 장치를 배치하세요.
+No part matches.	일치하는 부품이 없습니다.
 No parts marked for floor mounting yet. Mark one in the parts management: part editor › Mounting data › Floor mounting.	아직 바닥 설치로 표시된 부품이 없습니다. 부품 관리에서 표시하십시오: 부품 편집기 › 장착 데이터 › 바닥 설치.
 No parts marked for wall mounting yet. Mark one in the parts management: part editor › Mounting data › Wall mounting.	아직 벽 설치로 표시된 부품이 없습니다. 부품 관리에서 표시하십시오: 부품 편집기 › 장착 데이터 › 벽 설치.
 No parts of the product group Cables in the parts database.	부품 데이터베이스에 제품 그룹 케이블의 부품이 없습니다.
@@ -1188,6 +1276,7 @@ No segments yet: draw them in the plant layout.	아직 구간이 없습니다. �
 No shortcut	바로 가기 키 없음
 No single-line symbols and no power devices in the schematic.	회로도에 단선 심볼과 전력 장치가 없습니다.
 No stations: add one or use the automatic configuration.	스테이션이 없습니다. 스테이션을 추가하거나 자동 구성을 사용하세요.
+No string yet: the modules are not connected.	아직 스트링이 없습니다: 모듈이 연결되지 않았습니다.
 No subprojects were taken out of this project.	이 프로젝트에서 반출된 하위 프로젝트가 없습니다.
 No terminal strips: place terminals in a schematic first.	단자대 없음: 먼저 회로도에 단자를 배치하세요.
 No user symbols yet. Create one or copy a built-in symbol.	아직 사용자 심볼이 없습니다. 새로 만들거나 기본 제공 심볼을 복사하세요.
@@ -1198,11 +1287,14 @@ None – editing a page or the project data locks it.	없음 – 페이지나 �
 Not a page template file: {}	페이지 템플릿 파일이 아님: {}
 Not a point: type x y or @dx dy	점이 아닙니다. x y 또는 @dx dy를 입력하세요
 Not a symbol library: {}	심볼 라이브러리가 아님: {}
+Not changed, the lock was refused: {}. Your version is kept in the Project server pane.	잠금이 거부되어 변경되지 않음: {}. 내 버전은 프로젝트 서버 창에 보관됩니다.
 Not changed: {}	변경되지 않음: {}
+Not changed: {}. Your version is kept in the Project server pane.	변경되지 않음: {}. 내 버전은 프로젝트 서버 창에 보관됩니다.
 Not found: {}	찾을 수 없음: {}
 Not in the project parts – synchronize in parts management	프로젝트 부품에 없음 – 부품 관리에서 동기화하세요
 Not on a wire	전선 위에 없음
-Not saved, locked or changed by another user: {}	저장되지 않음, 다른 사용자가 잠그거나 변경함: {}
+Not saved yet	아직 저장되지 않음
+Not saved, locked or changed by another user	다른 사용자가 잠그거나 변경하여 저장되지 않음
 Not taken: the left button alone selects, draws and moves; hold a modifier or use another button.	적용 안 됨: 왼쪽 단추만으로는 선택, 그리기, 이동을 합니다. 보조키를 누르거나 다른 단추를 사용하세요.
 Not the shared project: changes are saved locally until it is opened on the project server again	공유 프로젝트가 아닙니다: 프로젝트 서버에서 다시 열 때까지 변경 사항은 로컬에 저장됩니다
 Nothing exchanged yet.	아직 교환된 내용이 없습니다.
@@ -1224,6 +1316,7 @@ Offset from one row to the next: downwards for lists, sideways for rows side by 
 On a touch screen and a trackpad. Pan only: pinching does not zoom; zoom only: scrolling with two fingers on a trackpad zooms too, where the system tells trackpads apart. One finger works like the left mouse button.	터치스크린과 트랙패드에 적용됩니다. 이동만: 핀치로 확대/축소하지 않습니다. 확대/축소만: 시스템이 트랙패드를 구별하는 경우 트랙패드에서 두 손가락 스크롤도 확대/축소합니다. 한 손가락은 마우스 왼쪽 단추처럼 작동합니다.
 On a touch screen; trackpads leave three-finger gestures to the system.	터치스크린에 적용됩니다. 트랙패드의 세 손가락 제스처는 시스템이 사용합니다.
 On startup	시작할 때
+On the roof, joined to the air-termination conductors; move it to its place	지붕 위에서 수뢰 도체에 연결됩니다. 제자리로 옮기세요
 One row per label	라벨당 한 행
 Only devices on the current page	현재 페이지의 장치만
 Only frames no page uses can be deleted	어떤 페이지도 사용하지 않는 프레임만 삭제할 수 있습니다
@@ -1251,6 +1344,7 @@ Open the selection: its properties, in the floor plan its face	선택 항목 열
 Open to {}: wires cross beside the mounting plates	{}(으)로 개방됨: 전선이 장착 플레이트 옆으로 지나감
 Open walls and floors	벽과 바닥 열기
 Open, save, import, export, print and the settings	열기, 저장, 가져오기, 내보내기, 인쇄 및 설정
+Open-circuit voltage	개방 전압
 OpenECraft page templates	OpenECraft 페이지 템플릿
 OpenECraft page templates (JSON)	OpenECraft 페이지 템플릿(JSON)
 OpenECraft project	OpenECraft 프로젝트
@@ -1261,6 +1355,7 @@ OpenECraft property library	OpenECraft 속성 라이브러리
 OpenECraft property library (JSON)	OpenECraft 속성 라이브러리(JSON)
 OpenECraft rule sets	OpenECraft 규칙 세트
 OpenECraft rule sets (JSON)	OpenECraft 규칙 세트(JSON)
+OpenECraft split project	OpenECraft 분할 프로젝트
 OpenECraft structure template	OpenECraft 구조 템플릿
 OpenECraft structure template (JSON)	OpenECraft 구조 템플릿(JSON)
 OpenECraft symbol library	OpenECraft 심볼 라이브러리
@@ -1292,6 +1387,7 @@ Other values ({})	기타 값({})
 Otherwise from the plant layout, or next to the other line-ups	그렇지 않으면 플랜트 레이아웃에서 가져오거나 다른 열 배치 옆에 배치
 Out since {} (pages locked)	{}부터 반출됨(페이지 잠김)
 Outer diameter (e.g. 8 mm) or DN	외경(예: 8 mm) 또는 DN
+Outlets	콘센트
 Outlets, switches, heating	콘센트, 스위치, 난방
 Outline	외곽선
 Outlines	외곽선
@@ -1314,6 +1410,10 @@ PLC channels	PLC 채널
 PLC hardware and bus topology	PLC 하드웨어 및 버스 토폴로지
 PLC overview	PLC 개요
 PNG or JPEG bitmap, e.g. a logo or a photo	PNG 또는 JPEG 비트맵(예: 로고 또는 사진)
+PV array {}	태양광 어레이 {}
+PV array {} lies outside the protection of the air-termination system	태양광 어레이 {}이(가) 수뢰부의 보호 범위 밖에 있습니다
+PV array {} of building {}: {} modules	건물 {1}의 태양광 어레이 {0}: 모듈 {2}개
+PV array {} of building {}: {} modules, {} kWp	건물 {1}의 태양광 어레이 {0}: 모듈 {2}개, {3} kWp
 PV arrays	태양광 어레이
 Page graphics	페이지 그래픽
 Page heading	페이지 제목
@@ -1348,6 +1448,10 @@ Part of the profile: generic types or parts from the parts store	프로필의 �
 Part selection from the parts database	부품 데이터베이스에서 부품 선택
 Part selection – {}	부품 선택 – {}
 Part selection…	부품 선택…
+Partly saved	일부 저장됨
+Partly saved (revision {}). Not saved, locked or changed by another user: {}. Your version is kept in the Project server pane.	일부 저장됨(개정 {}). 다른 사용자가 잠그거나 변경하여 저장되지 않음: {}. 내 버전은 프로젝트 서버 창에 보관됩니다.
+Partly saved to the project server (revision {})	프로젝트 서버에 일부 저장됨(개정 {})
+Partly saved: the project server left changes out. Your version of them is kept below; they are not saved on the server.	일부 저장됨: 프로젝트 서버가 일부 변경 내용을 제외했습니다. 사용자의 버전은 아래에 보관됩니다. 서버에는 저장되지 않았습니다.
 Parts can only be dropped onto pages that can be changed; this one is released, locked or generated	부품은 변경할 수 있는 페이지에만 놓을 수 있습니다. 이 페이지는 릴리스되었거나 잠겨 있거나 생성된 페이지입니다
 Parts management	부품 관리
 Parts marked for floor mounting (pumps, tanks, compressors): choose one, then click where it stands on the floor of the room	바닥 설치로 표시된 부품(펌프, 탱크, 압축기): 하나를 선택한 다음 방 바닥에서 설치할 위치를 클릭하십시오
@@ -1361,6 +1465,8 @@ Path for cables, tubes or wires over the plate: click the corners, double-click 
 Path function text	경로 기능 텍스트
 Pattern	패턴
 Pattern…	패턴…
+Peak power	피크 전력
+Pick a part in the list.	목록에서 부품을 선택하세요.
 Pin-out	핀 배치
 Pipe run	배관 경로
 Pipe run on a wall, the ceiling or the floor of the room, along which hoses, tubes and pipes are routed: click the corners, double-click or Enter to finish	방의 벽, 천장 또는 바닥에 있는 배관 경로로, 호스, 튜브, 배관이 이를 따라 배선됩니다: 모서리를 클릭하고 두 번 클릭하거나 Enter로 완료
@@ -1377,6 +1483,7 @@ Place in schematic	회로도에 배치
 Place in the plant	플랜트 내 위치
 Place in the room	공간 내 위치
 Place in the site plan	배치도에 배치
+Place on the wall	벽에 배치
 Place the georeferenced point everything is measured from	모든 측정의 기준이 되는 지리 참조점을 배치합니다
 Place the georeferenced point of the plant in the site plan; its coordinates go into the Buildings pane, every point is then measured from it	설비의 지리 참조점을 배치도에 배치합니다. 좌표는 건물 창에 입력하며 모든 점은 이 점에서 측정됩니다
 Placed	배치됨
@@ -1398,7 +1505,6 @@ Plant layout	플랜트 레이아웃
 Plant layout, route network, field cable planning, equipotential bonding and cable accessories	플랜트 레이아웃, 경로 네트워크, 필드 케이블 계획, 등전위 본딩 및 케이블 부속품
 Plant segments with planned devices before the schematic	회로도 작성 전 계획된 장치가 포함된 플랜트 세그먼트
 Plate outline, holes per diameter, cutouts	플레이트 외곽선, 직경별 구멍, 컷아웃
-Plot	부지
 Plot boundary	부지 경계
 Plot boundary drawn: {} m²	부지 경계를 그렸습니다: {} m²
 Plot boundary drawn: {} m²; outside it: {}	부지 경계를 그렸습니다: {} m², 바깥: {}
@@ -1406,8 +1512,8 @@ Plot frames	플롯 프레임
 Plot, {}	부지, {}
 Plug in card	카드 장착
 Plugin commands	플러그인 명령
-Plugins	플러그인
 Plugins add commands, checks, reports and exports. External plugins are loaded from the folders in the environment variable {} (one subfolder with a plugin.json per plugin).	플러그인은 명령, 검사, 보고서 및 내보내기를 추가합니다. 외부 플러그인은 환경 변수 {}의 폴더에서 로드됩니다(플러그인마다 plugin.json이 있는 하위 폴더 하나).
+Plus and minus leads from the modules to the inverter	모듈에서 인버터까지의 플러스 및 마이너스 케이블
 Points	점
 Polygon	다각형
 Polyline	폴리라인
@@ -1420,6 +1526,8 @@ Position of the cursor	커서 위치
 Position of the device tag (instead of the tag block)	장치 태그의 위치(태그 블록 대신)
 Position of the label (terminal number, address …)	레이블의 위치(단자 번호, 주소 …)
 Positions are relative to the lower right corner of the symbol.	위치는 심볼의 오른쪽 아래 모서리를 기준으로 합니다.
+Post distance	말뚝 간격
+Posts	말뚝
 Potential {}	전위 {}
 Potential: {}	전위: {}
 Power and current of the loads of the mains (motors, drives, heaters, power supplies, transformers), the load of each protective device, the demand with the diversity factor and the load budget of the power supplies.	전원 부하(모터, 드라이브, 히터, 전원 공급 장치, 변압기)의 전력 및 전류, 각 보호 장치의 부하, 부등률을 적용한 수요 및 전원 공급 장치의 부하 예산.
@@ -1444,7 +1552,6 @@ Profile name	프로필 이름
 Profiles	프로필
 Project access	프로젝트 액세스
 Project and user settings in one dialog	프로젝트 설정과 사용자 설정을 한 대화 상자에서
-Project data	프로젝트 데이터
 Project database	프로젝트 데이터베이스
 Project database, batch changes of project properties, subprojects, options, archives and verification	프로젝트 데이터베이스, 프로젝트 속성 일괄 변경, 하위 프로젝트, 옵션, 아카이브 및 검증
 Project default: {}	프로젝트 기본값: {}
@@ -1487,7 +1594,6 @@ Read a file of the other system (CSV or JSON) and review the changes	다른 시�
 Readdress card	카드 주소 재지정
 Reading the folder…	폴더를 읽는 중…
 Real length per millimetre on the page, e.g. 10 for a 1:10 drawing	페이지의 밀리미터당 실제 길이(예: 1:10 도면은 10)
-Rear	뒤
 Rear left corner of the line-up on the floor, as in the 3D view with all enclosures	바닥에 있는 열 배치의 왼쪽 뒤 모서리(모든 외함이 있는 3D 보기 기준)
 Recent projects	최근 프로젝트
 Recently used	최근 사용
@@ -1495,10 +1601,8 @@ Recommended height of manual actuators (10.1.2)	수동 조작부의 권장 높�
 Record	기록
 Record: do the gesture in the field that appears, holding a modifier if wanted (Esc cancels). Add keeps the gestures there are. Right click in the select tool opens the context menu.	기록: 나타나는 영역에서 제스처를 하고, 원하면 보조키를 누른 채로 합니다(Esc는 취소). 추가는 기존 제스처를 유지합니다. 선택 도구에서 마우스 오른쪽 클릭은 상황에 맞는 메뉴를 엽니다.
 Redline: to be changed · Greenline: changed as built	레드라인: 변경 예정 · 그린라인: 시공 상태대로 변경됨
-Redo	다시 실행
 Reference point	기준점
 Reference point placed at x {} m, z {} m; enter its coordinates in the Buildings pane	기준점을 x {} m, z {} m에 배치했습니다. 건물 창에서 좌표를 입력하십시오
-Refresh	새로 고침
 Refresh example catalog parts (GEN.*)	예제 카탈로그 부품(GEN.*) 새로 고침
 Rejected and closed ones too	거부 및 종료된 항목 포함
 Relative column width	상대 열 너비
@@ -1511,6 +1615,7 @@ Release: lock all pages	릴리스: 모든 페이지 잠금
 Released page – read only	릴리스된 페이지 – 읽기 전용
 Released pages in it keep their names	그 안의 릴리스된 페이지는 이름을 유지합니다
 Released pages keep their name.	릴리스된 페이지는 이름을 유지합니다.
+Released revisions, baselines, comments, markup, approvals and change requests of the source. Without them the copy starts as a new project.	원본의 릴리스된 개정, 기준선, 주석, 마크업, 승인 및 변경 요청입니다. 이것이 없으면 사본은 새 프로젝트로 시작합니다.
 Releases all locks; the project stays open as a local copy	모든 잠금을 해제합니다. 프로젝트는 로컬 복사본으로 열린 상태로 유지됩니다
 Releasing…	잠금 해제 중…
 Remove from cable	케이블에서 제거
@@ -1555,14 +1660,19 @@ Replace	바꾸기
 Replace all	모두 바꾸기
 Replace text	텍스트 바꾸기
 Replace with	바꿀 텍스트
+Replaced by the version on the project server: {}. Your version is kept in the Project server pane.	프로젝트 서버의 버전으로 교체됨: {}. 내 버전은 프로젝트 서버 창에 보관됩니다.
 Replaced when the configurator generates again; switch off to keep the page	컨피규레이터가 다시 생성하면 교체됩니다. 페이지를 유지하려면 끄세요
+Replaced while you held no lock	잠금이 없는 동안 교체됨
 Replaces in free texts, function texts, page, device and cable descriptions; released pages stay	자유 텍스트, 기능 텍스트, 페이지, 장치 및 케이블 설명에서 바꿉니다. 릴리스된 페이지는 그대로 유지됩니다
 Replaces the GEN.* parts in the database with the current example catalog (including models)	데이터베이스의 GEN.* 부품을 현재 예제 카탈로그로 교체합니다(모델 포함)
 Replaces the company library with the project's own title blocks, report schemes and plot frames (editors of the parts server)	회사 라이브러리를 프로젝트 자체의 표제란, 보고서 체계, 플롯 프레임으로 바꿉니다(부품 서버 편집자)
 Replaces the content of the macro boxes whose macro changed in the library	라이브러리에서 매크로가 변경된 매크로 박스의 내용을 대체합니다
+Replaces the current version with yours as a change you can undo; the next save stores it	현재 버전을 내 버전으로 바꿉니다(실행 취소 가능한 변경). 다음 저장 때 저장됩니다
 Replaces the pages of this block	이 블록의 페이지를 교체합니다
 Reply	회신
 Reply…	회신…
+Report a bug	버그 신고
+Report a bug…	버그 신고…
 Report block {}: {} pages generated	보고서 블록 {}: 페이지 {}개 생성됨
 Report blocks start new pages for every value of this column	보고서 블록은 이 열의 각 값마다 새 페이지를 시작합니다
 Report blocks updated: {} pages	보고서 블록 업데이트됨: 페이지 {}개
@@ -1570,7 +1680,6 @@ Report blocks…	보고서 블록…
 Report forms	보고서 양식
 Report name (page heading)	보고서 이름(페이지 제목)
 Report with all harness wires	모든 하네스 전선이 포함된 보고서
-Reports	보고서
 Representation	표시
 Requester	요청자
 Reservation	예약
@@ -1607,8 +1716,12 @@ Right edges	오른쪽 가장자리
 Right neighbour	오른쪽 인접 외함
 Rights	권한
 Risers	단 수
+Rod holder	피뢰침 지지대
+Roof pitch	지붕 경사
 Roof window	천창
 Roof windows	천창
+Roof {} of building {}	건물 {1}의 지붕 {0}
+Roof {} of building {}: the layout properties add a PV array or a roof window where it was clicked	건물 {1}의 지붕 {0}: 레이아웃 속성이 클릭한 위치에 태양광 어레이 또는 천창을 추가합니다
 Roofs	지붕
 Room	방
 Room added on level {}: drag its walls or draw new ones in the floor plan, put cabinets into it in their properties	{} 층에 방을 추가했습니다: 평면도에서 벽을 끌거나 새 벽을 그리고, 외함은 해당 속성에서 방에 넣으십시오
@@ -1635,6 +1748,8 @@ Row	행
 Row distance	열 간격
 Row drawing	행 도면
 Row labels	행 레이블
+Rows of tables behind each other	앞뒤로 놓인 가대 열
+Rows of tilted tables on posts in front of what stands in the plant, facing the front; move it to its place	설비에 있는 것의 앞에, 말뚝 위에 기울어진 가대 열을 앞쪽을 향해 놓습니다; 제자리로 옮기십시오
 Rows on released pages cannot be changed. A line break in a text is written as \\n.	릴리스된 페이지의 행은 변경할 수 없습니다. 텍스트의 줄 바꿈은 \\n으로 씁니다.
 Rows per page	페이지당 행 수
 Rule libraries	규칙 라이브러리
@@ -1656,12 +1771,14 @@ Save as local file	로컬 파일로 저장
 Save as macro	매크로로 저장
 Save as project template…	프로젝트 템플릿으로 저장…
 Save as scheme	스키마로 저장
+Save as split project…	분할 프로젝트로 저장…
 Save as template	템플릿으로 저장
 Save as template…	템플릿으로 저장…
 Save asks for a file	저장 시 파일을 선택합니다
 Save as…	다른 이름으로 저장…
 Save current page as template…	현재 페이지를 템플릿으로 저장…
 Save current…	현재 작업 공간 저장…
+Save failed	저장 실패
 Save file…	파일 저장…
 Save locally	로컬에 저장
 Save locally to {}	로컬의 {}에 저장
@@ -1670,12 +1787,15 @@ Save page as macro…	페이지를 매크로로 저장…
 Save page as template	페이지를 템플릿으로 저장
 Save page as template…	페이지를 템플릿으로 저장…
 Save selection as macro…	선택 항목을 매크로로 저장…
+Save shared projects to the project server automatically	공유 프로젝트를 프로젝트 서버에 자동으로 저장
 Save the box content as the macro in the library	박스 내용을 라이브러리에 매크로로 저장
 Save to project server	프로젝트 서버에 저장
 Save to project server: {}	프로젝트 서버에 저장: {}
 Save to project server: {} – the connection is lost, saving tries again	프로젝트 서버에 저장: {} – 연결이 손실되었습니다. 저장을 다시 시도합니다
 Save workspace	작업 공간 저장
 Save workspace…	작업 공간 저장…
+Saved	저장됨
+Saved the properties of {} (revision {})	{}의 속성을 저장했습니다(개정 {})
 Saved to	저장 위치
 Saved to the project server (revision {})	프로젝트 서버에 저장됨(개정 {})
 Saved workspaces	저장된 작업 공간
@@ -1683,8 +1803,10 @@ Saves the placed properties as a placement scheme of the project	배치된 속�
 Saves the project without revisions, baselines, review and wiring marks as a template for new projects	개정, 기준선, 검토 및 배선 표시 없이 프로젝트를 새 프로젝트용 템플릿으로 저장합니다
 Saves the project's own properties, function definitions and schemes for other projects	프로젝트 고유의 속성, 기능 정의 및 스키마를 다른 프로젝트용으로 저장합니다
 Saves the workspace, the arrangement of the panels and the open windows	작업 공간, 창 배치 및 열린 대화 상자를 저장합니다
+Saves your version of the whole project as a project file	전체 프로젝트의 내 버전을 프로젝트 파일로 저장합니다
 Saving failed: {}	저장 실패: {}
 Saving the project access…	프로젝트 액세스를 저장하는 중…
+Saving the properties of {}…	{}의 속성을 저장하는 중…
 Saving to the project server…	프로젝트 서버에 저장 중…
 Schematic crosshair	회로도 십자선
 Scheme	스키마
@@ -1699,23 +1821,26 @@ Scrolling up and down zooms at the pointer, sideways (horizontal wheel, Shift + 
 Scrolling zooms, also where it pans	스크롤로 확대/축소(이동하는 곳에서도)
 Search (* and ? as placeholders)…	검색 (* 와 ? 는 와일드카드)…
 Search below this folder	이 폴더 아래에서 검색
+Search number, description, maker	번호, 설명, 제조업체 검색
 Search the parts server by catalog, product group and technical data, add parts and check the database for updates	카탈로그, 제품 그룹 및 기술 데이터로 부품 서버를 검색하고, 부품을 추가하며, 데이터베이스의 업데이트를 확인합니다
 Second channel	두 번째 채널
+Seconds from a change to its automatic save (10 to 600)	변경부터 자동 저장까지의 초 (10 ~ 600)
 Section properties	구역 속성
 Section properties…	구역 속성…
 Section {} is now section {}	구역 {}은(는) 이제 구역 {}입니다
+See-through PV modules	태양광 모듈 투명하게
 Seen on the mating faces; the colours are those of the wires and cable cores at the pins.	결합면에서 본 모습입니다. 색상은 핀에 연결된 전선과 케이블 심선의 색상입니다.
 Segment {}	세그먼트 {}
 Segments	구간
 Segregation	분리
 Segregation factor	분리 계수
-Select	선택
 Select / move (Esc)	선택 / 이동(Esc)
 Select a file to import it	가져올 파일을 선택하세요
 Select a function definition. Project definitions (bold) can be changed and are kept in property libraries.	기능 정의를 선택하세요. 프로젝트 정의(굵게)는 변경할 수 있으며 속성 라이브러리에 저장됩니다.
 Select a macro.	매크로를 선택하세요.
 Select a part. Double click adds it to the device.	부품을 선택하세요. 두 번 클릭하면 장치에 추가됩니다.
 Select a placement scheme. A scheme places properties beside symbols; symbols using it are updated when it changes.	배치 스키마를 선택하세요. 스키마는 심볼 옆에 속성을 배치하며, 스키마가 변경되면 이를 사용하는 심볼이 업데이트됩니다.
+Select a project in the list	목록에서 프로젝트를 선택하세요
 Select a report block.	보고서 블록을 선택하세요.
 Select a request.	요청을 선택하세요.
 Select a segment.	세그먼트를 선택하세요.
@@ -1737,6 +1862,7 @@ Semicolon	세미콜론
 Separator	분리기
 Server URL	서버 URL
 Server address and sign-in	서버 주소 및 로그인
+Server project properties	서버 프로젝트 속성
 Server type	서버 유형
 Servers	서버
 Service space in front	전면 서비스 공간
@@ -1758,6 +1884,7 @@ Shielded analogue cables	차폐된 아날로그 케이블
 Shielded drive cables	차폐된 드라이브 케이블
 Short circuit and selectivity	단락 및 선택 차단
 Short circuit, selectivity, loads, EMC, functional safety and verification against rule sets	단락, 선택 차단, 부하, EMC, 기능 안전 및 규칙 세트에 대한 검증
+Short-circuit current	단락 전류
 Short-circuit currents	단락 전류
 Short-circuit power of the network	계통의 단락 용량
 Shortest profile	최단 프로파일
@@ -1768,7 +1895,6 @@ Show as tiles	타일로 표시
 Show connection point designations	연결 지점 명칭 표시
 Show connectors	커넥터 표시
 Show device tag and cross references	장치 태그 및 상호 참조 표시
-Show everything (Home)	모두 표시 (Home)
 Show in panel layout ({})	패널 레이아웃에서 표시({})
 Show in schematic	회로도에서 표시
 Show in the schematic	회로도에서 표시
@@ -1777,6 +1903,7 @@ Show or hide panes; drag a tab to dock it elsewhere	창 표시 또는 숨기기.
 Show project manager	프로젝트 관리자 표시
 Show the enclosures bayed to this one as well	이 외함에 결합된 외함도 표시
 Show the messages accepted as checked	확인됨으로 승인된 메시지 표시
+Show the modules of the PV arrays see-through in the 3D view: the wiring of the modules to each other under them is seen	3D 보기에서 태양광 어레이의 모듈을 투명하게 표시합니다: 그 아래 모듈 간 배선이 보입니다
 Show the other wires	다른 전선 표시
 Show the pane as a window	창을 별도 창으로 표시
 Show the ribbon	리본 표시
@@ -1789,6 +1916,8 @@ Shown instead of the measured value	측정값 대신 표시됨
 Shown now: {}	현재 표시: {}
 Shown on the cover page and by the image elements of title blocks that show the project logo	표지와 프로젝트 로고를 표시하는 표제란의 이미지 요소에 표시됩니다
 Shows	표시
+Shows the differences of your version to the open project; selected ones can be taken over	내 버전과 열린 프로젝트의 차이를 표시합니다. 선택한 항목을 가져올 수 있습니다
+Shows the properties saved on the project server; you change them here if you may and nobody has locked the project data	프로젝트 서버에 저장된 속성을 표시합니다. 권한이 있고 아무도 프로젝트 데이터를 잠그지 않았으면 여기에서 변경합니다
 Side walls, rear wall, roof and bottom seen from the outside: fans, cable glands, cutouts	밖에서 본 측벽, 후면벽, 지붕 및 바닥: 팬, 케이블 글랜드, 컷아웃
 Sign in in the Project server pane; the project opens afterwards	프로젝트 서버 창에서 로그인하세요. 이후 프로젝트가 열립니다
 Sign in…	로그인…
@@ -1796,7 +1925,6 @@ Signed in to {} as {}	{}에 {}(으)로 로그인됨
 Signed out of Vault	Vault에서 로그아웃됨
 Single-line	단선
 Single-line symbols for the power devices of the schematic that have none yet, on a new overview page	아직 단선 심볼이 없는 회로도 전력 장치의 단선 심볼(새 개요 페이지에 생성)
-Site	부지
 Site plan, building {}	배치도, 건물 {}
 Size {} × {} mm	크기 {} × {} mm
 Slot	슬롯
@@ -1806,6 +1934,7 @@ Smallest cross-section of control circuits	제어 회로의 최소 단면적
 Smallest cross-section of power circuits	전력 회로의 최소 단면적
 Socket outlets, data and antenna outlets	전원 콘센트, 데이터 및 안테나 콘센트
 Solid	실선
+Some of your changes were not taken by the project server. Your version stays in the Project server pane, also after discarding.	일부 변경 내용이 프로젝트 서버에 반영되지 않았습니다. 버린 후에도 내 버전은 프로젝트 서버 창에 남습니다.
 Some wires have no length: place their devices in the panel layout or set the field length.	일부 전선에 길이가 없습니다. 패널 레이아웃에 해당 장치를 배치하거나 필드 길이를 설정하세요.
 Sort by designation	명칭순 정렬
 Sort order	정렬 순서
@@ -1869,6 +1998,7 @@ Surge protection	서지 보호
 Swing the enclosure door open or shut (door devices and their wires move with it)	외함 도어를 열거나 닫습니다(도어 장치와 해당 전선이 함께 움직임)
 Switch off the check \"{}\"	\"{}\" 검사 끄기
 Switched off on this computer ({})	이 PC에서 꺼져 있습니다({})
+Switches	스위치
 Switches the options with a condition by the configurator options	조건이 있는 옵션을 컨피규레이터 옵션에 따라 전환합니다
 Switches to this workspace with its panes at their default places	이 작업 공간으로 전환하고 창을 기본 위치로 되돌립니다
 Switches, push buttons and room thermostats	스위치, 푸시 버튼 및 실내 온도 조절기
@@ -1893,6 +2023,7 @@ Tag placed by hand	수동으로 배치된 태그
 Take out a subproject	하위 프로젝트 반출
 Take out of the building	건물에서 제외
 Take out {} pages…	페이지 {}개 반출…
+Take over again	다시 가져오기
 Take over cut lengths	절단 길이 적용
 Take over selected ({})	선택 항목 가져오기({})
 Take over {} changes	변경 내용 {}개 적용
@@ -1917,6 +2048,7 @@ Terminals at least	단자 최소 높이
 Terminals with the same jumper number are bridged (same potential). Spare terminals are counted in the bill of materials.	점퍼 번호가 같은 단자는 브리지됩니다(동일 전위). 예비 단자는 자재 명세서에 포함됩니다.
 Terms separated by ';': key=value (equal), key~text (contains) or text found anywhere	검색어는 ';'으로 구분: key=value(일치), key~text(포함) 또는 위치에 관계없이 찾을 텍스트
 Test connection	연결 테스트
+Test joints	시험 단자
 Text offset	텍스트 오프셋
 Text size	텍스트 크기
 Texts	텍스트
@@ -1927,37 +2059,51 @@ The aspect ratio is kept.	가로세로 비율이 유지됩니다.
 The check warns about cable ducts filled above this level	이 한계를 초과하여 채워진 케이블 덕트에 대해 검사가 경고합니다
 The checks keep the distances between classes and let classes overlap as set in Layout checks	검사는 레이아웃 검사에 설정된 대로 클래스 간 거리를 유지하고 클래스 간 겹침을 허용합니다
 The commands of all plugins by plugin, with a search; the star pins a command to the Plugins tab	모든 플러그인의 명령을 플러그인별로 검색과 함께 표시합니다. 별표를 누르면 명령이 플러그인 탭에 고정됩니다
+The copy is created from the state saved on the project server. Changes other users have not saved yet are not part of it. Sessions, locks and access rights are not copied; the original stays as it is.	사본은 프로젝트 서버에 저장된 상태로 만들어집니다. 다른 사용자가 아직 저장하지 않은 변경 내용은 포함되지 않습니다. 세션, 잠금 및 액세스 권한은 복사되지 않으며 원본은 그대로 유지됩니다.
 The crossed wires get free cores of the cable in order	교차된 전선이 케이블의 빈 심선을 순서대로 받습니다
 The current page belongs to option {}.	현재 페이지는 옵션 {}에 속합니다.
 The devices do not fit onto the rail	장치가 레일에 맞지 않습니다
 The dictionary is empty: collect the texts from the project.	사전이 비어 있습니다. 프로젝트에서 텍스트를 수집하세요.
 The door seen from the front: door devices and cutouts	앞에서 본 도어: 도어 장치 및 컷아웃
-The door seen from the inside (hinges on the right): cable ducts and the wiring behind the door	안쪽에서 본 도어(힌지 오른쪽): 케이블 덕트 및 도어 뒤 배선
+The door seen from the inside (mirrored): cable ducts and the wiring behind the door	안쪽에서 본 도어(좌우 반전): 케이블 덕트 및 도어 뒤 배선
 The element is drawn only when this text with its placeholders is not empty, e.g. the rows of a revision table	자리 표시자가 포함된 이 텍스트가 비어 있지 않을 때만 요소를 그립니다(예: 개정 표의 행)
 The enclosure stands with its left side against the right side of the chosen one; wires run between them through cable passages	외함의 왼쪽 측면이 선택한 외함의 오른쪽 측면에 붙어 있으며, 전선은 케이블 통로를 통해 그 사이를 지나갑니다
 The horizontal wire	가로 전선
 The items are selected and moved together	항목이 함께 선택되고 이동됩니다
+The last save failed: {}. Your changes are not saved on the project server; the automatic save tries again.	마지막 저장 실패: {}. 변경 내용이 프로젝트 서버에 저장되지 않았습니다. 자동 저장이 다시 시도합니다.
+The local recovery copy is of {}: your latest changes are not in it yet	로컬 복구 사본은 {} 시점의 것입니다: 최신 변경 내용이 아직 들어 있지 않습니다
+The lock was refused	잠금이 거부됨
 The logo is fitted into this area keeping its aspect ratio	로고는 가로세로 비율을 유지하며 이 영역에 맞춰집니다
 The logo of the project properties, e.g. the customer's	프로젝트 속성의 로고(예: 고객의 로고)
+The logos of the manufacturers' catalogs on the parts server, beside the details of a part	부품 서버에 있는 제조업체 카탈로그의 로고를 부품 세부 정보 옆에 표시
 The macro library has no page macros (Macros › Save page as macro…).	매크로 라이브러리에 페이지 매크로가 없습니다(매크로 › 페이지를 매크로로 저장…).
 The modifiers that turn the wheel sideways or make it zoom are set under Modifier keys.	휠로 옆으로 이동하거나 확대/축소하는 보조키는 보조키에서 설정합니다.
 The modules no string takes yet in series, on the first inverter	아직 어느 스트링에도 속하지 않은 모듈을 직렬로, 첫 번째 인버터에
+The name on the server needs letters, digits, space, - _ . (up to 64 characters).	서버의 이름에는 문자, 숫자, 공백, - _ . 을 사용합니다(최대 64자).
 The names of its pages follow	페이지 이름도 함께 변경됩니다
+The open project already has your version	열린 프로젝트에 이미 내 버전이 있습니다
+The open project has changes that are not saved on the project server yet. You are asked whether to save them first; only saved changes are part of the copy.	열린 프로젝트에 아직 프로젝트 서버에 저장되지 않은 변경 내용이 있습니다. 먼저 저장할지 묻습니다. 저장된 변경 내용만 사본에 포함됩니다.
+The open project is a local recovery copy of this project. Its changes are not on the project server and not part of the copy.	열린 프로젝트는 이 프로젝트의 로컬 복구 사본입니다. 그 변경 내용은 프로젝트 서버에 없으며 사본에 포함되지 않습니다.
 The open project is a local recovery copy. Its changes are not saved on the project server; before the shared project opens, you decide whether to save them locally or discard them.	열린 프로젝트는 로컬 복구 사본입니다. 변경 사항은 프로젝트 서버에 저장되지 않았습니다. 공유 프로젝트를 열기 전에 로컬에 저장할지 버릴지 결정합니다.
 The page name gets the section number	페이지 이름에 구역 번호가 붙습니다
 The page type, plot frame, title block, structure, description and the whole content are saved.	페이지 유형, 플롯 프레임, 표제란, 구조, 설명 및 전체 내용이 저장됩니다.
 The pages it generated stay	생성된 페이지는 유지됩니다
 The parts database is shared by all projects. Parts are copied into a project when they are assigned to a device.	부품 데이터베이스는 모든 프로젝트가 공유합니다. 부품은 장치에 지정될 때 프로젝트로 복사됩니다.
 The point's coordinates in the coordinate reference system	좌표 참조계에서의 점의 좌표
+The post; its accessories are the table beams, rails and clamps	말뚝; 부속품은 가대 보, 레일과 클램프입니다
 The project changed since the search.	검색 이후 프로젝트가 변경되었습니다.
 The project check	프로젝트 검사
+The project data is locked by {}: the properties cannot be changed now.	프로젝트 데이터를 {}이(가) 잠갔습니다. 지금은 속성을 변경할 수 없습니다.
 The project database needs the desktop version: the browser cannot search folders.	프로젝트 데이터베이스에는 데스크톱 버전이 필요합니다. 브라우저에서는 폴더를 검색할 수 없습니다.
 The project server does not answer: changes are not saved on it until the connection is back	프로젝트 서버가 응답하지 않습니다: 연결이 돌아올 때까지 변경 사항이 서버에 저장되지 않습니다
+The project server has confirmed no save of this session yet	프로젝트 서버가 이 세션의 저장을 아직 확인하지 않았습니다
 The project server {} could not open {}.	프로젝트 서버 {}에서 {}을(를) 열 수 없습니다.
 The project's own page templates as a file	프로젝트 고유 페이지 템플릿(파일)
 The project's own title blocks	프로젝트 고유 표제란
 The project's own title blocks and report schemes	프로젝트 고유 표제란 및 보고서 스키마
+The properties of the open project; changing them locks the project data	열린 프로젝트의 속성입니다. 변경하면 프로젝트 데이터가 잠깁니다
 The properties of the selection in a window beside the page	페이지 옆 창에 표시되는 선택 항목의 속성
+The properties were changed on the project server meanwhile. Reload shows them; your entries are replaced.	그동안 프로젝트 서버에서 속성이 변경되었습니다. 다시 불러오면 표시되며 입력한 내용은 바뀝니다.
 The rail or mounting base; its accessories are the hooks, clamps and ballast	레일 또는 설치 받침대; 부속품은 후크, 클램프, 밸러스트
 The recalculation keeps frozen routes as long as they are still possible	다시 계산할 때 가능한 한 고정된 경로가 유지됩니다
 The ribbon with the File tab replaces the menus; Ctrl+Shift+P finds any command.	파일 탭이 있는 리본이 메뉴를 대신합니다. Ctrl+Shift+P로 모든 명령을 찾을 수 있습니다.
@@ -1965,6 +2111,7 @@ The rooms of the level side by side; click the level again for all of the plant	
 The second fault is checked at the line-to-earth voltage	이중 고장은 대지 전압으로 검사됩니다
 The selected devices side by side on the selected rail, from its left end	선택한 장치를 선택한 레일의 왼쪽 끝부터 나란히 배치
 The side of {} is open	{}의 측면이 개방되어 있습니다
+The state of the save shows in the status bar and in the Project server pane: saved, not saved yet, saving, waiting for the server, failed or partly saved. The local recovery copy is kept besides; it is no save on the project server.	저장 상태는 상태 표시줄과 프로젝트 서버 창에 표시됩니다: 저장됨, 아직 저장되지 않음, 저장 중, 서버 대기 중, 실패 또는 일부 저장됨. 로컬 복구 사본은 별도로 보관되며 프로젝트 서버에 저장한 것이 아닙니다.
 The symbol is placed in the project	심볼이 프로젝트에 배치되어 있습니다
 The terminal parts name no end brackets or end plates (tech data End bracket, End plate).	단자 부품에 엔드 브래킷이나 엔드 플레이트가 지정되어 있지 않습니다(기술 데이터 End bracket, End plate).
 The update failed	업데이트에 실패했습니다
@@ -1972,6 +2119,7 @@ The vertical wire	세로 전선
 The web version is updated on its server.	웹 버전은 해당 서버에서 업데이트됩니다.
 The wires get the free cores of the cable in order (left to right)	전선은 케이블의 빈 심선을 순서대로(왼쪽에서 오른쪽) 받습니다
 The wires of the connection take these values again	연결의 전선이 이 값을 다시 받습니다
+Their places, sizes and busbars are set in the Buildings pane.	위치, 치수 및 부스바는 건물 창에서 설정합니다.
 Theme	테마
 These settings are edited in their panes:	이 설정은 각 창에서 편집합니다:
 Thickness	두께
@@ -1993,7 +2141,6 @@ Title blocks, report schemes and plot frames shared by all projects on the parts
 To do	할 일
 Toggle corner direction while drawing wires	전선을 그리는 동안 꺾임 방향 전환
 Toggle routing around symbols (wire tool)	심볼 우회 경로 설정 켜기/끄기(전선 도구)
-Top	위쪽
 Top edges	위쪽 가장자리
 Top left	왼쪽 위
 Top right	오른쪽 위
@@ -2001,16 +2148,15 @@ Total selectivity	완전 선택 차단
 Touch screen	터치스크린
 Transfer project parts to database	프로젝트 부품을 데이터베이스로 전송
 Translate the project texts; documentation per language	프로젝트 텍스트 번역, 언어별 문서
+Try again	다시 시도
 Turn about the vertical, counter-clockwise seen from above (90 °: the fronts face to the right)	수직축 기준 회전, 위에서 볼 때 시계 반대 방향(90 °: 전면이 오른쪽을 향함)
 Turn the 3D view to the point	3D 보기를 해당 점으로 돌리기
-Tutorial	튜토리얼
 Twin ferrules where two wires share a connection point	두 전선이 연결 지점을 공유하는 곳에 이중 페룰
 Two fingers	두 손가락
 Two wires must meet here at a right angle. With Auto-connect on, connection points facing its arms are wired to it.	여기에서 두 연결선이 직각으로 만나야 합니다. 자동 연결이 켜져 있으면 그 가지를 마주하는 접속점이 여기에 배선됩니다.
 Type a point and press Enter: x y in mm, or @dx dy relative to the last point; it acts like a click of the current tool	점을 입력하고 Enter 키를 누르세요: x y(mm) 또는 마지막 점 기준 상대 좌표 @dx dy. 현재 도구로 클릭한 것과 같이 동작합니다
 U {} / {} / {} V, I {} A, {} kWp	U {} / {} / {} V, I {} A, {} kWp
 UI scale	UI 배율
-Undo	실행 취소
 Undo brings it back.	실행 취소로 되돌릴 수 있습니다.
 Undo list	실행 취소 목록
 Undo {} steps	{}단계 실행 취소
@@ -2068,8 +2214,10 @@ Via:	경유:
 View	보기
 Visible	표시
 Voltage (line to line)	전압(선간)
+Voltage at maximum power	최대 전력 시 전압
 Voltage drop	전압 강하
 WGS 84, written into the site of IFC exports	WGS 84, IFC 내보내기의 부지에 기록됩니다
+Waiting for the server	서버 대기 중
 Wall {}, {} m: drag to move it, a double-click shows it to equip it	벽 {}, {} m: 드래그하여 이동, 두 번 클릭하면 장착할 수 있도록 표시
 Wall {}, {} m: the wall shown in the wall view (highlighted); drag to move it	벽 {}, {} m: 벽 보기에 표시된 벽(강조 표시), 드래그하여 이동
 Wall-mounted part	벽 설치 부품
@@ -2088,8 +2236,10 @@ When it differs from the page	페이지와 다를 때
 Where	위치
 Where neither wire has a termination chosen for it	두 전선 모두 마감을 선택하지 않은 경우
 Where the point is in the plant; y: its height above the ground level of the plant	설비 내 점의 위치. y: 설비 지반면 위의 높이
+Where the roof was clicked in the 3D view	3D 보기에서 지붕을 클릭한 위치
 Where the structure of the device comes from: aspects equal to the structure around the symbol are inherited and follow when it moves into or out of a structure box; other aspects are the device's own and stay.	장치 구조의 출처: 기호 주변 구조와 같은 측면은 상속되며 기호를 구조 박스 안으로 또는 밖으로 이동하면 함께 변경됩니다. 다른 측면은 장치 고유의 것으로 유지됩니다.
 Where the wire starts and ends: a connection point from the part data, one generated from the function template, or the device centre if no connection point matches	전선이 시작하고 끝나는 곳: 부품 데이터의 연결 지점, 기능 템플릿에서 생성된 연결 지점 또는 일치하는 연결 지점이 없으면 장치 중심
+Who created the project on the project server and when; not the drawing author below	프로젝트 서버에서 프로젝트를 만든 사람과 시간입니다. 아래의 도면 작성자가 아닙니다
 Whole building	건물 전체
 Whole words	단어 단위로
 Width / going	폭 / 발판
@@ -2126,6 +2276,7 @@ Wiring assistant: checklist of the wires with 3D view and progress (tablet: open
 Wiring space between devices and ducts	장치와 덕트 사이의 배선 공간
 With a user account of the server; replaces the access token	서버의 사용자 계정으로. 액세스 토큰을 대체합니다
 With everything below it	그 아래의 모든 항목 포함
+With its middle where the roof was clicked in the 3D view	3D 보기에서 지붕을 클릭한 위치에 중심을 둠
 With the current pages; the approvals so far become void	현재 페이지로 제출합니다. 지금까지의 승인은 무효가 됩니다
 With values only	값이 있는 항목만
 Withdraw	철회
@@ -2146,6 +2297,9 @@ YYYY-MM-DD	YYYY-MM-DD
 You may only view this project.	이 프로젝트를 보기만 할 수 있습니다.
 You may review this project: comments, markup and approvals, no other changes.	이 프로젝트를 검토할 수 있습니다. 주석, 마크업 및 승인만 가능하며 다른 변경은 할 수 없습니다.
 Your unsaved changes of it are taken back	저장되지 않은 변경 내용이 취소됩니다
+Your version of {}	{}의 내 버전
+Your version taken over: {}. Save to store it on the project server.	내 버전을 가져옴: {}. 프로젝트 서버에 저장하세요.
+Your versions of changes that were replaced by the version on the project server. They stay here until you discard them.	프로젝트 서버의 버전으로 교체된 변경 내용의 내 버전입니다. 버릴 때까지 여기에 남습니다.
 Zoom	확대/축소
 Zoom in in the 3D view (held)	3D 보기 확대(누른 채로)
 Zoom out in the 3D view (held)	3D 보기 축소(누른 채로)
@@ -2250,7 +2404,10 @@ x y	x y
 {} (default)	{}(기본값)
 {} (first column)	{}(첫 번째 열)
 {} (locked by {})	{}(잠금: {})
+{} (no such device)	{} (장치가 없음)
+{} (not placed in the layout)	{} (레이아웃에 배치되지 않음)
 {} (project server, revision {})	{}(프로젝트 서버, 개정 {})
+{} (revision {})	{}(개정 {})
 {} (spare)	{}(예비)
 {} (subproject of {})	{}({}의 하위 프로젝트)
 {} (unused)	{}(사용 안 함)
@@ -2259,7 +2416,10 @@ x y	x y
 {} PLC function texts updated	PLC 기능 텍스트 {}개 업데이트됨
 {} Vault items found for the project parts	프로젝트 부품에 대한 Vault 항목 {}개를 찾았습니다
 {} Vault items found: review the changes in the integration window	Vault 항목 {}개를 찾았습니다. 통합 창에서 변경 내용을 검토하세요
+{} added to building {}	{0}이(가) 건물 {1}에 추가되었습니다
 {} addresses changed	주소 {}개 변경됨
+{} air-termination rods	피뢰침 {}개
+{} already exists on the project server.	{}이(가) 프로젝트 서버에 이미 있습니다.
 {} bundles, {} branch points	번들 {}개, 분기점 {}개
 {} bus cables created	버스 케이블 {}개 만들어짐
 {} bus connections	버스 연결 {}개
@@ -2297,6 +2457,7 @@ x y	x y
 {} devices renamed	장치 {}개의 이름을 바꿨습니다
 {} differences to {}	{1}와(과)의 차이점 {0}개
 {} doors	문 {}개
+{} down conductors with test joints, {} m of conductors	시험 단자가 있는 인하 도선 {}개, 도체 {} m
 {} entries in {}	{1}의 항목 {0}개
 {} errors	오류 {}개
 {} errors, {} warnings	오류 {}개, 경고 {}개
@@ -2311,6 +2472,7 @@ x y	x y
 {} has no function with a symbol; assign it to a device in its properties	{}에는 기호가 있는 기능이 없습니다. 장치 속성에서 장치에 할당하십시오
 {} has unsaved changes. Discard them?	{}에 저장되지 않은 변경 내용이 있습니다. 취소할까요?
 {} imported into the parts database and placed as {}	{}을(를) 부품 데이터베이스로 가져와 {}(으)로 배치했습니다
+{} in {}	{1}의 {0}
 {} is neither in the parts database nor on the parts server	{}은(는) 부품 데이터베이스와 부품 서버 어디에도 없습니다
 {} is not in the disk image	디스크 이미지에 {}이(가) 없습니다
 {} is used by: {}	{}을(를) 사용하는 항목: {}
@@ -2339,11 +2501,13 @@ x y	x y
 {} of {} entries shown: search to narrow the list	항목 {}/{}개 표시됨. 목록을 좁히려면 검색하세요
 {} of {} items	항목 {}/{}개
 {} of {} pages locked	페이지 {1}개 중 {0}개 잠김
+{} of {} parts · double-click: place	{} / {}개 부품 · 두 번 클릭: 배치
 {} of {} pins used	핀 {1}개 중 {0}개 사용됨
 {} of {} rows	행 {1}개 중 {0}개
 {} of {} wires	전선 {1}개 중 {0}개
 {} of {} wires assigned to cores of {}	전선 {1}개 중 {0}개가 {2}의 심선에 지정됨
 {} on released pages were left as they are	릴리스된 페이지의 {}개는 그대로 두었습니다
+{} on {}	{}({})
 {} options switched	옵션 {}개를 전환했습니다
 {} pages generated	페이지 {}개를 생성했습니다
 {} pages generated; page macros not found: {}	페이지 {}개를 생성했습니다. 찾을 수 없는 페이지 매크로: {}
@@ -2368,6 +2532,7 @@ x y	x y
 {} renamed: {} pages and devices	{} 이름 변경됨: 페이지 및 장치 {}개
 {} report pages output to {}	보고서 페이지 {0}개를 {1}(으)로 출력함
 {} routes frozen	경로 {}개 고정됨
+{} rows of tables of {} × {} = {}, {}	가대 {}열, {} × {} = {}, {}
 {} segments created, {} devices added, {} updated	세그먼트 {}개 생성, 장치 {}개 추가, {}개 업데이트
 {} stations, {} bus systems, {} cards assigned, {} addresses changed, {} connections, {} cables	스테이션 {}개, 버스 시스템 {}개, 카드 {}개 지정됨, 주소 {}개 변경됨, 연결 {}개, 케이블 {}개
 {} structure identifiers added	구조 식별자 {}개 추가됨
@@ -2381,6 +2546,7 @@ x y	x y
 {} unused structure identifiers removed	사용하지 않는 구조 식별자 {}개 제거됨
 {} values taken over	값 {}개를 적용했습니다
 {} warnings	경고 {}개
+{} was changed on the project server meanwhile. Your entries are kept; create the copy again to copy the current saved state.	그동안 {}이(가) 프로젝트 서버에서 변경되었습니다. 입력한 내용은 유지됩니다. 현재 저장된 상태를 복사하려면 사본을 다시 만드세요.
 {} was imported into the parts database; its page no longer exists	{}을(를) 부품 데이터베이스로 가져왔습니다. 해당 페이지는 더 이상 없습니다
 {} windows	창 {}개
 {} wire pieces joined	전선 조각 {}개 결합됨
@@ -2388,15 +2554,21 @@ x y	x y
 {} wires changed	전선 {}개 변경됨
 {} wires, {} cables and {} tubes routed	전선 {}개, 케이블 {}개, 튜브 {}개 배선 경로 지정됨
 {} wires, {} – {} mm	전선 {}개, {} – {} mm
+{} {} of building {}	건물 {2}의 {0} {1}
 {} °C (max. {} °C)	{} °C(최대 {} °C)
 {} °C (max.)	{} °C(최대)
+{} × {} = {}, {}	{} × {} = {}, {}
 {} × {} pixels, {}	{} × {} 픽셀, {}
+{} – revision {}, {}	{} – 개정 {}, {}
 {} – {} ({} pages)	{} – {}(페이지 {}개)
 {} – {} here (Esc cancels)	{} – 여기에서 {}(Esc는 취소)
+{}, freestanding	{}, 지상형
+{}, {} (copy of {}, revision {})	{}, {}({}의 사본, 개정 {})
 {}: click to show its floor plan	{}: 클릭하면 평면도를 표시합니다
 {}: crimp together with the wire to {}	{}: {}(으)로 가는 전선과 함께 압착
 {}: drag to move it, R turns it, a double-click opens it	{}: 드래그하여 이동, R로 회전, 두 번 클릭하여 열기
 {}: drag to move it, a double-click shows the floor	{}: 드래그하여 이동, 두 번 클릭하여 바닥 표시
+{}: drag to move, R: turn by 90°	{}: 드래그하여 이동, R: 90° 회전
 {}: nothing to change	{}: 변경할 항목 없음
 {}: pin {}	{}: 핀 {}
 {}: strip {} mm, {}	{}: 피복 제거 {} mm, {}

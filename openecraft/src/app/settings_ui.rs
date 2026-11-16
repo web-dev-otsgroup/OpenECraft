@@ -213,6 +213,10 @@ impl App {
     }
 
     fn server_links(&mut self, ui: &mut egui::Ui) {
+        ui.strong(tr("Project server"));
+        self.server_autosave_setting(ui);
+        ui.weak(tr("The state of the save shows in the status bar and in the Project server pane: saved, not saved yet, saving, waiting for the server, failed or partly saved. The local recovery copy is kept besides; it is no save on the project server."));
+        ui.add_space(8.0);
         ui.weak(tr("Addresses and sign-in of the servers are set in their panes:"));
         for c in [Cmd::DataPortal, Cmd::ProjectServer, Cmd::Vault, Cmd::ManagePlugins] {
             let d = commands::def(c);
@@ -299,7 +303,8 @@ impl App {
         if list {
             if let Startup::Project(Target::Server(p)) = &self.shell.startup {
                 if self.remote.shared.is_none() {
-                    self.remote.url = p.url.clone();
+                    if self.remote.url != p.url { self.reconnect = None; }
+                    self.remote.select_server(&p.url);
                 }
             }
             self.remote.list();
@@ -342,6 +347,10 @@ impl App {
                     ui.colored_label(crate::style::warning(), tr("not available, drawn by the processor"));
                 }
             });
+            ui.end_row();
+            ui.label(tr("Data portal"));
+            ui.checkbox(&mut self.shell.catalog_logos, tr("Show the logos of the catalogs"))
+                .on_hover_text(tr("The logos of the manufacturers' catalogs on the parts server, beside the details of a part"));
             ui.end_row();
             ui.label(tr("Wall opacity"));
             let mut percent = self.shell.wall_opacity * 100.0;

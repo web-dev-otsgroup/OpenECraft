@@ -168,6 +168,14 @@ impl Session {
         };
     }
 
+    /// The catalog whose logo may be changed now: a stored catalog without unsaved
+    /// changes (a changed logo replaces the open catalog with the server's).
+    pub fn logo_target(&self) -> Option<&str> {
+        let d = self.catalog.as_ref()?;
+        let id = d.original.as_deref()?;
+        self.catalogs.iter().any(|c| c.id == id && *c == d.catalog).then_some(id)
+    }
+
     /// The catalog to save, with an id derived from the name for new catalogs; or
     /// why it cannot be saved.
     pub fn catalog_to_save(&self) -> Result<Catalog, &'static str> {
@@ -215,9 +223,14 @@ impl Session {
     }
 
     /// Updates the local copy with a server reply.
-    /// The parts of an EDZ file to upload; its files wait for the upload.
+    /// The parts of an EDZ file or the ZIP package of an enclosure configurator to
+    /// upload; its files wait for the upload.
     pub fn import_package(&mut self, path: &str, bytes: &[u8]) -> Result<Vec<Part>, String> {
-        let edz = openecraft_edz::folder::read_file(std::path::Path::new(path),bytes)?;
+        let edz = if openecraft_edz::package::is_zip(bytes) {
+            openecraft_edz::package::read(bytes, Some(openecraft_step::parse_step_without))?
+        } else {
+            openecraft_edz::folder::read_file(std::path::Path::new(path), bytes)?
+        };
         self.pending_files = edz.files;
         Ok(edz.parts)
     }

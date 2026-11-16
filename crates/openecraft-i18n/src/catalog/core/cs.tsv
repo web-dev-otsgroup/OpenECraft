@@ -48,7 +48,6 @@ Address {} is used by {} and {}	Adresu {} používají {} a {}
 Adhesive	Lepení
 Adjustable output voltage	Nastavitelné výstupní napětí
 Administer the server	Spravovat server
-Administrator	Správce
 Alarm limit H	Mez alarmu H
 Alarm limit HH	Mez alarmu HH
 Alarm limit L	Mez alarmu L
@@ -188,7 +187,7 @@ Cell temperatures: {} °C (U max), {} °C (U mean), {} °C (U min)	Teploty člá
 Centre horizontally	Zarovnat vodorovně na střed
 Centre vertically	Zarovnat svisle na střed
 Centrifugal pump	Odstředivé čerpadlo
-Change	Změna
+Changed in the project folder by another program and also in the open project: {}{}. Save the project under another name, or open it again and repeat the changes	Změněno ve složce projektu jiným programem a také v otevřeném projektu: {}{}. Uložte projekt pod jiným názvem, nebo jej otevřete znovu a změny zopakujte
 Changed since mounted	Změněno od montáže
 Changed since wired	Změněno od zapojení
 Changeover contact	Přepínací kontakt
@@ -293,6 +292,7 @@ Copper bar {}: segment {} is {} mm straight, at least {} mm are needed for bendi
 Copper bar {}: {} mm are longer than the stock length of {} mm	Měděná přípojnice {}: {} mm je delší než skladová délka {} mm
 Copper bar {}: {} mm are too thick for {}	Měděná přípojnice {}: {} mm je příliš silná pro {}
 Copper bar {}: {} segments need {} bends	Měděná přípojnice {}: {} úseků vyžaduje {} ohybů
+Copper-bonded steel	Poměděná ocel
 Cores used	Použité žíly
 Corner on page {} does not fit its wires: it needs one wire in each of its two directions and no connection point there	Roh na straně {} neodpovídá svým vodičům: potřebuje jeden vodič v každém ze svých dvou směrů a žádný připojovací bod v místě
 Counter contact NC	Kontakt čítače, rozpínací
@@ -310,7 +310,6 @@ Create projects	Vytvářet projekty
 Creation date	Datum vytvoření
 Cross-section {} carries {} A, less than the {} A of {}	Průřez {} snese {} A, méně než {} A z {}
 Crossing on page {} does not fit its wires: it needs a wire in all four directions and no connection point there	Křížení na straně {} neodpovídá svým vodičům: potřebuje vodič ve všech čtyřech směrech a žádný připojovací bod v místě
-Currency	Měna
 Current (A)	Proud (A)
 Current capacity (A)	Proudová zatížitelnost (A)
 Current consumption	Odběr proudu
@@ -434,10 +433,10 @@ ERP item master and bill of materials (CSV)	Kmenová data položek ERP a kusovn�
 ERP number	Číslo ERP
 ETIM class	Třída ETIM
 Earth electrode	Zemnič
+Earth rod	Tyčový zemnič
 East-west on a flat roof	Východ-západ na ploché střeše
 Edit pages	Upravovat stránky
 Edit project data	Upravovat data projektu
-Editor	Editor
 Efficiency	Účinnost
 Efficiency class	Třída účinnosti
 Electrical data	Elektrické údaje
@@ -551,10 +550,12 @@ Foot switch NO (NFPA)	Nožní spínač, spínací (NFPA)
 Force	Síla
 Fork terminal	Vidlicové oko
 Format (placeholders)	Formát (zástupné symboly)
+Foundation earth electrode	Základový zemnič
 Frame size	Konstrukční velikost
 Free	Volné
 Free air (mm)	Volné vedení (mm)
 Free run	Volné uložení
+Freestanding on posts	Pozemní na sloupcích
 Frequency converter	Frekvenční měnič
 Frequency meter	Frekvenční měřič
 From end	Od konce
@@ -757,7 +758,6 @@ Latitude is within ±90° and longitude within ±180°	Zeměpisná šířka je v
 Lead time (days)	Dodací lhůta (dny)
 Leakage current	Unikající proud
 Leakage line	Vedení prosakujícího oleje
-Left side	Levá strana
 Left side panel	Levá boční stěna
 Legend plate text	Text štítku
 Length (m)	Délka (m)
@@ -818,7 +818,6 @@ Manual switch NO	Ruční spínač, spínací
 Manual switch NO, latching	Ruční spínač, spínací, s aretací
 Manual work	Ruční práce
 Manufacturer's table	Tabulka výrobce
-Manufacturers	Výrobci
 Marking (CSV)	Popisování (CSV)
 Marking (Excel)	Popisování (Excel)
 Mating faces	Čelní strany
@@ -849,8 +848,6 @@ Minimum operating temperature	Minimální provozní teplota
 Mirror contacts	Zrcadlové kontakty
 Mirrored	Zrcadleno
 Mission time	Doba mise
-Module	Modul
-Modules	Moduly
 Moisture	Vlhkost
 Moment of inertia	Moment setrvačnosti
 Motion detector	Detektor pohybu
@@ -893,7 +890,6 @@ Mounting site	Místo montáže
 Mounting type	Způsob upevnění
 Multi-line text	Víceřádkový text
 N terminal	Svorka N
-NC contact	Rozpínací kontakt
 NC contact (NFPA)	Rozpínací kontakt (NFPA)
 NC contact K (GOST)	Rozpínací kontakt K (GOST)
 NC contact KA (GB)	Rozpínací kontakt KA (GB)
@@ -908,7 +904,6 @@ NC contact, on-delay KT (GOST)	Rozpínací kontakt, zpožděný přítah KT (GOS
 NC contact, on-delay TLR (JIS)	Rozpínací kontakt, zpožděný přítah TLR (JIS)
 NC contact, timed opening (NFPA)	Rozpínací kontakt, zpožděné rozepnutí (NFPA)
 NFPA / JIC	NFPA / JIC
-NO contact	Spínací kontakt
 NO contact (NFPA)	Spínací kontakt (NFPA)
 NO contact K (GOST)	Spínací kontakt K (GOST)
 NO contact KA (GB)	Spínací kontakt KA (GB)
@@ -940,7 +935,6 @@ No plugs	Žádné konektory
 No report block {}	Žádný blok výkazů {}
 No segment template named {}	Žádná šablona segmentu s názvem {}
 No subproject {}	Žádný podprojekt {}
-No such PV array	Takové FV pole neexistuje
 No such object: {}	Žádný takový objekt: {}
 No surge protective device at the supply (IEC 60364-4-44)	Na přívodu není přepěťová ochrana (IEC 60364-4-44)
 No terminal {}	Žádná svorka {}
@@ -1006,7 +1000,6 @@ Optocoupler	Optočlen
 Order numbers	Objednací čísla
 Order status	Stav objednávky
 Ordered	Objednáno
-Other	Ostatní
 Other bus device	Jiný účastník sběrnice
 Other module	Jiný modul
 Other properties	Další vlastnosti
@@ -1227,7 +1220,6 @@ Product	Produkt
 Production of {}{} failed: {}	Výroba {}{} selhala: {}
 Production wire list (CSV)	Výrobní seznam vodičů (CSV)
 Project description	Popis projektu
-Project manager	Vedoucí projektu
 Project number	Číslo projektu
 Project property of the property database (by key)	Vlastnost projektu z databáze vlastností (podle klíče)
 Project revision	Revize projektu
@@ -1300,7 +1292,6 @@ Rated short-time withstand current	Jmenovitý krátkodobý výdržný proud
 Rated speed	Jmenovité otáčky
 Rated torque	Jmenovitý moment
 Rated voltage	Jmenovité napětí
-Rear wall	Zadní stěna
 Rectangular punch	Obdélníkový razník
 Rectifier / inverter AC/DC, bidirectional	Usměrňovač / střídač AC/DC, obousměrný
 Redline	Redline
@@ -1338,21 +1329,19 @@ Resolution	Rozlišení
 Response time	Doba odezvy
 Result	Výsledek
 Return / exhaust line	Zpětné / odfukové vedení
-Reviewer	Kontrolor
 Revision overview (changes)	Přehled revizí (změny)
 Revision table: author of the last revision (2: the one before …)	Tabulka revizí: autor poslední revize (2: předchozí …)
 Revision table: date of the last revision (2: the one before …)	Tabulka revizí: datum poslední revize (2: předchozí …)
 Revision table: description of the last revision (2: the one before …)	Tabulka revizí: popis poslední revize (2: předchozí …)
 Revision table: index of the last revision (2: the one before …)	Tabulka revizí: index poslední revize (2: předchozí …)
-Right side	Pravá strana
 Right side panel	Pravá boční stěna
+Ring earth electrode	Obvodový zemnič
 Ring terminal	Kabelové oko
 Rivet nut	Nýtovací matice
 RoHS compliant	Vyhovuje RoHS
 Rockwell (Local:1:I.Data.0)	Rockwell (Local:1:I.Data.0)
 Roller switch NC	Kladičkový spínač, rozpínací
 Roller switch NO	Kladičkový spínač, spínací
-Roof	Střecha
 Roof top	Střecha
 Room floor	Podlaha místnosti
 Room {} stands outside the plot boundary	Místnost {} stojí mimo hranici pozemku
@@ -1485,10 +1474,10 @@ Spare terminal	Rezervní svorka
 Speed	Otáčky
 Spiral	Točité
 Stainless steel	Nerezová ocel
+Stainless steel V4A	Nerezová ocel V4A
 Standard	Norma
 Start / stop circuit with a relay: coil and contacts form one device with cross references and contact image, terminal strip, wire numbers, terminal diagram and connection list.	Obvod start / stop s relé: cívka a kontakty tvoří jedno zařízení s křížovými odkazy a obrazem kontaktů, svorkovnice, čísla vodičů, schéma svorkovnice a seznam spojení.
 Start date	Datum zahájení
-Started	Zahájeno
 Starting current ratio	Poměr záběrného proudu
 Starting torque	Záběrný moment
 State of the project: draft, in review, approved, released	Stav projektu: návrh, v kontrole, schváleno, uvolněno
@@ -1497,6 +1486,7 @@ Station name {} is used {} times	Název stanice {} je použit {}krát
 Station {} is not connected to bus {}	Stanice {} není připojena ke sběrnici {}
 Station {}: bus system {} does not exist	Stanice {}: sběrnicový systém {} neexistuje
 Steam	Pára
+Steel, hot-dip galvanised	Ocel žárově zinkovaná
 Stock	Zásoba
 Stop category	Kategorie zastavení
 Storage temperature range	Rozsah skladovací teploty
@@ -1586,6 +1576,7 @@ The archive contains no project	Archiv neobsahuje žádný projekt
 The archive has no manifest	Archiv nemá manifest
 The archive is damaged	Archiv je poškozen
 The archive unpacks to more than {} MB	Archiv se rozbalí na více než {} MB
+The archive was written by a newer version (archive version {})	Archiv byl zapsán novější verzí (verze archivu {})
 The assembly manufacturer must be named (IEC 61439-1, 6.1)	Výrobce rozváděče musí být uveden (IEC 61439-1, 6.1)
 The cabinet line-up in its room: L-shaped floor plan, inner wall, door and window, the line-up at its place, a mounting rail with a socket outlet on a wall, a wall-mounted emergency light and a cable tray under the ceiling.	Řada rozvaděčů ve své místnosti: půdorys ve tvaru L, vnitřní stěna, dveře a okno, řada na svém místě, lišta se zásuvkou na stěně, nouzové svítidlo na stěně a kabelový žlab pod stropem.
 The configuration is not a JSON object	Konfigurace není objekt JSON
@@ -1598,7 +1589,10 @@ The embedded document {} is damaged	Vložený dokument {} je poškozen
 The file is empty	Soubor je prázdný
 The file was written by a newer version (format {}): data this version does not know is lost when saving	Soubor byl zapsán novější verzí (formát {}): data, která tato verze nezná, se při uložení ztratí
 The first column must be Key	První sloupec musí být Key
+The folder {} already holds the project {}: a split project needs a folder of its own	Složka {} již obsahuje projekt {}: rozdělený projekt potřebuje vlastní složku
+The folder {} holds files that belong to no project ({}): a split project needs a folder of its own	Složka {} obsahuje soubory, které nepatří k žádnému projektu ({}): rozdělený projekt potřebuje vlastní složku
 The function definition needs a key and a name	Definice funkce potřebuje klíč a název
+The index of the project names no file layout: it was not written by OpenECraft	Index projektu neuvádí rozložení souborů: nebyl zapsán aplikací OpenECraft
 The last page cannot be deleted	Poslední stránku nelze odstranit
 The macro box has no items left	V rámečku makra nezůstaly žádné prvky
 The next free id is already in use	Další volné ID je již použito
@@ -1608,7 +1602,10 @@ The pages were changed after the submission; submit the revision again	Stránky 
 The plot boundary crosses itself	Hranice pozemku protíná sama sebe
 The plot boundary encloses no area	Hranice pozemku neohraničuje žádnou plochu
 The plot boundary is no polygon: it crosses itself or has fewer than three corners	Hranice pozemku není mnohoúhelník: protíná sama sebe nebo má méně než tři rohy
+The project cannot be written as files: {}	Projekt nelze zapsat jako soubory: {}
+The project file {} is missing	Soubor projektu {} chybí
 The project has no panel layout	Projekt nemá rozvržení rozváděče
+The project was written by a newer version (file layout {})	Projekt byl zapsán novější verzí (rozložení souborů {})
 The property needs a name	Vlastnost potřebuje název
 The pump station built into two bayed floor-standing enclosures: busbar system, rails and ducts, door devices and handles, filter fan, light, PE bar, cable glands, a cable passage, climate calculation, duct fill and 3D routing.	Čerpací stanice vestavěná do dvou řazených stojanových skříní: přípojnicový systém, lišty a kabelové žlaby, přístroje ve dveřích a rukojeti, ventilátor s filtrem, osvětlení, přípojnice PE, kabelové vývodky, kabelová průchodka, výpočet klimatizace, zaplnění žlabů a 3D trasování.
 The revision is already released	Revize je již uvolněna
@@ -1749,7 +1746,6 @@ Vessel	Nádoba
 Vibration	Vibrace
 Vibration resistance	Odolnost proti vibracím
 View projects	Prohlížet projekty
-Viewer	Prohlížející
 Violations	Porušení
 Voltage (V)	Napětí (V)
 Voltage drop (%)	Úbytek napětí (%)
@@ -1890,7 +1886,6 @@ page properties	vlastnosti stránky
 pigtail {} mm	pigtail {} mm
 pilot	řídicí
 pink	růžová
-portrait	na výšku
 pressure	tlak
 red	červená
 released	uvolněno
@@ -1928,6 +1923,7 @@ yellow	žlutá
 {} has no MTTFd, B10d, PL or PFHd	{} nemá MTTFd, B10d, PL ani PFHd
 {} has no door or window {}	{} nemá dveře ani okno {}
 {} has nothing to manufacture	{} nemá nic k výrobě
+{} holds an unresolved merge conflict of git: the file was merged as text. Take one version of the file (git checkout --ours or --theirs), then set up the merge driver for split projects (merge_project_file) before merging again	{} obsahuje nevyřešený konflikt slučování gitu: soubor byl sloučen jako text. Převezměte jednu verzi souboru (git checkout --ours nebo --theirs) a poté před dalším slučováním nastavte slučovací ovladač pro rozdělené projekty (merge_project_file)
 {} is a built-in function definition	{} je vestavěná definice funkce
 {} is a built-in property	{} je vestavěná vlastnost
 {} is a built-in scheme	{} je vestavěné schéma
@@ -1973,6 +1969,7 @@ yellow	žlutá
 {}: PV array {} covers a roof window	{}: FV pole {} zakrývá střešní okno
 {}: PV array {} has {} modules, its device {} has {}	{}: FV pole {} má {} modulů, jeho zařízení {} má {}
 {}: PV array {} is mounted tilted on a pitched roof	{}: FV pole {} je namontováno skloněně na šikmé střeše
+{}: PV array {} lies outside the protection of the air-termination system	{}: FV pole {} leží mimo ochranu jímací soustavy
 {}: PV array {} of roof {} lies across a ridge, a hip or the edge of the roof	{}: FV pole {} střechy {} leží přes hřeben, nároží nebo okraj střechy
 {}: PV array {} of roof {} lies outside the roof	{}: FV pole {} střechy {} leží mimo střechu
 {}: PV arrays {} and {} lie over each other	{}: FV pole {} a {} se překrývají
@@ -1982,6 +1979,7 @@ yellow	žlutá
 {}: a wire of {} mm² is thinner than the connection point takes (at least {} mm²)	{}: vodič {} mm² je slabší, než přípojný bod pojme (nejméně {} mm²)
 {}: accessory {} fits none of the device's parts	{}: příslušenství {} se nehodí k žádnému dílu přístroje
 {}: actuator {} is {} mm above the floor, recommended {} … {} mm	{}: ovládací prvek {} je {} mm nad podlahou, doporučeno {} … {} mm
+{}: air-termination rod {} stands off the roofs	{}: jímací tyč {} stojí mimo střechy
 {}: auxiliary function(s) without main function	{}: pomocné funkce bez hlavní funkce
 {}: breaking capacity {} kA below the short-circuit current {} kA	{}: vypínací schopnost {} kA pod zkratovým proudem {} kA
 {}: cable duct at {} mm filled {} % (limit {} %)	{}: kabelový kanál na {} mm zaplněn na {} % (mez {} %)
@@ -1998,13 +1996,17 @@ yellow	žlutá
 {}: cross-section {} below the {} mm² of power circuits	{}: průřez {} pod {} mm² silových obvodů
 {}: cross-section {} differs from the potential definition ({})	{}: průřez {} se liší od definice potenciálu ({})
 {}: cutout of {} on the {} is {} mm from the edge, at least {} mm required	{}: výřez {} na {} je {} mm od okraje, vyžaduje se alespoň {} mm
+{}: cutout of {} on the {} lies in a restricted cut-out area	{}: výřez {} na {} leží v oblasti zakázané pro výřezy
 {}: cutout of {} on the {} reaches {} mm beyond its front	{}: výřez {} na {} přesahuje jeho čelo o {} mm
 {}: cutouts of {} and {} on the {} are too close ({} mm web, at least {} mm)	{}: výřezy {} a {} na {} jsou příliš blízko ({} mm můstek, alespoň {} mm)
 {}: designation '{}' used more than once	{}: označení '{}' použito vícekrát
 {}: device tag without device name	{}: označení přístroje bez názvu přístroje
+{}: earth electrode {} has no walls to run along: the building has no rooms or roofs	{}: zemnič {} nemá zdi, podél kterých by vedl: budova nemá místnosti ani střechy
+{}: earth rod {} stands inside the walls of the building	{}: tyčový zemnič {} stojí uvnitř zdí budovy
 {}: fault current {} A at {} does not disconnect within {} s (needs {} A)	{}: poruchový proud {} A na {} neodpojí do {} s (potřeba {} A)
 {}: function texts differ in the single-line diagram and the schematic	{}: texty funkcí se v jednopólovém schématu a ve schématu zapojení liší
 {}: hole of {} is too close to the cutout of {} on the {}	{}: otvor {} je příliš blízko výřezu {} na {}
+{}: hole of {} on the {} lies in a restricted cut-out area	{}: otvor {} na {} leží v oblasti zakázané pro výřezy
 {}: hole Ø{} of {} on the {} is {} mm from the edge, at least {} mm required	{}: otvor Ø{} prvku {} na {} je {} mm od okraje, vyžaduje se alespoň {} mm
 {}: holes of {} and {} on the {} are too close ({} mm web, at least {} mm)	{}: otvory {} a {} na {} jsou příliš blízko ({} mm můstek, alespoň {} mm)
 {}: hot spot of about {} °C at x = {} mm, y = {} mm of the mounting plate (inside temperature at most {} °C)	{}: horké místo asi {} °C v bodě x = {} mm, y = {} mm montážní desky (vnitřní teplota nejvýše {} °C)
@@ -2062,7 +2064,14 @@ yellow	žlutá
 {}: terminal {} uses {} levels, its part {} has {}	{}: svorka {} používá {} pater, její artikl {} má {}
 {}: terminals {} are {} mm above the floor, at least {} mm required	{}: svorky {} jsou {} mm nad podlahou, vyžaduje se alespoň {} mm
 {}: the busbar system with {} bars joins {} conductors ({}): short circuit	{}: přípojnicový systém s {} přípojnicemi spojuje {} vodiče ({}): zkrat
+{}: the busbar {} of earth electrode {} does not exist	{}: přípojnice {} zemniče {} neexistuje
 {}: the device {} of PV array {} does not exist	{}: zařízení {} FV pole {} neexistuje
+{}: the earthing busbar {} of PV array {} does not exist	{}: uzemňovací přípojnice {} FV pole {} neexistuje
+{}: the freestanding PV array {} stands on {}	{}: pozemní FV pole {} stojí na {}
+{}: the freestanding PV arrays {} and {} stand on each other	{}: pozemní FV pole {} a {} se překrývají
+{}: the generator junction box {} of PV array {} does not exist	{}: generátorová přípojková skříň {} FV pole {} neexistuje
+{}: the lightning protection has no earth electrode	{}: ochrana před bleskem nemá zemnič
+{}: the lightning protection has no walls to run along: the building has no rooms or roofs	{}: ochrana před bleskem nemá zdi, podél kterých by vedla: budova nemá místnosti ani střechy
 {}: the module {} of PV array {} has no electrical data	{}: modul {} FV pole {} nemá elektrická data
 {}: the station has no port {}	{}: stanice nemá port {}
 {}: the strings of PV array {} connect {} modules, the array has {}	{}: stringy FV pole {} spojují {} modulů, pole má {}
@@ -2079,6 +2088,7 @@ yellow	žlutá
 {}: {} carries {} A, the load {} needs {} A	{}: {} snese {} A, spotřebič {} potřebuje {} A
 {}: {} changed after it was mounted	{}: {} se po montáži změnilo
 {}: {} collides with {}	{}: {} koliduje s {}
+{}: {} down conductors, class {} needs {} round the building	{}: {} svodů, třída {} vyžaduje {} kolem budovy
 {}: {} inputs used, the module has {}	{}: použito vstupů: {}, modul jich má {}
 {}: {} is a fluid device, not an electrical one	{}: {} je tekutinový přístroj, ne elektrický
 {}: {} is closer than {} mm to a cable duct	{}: {} je blíže než {} mm ke kabelovému kanálu
@@ -2091,6 +2101,7 @@ yellow	žlutá
 {}: {} is not made for wall mounting, mount it on a rail	{}: {} není určen pro montáž na stěnu, namontujte jej na lištu
 {}: {} is {} … {} mm above the floor, allowed {} … {} mm	{}: {} je {} … {} mm nad podlahou, povoleno {} … {} mm
 {}: {} kg on the {} exceed its load of {} kg	{}: {} kg na {} překračuje nosnost {} kg
+{}: {} lies in a restricted placing area of the {}	{}: {} leží v oblasti zakázané pro umístění na {}
 {}: {} modules of PV array {} are not connected to a string	{}: {} modulů FV pole {} není připojeno k žádnému stringu
 {}: {} modules, the head has {} slots	{}: modulů: {}, hlavní modul má {} slotů
 {}: {} of {} mm is longer than the stock length of {} mm and has to be joined	{}: {} s {} mm je delší než skladová délka {} mm a musí se nastavovat

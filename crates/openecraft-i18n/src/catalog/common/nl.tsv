@@ -1,9 +1,12 @@
 # English<TAB>Nederlands – texts shown by several areas (texts without a line are shown in English). Sorted by the English text: cargo run -p openecraft-i18n --example tidy
 (all)	(alle)
 (no entries)	(geen items)
+(no structure)	(geen structuur)
+(optional)	(optioneel)
 --json needs a JSON object	--json verwacht een JSON-object
 3D model	3D-model
 3D routing	3D-routering
+3D view	3D-weergave
 A page named {} already exists	Er bestaat al een pagina met de naam {}
 A page needs a name	Een pagina heeft een naam nodig
 A routing path needs {} points at least	Een routeringspad heeft minstens {} punten nodig
@@ -12,14 +15,18 @@ Above	Boven
 Access token	Toegangstoken
 Accessories	Toebehoren
 Accessory	Toebehoren
+Add	Toevoegen
 Add a PDF of all pages	Een PDF van alle pagina's toevoegen
 Add to favorites	Toevoegen aan favorieten
 Address	Adres
+Administrator	Beheerder
 Angle	Hoek
 Apply	Toepassen
 Approve	Goedkeuren
 Approvers	Goedkeurders
 Automatic	Automatisch
+Automation	Automatisering
+Aux	Hulp
 Below	Onder
 Bold	Vet
 Bottom	Bodem
@@ -41,11 +48,13 @@ Cable tag, e.g. -W20	Kabelcode, bijv. -W20
 Cables	Kabels
 Cancel	Annuleren
 Cannot read {}: {}	Kan {} niet lezen: {}
+Cannot write {}: {}	Kan {} niet schrijven: {}
 Catalog	Catalogus
 Catalog id	Catalogus-ID
 Category	Categorie
 Centred	Gecentreerd
 Certificates	Certificaten
+Change	Wijziging
 Channel	Kanaal
 Characteristic	Karakteristiek
 Check settings	Controle-instellingen
@@ -56,6 +65,7 @@ Clear filters	Filters wissen
 Clearance bottom	Afstand onder
 Clearance top	Afstand boven
 Clearances	Afstanden
+Close	Sluiten
 Coding: {}	Codering: {}
 Coil voltage	Spoelspanning
 Collision class	Botsingsklasse
@@ -85,6 +95,7 @@ Created by	Gemaakt door
 Cross references	Kruisverwijzingen
 Cross-section	Doorsnede
 Crossing	Kruising
+Currency	Valuta
 Current	Stroom
 Cutout	Uitsparing
 Cutouts	Uitsparingen
@@ -106,19 +117,24 @@ Device (PV generator) the modules belong to; its parts then count them in the bi
 Device connection point	Apparaataansluitpunt
 Device description	Apparaatbeschrijving
 Device tag	Apparaataanduiding
+Device the earthing conductor of the mounting runs to (earthing or equipotential bonding busbar); empty: none	Apparaat waar de aardgeleider van de onderconstructie naartoe loopt (aard- of potentiaalvereffeningsrail); leeg: geen
 Device {}	Apparaat {}
 Devices	Apparaten
+Dimensions	Afmetingen
 Direction	Richting
 Discard	Verwerpen
 Discard changes	Wijzigingen verwerpen
 Display	Weergave
+Documents	Documenten
 Done	Gereed
 Door	Deur
 Door cutout	Deuruitsparing
+Download	Downloaden
 Downloading {}…	{} downloaden…
 Drag to turn the model	Sleep om het model te draaien
 EMC clearance	EMC-afstand
 Edit	Bewerken
+Editor	Bewerker
 Electro-fluid cross reference	Elektro-fluïdum-kruisverwijzingen
 Enclosure	Behuizing
 Enclosures	Behuizingen
@@ -138,10 +154,13 @@ Field wiring	Veldbedrading
 File	Bestand
 Files	Bestanden
 Filter	Filter
+Filter devices…	Apparaten filteren…
+Fit	Passend maken
 Fits	Past op
 Fitting at the end	Fitting aan het einde
 Fitting at the start	Fitting aan het begin
 Floor	Bodem
+Floor plan	Plattegrond
 Fluid device	Vloeistoftechnisch apparaat
 Fluid device groups	Vloeistoftechnische apparaatgroepen
 Fluid netlist	Fluïdumnetlijst
@@ -154,10 +173,12 @@ Function text	Functietekst
 Functional safety	Functionele veiligheid
 Functions	Functies
 General	Algemeen
+Generator junction box (device) the strings run to, from there a DC main cable to each inverter; empty: none	Generatoraansluitkast (apparaat) waar de strings naartoe lopen, van daar een DC-hoofdkabel naar elke omvormer; leeg: geen
 Gives up a subproject: its pages are unlocked again	Verwerpt een deelproject: de pagina's ervan worden weer ontgrendeld
 Gland plate	Wartelplaat
 Graphics	Grafiek
 Group	Groep
+Group the pages by structure	De pagina's groeperen op structuur
 Groups	Groepen
 Harness	Kabelboom
 Harness data	Kabelboomgegevens
@@ -185,9 +206,12 @@ Kind	Soort
 Language	Taal
 Languages	Talen
 Last change	Laatste wijziging
+Last changed	Laatst gewijzigd
+Last changed by	Laatst gewijzigd door
 Layers	Lagen
 Leave out stored baselines and wiring marks	Opgeslagen basisversies en bedradingsmarkeringen weglaten
 Left	Links
+Left side	Linkerzijde
 Length	Lengte
 Level	Niveau
 Lifecycle	Levenscyclus
@@ -197,13 +221,20 @@ Link	Koppeling
 Linked	Gekoppeld
 Load	Belasting
 Loaded circuits bunched together	Gebundelde belaste stroomkringen
+Loading…	Laden…
 Location	Locatie
 Location (+)	Plaats (+)
+Locked	Vergrendeld
+Locked by {}	Vergrendeld door {}
+Logo	Logo
 MTTFd (years)	MTTFd (jaar)
 Machine	Machine
+Main	Hoofd
+Main earthing busbar (device) it is connected to; empty: none	Hoofdaardrail (apparaat) waarop hij is aangesloten; leeg: geen
 Main earthing terminal	Hoofdaardrail
 Main switch	Hoofdschakelaar
 Manufacturer	Fabrikant
+Manufacturers	Fabrikanten
 Manufacturing	Productie
 Marking	Markering
 Match case	Hoofdlettergevoelig
@@ -214,6 +245,8 @@ Minimum digits of the counter (leading zeros)	Minimumaantal cijfers van de telle
 Missing parameter: {}	Ontbrekende parameter: {}
 Missing value for --{}	Ontbrekende waarde voor --{}
 Model import failed: {}	Model importeren mislukt: {}
+Module	Module
+Modules	Modules
 Modules in series	Modules in serie
 Modules side by side in a row	Modules naast elkaar in een rij
 Mounted	Gemonteerd
@@ -223,6 +256,8 @@ Mounting holes	Bevestigingsgaten
 Mounting layout {}	Montageplan {}
 Mounting plate	Montageplaat
 Mounting rail	Montagerail
+NC contact	Verbreekcontact
+NO contact	Maakcontact
 Name	Naam
 Name of the block	Naam van het blok
 Name of the plot, e.g. the cadastral parcel	Naam van het perceel, bijv. het kadastrale perceel
@@ -230,6 +265,7 @@ Name of the point, e.g. a survey point	Naam van het punt, bijv. een meetpunt
 Name of the scheme	Naam van het schema
 Net	Net
 Never	Nooit
+New group	Nieuwe groep
 New name	Nieuwe naam
 Next page	Volgende pagina
 No	Nee
@@ -251,6 +287,7 @@ No plug {}	Geen stekker {}
 No report block named {}	Geen rapportblok met de naam {}
 No segment {}	Geen segment {}
 No station {}	Geen station {}
+No such PV array	Geen dergelijk PV-veld
 No such page	Deze pagina bestaat niet
 No such section	Sectie bestaat niet
 No symbol with id {}	Geen symbool met id {}
@@ -265,12 +302,14 @@ Not in the schematic	Niet in het schema
 Note	Opmerking
 Notes	Notities
 Number	Nummer
+Number of down conductors (0: as many as the class needs for the walls)	Aantal afleidingen (0: zoveel als de klasse voor de muren nodig heeft)
 Number the sections 1, 2, 3 … on every level first	Eerst de secties op elk niveau nummeren met 1, 2, 3 …
 Numbers the device tags per structure and identifying letter in schematic order (page, column, top to bottom)	Nummert de apparaataanduidingen per structuur en kenletter in schemavolgorde (pagina, kolom, van boven naar beneden)
 Only rows containing this text	Alleen rijen die deze tekst bevatten
 Operating pressure	Werkdruk
 Option {}: {} is not one of its choices	Optie {}: {} is geen van de keuzes
 Order number	Bestelnummer
+Other	Overig
 Outer diameter	Buitendiameter
 Output	Uitgang
 Overview	Overzicht
@@ -299,7 +338,7 @@ Part number	Artikelnummer
 Part number already exists	Artikelnummer bestaat al
 Part {}	Artikel {}
 Parts	Artikelen
-Parts (CSV, JSON, BMEcat, EPLAN XML, EDZ)	Artikelen (CSV, JSON, BMEcat, EPLAN XML, EDZ)
+Parts (CSV, JSON, BMEcat, EPLAN XML, EDZ, ZIP)	Artikelen (CSV, JSON, BMEcat, EPLAN XML, EDZ, ZIP)
 Parts import failed: {}	Artikelen importeren mislukt: {}
 Password	Wachtwoord
 Picture	Afbeelding
@@ -310,9 +349,11 @@ Pin side	Penzijde
 Place	Plaats
 Placement scheme	Plaatsingsschema
 Plinth	Sokkel
+Plot	Perceel
 Plot frame	Plotkader
 Plug	Stekker
 Plug diagram	Stekkerschema
+Plugins	Plugins
 Plugs	Stekkers
 Poles	Polen
 Ports	Poorten
@@ -335,9 +376,11 @@ Product subgroup	Productsubgroep
 Product top group	Producthoofdgroep
 Profile	Profiel
 Project	Project
+Project data	Projectgegevens
 Project languages	Projecttalen
 Project logo	Projectlogo
 Project management	Projectbeheer
+Project manager	Projectleider
 Project name	Projectnaam
 Project properties	Projecteigenschappen
 Properties	Eigenschappen
@@ -351,8 +394,11 @@ Rail	Rail
 Range	Bereik
 Rated current	Nominale stroom
 Rated power	Nominaal vermogen
+Rear wall	Achterwand
 Rectangle	Rechthoek
 Rectangular	Rechthoekig
+Redo	Opnieuw
+Refresh	Vernieuwen
 Reject	Afwijzen
 Relative humidity	Relatieve luchtvochtigheid
 Relay	Relais
@@ -361,17 +407,22 @@ Released pages cannot be moved	Vrijgegeven pagina's kunnen niet worden verplaats
 Remove	Verwijderen
 Remove from favorites	Verwijderen uit favorieten
 Remove the boundary	Grens verwijderen
+Remove the lightning protection system	De bliksembeveiliging verwijderen
 Remove the reference point	Referentiepunt verwijderen
 Report	Rapport
 Report blocks	Rapportblokken
 Report: {}	Rapport: {}
+Reports	Rapporten
 Required	Vereist
 Reserve	Reserve
+Reviewer	Reviewer
 Revision	Revisie
 Revision {}	Revisie {}
 Rework	Nabewerking
 Right	Rechts
+Right side	Rechterzijde
 Role	Rol
+Roof	Dak
 Rooms	Ruimtes
 Round	Rond
 Route	Routeren
@@ -392,6 +443,7 @@ Search parts	Artikelen zoeken
 Searching…	Zoeken…
 Section	Sectie
 Segment	Segment
+Select	Selecteren
 Select a part in the tree or create a new one.	Selecteer een artikel in de structuur of maak een nieuw artikel.
 Sensor	Sensor
 Sensors, switches, pushbuttons	Sensoren, schakelaars, drukknoppen
@@ -401,19 +453,24 @@ Settings	Instellingen
 Shape	Vorm
 Short-circuit voltage	Kortsluitspanning
 Show history	Geschiedenis weergeven
+Show the logos of the catalogs	De logo's van de catalogi weergeven
 Show the row after the column	De rij na de kolom weergeven
 Side	Zijde
 Sign in	Aanmelden
 Sign out	Afmelden
 Signed in as {}	Aangemeld als {}
 Signed in as {} ({})	Aangemeld als {} ({})
+Signed out	Afgemeld
 Signing in…	Aanmelden…
 Single-line / multi-line	Eenlijnig / meerlijnig
+Site	Terrein
+Site plan	Situatietekening
 Size	Grootte
 Socket side	Buszijde
 Solenoid not linked	Magneetspoel niet gekoppeld
 Sort by	Sorteren op
 Source	Bron
+Started	Gestart
 State	Status
 Status	Status
 String	String
@@ -440,6 +497,7 @@ Terminal type	Klemtype
 Terminals	Klemmen
 Text	Tekst
 Text to find	Te zoeken tekst
+The freestanding PV array {} stands outside the plot boundary	Het vrijstaande PV-veld {} staat buiten de perceelgrens
 The identifier must not be empty	De aanduiding mag niet leeg zijn
 The long side of the modules along the rows	De lange zijde van de modules langs de rijen
 The page is released	De pagina is vrijgegeven
@@ -449,11 +507,15 @@ Time	Tijd
 Title block	Titelblok
 To	Naar
 Tools	Gereedschappen
+Top	Boven
 Total	Totaal
 Transformer	Transformator
+Tutorial	Tutorial
 Type	Type
 Type number	Typenummer
 Underline	Onderstrepen
+Undo	Ongedaan maken
+Unexpected argument: {}	Onverwacht argument: {}
 Unit	Eenheid
 Unknown column: {}	Onbekende kolom: {}
 Unknown connector: {}	Onbekende connector: {}
@@ -461,10 +523,12 @@ Unknown enclosure system: {}	Onbekend behuizingssysteem: {}
 Unknown face: {}	Onbekend vlak: {}
 Unknown format: {}	Onbekende indeling: {}
 Unknown function definition: {}	Onbekende functiedefinitie: {}
+Unknown language: {}	Onbekende taal: {}
 Unknown option {}	Onbekende optie {}
 Unknown parameter: {}	Onbekende parameter: {}
 Unknown part: {}	Onbekend artikel: {}
 Unknown property: {}	Onbekende eigenschap: {}
+Unknown report: {}	Onbekend rapport: {}
 Unknown scheme: {}	Onbekend schema: {}
 Unknown segment	Onbekend segment
 Unknown symbol {}	Onbekend symbool {}
@@ -475,6 +539,7 @@ User	Gebruiker
 User name	Gebruikersnaam
 Users	Gebruikers
 Version	Versie
+Viewer	Kijker
 Voltage	Spanning
 Warning	Waarschuwing
 Warnings	Waarschuwingen
@@ -497,11 +562,13 @@ file or folder not found	bestand of map niet gevonden
 landscape	liggend
 left	naar links
 mm	mm
+none	geen
 normal	normaal
 not bonded	niet aangesloten
 not connected	niet aangesloten
 open	open
 pcs	st.
+portrait	staand
 rejected	afgewezen
 right	naar rechts
 spare	reserve
@@ -515,6 +582,7 @@ yes	ja
 {} exists already	{} bestaat al
 {} is not a PNG or JPEG image	{} is geen PNG- of JPEG-afbeelding
 {} parts	{} artikelen
+{} users	{} gebruikers
 {} wires	{} draden
 {}, together with the wire to {}	{}, samen met de draad naar {}
 {}: {} does not stand on the floor, choose a floor-standing part	{}: {} staat niet op de vloer, kies een vloerstaand artikel

@@ -10,6 +10,60 @@ and what they may do comes from **roles** given to them or their **groups** by
 - Rights and built-in roles: `openecraft_core::collab::{ProjectRight, ProjectRole}` and
   `openecraft_parts::portal::{PartsRight, Role}`
 
+## Remembered project-server sign-ins
+
+In the editor's **Project server** pane, **Keep me signed in** is an explicit,
+optional setting for the selected server and account. On Windows, only the account
+session token goes into Windows Credential Manager. Passwords are never persisted.
+App settings contain only server/account metadata and the opt-in, independently
+per account so another editor window cannot disable a different account's sign-in.
+The complete server identity includes scheme, host, effective port and base path;
+credentials never move to another server. HTTP and HTTPS remain distinct, and this
+feature does not change or encrypt the existing transport.
+
+On startup, `GET /api/v1/session` validates the remembered account token and returns
+`CurrentAccount { user, access }`, with current rights and no token or password.
+Root tokens, anonymous access, invalid and expired account tokens are refused with
+401. This request does not renew the token or touch page locks. The account session
+currently expires 30 days after sign-in; the separate 90-second idle project session
+is unaffected. Older servers without this endpoint require manual sign-in; their
+404 does not delete a possibly valid remembered credential. Connection failures
+also retain the opt-in for a later retry.
+
+If an account token expires while a shared project is open, signing in again with
+the same server and account continues that project through the session recovery
+flow. Unsaved edits and undo history remain available; signing in does not mark
+them as saved or replace the project with a fresh copy.
+
+**Sign out** removes the remembered credential and asks the server to revoke the
+account token after outstanding saves and project closes have been answered.
+**Change user** releases the project session and clears the selected user name,
+but keeps that account's remembered sign-in for switching back. An open shared
+project and its undo history remain as a local recovery copy, including
+unsaved changes. Local sign-out works offline; the pane reports separately if the
+server session could not be ended or protected storage could not be changed.
+OS operations run in order, including deletion after an already-running save;
+normal application closing waits for their results. Replies from a previous
+server/account selection never restore its identity or replace the open project.
+A delayed save confirmation still belongs to the same retained project during
+reauthentication; it advances the saved revision without changing the new sign-in.
+Background revocation does not disable the next sign-in while waiting for a server.
+
+Invalid-token cleanup compares the rejected token before deleting it. It never
+writes a new opt-out: another window may already have remembered a newer sign-in.
+Directory logins keep their opt-in under the account name confirmed by the server,
+including when the typed name was domain-qualified or a user principal name.
+
+The browser, macOS and Linux currently offer session-only sign-in. Their checkbox
+is disabled with an explanation; there is no token/password fallback in local
+storage, IndexedDB, ordinary settings or project files. Windows support reuses the
+existing OS credential backend also used for EPLAN PATs, with a separate namespace.
+These session/platform functions do not change project commands or the plugin API.
+
+The isolated live check is `scripts/test-project-sign-in.ps1` (PowerShell 7,
+Windows). It uses a disposable loopback project server, synthetic accounts, its
+own metadata folder and unique credential keys, which the test removes afterwards.
+
 ## Rights and built-in roles
 
 Project server (the scope of a grant is a project name):
@@ -36,7 +90,7 @@ Project server (the scope of a grant is a project name):
 A signed-in user who creates a project becomes its `manager` (a grant on the new
 project), so project owners manage who works on their projects.
 
-Parts server (the scope of a grant is a manufacturer):
+Parts server (the scope of a grant is a manufacturer, or one catalog as `catalog:<id>`):
 
 | Right | Allows |
 | --- | --- |
@@ -50,13 +104,21 @@ Built-in roles: `reader` (read), `manufacturer` and `editor` (read, edit_parts,
 delete_parts, edit_catalogs), `admin` (everything). An account's own role still works
 as before: a manufacturer user has the manufacturer role on their manufacturer only.
 
+The rights on a part or a catalog are those on its manufacturer together with those on
+its catalog (`catalog:siemens`): a grant on a catalog lets users and groups change the
+catalog and its parts whatever their manufacturer, and a deny grant on either takes
+the right away. Administrators set the grants of a catalog in *Administration ›
+Catalogs › Permissions* (`GET` / `PUT /api/v1/catalogs/{id}/grants`); reading stays a
+right of the whole server.
+
 ## How rights are resolved
 
 1. The account's built-in role (project server: on its projects; none for users that
    came from a directory).
 2. Every grant of the policy whose subject matches the user (`{"user": "anna"}`) or one
-   of their groups (`{"group": "corp:Engineering"}`). Names and scopes take `*` and
-   `?` wildcards and are case insensitive; `{"user": "*"}` is every signed-in user.
+   of their groups (`{"group": "corp:Engineering"}` of a directory, `{"group":
+   "Wiring"}` defined on the parts server). Names and scopes take `*` and `?` wildcards
+   and are case insensitive; `{"user": "*"}` is every signed-in user.
 3. The role of anonymous requests (`anonymous`), which signed-in users have as well.
 4. **Deny grants win:** rights of a grant with `"deny": true` are taken away on its
    scope, whatever the other grants give.
@@ -70,9 +132,11 @@ grants on `*`. The server token (`--token`) keeps full access.
 parts database (both changeable with `--access <file>`). A missing file means: no
 directories, no defined roles or grants; on the parts server anonymous requests may
 read (`"anonymous": "reader"`). Administrators change roles, grants and `anonymous`
-through the API (`GET|PUT /api/v1/access`), which rewrites the file; directories are
-only configured in the file. On the parts server the web page does so too
-(*Administration › Access rights*, which also exports and restores them).
+through the API (`GET|PUT /api/v1/access`), which rewrites the file, and the directories
+through `/api/v1/directories` (`GET`, `PUT|DELETE /{id}`, `POST /{id}/test`). The web
+pages do so too: the parts server's (*Administration › Access rights*, which also
+exports and restores them) and the project server's when it runs with `--web`
+(*Administration › Access rights* and *Directories*).
 
 ```json
 {
@@ -116,8 +180,35 @@ On the parts server `"registration": true` lets users register themselves as rea
 (switched in *Administration › Access rights*; the start option `--registration`
 overrides it, see [docs/parts-server.md](parts-server.md)); their accounts wait for the
 approval of an administrator unless `"registration_approval": false`.
+`"dashboard": false` hides the dashboard of the web page (*Administration ›
+Overview*; the start option `--dashboard` overrides it).
+
+### Groups
+
+The parts server keeps groups of users in `groups` (*Administration › Groups*, `GET
+/api/v1/groups`, `PUT` / `DELETE /api/v1/groups/{name}`):
+
+```json
+"groups": [{ "name": "Wiring", "description": "Panel shop", "members": ["anna", "bob"] }]
+```
+
+Members are user names, local users and users of a directory alike (by the name they
+sign in with). Grants to `{"group": "Wiring"}` apply to the members next to the groups
+of their directory; group names cannot hold `:`, which separates the directory groups.
+The groups of a user (*Users*, `groups` of `PUT /api/v1/users/{name}`) are memberships:
+saving them adds the user to the named groups (new names become groups) and removes
+them from the others. Groups that local accounts named before are turned into groups of
+the server at startup. Deleting a group deletes the grants to it, deleting a user their
+memberships; names of members cannot be registered, and a change that would leave
+nobody who manages users is refused.
 
 ### Directories
+
+Administrators set the directories up in *Administration › Directories* too (`GET
+/api/v1/directories`, `PUT` / `DELETE /api/v1/directories/{id}`), which shows no
+password (an empty password keeps the stored one) and tests the settings: *Test*
+connects and binds with the service account, with a user name and password it signs the
+user in and shows their groups (`POST /api/v1/directories/{id}/test`).
 
 | Key | Meaning |
 | --- | --- |
@@ -177,7 +268,7 @@ Values are escaped for LDAP filters and DNs. Keep the service account read-only.
   reviewers cannot change it, project managers edit the grants on it in the *Project
   access* section.
 - Parts manager: the user editor shows the directory and groups of a user and edits the
-  local groups.
+  groups of the server the user is a member of.
 - Command line / MCP: `parts_access` (also sets `anonymous`), `parts_grant` (with
   `deny`, or `revoke` to remove grants), `parts_role` (define, change, `delete`),
   `parts_registration` (`enabled`, `approval`), `parts_user_approve` and

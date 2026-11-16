@@ -1,9 +1,12 @@
 # English<TAB>Čeština – texts shown by several areas (texts without a line are shown in English). Sorted by the English text: cargo run -p openecraft-i18n --example tidy
 (all)	(vše)
 (no entries)	(žádné položky)
+(no structure)	(bez struktury)
+(optional)	(volitelné)
 --json needs a JSON object	--json vyžaduje objekt JSON
 3D model	3D model
 3D routing	3D vedení
+3D view	3D pohled
 A page named {} already exists	Stránka s názvem {} již existuje
 A page needs a name	Stránka musí mít název
 A routing path needs {} points at least	Trasa vedení potřebuje alespoň {} bodů
@@ -12,14 +15,18 @@ Above	Nad
 Access token	Přístupový token
 Accessories	Příslušenství
 Accessory	Příslušenství
+Add	Přidat
 Add a PDF of all pages	Přidat PDF všech stránek
 Add to favorites	Přidat k oblíbeným
 Address	Adresa
+Administrator	Správce
 Angle	Úhel
 Apply	Použít
 Approve	Schválit
 Approvers	Schvalovatelé
 Automatic	Automaticky
+Automation	Automatizace
+Aux	Pomocné
 Below	Pod
 Bold	Tučné
 Bottom	Dno
@@ -41,11 +48,13 @@ Cable tag, e.g. -W20	Označení kabelu, např. -W20
 Cables	Kabely
 Cancel	Zrušit
 Cannot read {}: {}	Nelze číst {}: {}
+Cannot write {}: {}	Nelze zapsat {}: {}
 Catalog	Katalog
 Catalog id	ID katalogu
 Category	Kategorie
 Centred	Na střed
 Certificates	Certifikáty
+Change	Změna
 Channel	Kanál
 Characteristic	Charakteristika
 Check settings	Nastavení kontroly
@@ -56,6 +65,7 @@ Clear filters	Vymazat filtry
 Clearance bottom	Odstup dole
 Clearance top	Odstup nahoře
 Clearances	Odstupy
+Close	Zavřít
 Coding: {}	Kódování: {}
 Coil voltage	Napětí cívky
 Collision class	Třída kolize
@@ -85,6 +95,7 @@ Created by	Vytvořil
 Cross references	Křížové odkazy
 Cross-section	Průřez
 Crossing	Křížení
+Currency	Měna
 Current	Proud
 Cutout	Výřez
 Cutouts	Výřezy
@@ -106,19 +117,24 @@ Device (PV generator) the modules belong to; its parts then count them in the bi
 Device connection point	Připojovací bod zařízení
 Device description	Popis zařízení
 Device tag	Označení přístroje
+Device the earthing conductor of the mounting runs to (earthing or equipotential bonding busbar); empty: none	Zařízení, ke kterému vede uzemňovací vodič konstrukce (uzemňovací nebo ekvipotenciální přípojnice); prázdné: žádné
 Device {}	Přístroj {}
 Devices	Přístroje
+Dimensions	Rozměry
 Direction	Směr
 Discard	Zahodit
 Discard changes	Zahodit změny
 Display	Zobrazení
+Documents	Dokumenty
 Done	Hotovo
 Door	Dveře
 Door cutout	Výřez ve dveřích
+Download	Stáhnout
 Downloading {}…	Stahování {}…
 Drag to turn the model	Tažením model otočíte
 EMC clearance	Odstup EMC
 Edit	Úpravy
+Editor	Editor
 Electro-fluid cross reference	Elektro-tekutinové křížové odkazy
 Enclosure	Skříň
 Enclosures	Skříně
@@ -138,10 +154,13 @@ Field wiring	Polní kabeláž
 File	Soubor
 Files	Soubory
 Filter	Filtr
+Filter devices…	Filtrovat přístroje…
+Fit	Přizpůsobit
 Fits	Hodí se k
 Fitting at the end	Šroubení na konci
 Fitting at the start	Šroubení na začátku
 Floor	Dno
+Floor plan	Půdorys
 Fluid device	Tekutinový přístroj
 Fluid device groups	Skupiny tekutinových přístrojů
 Fluid netlist	Seznam sítí tekutin
@@ -154,10 +173,12 @@ Function text	Text funkce
 Functional safety	Funkční bezpečnost
 Functions	Funkce
 General	Obecné
+Generator junction box (device) the strings run to, from there a DC main cable to each inverter; empty: none	Generátorová přípojková skříň (zařízení), ke které vedou stringy, odtud hlavní kabel DC ke každému střídači; prázdné: žádná
 Gives up a subproject: its pages are unlocked again	Zruší podprojekt: jeho stránky se opět odemknou
 Gland plate	Přírubová deska
 Graphics	Grafika
 Group	Skupina
+Group the pages by structure	Seskupit stránky podle struktury
 Groups	Skupiny
 Harness	Kabelový svazek
 Harness data	Data kabelového svazku
@@ -185,9 +206,12 @@ Kind	Druh
 Language	Jazyk
 Languages	Jazyky
 Last change	Poslední změna
+Last changed	Poslední změna
+Last changed by	Naposledy změnil
 Layers	Vrstvy
 Leave out stored baselines and wiring marks	Vynechat uložené základní verze a značky zapojení
 Left	Vlevo
+Left side	Levá strana
 Length	Délka
 Level	Hladina
 Lifecycle	Životní cyklus
@@ -197,13 +221,20 @@ Link	Odkaz
 Linked	Propojeno
 Load	Spotřebič
 Loaded circuits bunched together	Seskupené zatížené obvody
+Loading…	Načítání…
 Location	Umístění
 Location (+)	Umístění (+)
+Locked	Uzamčená
+Locked by {}	Uzamčeno uživatelem {}
+Logo	Logo
 MTTFd (years)	MTTFd (roky)
 Machine	Stroj
+Main	Hlavní
+Main earthing busbar (device) it is connected to; empty: none	Hlavní uzemňovací přípojnice (zařízení), ke které je připojen; prázdné: žádná
 Main earthing terminal	Hlavní uzemňovací svorka
 Main switch	Hlavní vypínač
 Manufacturer	Výrobce
+Manufacturers	Výrobci
 Manufacturing	Výroba
 Marking	Značení
 Match case	Rozlišovat malá a velká písmena
@@ -214,6 +245,8 @@ Minimum digits of the counter (leading zeros)	Minimální počet číslic číta
 Missing parameter: {}	Chybí parametr: {}
 Missing value for --{}	Chybí hodnota pro --{}
 Model import failed: {}	Import modelu se nezdařil: {}
+Module	Modul
+Modules	Moduly
 Modules in series	Moduly v sérii
 Modules side by side in a row	Moduly vedle sebe v řadě
 Mounted	Namontováno
@@ -223,6 +256,8 @@ Mounting holes	Upevňovací otvory
 Mounting layout {}	Montážní plán {}
 Mounting plate	Montážní deska
 Mounting rail	Montážní lišta
+NC contact	Rozpínací kontakt
+NO contact	Spínací kontakt
 Name	Název
 Name of the block	Název bloku
 Name of the plot, e.g. the cadastral parcel	Název pozemku, např. katastrální parcela
@@ -230,6 +265,7 @@ Name of the point, e.g. a survey point	Název bodu, např. geodetický bod
 Name of the scheme	Název schématu
 Net	Síť
 Never	Nikdy
+New group	Nová skupina
 New name	Nový název
 Next page	Další stránka
 No	Ne
@@ -251,6 +287,7 @@ No plug {}	Žádný konektor {}
 No report block named {}	Žádný blok výkazů s názvem {}
 No segment {}	Žádný segment {}
 No station {}	Žádná stanice {}
+No such PV array	Takové FV pole neexistuje
 No such page	Taková stránka neexistuje
 No such section	Takový oddíl neexistuje
 No symbol with id {}	Žádný symbol s ID {}
@@ -265,12 +302,14 @@ Not in the schematic	Není ve schématu
 Note	Poznámka
 Notes	Poznámky
 Number	Číslo
+Number of down conductors (0: as many as the class needs for the walls)	Počet svodů (0: tolik, kolik třída vyžaduje pro zdi)
 Number the sections 1, 2, 3 … on every level first	Nejprve očíslovat oddíly 1, 2, 3 … na každé úrovni
 Numbers the device tags per structure and identifying letter in schematic order (page, column, top to bottom)	Očísluje označení přístrojů podle struktury a identifikačního písmene v pořadí schématu (stránka, sloupec, shora dolů)
 Only rows containing this text	Jen řádky s tímto textem
 Operating pressure	Provozní tlak
 Option {}: {} is not one of its choices	Volba {}: {} není jednou z jejích možností
 Order number	Objednací číslo
+Other	Ostatní
 Outer diameter	Vnější průměr
 Output	Výstup
 Overview	Přehled
@@ -299,7 +338,7 @@ Part number	Číslo artiklu
 Part number already exists	Číslo artiklu již existuje
 Part {}	Artikl {}
 Parts	Artikly
-Parts (CSV, JSON, BMEcat, EPLAN XML, EDZ)	Artikly (CSV, JSON, BMEcat, EPLAN XML, EDZ)
+Parts (CSV, JSON, BMEcat, EPLAN XML, EDZ, ZIP)	Artikly (CSV, JSON, BMEcat, EPLAN XML, EDZ, ZIP)
 Parts import failed: {}	Import artiklů se nezdařil: {}
 Password	Heslo
 Picture	Obrázek
@@ -310,9 +349,11 @@ Pin side	Strana kolíků
 Place	Místo
 Placement scheme	Schéma umístění
 Plinth	Sokl
+Plot	Pozemek
 Plot frame	Rámeček výkresu
 Plug	Konektor
 Plug diagram	Schéma konektoru
+Plugins	Pluginy
 Plugs	Konektory
 Poles	Póly
 Ports	Porty
@@ -335,9 +376,11 @@ Product subgroup	Podskupina produktů
 Product top group	Hlavní skupina produktů
 Profile	Profil
 Project	Projekt
+Project data	Data projektu
 Project languages	Jazyky projektu
 Project logo	Logo projektu
 Project management	Správa projektů
+Project manager	Vedoucí projektu
 Project name	Název projektu
 Project properties	Vlastnosti projektu
 Properties	Vlastnosti
@@ -351,8 +394,11 @@ Rail	Lišta
 Range	Rozsah
 Rated current	Jmenovitý proud
 Rated power	Jmenovitý výkon
+Rear wall	Zadní stěna
 Rectangle	Obdélník
 Rectangular	Obdélníkový
+Redo	Znovu
+Refresh	Obnovit
 Reject	Zamítnout
 Relative humidity	Relativní vlhkost vzduchu
 Relay	Relé
@@ -361,17 +407,22 @@ Released pages cannot be moved	Uvolněné stránky nelze přesouvat
 Remove	Odebrat
 Remove from favorites	Odebrat z oblíbených
 Remove the boundary	Odstranit hranici
+Remove the lightning protection system	Odstranit ochranu před bleskem
 Remove the reference point	Odstranit referenční bod
 Report	Výkaz
 Report blocks	Bloky výkazů
 Report: {}	Výkaz: {}
+Reports	Výkazy
 Required	Požadováno
 Reserve	Rezerva
+Reviewer	Kontrolor
 Revision	Revize
 Revision {}	Revize {}
 Rework	Přepracování
 Right	Vpravo
+Right side	Pravá strana
 Role	Role
+Roof	Střecha
 Rooms	Místnosti
 Round	Kruhový
 Route	Vést
@@ -392,6 +443,7 @@ Search parts	Hledat artikly
 Searching…	Hledání…
 Section	Oddíl
 Segment	Úsek
+Select	Vybrat
 Select a part in the tree or create a new one.	Vyberte artikl ve stromu nebo vytvořte nový.
 Sensor	Snímač
 Sensors, switches, pushbuttons	Senzory, spínače, tlačítka
@@ -401,19 +453,24 @@ Settings	Nastavení
 Shape	Tvar
 Short-circuit voltage	Napětí nakrátko
 Show history	Zobrazit historii
+Show the logos of the catalogs	Zobrazit loga katalogů
 Show the row after the column	Zobrazit řádek za sloupcem
 Side	Strana
 Sign in	Přihlásit se
 Sign out	Odhlásit se
 Signed in as {}	Přihlášen jako {}
 Signed in as {} ({})	Přihlášen jako {} ({})
+Signed out	Odhlášeno
 Signing in…	Přihlašování…
 Single-line / multi-line	Jednopólové / vícepólové
+Site	Pozemek
+Site plan	Situační plán
 Size	Velikost
 Socket side	Strana zdířek
 Solenoid not linked	Cívka není propojena
 Sort by	Seřadit podle
 Source	Zdroj
+Started	Zahájeno
 State	Stav
 Status	Stav
 String	String
@@ -440,6 +497,7 @@ Terminal type	Typ svorky
 Terminals	Svorky
 Text	Text
 Text to find	Hledaný text
+The freestanding PV array {} stands outside the plot boundary	Pozemní FV pole {} stojí mimo hranice pozemku
 The identifier must not be empty	Identifikátor nesmí být prázdný
 The long side of the modules along the rows	Delší strana modulů podél řad
 The page is released	Stránka je uvolněna
@@ -449,11 +507,15 @@ Time	Čas
 Title block	Rohové razítko
 To	Do
 Tools	Nástroje
+Top	Nahoře
 Total	Celkem
 Transformer	Transformátor
+Tutorial	Výukový kurz
 Type	Typ
 Type number	Typové číslo
 Underline	Podtržené
+Undo	Zpět
+Unexpected argument: {}	Neočekávaný argument: {}
 Unit	Jednotka
 Unknown column: {}	Neznámý sloupec: {}
 Unknown connector: {}	Neznámý konektor: {}
@@ -461,10 +523,12 @@ Unknown enclosure system: {}	Neznámý systém skříní: {}
 Unknown face: {}	Neznámá plocha: {}
 Unknown format: {}	Neznámý formát: {}
 Unknown function definition: {}	Neznámá definice funkce: {}
+Unknown language: {}	Neznámý jazyk: {}
 Unknown option {}	Neznámá volba {}
 Unknown parameter: {}	Neznámý parametr: {}
 Unknown part: {}	Neznámý artikl: {}
 Unknown property: {}	Neznámá vlastnost: {}
+Unknown report: {}	Neznámý výkaz: {}
 Unknown scheme: {}	Neznámé schéma: {}
 Unknown segment	Neznámý segment
 Unknown symbol {}	Neznámý symbol {}
@@ -475,6 +539,7 @@ User	Uživatel
 User name	Uživatelské jméno
 Users	Uživatelé
 Version	Verze
+Viewer	Prohlížející
 Voltage	Napětí
 Warning	Upozornění
 Warnings	Upozornění
@@ -497,11 +562,13 @@ file or folder not found	soubor nebo složka nenalezeny
 landscape	na šířku
 left	doleva
 mm	mm
+none	žádná
 normal	normální
 not bonded	nepospojeno
 not connected	nepřipojeno
 open	otevřený
 pcs	ks
+portrait	na výšku
 rejected	zamítnuto
 right	doprava
 spare	rezerva
@@ -515,6 +582,7 @@ yes	ano
 {} exists already	{} již existuje
 {} is not a PNG or JPEG image	{} není obrázek PNG ani JPEG
 {} parts	Artikly: {}
+{} users	Uživatelé: {}
 {} wires	Vodiče: {}
 {}, together with the wire to {}	{}, společně s vodičem do {}
 {}: {} does not stand on the floor, choose a floor-standing part	{}: {} nestojí na podlaze, zvolte artikl stojící na podlaze

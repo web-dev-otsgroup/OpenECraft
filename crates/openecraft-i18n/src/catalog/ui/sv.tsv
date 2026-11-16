@@ -5,6 +5,7 @@
 2D front view	2D-frontvy
 2D front view (SVG)	2D-frontvy (SVG)
 3D model (STL, OBJ, STEP, IGES, Parasolid, IFC, JT)	3D-modell (STL, OBJ, STEP, IGES, Parasolid, IFC, JT)
+A short title for the problem (optional)	En kort rubrik för problemet (valfritt)
 Accessories of this part	Tillbehör till den här artikeln
 Accessories only work together with the parts they fit. A part lists its accessories, an accessory the parts it fits; either side is enough.	Tillbehör fungerar bara tillsammans med de artiklar de passar till. En artikel listar sina tillbehör, ett tillbehör de artiklar det passar till; en sida räcker.
 Accessory, mounted: {}	Tillbehör, monterat: {}
@@ -12,34 +13,43 @@ Add connection point	Lägg till anslutningspunkt
 Add cutout	Lägg till urtag
 Add function	Lägg till funktion
 Add marked parts to the parts database ({})	Lägg till markerade artiklar i artikeldatabasen ({})
+Add restricted area	Lägg till spärrat område
 Add to the parts database	Lägg till i artikeldatabasen
 Adds the macros of the file to the macro library	Lägger till filens makron i makrobiblioteket
 All parts are up to date	Alla artiklar är aktuella
 Already in the parts database	Finns redan i artikeldatabasen
 Apply {} updates	Tillämpa {} uppdateringar
+Areas of the enclosure kept free of devices (placing) or of cutouts and holes (cut-out); place and size in the coordinates of the face, as its items have them.	Områden i kapslingen fria från apparater (placering) eller från urtag och hål (urtag); läge och storlek i ytans koordinater, som dess objekt har dem.
 Check the parts database for updates	Sök efter uppdateringar i artikeldatabasen
 Checking for part updates…	Söker efter artikeluppdateringar…
 Clearance front	Avstånd framåt
 Clearance left	Avstånd vänster
 Clearance right	Avstånd höger
+Click a face, edge or corner to look from there; drag to orbit	Klicka på en sida, kant eller ett hörn för att titta därifrån; dra för att rotera
 Compared with {} parts of the server	Jämfört med {} artiklar på servern
 Compares the local parts with the parts server: newer versions, phase-out, discontinued and removed parts	Jämför de lokala artiklarna med artikelservern: nyare versioner, artiklar som fasas ut, har utgått eller har tagits bort
 Connect to a parts server and search.	Anslut till en artikelserver och sök.
 Connected: {} {} – {} parts, revision {}, {}	Ansluten: {} {} – {} artiklar, revision {}, {}
 Connection designations	Förbindelsebeteckningar
+Copy report	Kopiera rapporten
+Copy screenshot	Kopiera skärmbilden
 Corner radius	Hörnradie
+Could not save the screenshot: {}	Skärmbilden kunde inte sparas: {}
+Cut-out	Urtag
 Datasheet (URL)	Datablad (URL)
 Deleted catalog {}	Katalog {} borttagen
 Deleted part {}	Artikel {} borttagen
 Deleted user {}	Användare {} borttagen
 Deleting {}…	Tar bort {}…
-Dimensions	Mått
+Describe the problem you saw	Beskriv problemet du såg
+Describe what happened before continuing.	Beskriv vad som hände innan du fortsätter.
 Door cutouts	Dörrurtag
 Downloaded {} ({} bytes)	{} nedladdad ({} byte)
 Downloading parts…	Laddar ned artiklar…
 Drag it onto a schematic page to place it	Dra till en schemasida för att placera
 EPLAN numbers	EPLAN-nummer
 EPLAN product groups	EPLAN-produktgrupper
+Expected result (optional)	Förväntat resultat (valfritt)
 FLOOR	GOLV
 Faces	Ytor
 Filter (number, type, manufacturer, text …)	Filter (nummer, typ, tillverkare, text …)
@@ -49,11 +59,13 @@ Floor mounting	Golvmontage
 Functions the part provides. Used for device selection, the contact image (reserve contacts), the project check and to assign connection designations. Designations are listed in symbol connection order, separated by blanks.	Funktioner som artikeln tillhandahåller. Används för apparatval, kontaktbilden (reservkontakter), projektkontrollen och för att tilldela anslutningsbeteckningar. Beteckningarna anges i symbolens anslutningsordning, åtskilda med blanksteg.
 Generate from function template	Generera från funktionsmall
 Group by	Gruppera efter
+Hides this form and takes a screenshot of the window as it is now	Döljer formuläret och tar en skärmbild av fönstret som det ser ut nu
 Identifying letter of devices using this part (K, Q, S …)	Kodbokstav för apparater som använder den här artikeln (K, Q, S …)
 Import STL / OBJ / STEP / IGES / IFC / JT…	Importera STL / OBJ / STEP / IGES / IFC / JT…
 Import SVG…	Importera SVG…
 In the door, when they differ from the cutouts	I dörren, när de skiljer sig från urtagen
 Internal values of the EPLAN part exchange (0: undefined)	Interna värden för EPLAN-artikelutbytet (0: odefinierat)
+Isometric view, everything shown	Isometrisk vy, allt visas
 It only works attached to one of the parts it fits; the project check reports it on a device without such a part	Det fungerar bara monterat på en av de artiklar det passar till; projektkontrollen rapporterar det på en enhet utan en sådan artikel
 Largest conductor the clamp takes (0: not known)	Största ledare som klämman tar (0: okänt)
 Loaded the library {}	Biblioteket {} har lästs in
@@ -72,10 +84,15 @@ Moves lines such as Power loss: 3 W into the typed fields	Flyttar rader som Powe
 No own connection points – the generated ones are shown.	Inga egna anslutningspunkter – de genererade visas.
 No part of the database comes from the EPLAN Data Portal	Ingen artikel i databasen kommer från EPLAN Data Portal
 No parts found.	Inga artiklar hittades.
+No screenshot could be taken of this window.	Ingen skärmbild kunde tas av det här fönstret.
+Offline, or GitHub does not open? Copy the report and submit it later.	Offline, eller öppnas inte GitHub? Kopiera rapporten och skicka den senare.
 Only floor-standing parts	Endast golvstående artiklar
 Only parts for direct wall mounting	Endast artiklar för direkt väggmontage
+Open GitHub issue form	Öppna GitHubs ärendeformulär
 Open datasheet	Öppna datablad
 Open in the browser	Öppna i webbläsaren
+Opens your browser and copies the report for you to paste into the GitHub issue form.	Öppnar webbläsaren och kopierar rapporten så att du kan klistra in den i GitHubs ärendeformulär.
+Opens your browser with the report filled in and copies it. Review and submit it on GitHub.	Öppnar webbläsaren med rapporten ifylld och kopierar den. Granska och skicka den på GitHub.
 Outside the face	Utanför ytan
 Pan and zoom together	Panorera och zooma samtidigt
 Pan only	Endast panorera
@@ -84,38 +101,59 @@ Parts server: {}	Artikelserver: {}
 Parts this part is assembled from; the bill of materials lists them under it	Artiklar som den här artikeln är sammansatt av; stycklistan listar dem under den
 Personal access token	Personlig åtkomsttoken
 Place by clicking into the view	Placera genom att klicka i vyn
+Placing	Placering
 Prices / other	Priser / övrigt
+Rear	Bak
 Remove all	Ta bort alla
 Remove picture	Ta bort bild
+Remove screenshot	Ta bort skärmbilden
 Removing the file…	Tar bort filen…
 Replaces the connection points by the IEC convention: odd designations at the top, even ones at the bottom	Ersätter anslutningspunkterna enligt IEC-konventionen: udda beteckningar upptill, jämna nedtill
+Report copied. Keep it to submit on GitHub when you are online.	Rapporten har kopierats. Spara den för att skicka den på GitHub när du är online.
+Report copied. Paste it into the GitHub issue form and submit it there.	Rapporten har kopierats. Klistra in den i GitHubs ärendeformulär och skicka den där.
+Reports are public. A GitHub account is needed to submit them.	Rapporter är offentliga. Ett GitHub-konto krävs för att skicka dem.
 Reset filter	Återställ filter
+Restricted areas: {}	Spärrade områden: {}
+Retake screenshot	Ta om skärmbilden
+Review your report on GitHub and submit it there.	Granska rapporten på GitHub och skicka den där.
 Rotate 90°:	Rotera 90°:
+Save screenshot…	Spara skärmbilden…
 Save the file	Spara filen
 Saved part {}	Artikel {} sparad
 Saved the library {}	Biblioteket {} har sparats
 Saving favorites…	Sparar favoriter…
 Saving {}…	Sparar {}…
 Scale ×	Skala ×
+Screenshot (optional)	Skärmbild (valfritt)
+Screenshot copied. Paste it into the GitHub issue form.	Skärmbilden har kopierats. Klistra in den i GitHubs ärendeformulär.
+Screenshot removed from this report.	Skärmbilden har tagits bort från rapporten.
+Screenshot saved. Attach the PNG file in the GitHub issue form.	Skärmbilden har sparats. Bifoga PNG-filen i GitHubs ärendeformulär.
 Select a part to see its details.	Välj en artikel för att se dess detaljer.
 Select a row, then click into the view to place it.	Välj en rad och klicka sedan i vyn för att placera den.
 Server revision	Serverrevision
-Signed out	Utloggad
+Show everything (Home)	Visa allt (Home)
 Signing out…	Loggar ut…
 Smallest conductor the clamp takes (0: not known)	Minsta ledare som klämman tar (0: okänt)
 Stands on the floor of a room	Står på golvet i ett rum
 Stands on the floor of a room, like pumps, tanks and compressors	Står på golvet i ett rum, som pumpar, tankar och kompressorer
+Steps to reproduce (optional)	Steg för att återskapa (valfritt)
 Successor {}	Efterföljare {}
+Summary	Sammanfattning
 Take {} values from the technical data	Överför {} värden från de tekniska data
+Technical details	Tekniska uppgifter
 The 2D front view is used in the panel front view and on mounting layout pages, the 3D model in the 3D panel view. Both are fitted to the mounting data (width × height × depth).	2D-frontvyn används i skåpets frontvy och på monteringslayoutsidor, 3D-modellen i 3D-skåpvyn. Båda anpassas till monteringsdata (bredd × höjd × djup).
 The model ({} × {} × {}) differs from the mounting data ({} × {} × {}); it is stretched to the mounting data.	Modellen ({} × {} × {}) avviker från monteringsdata ({} × {} × {}); den sträcks ut till monteringsdata.
 The parts server has no library {} yet	Artikelservern har inget bibliotek {} än
 The price refers to this many units	Priset avser så här många enheter
+The report includes the version, the system and counts of what the open project holds, but no project contents. Review the details before sharing them.	Rapporten innehåller versionen, systemet och antal av det som det öppna projektet innehåller, men inget projektinnehåll. Granska uppgifterna innan du delar dem.
+The screenshot is not attached by itself: copy or save it, then add it to the GitHub issue form.	Skärmbilden bifogas inte av sig själv: kopiera eller spara den och lägg sedan till den i GitHubs ärendeformulär.
 The successor is not in this parts list	Efterföljaren finns inte i den här artikellistan
 This part is an accessory	Den här artikeln är ett tillbehör
 Top group	Huvudgrupp
 Top group {}, product group {}, subgroup {}	Huvudgrupp {}, produktgrupp {}, undergrupp {}
 Turn the model so that its front faces the viewer (+Z) and its top is +Y	Vrid modellen så att dess framsida är vänd mot betraktaren (+Z) och dess ovansida är +Y
+Turn the view 90° to the left	Vrid vyn 90° åt vänster
+Turn the view 90° to the right	Vrid vyn 90° åt höger
 Uploaded {} parts, server revision {}	{} artiklar uppladdade, serverrevision {}
 Uploading parts file…	Laddar upp artikelfil…
 Uploading {} parts…	Laddar upp {} artiklar…
@@ -125,6 +163,9 @@ Use model size as mounting data	Använd modellens storlek som monteringsdata
 Voltage / current	Spänning / ström
 WALL	VÄGG
 Wall mounting	Väggmontage
+What did you do just before the problem? A short list is enough	Vad gjorde du strax före problemet? En kort lista räcker
+What did you expect to see?	Vad förväntade du dig att se?
+What happened?	Vad hände?
 Where the accessory sits on the part it fits, in the panel layout and the 3D view	Var tillbehöret sitter på artikeln det passar till, i kapslingslayouten och 3D-vyn
 Where the cutouts are: the centre from the middle of the front view (x to the right, y down), the turn counter-clockwise.	Var urtagen sitter: mittpunkten från mitten av frontvyn (x åt höger, y nedåt), vridningen moturs.
 Where the wires are connected in the panel layout: the designation as in the function template, the position in the front view (x from the left, y from the top, z above the mounting surface) and the direction the wire leaves in. Parts without own connection points get them from the function template.	Var ledningarna ansluts i skåplayouten: beteckningen som i funktionsmallen, positionen i frontvyn (x från vänster, y uppifrån, z ovanför monteringsytan) och riktningen som ledningen lämnar i. Artiklar utan egna anslutningspunkter får dem från funktionsmallen.
@@ -160,7 +201,6 @@ up to {} mm²	upp till {} mm²
 {} mm right	{} mm till höger
 {} of {} parts	{} av {} artiklar
 {} parts found	{} artiklar hittades
-{} users	{} användare
 {} wires per connection point	{} ledningar per anslutningspunkt
 {} × {} mm, {} elements	{} × {} mm, {} element
 {} × {} × {} mm	{} × {} × {} mm

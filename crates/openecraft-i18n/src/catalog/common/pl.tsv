@@ -1,9 +1,12 @@
 # English<TAB>Polski – texts shown by several areas (texts without a line are shown in English). Sorted by the English text: cargo run -p openecraft-i18n --example tidy
 (all)	(wszystkie)
 (no entries)	(brak wpisów)
+(no structure)	(brak struktury)
+(optional)	(opcjonalnie)
 --json needs a JSON object	--json wymaga obiektu JSON
 3D model	Model 3D
 3D routing	Prowadzenie 3D
+3D view	Widok 3D
 A page named {} already exists	Strona o nazwie {} już istnieje
 A page needs a name	Strona musi mieć nazwę
 A routing path needs {} points at least	Ścieżka prowadzenia wymaga co najmniej {} punktów
@@ -12,14 +15,18 @@ Above	Powyżej
 Access token	Token dostępu
 Accessories	Akcesoria
 Accessory	Akcesorium
+Add	Dodaj
 Add a PDF of all pages	Dodaj PDF wszystkich stron
 Add to favorites	Dodaj do ulubionych
 Address	Adres
+Administrator	Administrator
 Angle	Kąt
 Apply	Zastosuj
 Approve	Zatwierdź
 Approvers	Zatwierdzający
 Automatic	Automatycznie
+Automation	Automatyzacja
+Aux	Pomocn.
 Below	Poniżej
 Bold	Pogrubienie
 Bottom	Dno
@@ -41,11 +48,13 @@ Cable tag, e.g. -W20	Oznaczenie kabla, np. -W20
 Cables	Kable
 Cancel	Anuluj
 Cannot read {}: {}	Nie można odczytać {}: {}
+Cannot write {}: {}	Nie można zapisać {}: {}
 Catalog	Katalog
 Catalog id	Identyfikator katalogu
 Category	Kategoria
 Centred	Wyśrodkowane
 Certificates	Certyfikaty
+Change	Zmiana
 Channel	Kanał
 Characteristic	Charakterystyka
 Check settings	Ustawienia kontroli
@@ -56,6 +65,7 @@ Clear filters	Wyczyść filtry
 Clearance bottom	Odstęp dolny
 Clearance top	Odstęp górny
 Clearances	Odstępy
+Close	Zamknij
 Coding: {}	Kodowanie: {}
 Coil voltage	Napięcie cewki
 Collision class	Klasa kolizji
@@ -85,6 +95,7 @@ Created by	Utworzone przez
 Cross references	Odsyłacze
 Cross-section	Przekrój
 Crossing	Skrzyżowanie
+Currency	Waluta
 Current	Prąd
 Cutout	Wycięcie
 Cutouts	Wycięcia
@@ -106,19 +117,24 @@ Device (PV generator) the modules belong to; its parts then count them in the bi
 Device connection point	Punkt przyłączeniowy urządzenia
 Device description	Opis urządzenia
 Device tag	Oznaczenie urządzenia
+Device the earthing conductor of the mounting runs to (earthing or equipotential bonding busbar); empty: none	Urządzenie, do którego biegnie przewód uziemiający konstrukcji (szyna uziemiająca lub wyrównawcza); puste: brak
 Device {}	Urządzenie {}
 Devices	Urządzenia
+Dimensions	Wymiary
 Direction	Kierunek
 Discard	Odrzuć
 Discard changes	Odrzuć zmiany
 Display	Wyświetlanie
+Documents	Dokumenty
 Done	Wykonano
 Door	Drzwi
 Door cutout	Wycięcie w drzwiach
+Download	Pobierz
 Downloading {}…	Pobieranie {}…
 Drag to turn the model	Przeciągnij, aby obrócić model
 EMC clearance	Odstęp EMC
 Edit	Edycja
+Editor	Redaktor
 Electro-fluid cross reference	Odsyłacze elektryczno-płynowe
 Enclosure	Obudowa
 Enclosures	Obudowy
@@ -138,10 +154,13 @@ Field wiring	Okablowanie obiektowe
 File	Plik
 Files	Pliki
 Filter	Filtr
+Filter devices…	Filtruj urządzenia…
+Fit	Dopasuj
 Fits	Pasuje do
 Fitting at the end	Złączka na końcu
 Fitting at the start	Złączka na początku
 Floor	Podłoga
+Floor plan	Rzut
 Fluid device	Urządzenie płynowe
 Fluid device groups	Grupy urządzeń płynowych
 Fluid netlist	Lista sieci płynowych
@@ -154,10 +173,12 @@ Function text	Tekst funkcji
 Functional safety	Bezpieczeństwo funkcjonalne
 Functions	Funkcje
 General	Ogólne
+Generator junction box (device) the strings run to, from there a DC main cable to each inverter; empty: none	Skrzynka przyłączeniowa generatora (urządzenie), do której biegną stringi, stamtąd główny kabel DC do każdego falownika; puste: brak
 Gives up a subproject: its pages are unlocked again	Porzuca podprojekt: jego strony zostają ponownie odblokowane
 Gland plate	Płyta dławicowa
 Graphics	Grafika
 Group	Grupa
+Group the pages by structure	Grupuj strony według struktury
 Groups	Grupy
 Harness	Wiązka przewodów
 Harness data	Dane wiązki
@@ -185,9 +206,12 @@ Kind	Rodzaj
 Language	Język
 Languages	Języki
 Last change	Ostatnia zmiana
+Last changed	Ostatnia zmiana
+Last changed by	Ostatnio zmienione przez
 Layers	Warstwy
 Leave out stored baselines and wiring marks	Pomiń zapisane wersje bazowe i znaczniki okablowania
 Left	Lewo
+Left side	Lewa strona
 Length	Długość
 Level	Poziom
 Lifecycle	Cykl życia
@@ -197,13 +221,20 @@ Link	Łącze
 Linked	Powiązane
 Load	Odbiornik
 Loaded circuits bunched together	Obciążone obwody ułożone wspólnie
+Loading…	Ładowanie…
 Location	Miejsce montażu
 Location (+)	Miejsce montażu (+)
+Locked	Zablokowana
+Locked by {}	Zablokowane przez {}
+Logo	Logo
 MTTFd (years)	MTTFd (lata)
 Machine	Maszyna
+Main	Główny
+Main earthing busbar (device) it is connected to; empty: none	Główna szyna uziemiająca (urządzenie), do której jest podłączony; puste: brak
 Main earthing terminal	Główna szyna uziemiająca
 Main switch	Wyłącznik główny
 Manufacturer	Producent
+Manufacturers	Producenci
 Manufacturing	Produkcja
 Marking	Oznaczanie
 Match case	Uwzględniaj wielkość liter
@@ -214,6 +245,8 @@ Minimum digits of the counter (leading zeros)	Minimalna liczba cyfr licznika (ze
 Missing parameter: {}	Brak parametru: {}
 Missing value for --{}	Brak wartości dla --{}
 Model import failed: {}	Import modelu nie powiódł się: {}
+Module	Moduł
+Modules	Moduły
 Modules in series	Moduły szeregowo
 Modules side by side in a row	Moduły obok siebie w rzędzie
 Mounted	Zamontowane
@@ -223,6 +256,8 @@ Mounting holes	Otwory montażowe
 Mounting layout {}	Plan montażu {}
 Mounting plate	Płyta montażowa
 Mounting rail	Szyna montażowa
+NC contact	Styk rozwierny
+NO contact	Styk zwierny
 Name	Nazwa
 Name of the block	Nazwa bloku
 Name of the plot, e.g. the cadastral parcel	Nazwa działki, np. działka ewidencyjna
@@ -230,6 +265,7 @@ Name of the point, e.g. a survey point	Nazwa punktu, np. punkt osnowy
 Name of the scheme	Nazwa wzorca
 Net	Sieć
 Never	Nigdy
+New group	Nowa grupa
 New name	Nowa nazwa
 Next page	Następna strona
 No	Nie
@@ -251,6 +287,7 @@ No plug {}	Brak wtyku {}
 No report block named {}	Brak bloku raportu o nazwie {}
 No segment {}	Brak segmentu {}
 No station {}	Brak stacji {}
+No such PV array	Brak takiej instalacji PV
 No such page	Taka strona nie istnieje
 No such section	Nie ma takiej sekcji
 No symbol with id {}	Brak symbolu o identyfikatorze {}
@@ -265,12 +302,14 @@ Not in the schematic	Nie na schemacie
 Note	Uwaga
 Notes	Notatki
 Number	Numer
+Number of down conductors (0: as many as the class needs for the walls)	Liczba przewodów odprowadzających (0: tyle, ile klasa wymaga dla ścian)
 Number the sections 1, 2, 3 … on every level first	Najpierw numeruj sekcje 1, 2, 3 … na każdym poziomie
 Numbers the device tags per structure and identifying letter in schematic order (page, column, top to bottom)	Numeruje oznaczenia urządzeń według struktury i litery kodu w kolejności schematu (strona, kolumna, od góry do dołu)
 Only rows containing this text	Tylko wiersze zawierające ten tekst
 Operating pressure	Ciśnienie robocze
 Option {}: {} is not one of its choices	Opcja {}: {} nie jest jedną z jej wartości do wyboru
 Order number	Numer zamówieniowy
+Other	Inne
 Outer diameter	Średnica zewnętrzna
 Output	Wyjście
 Overview	Przegląd
@@ -299,7 +338,7 @@ Part number	Numer artykułu
 Part number already exists	Numer artykułu już istnieje
 Part {}	Artykuł {}
 Parts	Artykuły
-Parts (CSV, JSON, BMEcat, EPLAN XML, EDZ)	Artykuły (CSV, JSON, BMEcat, EPLAN XML, EDZ)
+Parts (CSV, JSON, BMEcat, EPLAN XML, EDZ, ZIP)	Artykuły (CSV, JSON, BMEcat, EPLAN XML, EDZ, ZIP)
 Parts import failed: {}	Import artykułów nie powiódł się: {}
 Password	Hasło
 Picture	Obraz
@@ -310,9 +349,11 @@ Pin side	Strona pinu
 Place	Miejsce
 Placement scheme	Schemat rozmieszczenia
 Plinth	Cokół
+Plot	Działka
 Plot frame	Ramka rysunku
 Plug	Wtyk
 Plug diagram	Schemat wtyku
+Plugins	Wtyczki
 Plugs	Wtyki
 Poles	Bieguny
 Ports	Porty
@@ -335,9 +376,11 @@ Product subgroup	Podgrupa produktów
 Product top group	Grupa główna produktów
 Profile	Profil
 Project	Projekt
+Project data	Dane projektu
 Project languages	Języki projektu
 Project logo	Logo projektu
 Project management	Zarządzanie projektami
+Project manager	Kierownik projektu
 Project name	Nazwa projektu
 Project properties	Właściwości projektu
 Properties	Właściwości
@@ -351,8 +394,11 @@ Rail	Szyna
 Range	Zakres
 Rated current	Prąd znamionowy
 Rated power	Moc znamionowa
+Rear wall	Ściana tylna
 Rectangle	Prostokąt
 Rectangular	Prostokątny
+Redo	Ponów
+Refresh	Odśwież
 Reject	Odrzuć
 Relative humidity	Wilgotność względna
 Relay	Przekaźnik
@@ -361,17 +407,22 @@ Released pages cannot be moved	Nie można przenosić wydanych stron
 Remove	Usuń
 Remove from favorites	Usuń z ulubionych
 Remove the boundary	Usuń granicę
+Remove the lightning protection system	Usuń ochronę odgromową
 Remove the reference point	Usuń punkt odniesienia
 Report	Raport
 Report blocks	Bloki raportów
 Report: {}	Raport: {}
+Reports	Raporty
 Required	Wymagany
 Reserve	Rezerwa
+Reviewer	Recenzent
 Revision	Rewizja
 Revision {}	Rewizja {}
 Rework	Poprawka
 Right	Prawo
+Right side	Prawa strona
 Role	Rola
+Roof	Dach
 Rooms	Pomieszczenia
 Round	Okrągły
 Route	Prowadź
@@ -392,6 +443,7 @@ Search parts	Wyszukaj artykuły
 Searching…	Wyszukiwanie…
 Section	Sekcja
 Segment	Odcinek
+Select	Zaznacz
 Select a part in the tree or create a new one.	Wybierz artykuł w drzewie lub utwórz nowy.
 Sensor	Czujnik
 Sensors, switches, pushbuttons	Czujniki, łączniki, przyciski
@@ -401,19 +453,24 @@ Settings	Ustawienia
 Shape	Kształt
 Short-circuit voltage	Napięcie zwarcia
 Show history	Pokaż historię
+Show the logos of the catalogs	Pokaż loga katalogów
 Show the row after the column	Pokaż wiersz po kolumnie
 Side	Strona
 Sign in	Zaloguj się
 Sign out	Wyloguj się
 Signed in as {}	Zalogowano jako {}
 Signed in as {} ({})	Zalogowano jako {} ({})
+Signed out	Wylogowano
 Signing in…	Logowanie…
 Single-line / multi-line	Jednokreskowy / wielokreskowy
+Site	Działka
+Site plan	Plan sytuacyjny
 Size	Rozmiar
 Socket side	Strona gniazda
 Solenoid not linked	Cewka niepowiązana
 Sort by	Sortuj według
 Source	Źródło
+Started	Rozpoczęto
 State	Stan
 Status	Stan
 String	Łańcuch
@@ -440,6 +497,7 @@ Terminal type	Typ zacisku
 Terminals	Zaciski
 Text	Tekst
 Text to find	Tekst do znalezienia
+The freestanding PV array {} stands outside the plot boundary	Naziemne pole PV {} stoi poza granicą działki
 The identifier must not be empty	Identyfikator nie może być pusty
 The long side of the modules along the rows	Dłuższy bok modułów wzdłuż rzędów
 The page is released	Strona jest wydana
@@ -449,11 +507,15 @@ Time	Czas
 Title block	Tabliczka rysunkowa
 To	Do
 Tools	Narzędzia
+Top	Góra
 Total	Razem
 Transformer	Transformator
+Tutorial	Samouczek
 Type	Typ
 Type number	Numer typu
 Underline	Podkreślenie
+Undo	Cofnij
+Unexpected argument: {}	Nieoczekiwany argument: {}
 Unit	Jednostka
 Unknown column: {}	Nieznana kolumna: {}
 Unknown connector: {}	Nieznany konektor: {}
@@ -461,10 +523,12 @@ Unknown enclosure system: {}	Nieznany system obudów: {}
 Unknown face: {}	Nieznana ściana: {}
 Unknown format: {}	Nieznany format: {}
 Unknown function definition: {}	Nieznana definicja funkcji: {}
+Unknown language: {}	Nieznany język: {}
 Unknown option {}	Nieznana opcja {}
 Unknown parameter: {}	Nieznany parametr: {}
 Unknown part: {}	Nieznany artykuł: {}
 Unknown property: {}	Nieznana właściwość: {}
+Unknown report: {}	Nieznany raport: {}
 Unknown scheme: {}	Nieznany schemat: {}
 Unknown segment	Nieznany segment
 Unknown symbol {}	Nieznany symbol {}
@@ -475,6 +539,7 @@ User	Użytkownik
 User name	Nazwa użytkownika
 Users	Użytkownicy
 Version	Wersja
+Viewer	Przeglądający
 Voltage	Napięcie
 Warning	Ostrzeżenie
 Warnings	Ostrzeżenia
@@ -497,11 +562,13 @@ file or folder not found	nie znaleziono pliku ani folderu
 landscape	poziomo
 left	w lewo
 mm	mm
+none	brak
 normal	normalny
 not bonded	nieprzyłączone
 not connected	niepodłączony
 open	otwarty
 pcs	szt.
+portrait	pionowo
 rejected	odrzucona
 right	w prawo
 spare	rezerwa
@@ -515,6 +582,7 @@ yes	tak
 {} exists already	{} już istnieje
 {} is not a PNG or JPEG image	{} nie jest obrazem PNG ani JPEG
 {} parts	Artykuły: {}
+{} users	Użytkownicy: {}
 {} wires	Przewody: {}
 {}, together with the wire to {}	{}, razem z przewodem do {}
 {}: {} does not stand on the floor, choose a floor-standing part	{}: {} nie stoi na podłodze, wybierz artykuł stojący na podłodze

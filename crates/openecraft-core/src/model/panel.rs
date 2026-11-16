@@ -127,6 +127,10 @@ pub struct Plot {
     /// The georeferenced point everything is measured from.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub reference: Option<GeoReference>,
+    /// Freestanding (ground-mounted) PV arrays on it, their places in the plant (see
+    /// `crate::panel::solar`).
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub solar: Vec<PvArray>,
 }
 
 impl Plot {
@@ -191,6 +195,153 @@ pub struct Building {
     /// `crate::panel::roofs`).
     #[serde(skip_serializing_if = "Vec::is_empty")]
     pub roofs: Vec<Roof>,
+    /// Earth electrodes: foundation and ring earth electrodes, earth rods (see
+    /// `crate::panel::earthing`).
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub electrodes: Vec<Electrode>,
+    /// Lightning protection system (see `crate::panel::lightning`).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub lightning: Option<Lightning>,
+}
+
+/// Material of an earth electrode or of the conductors and rods of a lightning
+/// protection system.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum Material {
+    /// Hot-dip galvanised steel.
+    #[default]
+    GalvanisedSteel,
+    /// Stainless steel V4A.
+    StainlessSteel,
+    Copper,
+    /// Copper-bonded steel (earth rods).
+    CopperBondedSteel,
+    Aluminium,
+}
+
+/// How an air-termination rod stands.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum RodBase {
+    /// Held by a rod holder on the roof or on the ridge.
+    #[default]
+    Holder,
+    /// On a concrete base (flat roofs, without piercing the covering).
+    ConcreteBase,
+}
+
+/// What an earth electrode is.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum ElectrodeKind {
+    /// In the concrete of the foundation slab of the lowest level: a closed ring along
+    /// the outer walls, divided into meshes.
+    #[default]
+    Foundation,
+    /// In the soil round the building, outside its walls.
+    Ring,
+    /// An earth rod driven vertically into the soil.
+    Rod,
+}
+
+/// An earth electrode of a building.
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(default)]
+pub struct Electrode {
+    pub id: u64,
+    /// Name, e.g. "E1".
+    pub name: String,
+    pub kind: ElectrodeKind,
+    /// Foundation: how far inside the outer walls, ring: how far outside them, mm.
+    pub distance: f32,
+    /// Ring: depth below the ground level; rod: depth of its top, mm.
+    pub depth: f32,
+    /// Foundation: the largest mesh, mm.
+    pub mesh: f32,
+    /// Rod: its place in the building's floor plan and its length, mm.
+    pub x: f32,
+    pub z: f32,
+    pub length: f32,
+    /// Its material; none: that of its kind (foundation galvanised steel, ring and rod
+    /// stainless steel).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub material: Option<Material>,
+    /// Rod: its diameter; foundation and ring: of a round wire, 0 for a flat strip, mm.
+    pub diameter: f32,
+    /// Part of its strip, wire or rod; empty: the one of its material and diameter.
+    #[serde(skip_serializing_if = "String::is_empty")]
+    pub part: String,
+    /// Device (main earthing busbar) it is connected to, e.g. "=GRID+HR-X1".
+    #[serde(skip_serializing_if = "String::is_empty")]
+    pub busbar: String,
+}
+
+impl Default for Electrode {
+    fn default() -> Self {
+        Electrode { id: 0, name: String::new(), kind: ElectrodeKind::Foundation, distance: 100.0, depth: 500.0, mesh: 20_000.0, x: 0.0, z: 0.0, length: 3000.0, material: None, diameter: 0.0, part: String::new(), busbar: String::new() }
+    }
+}
+
+/// The lightning protection system of a building: air-termination conductors on the
+/// ridges and hips (a mesh on flat roofs) and air-termination rods, down conductors
+/// along the outer walls with test joints, connected to the earth electrodes.
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(default)]
+pub struct Lightning {
+    /// Class of the lightning protection system, I … IV (1 … 4).
+    pub class: u8,
+    /// Number of down conductors; 0: as many as the class needs for the perimeter.
+    pub down_conductors: u32,
+    /// Material of the conductors; none: aluminium.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub material: Option<Material>,
+    /// Diameter of the conductors (round wire), mm.
+    pub diameter: f32,
+    /// Part of the conductors (round wire); empty: the one of their material and diameter.
+    #[serde(skip_serializing_if = "String::is_empty")]
+    pub part: String,
+    /// Mounting hardware: the parts of the conductor holders on the roof and on the walls
+    /// (empty: generic) and their greatest distance, mm.
+    #[serde(skip_serializing_if = "String::is_empty")]
+    pub roof_holder: String,
+    #[serde(skip_serializing_if = "String::is_empty")]
+    pub wall_holder: String,
+    pub holder_spacing: f32,
+    /// Height of the test joints above the ground, mm.
+    pub test_joint: f32,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub rods: Vec<AirRod>,
+}
+
+impl Default for Lightning {
+    fn default() -> Self {
+        Lightning { class: 3, down_conductors: 0, material: None, diameter: 8.0, part: String::new(), roof_holder: String::new(), wall_holder: String::new(), holder_spacing: 1000.0, test_joint: 1000.0, rods: Vec::new() }
+    }
+}
+
+/// An air-termination rod on a roof.
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(default)]
+pub struct AirRod {
+    pub id: u64,
+    pub name: String,
+    /// Its foot in the building's floor plan, mm.
+    pub x: f32,
+    pub z: f32,
+    /// Height above the covering, mm.
+    pub height: f32,
+    /// Its material (none: aluminium) and diameter, mm.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub material: Option<Material>,
+    pub diameter: f32,
+    pub base: RodBase,
+    /// Its part; empty: the one of its material and diameter.
+    #[serde(skip_serializing_if = "String::is_empty")]
+    pub part: String,
+}
+
+impl Default for AirRod {
+    fn default() -> Self {
+        AirRod { id: 0, name: String::new(), x: 0.0, z: 0.0, height: 1500.0, material: None, diameter: 16.0, base: RodBase::Holder, part: String::new() }
+    }
 }
 
 /// How a stair runs from its foot to its head.
@@ -317,21 +468,32 @@ pub enum PvMounting {
     /// Flat roofs: pairs of modules tilted towards both sides (east-west) on ballasted
     /// mounting bases.
     EastWest,
+    /// Freestanding on the ground: rows of tilted tables, each on rails over table beams
+    /// on rammed posts.
+    Ground,
 }
 
-/// A solar (PV) array on a roof: rows of modules on one slope with their mounting.
+/// A solar (PV) array on a roof (rows of modules on one slope with their mounting) or
+/// freestanding on the plot (rows of tables).
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(default)]
 pub struct PvArray {
     pub id: u64,
     pub name: String,
-    /// Its middle in the building's floor plan, mm.
+    /// Its middle in the building's floor plan (freestanding: in the plant), mm.
     pub x: f32,
     pub z: f32,
     /// Modules side by side in a row (along the eaves, or across the direction they face).
     pub columns: u32,
-    /// Rows of modules (up the slope, or behind each other; east-west: rows of pairs).
+    /// Rows of modules (up the slope, or behind each other; east-west: rows of pairs;
+    /// freestanding: rows of tables).
     pub rows: u32,
+    /// Freestanding: modules on top of each other on a table (up its slope).
+    #[serde(skip_serializing_if = "is_default_stack")]
+    pub stack: u32,
+    /// Freestanding: height of the lower edge of the modules above the ground, mm.
+    #[serde(skip_serializing_if = "is_default_clearance")]
+    pub clearance: f32,
     /// The long side of the modules along the rows instead of up the slope.
     #[serde(skip_serializing_if = "std::ops::Not::not")]
     pub landscape: bool,
@@ -350,7 +512,8 @@ pub struct PvArray {
     /// Distance from row to row (tilted and east-west mounting), mm; 0: so that a row
     /// does not shade the next one in winter.
     pub row_gap: f32,
-    /// Greatest distance of the roof hooks or mounting bases along a rail, mm.
+    /// Greatest distance of the roof hooks or mounting bases along a rail (freestanding:
+    /// of the posts along a table), mm.
     pub span: f32,
     /// Ballast per module (tilted and east-west mounting), kg.
     pub ballast: f32,
@@ -362,9 +525,31 @@ pub struct PvArray {
     /// count the modules in the bill of materials.
     #[serde(skip_serializing_if = "String::is_empty")]
     pub device: String,
+    /// Device the earthing conductor of its mounting runs to (an earthing or equipotential
+    /// bonding busbar), e.g. "=PV-PE1"; the rails or mounting bases are bonded to it at
+    /// their earthing points.
+    #[serde(skip_serializing_if = "String::is_empty")]
+    pub earthing: String,
+    /// Generator junction box (device) its strings run to, e.g. "=PV-U1"; from there a
+    /// DC main cable runs to each inverter. Empty: the strings run to their inverters.
+    #[serde(skip_serializing_if = "String::is_empty")]
+    pub combiner: String,
     /// The strings its modules are connected in.
     #[serde(skip_serializing_if = "Vec::is_empty")]
     pub strings: Vec<PvString>,
+}
+
+/// Modules on top of each other on a table of a freestanding PV array unless set.
+pub const DEFAULT_STACK: u32 = 2;
+/// Height of the lower edge of freestanding modules above the ground unless set, mm.
+pub const DEFAULT_CLEARANCE: f32 = 800.0;
+
+fn is_default_stack(n: &u32) -> bool {
+    *n == DEFAULT_STACK
+}
+
+fn is_default_clearance(h: &f32) -> bool {
+    *h == DEFAULT_CLEARANCE
 }
 
 /// A string of a PV array: modules in series, possibly several such strings in
@@ -422,6 +607,8 @@ impl Default for PvArray {
             z: 0.0,
             columns: 4,
             rows: 2,
+            stack: DEFAULT_STACK,
+            clearance: DEFAULT_CLEARANCE,
             landscape: false,
             module: "GEN.PV-430W".into(),
             module_width: 1134.0,
@@ -435,6 +622,8 @@ impl Default for PvArray {
             ballast: 20.0,
             system: String::new(),
             device: String::new(),
+            earthing: String::new(),
+            combiner: String::new(),
             strings: Vec::new(),
         }
     }
@@ -544,8 +733,15 @@ pub struct Enclosure {
     /// Mounting-face origin in the enclosure frame; absent uses the legacy plate datum.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub mounting_origin: Option<[f32;3]>,
+    /// Width and height of the mounting plate, mm; absent: the enclosure less the
+    /// mounting origin on both sides (a centred plate).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub mounting_size: Option<[f32; 2]>,
     /// Space kept free behind the door (door-mounted devices, handles), mm.
     pub door_clearance: f32,
+    /// The edge the door is hinged at, seen from the front.
+    #[serde(skip_serializing_if = "DoorHinge::is_left")]
+    pub door_hinge: DoorHinge,
     pub items: Vec<PanelItem>,
     /// Installation and temperatures for the climate calculation.
     #[serde(skip_serializing_if = "super::climate::Climate::is_default")]
@@ -795,6 +991,36 @@ pub enum Opening {
 impl Opening {
     pub fn is_cutout(&self) -> bool {
         *self == Opening::Cutout
+    }
+}
+
+/// The edge a cabinet's door is hinged at, seen from the front: the 3D view opens the
+/// door there, the door drawing shows its hinges there and door wires run over it.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(rename_all = "lowercase")]
+pub enum DoorHinge {
+    #[default]
+    Left,
+    Right,
+}
+
+impl DoorHinge {
+    pub const ALL: [DoorHinge; 2] = [DoorHinge::Left, DoorHinge::Right];
+
+    pub fn is_left(&self) -> bool {
+        *self == DoorHinge::Left
+    }
+
+    /// Key in files and on the command line.
+    pub fn key(self) -> &'static str {
+        match self {
+            DoorHinge::Left => "left",
+            DoorHinge::Right => "right",
+        }
+    }
+
+    pub fn from_key(key: &str) -> Option<DoorHinge> {
+        DoorHinge::ALL.into_iter().find(|h| h.key().eq_ignore_ascii_case(key.trim()))
     }
 }
 

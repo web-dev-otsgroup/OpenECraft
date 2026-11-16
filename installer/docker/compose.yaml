@@ -1,4 +1,5 @@
-# Both OpenECraft servers with the images CI publishes (docs/installation.md):
+# Both OpenECraft servers and the web editor with the images CI publishes
+# (docs/installation.md):
 #
 #   OPENECRAFT_TOKEN=<secret> OPENECRAFT_PROJECT_TOKEN=<secret> docker compose -f installer/docker/compose.yaml up -d
 #
@@ -6,7 +7,11 @@
 # other machines reach them (docs/project-server.md). Set OPENECRAFT_TAG to a version
 # (0.1.0) instead of latest to pin the images. OPENECRAFT_ADMIN_USER and
 # OPENECRAFT_ADMIN_PASSWORD (OPENECRAFT_PROJECT_ADMIN_USER / _PASSWORD for the project
-# server) create an administrator account, or reset its password, at every start.
+# server) create an administrator account, or reset its password, at every start. The
+# web editor is on http://127.0.0.1:8080; in it the servers are http://127.0.0.1:8090 and
+# http://127.0.0.1:8091, as the browser reaches them. The website with its live demos
+# (docs/website.md) is on http://127.0.0.1:8088; it brings a web editor of its own at
+# /editor/, so a public site needs only this service.
 services:
   parts-server:
     image: ghcr.io/nilres/openecraft-parts-server:${OPENECRAFT_TAG:-latest}
@@ -33,6 +38,43 @@ services:
       OPENECRAFT_PROJECT_ADMIN_PASSWORD: ${OPENECRAFT_PROJECT_ADMIN_PASSWORD:-}
     volumes:
       - projects:/data
+
+  editor-web:
+    image: ghcr.io/nilres/openecraft-web:${OPENECRAFT_TAG:-latest}
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:8080"
+
+  website:
+    image: ghcr.io/nilres/openecraft-website:${OPENECRAFT_TAG:-latest}
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8088:8080"
+    # Where the links of the page lead (docs/website.md): the web editor (a folder
+    # beside the page or an address), the repository, and optionally the downloads,
+    # the documentation folder and the issues, which default to those of the repository.
+    environment:
+      # The public address of the site (https://…/) for search engines and link
+      # previews: canonical address, preview image, sitemap.
+      OPENECRAFT_SITE_URL: ${OPENECRAFT_SITE_URL:-}
+      OPENECRAFT_EDITOR_URL: ${OPENECRAFT_EDITOR_URL:-editor/}
+      OPENECRAFT_REPOSITORY_URL: ${OPENECRAFT_REPOSITORY_URL:-https://github.com/nilres/OpenECraft}
+      OPENECRAFT_DOWNLOADS_URL: ${OPENECRAFT_DOWNLOADS_URL:-}
+      OPENECRAFT_DOCUMENTATION_URL: ${OPENECRAFT_DOCUMENTATION_URL:-}
+      OPENECRAFT_ISSUES_URL: ${OPENECRAFT_ISSUES_URL:-}
+      # The legal notice (Impressum) of the operator: shown when a name is set. Lines
+      # of the address and the text are separated by "|".
+      OPENECRAFT_LEGAL_NAME: ${OPENECRAFT_LEGAL_NAME:-}
+      OPENECRAFT_LEGAL_ADDRESS: ${OPENECRAFT_LEGAL_ADDRESS:-}
+      OPENECRAFT_LEGAL_EMAIL: ${OPENECRAFT_LEGAL_EMAIL:-}
+      OPENECRAFT_LEGAL_PHONE: ${OPENECRAFT_LEGAL_PHONE:-}
+      OPENECRAFT_LEGAL_REPRESENTATIVE: ${OPENECRAFT_LEGAL_REPRESENTATIVE:-}
+      OPENECRAFT_LEGAL_REGISTER: ${OPENECRAFT_LEGAL_REGISTER:-}
+      OPENECRAFT_LEGAL_VAT_ID: ${OPENECRAFT_LEGAL_VAT_ID:-}
+      OPENECRAFT_LEGAL_RESPONSIBLE: ${OPENECRAFT_LEGAL_RESPONSIBLE:-}
+      OPENECRAFT_LEGAL_TEXT: ${OPENECRAFT_LEGAL_TEXT:-}
+      # Added to the privacy notice of the page: the hosting and the server logs.
+      OPENECRAFT_LEGAL_PRIVACY: ${OPENECRAFT_LEGAL_PRIVACY:-}
 
 volumes:
   parts:

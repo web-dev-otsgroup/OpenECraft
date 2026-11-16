@@ -124,6 +124,20 @@ impl<K> FileIo<K> {
         Ok(Some(suggested.to_string()))
     }
 
+    /// Asks where to save without writing anything (desktop only): for content that
+    /// is more than one file.
+    pub fn pick_save(&self, suggested: &str, filter: (&str, &str)) -> Option<String> {
+        #[cfg(not(target_arch = "wasm32"))]
+        {
+            rfd::FileDialog::new().add_filter(filter.0, &[filter.1]).set_file_name(suggested).save_file().map(|p| p.display().to_string())
+        }
+        #[cfg(target_arch = "wasm32")]
+        {
+            let _ = (suggested, filter);
+            None
+        }
+    }
+
     /// Writes to a known location (native) or downloads again (web).
     pub fn save_to(&self, path: &str, content: &str) -> Result<(), String> {
         #[cfg(not(target_arch = "wasm32"))]
@@ -243,11 +257,31 @@ pub fn set_title(ctx: &egui::Context, title: &str) {
 
 /// Today's date `YYYY-MM-DD` (UTC).
 pub fn today() -> String {
+    openecraft_parts::date_from_unix(unix_now())
+}
+
+/// Date and time now, `YYYY-MM-DD HH:MM UTC`.
+pub fn now_text() -> String {
+    let secs = unix_now();
+    format!("{} {:02}:{:02} UTC", openecraft_parts::date_from_unix(secs), secs % 86_400 / 3_600, secs % 3_600 / 60)
+}
+
+fn unix_now() -> u64 {
     #[cfg(not(target_arch = "wasm32"))]
     let secs = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map(|d| d.as_secs()).unwrap_or(0);
     #[cfg(target_arch = "wasm32")]
     let secs = (js_sys::Date::now() / 1000.0) as u64;
-    openecraft_parts::date_from_unix(secs)
+    secs
+}
+
+/// The system the app runs on, for bug reports: operating system and processor on the
+/// desktop, the browser's user agent in the browser.
+pub fn platform() -> String {
+    #[cfg(not(target_arch = "wasm32"))]
+    let text = format!("{} {} (desktop)", std::env::consts::OS, std::env::consts::ARCH);
+    #[cfg(target_arch = "wasm32")]
+    let text = format!("web: {}", web_sys::window().and_then(|w| w.navigator().user_agent().ok()).unwrap_or_default());
+    text
 }
 
 /// The local file system can be searched and written by path (desktop, not the
@@ -342,6 +376,8 @@ struct StoreQueue {
     writing: bool,
     /// Result of the last write (it fails e.g. without IndexedDB in a private window).
     last_ok: Option<bool>,
+    /// Keys whose last write succeeded.
+    stored: Vec<String>,
 }
 
 impl Store {
@@ -420,6 +456,12 @@ impl Store {
         self.queue.lock().is_ok_and(|q| q.last_ok == Some(true))
     }
 
+    /// The value last given to [`Store::store`] for `key` is written: no write of it
+    /// waits, is under way or failed.
+    pub fn stored(&self, key: &str) -> bool {
+        self.queue.lock().is_ok_and(|q| !q.writing && q.pending.is_empty() && q.stored.iter().any(|k| k == key))
+    }
+
     fn next_pending(&self) -> Option<(String, Vec<u8>)> {
         let mut q = self.queue.lock().ok()?;
         if q.pending.is_empty() {
@@ -429,9 +471,13 @@ impl Store {
         Some(q.pending.remove(0))
     }
 
-    fn written(&self, ok: bool) {
+    fn written(&self, key: &str, ok: bool) {
         if let Ok(mut q) = self.queue.lock() {
             q.last_ok = Some(ok);
+            q.stored.retain(|k| k != key);
+            if ok {
+                q.stored.push(key.to_string());
+            }
         }
     }
 
@@ -444,7 +490,7 @@ impl Store {
             if let Err(e) = &result {
                 log::error!("Could not write {}: {e}", path.display());
             }
-            self.written(result.is_ok());
+            self.written(&key, result.is_ok());
         }
     }
 
@@ -455,7 +501,7 @@ impl Store {
             if let Err(e) = &result {
                 log::error!("Could not write {key} to IndexedDB: {e:?}");
             }
-            self.written(result.is_ok());
+            self.written(&key, result.is_ok());
         }
     }
 

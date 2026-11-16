@@ -85,7 +85,7 @@ fn all_workspace_crates_are_checked() {
 
 /// UI crates (the others have no user-visible texts of their own).
 fn ui_source_files() -> Vec<PathBuf> {
-    ["openecraft/src", "crates/openecraft-ui/src", "parts-manager/src"]
+    ["openecraft/src", "crates/openecraft-shell/src", "crates/openecraft-canvas/src", "crates/openecraft-ui/src", "parts-manager/src", "website/src"]
         .iter()
         .flat_map(|d| rust_files(&root().join(d)))
         .filter(|p| !is_test_file(p))
@@ -251,8 +251,9 @@ const CORE_RULES: &[(&str, &[&str])] = &[
     ("integration", &["analysis", "issue", "model", "netlist", "panel", "parts", "wiring"]),
     // 8 project files, sharing, verification
     ("collab", &["model", "review", "report_blocks"]),
-    ("archive", &["document", "model", "pdf", "zip"]),
-    ("projects", &["archive", "index", "issue", "model", "properties", "verify"]),
+    ("archive", &["document", "model", "pdf", "storage", "zip"]),
+    ("storage", &["archive", "document", "model", "parallel"]),
+    ("projects", &["archive", "index", "issue", "model", "properties", "storage", "verify"]),
     ("project_templates", &["model", "structure"]),
     ("verify", &["analysis", "issue", "model", "options", "properties", "structure", "symbols"]),
     ("sample", &["electrofluid", "geom", "harness", "model", "netlist", "ops", "panel", "parts", "pinout", "potentials", "review", "revision", "sections", "sizing", "structure", "symbols", "wirenum"]),

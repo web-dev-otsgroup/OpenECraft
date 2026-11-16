@@ -44,7 +44,7 @@ fn connection_points_in_csv() {
     ];
     let csv = to_csv(std::slice::from_ref(&part));
     let header = csv.lines().next().unwrap();
-    assert!(header.contains(";Connection points;Catalog;Lifecycle;Successor;Clearance top;") && header.ends_with(";Terminal type;Wall mounting;Floor mounting;Components;Accessory;Accessory mounting;Fits"));
+    assert!(header.contains(";Connection points;Catalog;Lifecycle;Successor;Clearance top;") && header.ends_with(";Terminal type;Wall mounting;Floor mounting;Restricted areas;Components;Accessory;Accessory mounting;Fits"));
     assert!(csv.contains("A1:5.5/0/60/up|14:40/74/55.25/down"));
     assert_eq!(from_csv(&csv).unwrap()[0].connection_points, part.connection_points);
     // Files without the column (older exports) have no points.
@@ -87,4 +87,13 @@ fn assembly_components_in_csv() {
     assert!(csv.contains("A:2|B"));
     assert_eq!(from_csv(&csv).unwrap()[0].components, part.components);
     assert_eq!(crate::components_from_text("X:1,5 | Y"), vec![crate::Component { number: "X".into(), quantity: 1.5 }, crate::Component { number: "Y".into(), quantity: 1.0 }]);
+}
+
+#[test]
+fn comment_lines_before_the_header_are_skipped() {
+    let parts = [Part { number: "A-1".into(), description: "Relay".into(), ..Default::default() }];
+    let text = format!("# format=openecraft-parts;server_version=0.1.2\n#second\n{}", to_csv(&parts));
+    let read = import(&text).unwrap();
+    assert_eq!(read.len(), 1);
+    assert_eq!((read[0].number.as_str(), read[0].description.as_str()), ("A-1", "Relay"));
 }

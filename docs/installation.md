@@ -33,7 +33,7 @@ A project file given on the command line is opened at start (`openecraft plant.o
 administrator rights (or for all users in Program Files), in English, German, French or
 Spanish after the Windows language. Optional: the parts manager, the command line / MCP
 server (added to the `PATH` on request), the parts and project servers, a desktop
-shortcut, and opening `.oec` / `.oecz` files by double-click. It is uninstalled in
+shortcut, and opening `.oec` / `.oecz` / `.oecp` files by double-click. It is uninstalled in
 *Settings › Apps*; projects and settings are kept. CI builds it on every push (artifact
 `openecraft-windows-installer`); locally it needs
 [Inno Setup 6](https://jrsoftware.org/isinfo.php) (`winget install JRSoftware.InnoSetup`):
@@ -57,7 +57,7 @@ unsigned and SmartScreen asks for confirmation on first run (see [releasing](rel
 `installer/linux/build.sh` builds the packages for the architecture of the build machine
 into `target/installer/`. Each contains the editor and the parts manager (with menu
 entries in English, German, French and Spanish), the command line / MCP server and the
-parts and project servers. With deb, rpm, Flatpak and tar.gz `.oec` / `.oecz` files open
+parts and project servers. With deb, rpm, Flatpak and tar.gz `.oec` / `.oecz` / `.oecp` files open
 by double-click.
 
 ```bash
@@ -69,7 +69,7 @@ bash installer/linux/build.sh flatpak snap           # sandboxed packages
 | --- | --- | --- | --- |
 | Debian, Ubuntu | `openecraft_<version>_amd64.deb` | `sudo apt install ./openecraft_*.deb` | `dpkg-dev` |
 | Fedora, RHEL, openSUSE | `openecraft-<version>-1.x86_64.rpm` | `sudo dnf install ./openecraft-*.rpm` | `rpmbuild` |
-| Any distribution | `OpenECraft-<version>-x86_64.AppImage` | `chmod +x`, start it | Debian or Ubuntu, `patchelf`, `appimagetool` and its runtime (downloaded, checksums verified) |
+| Any distribution | `OpenECraft-<version>-x86_64.AppImage` | `chmod +x`, start it | Debian or Ubuntu, `patchelf`, `zsync`, `appimagetool` and its runtime (downloaded, checksums verified) |
 | Any distribution | `OpenECraft-<version>-x86_64.flatpak` | `flatpak install --user OpenECraft-*.flatpak` | `flatpak-builder` |
 | Any distribution | `openecraft_<version>_amd64.snap` | `sudo snap install --dangerous openecraft_*.snap` | `snapcraft` |
 | Any distribution | `OpenECraft-<version>-linux-x86_64.tar.gz` | `./install.sh` (to `~/.local`) | `tar` |
@@ -83,7 +83,11 @@ push (artifacts `openecraft-linux-packages`, `openecraft-flatpak`, `openecraft-s
 deb, rpm, AppImage and tar.gz are built on Debian 12 and run with glibc 2.36 or newer.
 The AppImage carries the window libraries that are not on every system (xkbcommon,
 Xcursor, Xi: `appimage_libs` in `installer/linux/build.sh`); the build refuses one that
-needs another library or a newer glibc than the programs.
+needs another library or a newer glibc than the programs. It also carries update
+information for AppImageUpdate and similar tools: the latest GitHub release of the
+repository that built it (`GITHUB_REPOSITORY`, otherwise `nilres/OpenECraft`), whose
+`OpenECraft-<version>-x86_64.AppImage.zsync` the build writes next to the AppImage
+(`APPIMAGE_UPDATE_INFO` sets other update information, an empty value none).
 The desktop entries, MIME types and AppStream data (`io.github.nilres.OpenECraft`) are
 in `installer/linux/`; a new version needs a `<release>` in the metainfo file.
 
@@ -118,7 +122,7 @@ it carries on without a message. A newer release is downloaded, checked against 
 | Installation | Update |
 | --- | --- |
 | Windows setup | `OpenECraft-<version>-setup.exe` runs silently (`/SILENT`) when the editor is closed, in the folder and with the components of the installation; *Restart and update* starts the editor again afterwards |
-| AppImage | the AppImage file is replaced at once; the new version starts next time |
+| AppImage | the AppImage file is replaced at once; the new version starts next time (AppImageUpdate and similar tools update it too) |
 | macOS app | `OpenECraft.app` (and `OpenECraft Parts Manager.app` next to it) are replaced from the disk image at once |
 | deb, rpm, Flatpak, Snap, tar.gz, own build | the status bar only tells of the new version and links its release page |
 
@@ -165,7 +169,7 @@ docker build -f installer/docker/Dockerfile --target project-server -t openecraf
 
 CI builds both images on every push, starts them once and checks that they answer;
 on `master` and for a release tag it pushes them to the GitHub Container Registry
-(job `docker`).
+(job `docker`), together with the image of the web editor (below).
 
 ## Web (WebAssembly)
 
@@ -183,12 +187,52 @@ the page.
 
 In the browser "Save" downloads the project file and "Open" uses the file picker.
 
+### Docker image of the web editor
+
+`ghcr.io/nilres/openecraft-web` (same tags as the server images) serves the release
+build of the web editor with nginx on port 8080, as an unprivileged user, with the
+license files next to the page; `installer/docker/compose.yaml` starts it with the
+servers. The servers are reached from the browser, not from the container: in the
+editor give them with the address the browser uses (`http://127.0.0.1:8090` with the
+compose file); both servers allow requests from every origin.
+
+```bash
+docker run -d --name openecraft-web -p 127.0.0.1:8080:8080 ghcr.io/nilres/openecraft-web
+docker build -f installer/docker/Dockerfile --target editor-web -t openecraft-web .
+```
+
+The nginx site is `installer/docker/editor-web.conf` (mount your own at
+`/etc/nginx/conf.d/default.conf`): `index.html` is checked at every visit, the scripts
+and the WebAssembly, named after their hash, are cached for a year. Put a TLS reverse
+proxy in front of it for other machines, as for the servers.
+
+The workflow *Docker image of the web editor* (`.github/workflows/docker-web.yml`)
+rebuilds this image alone, without the rest of CI: Actions › Docker image of the web
+editor › Run workflow, with a branch, a release tag (`v0.1.2`, also one older than the
+workflow) or a commit, further tags, whether to push and whether to build without the
+build cache. It checks the image like CI (`installer/docker/check-editor-web.sh`) and
+pushes it with the tags CI gives that commit (`sha-<commit>`, `edge` for the tip of
+master, `<version>`, and `<major>.<minor>` and `latest` only when no newer release
+has them), plus the tags given. From the command line:
+
+```bash
+gh workflow run docker-web.yml -f ref=v0.1.2
+gh workflow run docker-web.yml -f ref=master -f no-cache=true
+```
+
+### Website
+
+The website of the project with its live demos is a web build of its own (`website/`),
+deployed by hand as static files or with the Docker image
+`ghcr.io/nilres/openecraft-website`, which brings the web editor along at `/editor/`:
+see [website.md](website.md).
+
 ## Tests
 
 ```bash
 cargo test --workspace
 cargo clippy --workspace --all-targets
-cargo clippy -p openecraft -p openecraft-parts-manager --target wasm32-unknown-unknown
+cargo clippy -p openecraft -p openecraft-parts-manager -p openecraft-website --target wasm32-unknown-unknown
 ```
 
 All three must pass without warnings (CI runs them with `-D warnings`).

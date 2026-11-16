@@ -14,6 +14,11 @@ fn requests_of_the_api() {
     assert_eq!(e.info().url, "http://host:8091/api/v1/info");
     assert_eq!(e.list().url, "http://host:8091/api/v1/projects");
     assert_eq!(e.snapshot("Plant 1").url, "http://host:8091/api/v1/projects/Plant%201");
+    let snapshot = e.session_snapshot("Plant 1", &session());
+    assert_eq!(snapshot.url, "http://host:8091/api/v1/projects/Plant%201/snapshot");
+    assert_eq!(snapshot.method, ehttp::Method::POST);
+    assert_eq!(serde_json::from_slice::<Session>(&snapshot.body).unwrap(), session());
+    assert_eq!(snapshot.headers.get("Authorization"), Some("Bearer secret"));
     assert_eq!(e.open("Plant 1", "anna").url, "http://host:8091/api/v1/projects/Plant%201/open");
     assert_eq!(e.status("p", &session()).url, "http://host:8091/api/v1/projects/p/status");
     assert_eq!(e.release("p", &session(), Vec::new()).url, "http://host:8091/api/v1/projects/p/release");
@@ -23,6 +28,16 @@ fn requests_of_the_api() {
     let grants = [Grant::new(openecraft_core::collab::Subject::Group("corp:QA".into()), "reviewer", "Plant 1")];
     let put = e.save_project_access("Plant 1", &grants);
     assert_eq!((put.method, serde_json::from_slice::<Vec<Grant>>(&put.body).unwrap()), (ehttp::Method::PUT, grants.to_vec()));
+    assert_eq!((e.properties("Plant 1").url.as_str(), e.properties("Plant 1").method), ("http://host:8091/api/v1/projects/Plant%201/properties", ehttp::Method::GET));
+    let info = openecraft_core::model::ProjectInfo { name: "Press".into(), ..Default::default() };
+    let put = e.save_properties("Plant 1", "anna", 4, &info);
+    assert_eq!((put.url.as_str(), put.method), ("http://host:8091/api/v1/projects/Plant%201/properties", ehttp::Method::PUT));
+    let body: openecraft_core::collab::PropertiesUpdate = serde_json::from_slice(&put.body).unwrap();
+    assert_eq!((body.user.as_str(), body.revision, body.info), ("anna", 4, info.clone()));
+    let req = openecraft_core::collab::CopyRequest { name: "Plant 2".into(), user: "anna".into(), revision: 4, info: Some(info), records: false };
+    let copy = e.copy("Plant 1", &req);
+    assert_eq!((copy.url.as_str(), copy.method), ("http://host:8091/api/v1/projects/Plant%201/copy", ehttp::Method::POST));
+    assert_eq!(serde_json::from_slice::<openecraft_core::collab::CopyRequest>(&copy.body).unwrap(), req);
     assert_eq!(e.access().url, "http://host:8091/api/v1/access");
     assert_eq!(e.save_access(&Policy::default()).method, ehttp::Method::PUT);
     // Every request carries the token.
@@ -62,8 +77,154 @@ fn account_requests() {
     assert_eq!((login.method, login.url.as_str()), (ehttp::Method::POST, "http://server:8091/api/v1/login"));
     assert!(String::from_utf8_lossy(&login.body).contains("\"password\":\"pw\""));
     assert_eq!(e.logout().url, "http://server:8091/api/v1/logout");
+    let current = e.current_account();
+    assert_eq!((current.method, current.url.as_str()), (ehttp::Method::GET, "http://server:8091/api/v1/session"));
+    assert_eq!(current.headers.get("Authorization"), Some("Bearer t"));
+    assert!(current.body.is_empty());
     assert_eq!(e.users().url, "http://server:8091/api/v1/users");
     let del = e.delete_user("anna b");
     assert_eq!((del.method, del.url.as_str()), (ehttp::Method::DELETE, "http://server:8091/api/v1/users/anna%20b"));
     assert_eq!(e.save_user("anna", &Default::default()).method, ehttp::Method::PUT);
+}
+
+/// Tiny scripted loopback peer: checks the real request order and credentials,
+/// without contacting a configured server or relying on the production router.
+fn snapshot_peer(script: Vec<(&str, u16, String)>) -> Result<openecraft_core::collab::Snapshot, Failed> {
+    use std::io::{Read, Write};
+    use std::time::{Duration, Instant};
+    let listener = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
+    let url = format!("http://{}", listener.local_addr().unwrap());
+    listener.set_nonblocking(true).unwrap();
+    let script: Vec<_> = script.into_iter().map(|(line, status, body)| (line.to_string(), status, body)).collect();
+    let server = std::thread::spawn(move || {
+        for (line, status, body) in script {
+            let until = Instant::now() + Duration::from_secs(5);
+            let mut stream = loop {
+                match listener.accept() {
+                    Ok((stream, _)) => break stream,
+                    Err(e) if e.kind() == std::io::ErrorKind::WouldBlock && Instant::now() < until => std::thread::sleep(Duration::from_millis(5)),
+                    Err(e) => panic!("expected {line}: {e}"),
+                }
+            };
+            stream.set_nonblocking(false).unwrap();
+            stream.set_read_timeout(Some(Duration::from_secs(5))).unwrap();
+            let mut received = Vec::new();
+            loop {
+                let mut buffer = [0; 4096];
+                let n = stream.read(&mut buffer).unwrap();
+                assert!(n > 0);
+                received.extend_from_slice(&buffer[..n]);
+                if let Some(end) = received.windows(4).position(|b| b == b"\r\n\r\n") {
+                    let header = String::from_utf8_lossy(&received[..end]).to_lowercase();
+                    let length = header.lines().find_map(|s| s.strip_prefix("content-length:").map(|s| s.trim().parse::<usize>().unwrap())).unwrap_or(0);
+                    if received.len() >= end + 4 + length { break; }
+                }
+            }
+            let request = String::from_utf8(received).unwrap();
+            assert!(request.starts_with(&format!("{line} HTTP/1.1\r\n")), "{request}");
+            assert!(request.to_lowercase().contains("authorization: bearer test-token\r\n"));
+            if line.ends_with("/status") || line.ends_with("/snapshot") {
+                let (_, body) = request.split_once("\r\n\r\n").unwrap();
+                assert_eq!(serde_json::from_str::<Session>(body).unwrap(), session());
+            }
+            write!(stream, "HTTP/1.1 {status} Test\r\nContent-Type: application/json\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{body}", body.len()).unwrap();
+        }
+    });
+    let e = ProjectEndpoint { url, token: "test-token".into() };
+    let (tx, rx) = std::sync::mpsc::channel();
+    e.fetch_session_snapshot("plant", &session(), move |result| { tx.send(result).unwrap(); });
+    let result = rx.recv_timeout(Duration::from_secs(10)).unwrap();
+    server.join().unwrap();
+    result
+}
+
+fn snapshots() -> (openecraft_core::collab::Snapshot, openecraft_core::collab::Status) {
+    use openecraft_core::collab::{Lock, Snapshot, Status};
+    let own = Lock { target: Target::Page(1), user: "anna".into(), session: session().session };
+    // Two sessions can have the same display name. Only the status authenticates
+    // which lock is ours; the GET snapshot redacts both session identifiers.
+    let other = Lock { target: Target::Page(2), user: "anna".into(), session: String::new() };
+    let status = Status { revision: 7, locks: vec![own.clone(), other.clone()] };
+    let mut snapshot = Snapshot { revision: 7, locks: vec![own, other], ..Default::default() };
+    snapshot.locks[0].session.clear();
+    snapshot.project.pages.push(openecraft_core::model::Page::new(1, "1", "foreign edit", openecraft_core::model::PageKind::Schematic));
+    (snapshot, status)
+}
+
+#[test]
+fn session_snapshots_keep_the_modern_single_request() {
+    let (mut snapshot, status) = snapshots();
+    snapshot.locks = status.locks;
+    let result = snapshot_peer(vec![("POST /api/v1/projects/plant/snapshot", 200, serde_json::to_string(&snapshot).unwrap())]).unwrap();
+    assert_eq!(result, snapshot);
+}
+
+#[test]
+fn older_servers_load_foreign_edits_and_keep_own_locks_without_guessing_names() {
+    for missing in [404, 405] {
+        let (snapshot, status) = snapshots();
+        let result = snapshot_peer(vec![
+            ("POST /api/v1/projects/plant/snapshot", missing, "{}".into()),
+            ("GET /api/v1/projects/plant", 200, serde_json::to_string(&snapshot).unwrap()),
+            ("POST /api/v1/projects/plant/status", 200, serde_json::to_string(&status).unwrap()),
+        ]).unwrap();
+        assert_eq!(result.project, snapshot.project);
+        assert_eq!(result.locks, status.locks);
+        assert_eq!(result.locks[0].session, session().session);
+        assert!(result.locks[1].session.is_empty());
+    }
+}
+
+#[test]
+fn snapshot_authentication_and_other_errors_never_downgrade_to_get() {
+    for (status, why) in [(401, Failure::SignedOut), (403, Failure::Refused), (410, Failure::SessionEnded), (500, Failure::Refused), (503, Failure::Unreachable)] {
+        let failed = snapshot_peer(vec![("POST /api/v1/projects/plant/snapshot", status, r#"{"error":"refused"}"#.into())]).unwrap_err();
+        assert_eq!((failed.why, failed.error.as_str()), (why, "refused"));
+    }
+}
+
+#[test]
+fn legacy_snapshots_never_mix_revisions_or_ignore_a_failed_session_check() {
+    let (snapshot, mut status) = snapshots();
+    status.revision += 1;
+    let result = snapshot_peer(vec![
+        ("POST /api/v1/projects/plant/snapshot", 404, "{}".into()),
+        ("GET /api/v1/projects/plant", 200, serde_json::to_string(&snapshot).unwrap()),
+        ("POST /api/v1/projects/plant/status", 200, serde_json::to_string(&status).unwrap()),
+    ]);
+    assert!(result.unwrap_err().error.contains("changed while loading"));
+    for (code, why) in [(401, Failure::SignedOut), (410, Failure::SessionEnded)] {
+        let failed = snapshot_peer(vec![
+            ("POST /api/v1/projects/plant/snapshot", 404, "{}".into()),
+            ("GET /api/v1/projects/plant", 200, serde_json::to_string(&snapshot).unwrap()),
+            ("POST /api/v1/projects/plant/status", code, r#"{"error":"expired"}"#.into()),
+        ]).unwrap_err();
+        assert_eq!(failed.why, why);
+    }
+    assert!(snapshot_peer(vec![
+        ("POST /api/v1/projects/plant/snapshot", 404, "{}".into()),
+        ("GET /api/v1/projects/plant", 403, r#"{"error":"refused"}"#.into()),
+    ]).is_err());
+}
+
+#[test]
+fn failures_tell_an_outage_from_an_ended_session_and_a_lost_sign_in() {
+    let answer = |status: u16, body: &str| Ok(ehttp::Response {
+        url: String::new(),
+        ok: (200..300).contains(&status),
+        status,
+        status_text: String::new(),
+        headers: Default::default(),
+        bytes: body.as_bytes().to_vec(),
+    });
+    let why = |result: ehttp::Result<ehttp::Response>| decode_failure::<Status>(result).unwrap_err().why;
+    assert_eq!(why(Err("io: connection refused".into())), Failure::Unreachable);
+    assert_eq!(why(answer(502, "")), Failure::Unreachable);
+    assert_eq!(why(answer(410, r#"{"error":"the session has expired, open the project again"}"#)), Failure::SessionEnded);
+    assert_eq!(why(answer(401, r#"{"error":"missing or wrong access token"}"#)), Failure::SignedOut);
+    assert_eq!(why(answer(409, r#"{"error":"locked"}"#)), Failure::Refused);
+    assert_eq!(why(answer(200, "not json")), Failure::Refused);
+    let failed = decode_failure::<Status>(answer(410, r#"{"error":"expired"}"#)).unwrap_err();
+    assert_eq!(failed.to_string(), "expired");
+    assert_eq!(decode_failure::<Status>(answer(200, r#"{"revision":3}"#)).unwrap().revision, 3);
 }

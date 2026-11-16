@@ -32,6 +32,8 @@ use std::collections::HashMap;
 mod arrange_ui;
 mod backstage;
 mod cables_ui;
+mod cable_rename;
+mod bug_report_ui;
 mod check_ui;
 mod command_search;
 mod commands_ui;
@@ -93,6 +95,8 @@ use crate::dock::{LeftTab, Pane, ToolPane};
 
 /// Storage keys of the shell.
 const RECENT_KEY: &str = "recent_projects";
+/// The files of the open split project as they were read (`Session::tracked`).
+const TRACKED_KEY: &str = "split_project_files";
 const UI_KEY: &str = "shell";
 /// The server project of the last session (open or as a local copy).
 const SERVER_PROJECT_KEY: &str = "project_server_project";
@@ -126,6 +130,8 @@ struct ShellState {
     full_crosshair: bool,
     /// The 3D view of the panel layout is drawn by the graphics card.
     gpu_3d: bool,
+    /// The data portal shows the logos of the parts server's catalogs.
+    catalog_logos: bool,
     /// Look for a new release when the editor starts (and install it).
     update_check: bool,
     /// What the wheel, trackpads and touch screens do in the views.
@@ -134,6 +140,8 @@ struct ShellState {
     wheel_source_policy_migrated: bool,
     /// What the editor opens when it starts.
     startup: crate::startup::Startup,
+    /// Automatic saving of shared projects to the project server.
+    server_autosave: crate::server_save::Settings,
 }
 
 impl Default for ShellState {
@@ -153,10 +161,12 @@ impl Default for ShellState {
             frame_stats: false,
             full_crosshair: false,
             gpu_3d: true,
+            catalog_logos: true,
             update_check: true,
             nav: openecraft_ui::nav::Settings::default(),
             wheel_source_policy_migrated: false,
             startup: crate::startup::Startup::default(),
+            server_autosave: crate::server_save::Settings::default(),
         }
     }
 }
@@ -208,6 +218,8 @@ enum Replace {
     Path(String),
     /// A project of the project server.
     Shared(String),
+    /// The copy of a project of the project server (`Remote::draft`), created and opened.
+    Copy,
     /// A project file of the vault.
     Vault(Box<openecraft_client::vault::FileVersion>),
     /// The window closes; with `restart` the editor starts again, updated.
@@ -226,6 +238,9 @@ struct Message {
 pub struct App {
     /// The open project with its history, analysis and saved state.
     session: Session,
+    /// The files of the split project that was just read, until it becomes the open
+    /// project (`replace_project`).
+    opened: Option<openecraft_core::storage::folder::Tracked>,
     editor: Editor,
     io: FileIo,
     /// Arrangement of the panes of the current workspace.
@@ -248,6 +263,11 @@ pub struct App {
     report_filter: String,
     /// Rename device dialog: old tag and the tag entered.
     rename_device: Option<(String, String)>,
+    rename_cable: Option<cable_rename::Draft>,
+    /// Report a bug: the form and its screenshot.
+    bug_report: openecraft_ui::bug_report::Report,
+    /// Report a bug was chosen: the form opens when the frame's windows are drawn.
+    bug_report_wanted: bool,
     /// Active work area (name); empty = the whole project.
     work_area: String,
     structure_ui: structure_ui::StructureUi,
@@ -328,6 +348,9 @@ pub struct App {
     /// Section whose properties are shown.
     section_props: Option<u64>,
     message: Option<(Message, f64)>,
+    /// A result the user waits for (an import), shown in a box until clicked or for a
+    /// few seconds, and the time it came.
+    popup: Option<(Message, f64)>,
     /// The messages of this session (status bar › messages).
     messages: Vec<Message>,
     title: String,
@@ -353,6 +376,8 @@ pub struct App {
     plugins_ui: plugins_ui::PluginsUi,
     /// The autosaved project and parts database (IndexedDB in the browser).
     autosave: crate::autosave::Autosave,
+    /// The timer of the automatic save to the project server.
+    server_auto: crate::server_save::Auto,
     /// Ribbon: active tab, customisation, key tips.
     ribbon: ribbon_ui::RibbonUi,
     /// Open page of the backstage (File tab).
@@ -404,6 +429,7 @@ impl App {
                 break;
             }
         }
+        openecraft_ui::theme::follow_system(&cc.egui_ctx);
         let mut prj: Option<Project> = None;
         let mut file_name = None;
         let mut parts_db: Option<PartsDb> = None;
@@ -428,12 +454,14 @@ impl App {
         let mut plugin_cmds = crate::plugin_commands::PluginCommands::default();
         let mut stored = false;
         let mut recovery = None;
+        let mut tracked = None;
         if let Some(storage) = cc.storage {
             stored = storage.get_string("file_name").is_some();
             language = eframe::get_value(storage, openecraft_ui::language::STORAGE_KEY);
             // Packed; stores written before have the plain project.
             prj = storage.get_string("project_packed").and_then(|s| openecraft_core::archive::unpack(&s).ok()).or_else(|| eframe::get_value(storage, "project"));
             file_name = eframe::get_value(storage, "file_name").flatten();
+            tracked = eframe::get_value(storage, TRACKED_KEY).flatten();
             parts_db = eframe::get_value(storage, "parts_db");
             server_url = eframe::get_value(storage, "parts_server_url");
             eplan_url = eframe::get_value(storage, "eplan_portal_url");
@@ -507,6 +535,7 @@ impl App {
         let first_start = !shell.started && !stored;
         let mut app = App {
             session: Session::new(prj, file_name),
+            opened: None,
             editor: {
                 let mut editor = Editor::default();
                 editor.shortcuts = shortcuts;
@@ -526,6 +555,9 @@ impl App {
             connection_filter: String::new(),
             report_filter: String::new(),
             rename_device: None,
+            rename_cable: None,
+            bug_report: Default::default(),
+            bug_report_wanted: false,
             work_area: String::new(),
             structure_ui: Default::default(),
             properties_ui: Default::default(),
@@ -588,6 +620,7 @@ impl App {
             section_props: None,
             message: None,
             messages: Vec::new(),
+            popup: None,
             title: String::new(),
             shown_lang: openecraft_i18n::lang(),
             remote,
@@ -602,6 +635,7 @@ impl App {
             plugins,
             plugins_ui: plugins_ui::PluginsUi::with_folders(plugin_folders),
             autosave,
+            server_auto: crate::server_save::Auto::default(),
             ribbon,
             backstage: None,
             recent,
@@ -627,8 +661,16 @@ impl App {
         };
         crate::style::apply(&cc.egui_ctx);
         app.remote.attach(&cc.egui_ctx);
+        // A split project: its files as the last run read them tell what another
+        // program changed while the app was closed (a `git pull`). Without unsaved
+        // changes the project is read again, so that it shows them.
+        app.session.restore_tracked(tracked);
         if unsaved {
             app.session.mark_unsaved();
+        } else if let Some(path) = app.session.file_name.clone().filter(|f| io::is_split(f)) {
+            if let Ok((prj, _, read)) = openecraft_core::storage::folder::open_tracked(std::path::Path::new(&path)) {
+                app.session.replace(prj, Some(path), Some(read));
+            }
         }
         app.mounting_ui.active = workspace == Workspace::Mounting;
         app.ribbon.follow_workspace(workspace);
@@ -659,6 +701,7 @@ impl App {
             Some(path) => self.open_at_start(crate::startup::Target::File(path)),
             None => self.apply_startup(),
         }
+        self.remote.restore_sign_in();
         self
     }
 
@@ -691,10 +734,11 @@ impl App {
                     self.io.open_path(&path, Purpose::Project);
                 }
             }
-            crate::startup::Target::Server(project) => {
+            crate::startup::Target::Server(mut project) => {
                 if !project.url.trim().is_empty() {
-                    self.remote.url = project.url.clone();
+                    self.remote.select_server(&project.url);
                 }
+                project.url = self.remote.url.clone();
                 let name = project.name.clone();
                 self.reconnect = Some(crate::startup::Reconnect { project, state: crate::startup::ReconnectState::Connecting });
                 if let Some(Replace::Shared(name)) = self.discard.request(self.session.dirty(), Replace::Shared(name)) {
@@ -708,7 +752,7 @@ impl App {
     fn origin(&self) -> crate::startup::Origin<'_> {
         use crate::startup::Origin;
         if let Some(sh) = &self.remote.shared {
-            Origin::Server { url: &self.remote.url, name: &sh.name, connected: !self.remote.lost }
+            Origin::Server { url: &self.remote.url, name: &sh.name, link: self.remote.link }
         } else if let Some(f) = &self.session.file_name {
             Origin::File(f)
         } else if let Some(p) = &self.recovery {
@@ -752,6 +796,13 @@ impl App {
         self.post(ctx, Message { text: msg.into(), detail: detail.into(), level: crate::style::Level::Error });
     }
 
+    /// A result the user waits for (an import): a message, also shown in a box at the
+    /// bottom right until clicked or for a few seconds.
+    fn notify_popup(&mut self, ctx: &egui::Context, msg: Message) {
+        self.post(ctx, msg.clone());
+        self.popup = Some((msg, ctx.input(|i| i.time)));
+    }
+
     fn post(&mut self, ctx: &egui::Context, msg: Message) {
         self.messages.push(msg.clone());
         if self.messages.len() > 50 {
@@ -778,6 +829,7 @@ impl App {
                 self.backstage = None;
             }
             Replace::Shared(name) => self.remote.open(&name),
+            Replace::Copy => self.remote.copy(),
             Replace::Vault(file) => self.vault.download(*file, crate::vault::Use::Project),
             Replace::Close { restart } => {
                 self.updater.restart = restart;
@@ -789,6 +841,7 @@ impl App {
     }
 
     fn replace_project(&mut self, prj: Project, file_name: Option<String>) {
+        self.rename_cable = None;
         self.remote.close();
         self.recovery = None;
         // Another project must not be checked in as a version of the vault's file.
@@ -796,7 +849,9 @@ impl App {
         if let Some(path) = &file_name {
             self.remember_recent(path);
         }
-        self.session.replace(prj, file_name);
+        // The files of a split project as they were just read, if this is that project.
+        let tracked = self.opened.take();
+        self.session.replace(prj, file_name, tracked);
         self.find_ui.clear_results();
         parts::link_unassigned_plc_parts(&mut self.session.prj, &self.parts_db, None);
         self.editor.selection.clear();
@@ -971,6 +1026,7 @@ impl App {
         self.panel_ui.status.clear();
         self.vault.status.clear();
         self.message = None;
+        self.popup = None;
     }
 
     /// Clears the flag that asks for `pane` (the pane was closed).
@@ -1184,6 +1240,7 @@ impl eframe::App for App {
             self.perform(&ctx, r);
         }
         self.check_locks(&ctx);
+        self.autosave_remote(&ctx, can_commit);
 
         let mut title = format!(
             "OpenECraft – {}{}",
@@ -1221,6 +1278,7 @@ impl eframe::App for App {
         }
         storage.set_string("project", String::new());
         eframe::set_value(storage, "file_name", &self.session.file_name);
+        eframe::set_value(storage, TRACKED_KEY, &self.session.tracked);
         eframe::set_value(storage, "parts_server_url", &self.parts_ui.server.url_of(PortalKind::OpenECraft));
         eframe::set_value(storage, "eplan_portal_url", &self.parts_ui.server.url_of(PortalKind::Eplan));
         eframe::set_value(storage, "parts_server_kind", &self.parts_ui.server.kind);

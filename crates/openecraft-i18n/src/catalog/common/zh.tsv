@@ -1,9 +1,12 @@
 # English<TAB>简体中文 – texts shown by several areas (texts without a line are shown in English). Sorted by the English text: cargo run -p openecraft-i18n --example tidy
 (all)	（全部）
 (no entries)	（无条目）
+(no structure)	（无结构）
+(optional)	（可选）
 --json needs a JSON object	--json 需要一个 JSON 对象
 3D model	3D 模型
 3D routing	3D 布线
+3D view	3D 视图
 A page named {} already exists	名为 {} 的页已存在
 A page needs a name	页面需要名称
 A routing path needs {} points at least	布线路径至少需要 {} 个点
@@ -12,14 +15,18 @@ Above	上方
 Access token	访问令牌
 Accessories	附件
 Accessory	附件
+Add	添加
 Add a PDF of all pages	添加所有页的 PDF
 Add to favorites	添加到收藏夹
 Address	地址
+Administrator	管理员
 Angle	角度
 Apply	应用
 Approve	批准
 Approvers	审批人
 Automatic	自动
+Automation	自动化
+Aux	辅助
 Below	下方
 Bold	粗体
 Bottom	底板
@@ -39,11 +46,13 @@ Cable tag, e.g. -W20	电缆标识，例如 -W20
 Cables	电缆
 Cancel	取消
 Cannot read {}: {}	无法读取 {}：{}
+Cannot write {}: {}	无法写入 {}：{}
 Catalog	目录
 Catalog id	目录 ID
 Category	类别
 Centred	居中
 Certificates	证书
+Change	更改
 Channel	通道
 Characteristic	特性
 Check settings	检查设置
@@ -54,6 +63,7 @@ Clear filters	清除筛选器
 Clearance bottom	底部间距
 Clearance top	顶部间距
 Clearances	间距
+Close	关闭
 Coding: {}	编码：{}
 Coil voltage	线圈电压
 Collision class	碰撞类别
@@ -83,6 +93,7 @@ Created by	创建者
 Cross references	交叉引用
 Cross-section	截面积
 Crossing	交叉
+Currency	货币
 Current	电流
 Cutout	开孔
 Cutouts	开孔
@@ -104,19 +115,24 @@ Device (PV generator) the modules belong to; its parts then count them in the bi
 Device connection point	设备连接点
 Device description	设备描述
 Device tag	设备标识符
+Device the earthing conductor of the mounting runs to (earthing or equipotential bonding busbar); empty: none	支架接地导体所连接的设备（接地母线或等电位连接母线）；空：无
 Device {}	设备 {}
 Devices	设备
+Dimensions	尺寸
 Direction	方向
 Discard	放弃
 Discard changes	放弃更改
 Display	显示
+Documents	文档
 Done	完成
 Door	柜门
 Door cutout	柜门开孔
+Download	下载
 Downloading {}…	正在下载 {}…
 Drag to turn the model	拖动以旋转模型
 EMC clearance	EMC 间距
 Edit	编辑
+Editor	编辑者
 Electro-fluid cross reference	电气-流体交叉引用
 Enclosure	机柜
 Enclosures	机柜
@@ -136,10 +152,13 @@ Field wiring	现场接线
 File	文件
 Files	文件
 Filter	筛选
+Filter devices…	筛选设备…
+Fit	适合窗口
 Fits	适配
 Fitting at the end	末端接头
 Fitting at the start	起始端接头
 Floor	柜底
+Floor plan	平面图
 Fluid device	流体设备
 Fluid device groups	流体设备组
 Fluid netlist	流体网络表
@@ -152,10 +171,12 @@ Function text	功能文本
 Functional safety	功能安全
 Functions	功能
 General	常规
+Generator junction box (device) the strings run to, from there a DC main cable to each inverter; empty: none	组串所连接的光伏汇流箱（设备），从那里有一根直流主电缆通往每台逆变器；空：无
 Gives up a subproject: its pages are unlocked again	放弃子项目：其页重新解锁
 Gland plate	法兰板
 Graphics	图形
 Group	组
+Group the pages by structure	按结构对页分组
 Groups	组
 Harness	线束
 Harness data	线束数据
@@ -183,9 +204,12 @@ Kind	类型
 Language	语言
 Languages	语言
 Last change	上次更改
+Last changed	最后修改
+Last changed by	最后修改者
 Layers	图层
 Leave out stored baselines and wiring marks	省略已存储的基线和接线标记
 Left	左
+Left side	左侧
 Length	长度
 Level	液位
 Lifecycle	生命周期
@@ -195,13 +219,20 @@ Link	链接
 Linked	已关联
 Load	负载
 Loaded circuits bunched together	成束敷设的带负载回路数
+Loading…	正在加载…
 Location	位置
 Location (+)	位置 (+)
+Locked	已锁定
+Locked by {}	已被 {} 锁定
+Logo	标志
 MTTFd (years)	MTTFd（年）
 Machine	机器
+Main	主
+Main earthing busbar (device) it is connected to; empty: none	所连接的总接地母线（设备）；空：无
 Main earthing terminal	总接地端子
 Main switch	主开关
 Manufacturer	制造商
+Manufacturers	制造商
 Manufacturing	制造
 Marking	标记
 Match case	区分大小写
@@ -212,6 +243,8 @@ Minimum digits of the counter (leading zeros)	计数器最小位数（前导零�
 Missing parameter: {}	缺少参数：{}
 Missing value for --{}	缺少 --{} 的值
 Model import failed: {}	模型导入失败：{}
+Module	组件
+Modules	组件
 Modules in series	串联组件
 Modules side by side in a row	一行中并排的组件
 Mounted	已安装
@@ -221,6 +254,8 @@ Mounting holes	安装孔
 Mounting layout {}	安装布局 {}
 Mounting plate	安装板
 Mounting rail	安装导轨
+NC contact	常闭触点
+NO contact	常开触点
 Name	名称
 Name of the block	块名称
 Name of the plot, e.g. the cadastral parcel	场地名称，例如地籍宗地
@@ -228,6 +263,7 @@ Name of the point, e.g. a survey point	点的名称，例如测量点
 Name of the scheme	方案名称
 Net	网络
 Never	从不
+New group	新建组
 New name	新名称
 Next page	下一页
 No	否
@@ -249,6 +285,7 @@ No plug {}	没有插头 {}
 No report block named {}	没有名为 {} 的报表块
 No segment {}	规划段 {} 不存在
 No station {}	没有站 {}
+No such PV array	没有此光伏阵列
 No such page	该页不存在
 No such section	没有此分节
 No symbol with id {}	没有 ID 为 {} 的符号
@@ -263,12 +300,14 @@ Not in the schematic	不在原理图中
 Note	注释
 Notes	备注
 Number	编号
+Number of down conductors (0: as many as the class needs for the walls)	引下线数量（0：按类别对墙体所需的数量）
 Number the sections 1, 2, 3 … on every level first	先在每一级将分节编号为 1, 2, 3 …
 Numbers the device tags per structure and identifying letter in schematic order (page, column, top to bottom)	按结构和标识字母以原理图顺序（页、列、从上到下）为设备标识符编号
 Only rows containing this text	仅包含此文本的行
 Operating pressure	工作压力
 Option {}: {} is not one of its choices	选项 {}：{} 不是其选项值之一
 Order number	订货号
+Other	其他
 Outer diameter	外径
 Output	输出
 Overview	概览
@@ -297,7 +336,7 @@ Part number	部件编号
 Part number already exists	部件编号已存在
 Part {}	部件 {}
 Parts	部件
-Parts (CSV, JSON, BMEcat, EPLAN XML, EDZ)	部件 (CSV, JSON, BMEcat, EPLAN XML, EDZ)
+Parts (CSV, JSON, BMEcat, EPLAN XML, EDZ, ZIP)	部件 (CSV, JSON, BMEcat, EPLAN XML, EDZ, ZIP)
 Parts import failed: {}	部件导入失败：{}
 Password	密码
 Picture	图片
@@ -308,9 +347,11 @@ Pin side	插针侧
 Place	位置
 Placement scheme	放置方案
 Plinth	底座
+Plot	场地
 Plot frame	图框
 Plug	插头
 Plug diagram	插头图
+Plugins	插件
 Plugs	插头
 Poles	极数
 Ports	端口
@@ -333,9 +374,11 @@ Product subgroup	产品子组
 Product top group	产品主组
 Profile	配置文件
 Project	项目
+Project data	项目数据
 Project languages	项目语言
 Project logo	项目标志
 Project management	项目管理
+Project manager	项目经理
 Project name	项目名称
 Project properties	项目属性
 Properties	属性
@@ -349,8 +392,11 @@ Rail	导轨
 Range	范围
 Rated current	额定电流
 Rated power	额定功率
+Rear wall	后板
 Rectangle	矩形
 Rectangular	矩形
+Redo	重做
+Refresh	刷新
 Reject	拒绝
 Relative humidity	相对湿度
 Relay	继电器
@@ -359,17 +405,22 @@ Released pages cannot be moved	无法移动已发布页
 Remove	删除
 Remove from favorites	从收藏夹中删除
 Remove the boundary	删除边界
+Remove the lightning protection system	删除防雷系统
 Remove the reference point	删除参考点
 Report	报表
 Report blocks	报表块
 Report: {}	报表：{}
+Reports	报表
 Required	要求
 Reserve	备用
+Reviewer	审阅者
 Revision	修订
 Revision {}	修订 {}
 Rework	返工
 Right	右
+Right side	右侧
 Role	角色
+Roof	顶板
 Rooms	房间
 Round	圆形
 Route	布线
@@ -390,6 +441,7 @@ Search parts	搜索部件
 Searching…	正在搜索…
 Section	分节
 Segment	布线段
+Select	选择
 Select a part in the tree or create a new one.	在树中选择一个部件或新建一个部件。
 Sensor	传感器
 Sensors, switches, pushbuttons	传感器、开关、按钮
@@ -399,19 +451,23 @@ Settings	设置
 Shape	形状
 Short-circuit voltage	短路电压
 Show history	显示历史记录
+Show the logos of the catalogs	显示目录的标志
 Show the row after the column	在列后显示行
 Side	侧
 Sign in	登录
 Sign out	注销
 Signed in as {}	已作为 {} 登录
 Signed in as {} ({})	已作为 {} ({}) 登录
+Signed out	已注销
 Signing in…	正在登录…
 Single-line / multi-line	单线 / 多线
+Site	场地
 Size	大小
 Socket side	插孔侧
 Solenoid not linked	电磁线圈未关联
 Sort by	排序方式
 Source	来源
+Started	已开始
 State	状态
 Status	状态
 String	组串
@@ -438,6 +494,7 @@ Terminal type	端子类型
 Terminals	端子
 Text	文本
 Text to find	要查找的文本
+The freestanding PV array {} stands outside the plot boundary	地面光伏阵列 {} 位于场地边界之外
 The identifier must not be empty	标识符不能为空
 The long side of the modules along the rows	组件长边沿行方向
 The page is released	该页已发布
@@ -447,11 +504,15 @@ Time	时间
 Title block	标题栏
 To	到
 Tools	刀具
+Top	顶部
 Total	合计
 Transformer	变压器
+Tutorial	教程
 Type	类型
 Type number	型号
 Underline	下划线
+Undo	撤销
+Unexpected argument: {}	意外的参数：{}
 Unit	单位
 Unknown column: {}	未知列：{}
 Unknown connector: {}	未知接口：{}
@@ -459,10 +520,12 @@ Unknown enclosure system: {}	未知机柜系统：{}
 Unknown face: {}	未知面：{}
 Unknown format: {}	未知格式：{}
 Unknown function definition: {}	未知功能定义：{}
+Unknown language: {}	未知语言：{}
 Unknown option {}	未知选项 {}
 Unknown parameter: {}	未知参数：{}
 Unknown part: {}	未知部件：{}
 Unknown property: {}	未知属性：{}
+Unknown report: {}	未知报表：{}
 Unknown scheme: {}	未知方案：{}
 Unknown segment	未知规划段
 Unknown symbol {}	未知符号 {}
@@ -473,6 +536,7 @@ User	用户
 User name	用户名
 Users	用户
 Version	版本
+Viewer	查看者
 Voltage	电压
 Warning	警告
 Warnings	警告
@@ -500,6 +564,7 @@ not bonded	未联结
 not connected	未连接
 open	开放
 pcs	件
+portrait	纵向
 rejected	已拒绝
 right	向右
 spare	备用
@@ -513,6 +578,7 @@ yes	是
 {} exists already	{} 已存在
 {} is not a PNG or JPEG image	{} 不是 PNG 或 JPEG 图像
 {} parts	{} 个部件
+{} users	{} 个用户
 {} wires	{} 条导线
 {}, together with the wire to {}	{}，与通往 {} 的导线共用
 {}: {} does not stand on the floor, choose a floor-standing part	{}：{} 不是落地式，请选择落地式部件

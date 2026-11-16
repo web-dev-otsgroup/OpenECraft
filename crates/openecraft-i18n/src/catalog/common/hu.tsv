@@ -1,9 +1,12 @@
 # English<TAB>Magyar – texts shown by several areas (texts without a line are shown in English). Sorted by the English text: cargo run -p openecraft-i18n --example tidy
 (all)	(összes)
 (no entries)	(nincsenek bejegyzések)
+(no structure)	(nincs struktúra)
+(optional)	(nem kötelező)
 --json needs a JSON object	A --json JSON-objektumot vár
 3D model	3D-modell
 3D routing	3D nyomvonalvezetés
+3D view	3D nézet
 A page named {} already exists	Már létezik {} nevű oldal
 A page needs a name	Az oldalnak nevet kell adni
 A routing path needs {} points at least	A fektetési úthoz legalább {} pont szükséges
@@ -12,14 +15,18 @@ Above	Felül
 Access token	Hozzáférési token
 Accessories	Tartozékok
 Accessory	Tartozék
+Add	Hozzáadás
 Add a PDF of all pages	PDF hozzáadása az összes oldalról
 Add to favorites	Hozzáadás a kedvencekhez
 Address	Cím
+Administrator	Rendszergazda
 Angle	Szög
 Apply	Alkalmaz
 Approve	Jóváhagyás
 Approvers	Jóváhagyók
 Automatic	Automatikus
+Automation	Automatizálás
+Aux	Segéd
 Below	Alul
 Bold	Félkövér
 Bottom	Fenék
@@ -41,11 +48,13 @@ Cable tag, e.g. -W20	Kábel jelölése, pl. -W20
 Cables	Kábelek
 Cancel	Mégse
 Cannot read {}: {}	{} nem olvasható: {}
+Cannot write {}: {}	{} nem írható: {}
 Catalog	Katalógus
 Catalog id	Katalógusazonosító
 Category	Kategória
 Centred	Középre igazítva
 Certificates	Tanúsítványok
+Change	Változás
 Channel	Csatorna
 Characteristic	Jelleggörbe
 Check settings	Ellenőrzési beállítások
@@ -56,6 +65,7 @@ Clear filters	Szűrők törlése
 Clearance bottom	Szabad tér alul
 Clearance top	Szabad tér felül
 Clearances	Szabad terek
+Close	Bezárás
 Coding: {}	Kódolás: {}
 Coil voltage	Tekercsfeszültség
 Collision class	Ütközési osztály
@@ -85,6 +95,7 @@ Created by	Létrehozta
 Cross references	Kereszthivatkozások
 Cross-section	Keresztmetszet
 Crossing	Kereszteződés
+Currency	Pénznem
 Current	Áram
 Cutout	Kivágás
 Cutouts	Kivágások
@@ -106,19 +117,24 @@ Device (PV generator) the modules belong to; its parts then count them in the bi
 Device connection point	Eszköz csatlakozási pontja
 Device description	Eszközleírás
 Device tag	Készülékazonosító
+Device the earthing conductor of the mounting runs to (earthing or equipotential bonding busbar); empty: none	Eszköz, amelyhez a tartószerkezet földelővezetője fut (földelő- vagy potenciálkiegyenlítő sín); üres: nincs
 Device {}	{} készülék
 Devices	Készülékek
+Dimensions	Méretek
 Direction	Irány
 Discard	Elvetés
 Discard changes	Módosítások elvetése
 Display	Megjelenítés
+Documents	Dokumentumok
 Done	Kész
 Door	Ajtó
 Door cutout	Ajtókivágás
+Download	Letöltés
 Downloading {}…	{} letöltése…
 Drag to turn the model	Húzással forgathatja a modellt
 EMC clearance	EMC-távolság
 Edit	Szerkesztés
+Editor	Szerkesztő
 Electro-fluid cross reference	Elektro-fluid kereszthivatkozások
 Enclosure	Szekrény
 Enclosures	Szekrények
@@ -138,10 +154,13 @@ Field wiring	Terepi huzalozás
 File	Fájl
 Files	Fájlok
 Filter	Szűrő
+Filter devices…	Készülékek szűrése…
+Fit	Illesztés
 Fits	Illeszkedik
 Fitting at the end	Csatlakozószerelvény a végén
 Fitting at the start	Csatlakozószerelvény az elején
 Floor	Fenéklemez
+Floor plan	Alaprajz
 Fluid device	Fluidkészülék
 Fluid device groups	Fluid-készülékcsoportok
 Fluid netlist	Fluid-hálózatlista
@@ -154,10 +173,12 @@ Function text	Funkciószöveg
 Functional safety	Funkcionális biztonság
 Functions	Funkciók
 General	Általános
+Generator junction box (device) the strings run to, from there a DC main cable to each inverter; empty: none	Generátor csatlakozódoboz (eszköz), amelyhez a stringek futnak, onnan egy DC fővezeték minden inverterhez; üres: nincs
 Gives up a subproject: its pages are unlocked again	Elvet egy alprojektet: oldalai zárolása feloldódik
 Gland plate	Kábelbevezető lemez
 Graphics	Grafika
 Group	Csoport
+Group the pages by structure	Oldalak csoportosítása struktúra szerint
 Groups	Csoportok
 Harness	Kábelköteg
 Harness data	Kábelköteg-adatok
@@ -185,9 +206,12 @@ Kind	Fajta
 Language	Nyelv
 Languages	Nyelvek
 Last change	Utolsó módosítás
+Last changed	Utoljára módosítva
+Last changed by	Utoljára módosította
 Layers	Rétegek
 Leave out stored baselines and wiring marks	Az alapállapotok és huzalozási jelölések kihagyása
 Left	Bal
+Left side	Bal oldal
 Length	Hossz
 Level	Szint
 Lifecycle	Életciklus
@@ -197,13 +221,20 @@ Link	Hivatkozás
 Linked	Kapcsolva
 Load	Fogyasztó
 Loaded circuits bunched together	Együtt fektetett terhelt áramkörök
+Loading…	Betöltés…
 Location	Szerelési hely
 Location (+)	Szerelési hely (+)
+Locked	Zárolt
+Locked by {}	Zárolta: {}
+Logo	Logó
 MTTFd (years)	MTTFd (év)
 Machine	Gép
+Main	Fő
+Main earthing busbar (device) it is connected to; empty: none	Fő földelősín (eszköz), amelyhez csatlakozik; üres: nincs
 Main earthing terminal	Fő földelősín
 Main switch	Főkapcsoló
 Manufacturer	Gyártó
+Manufacturers	Gyártók
 Manufacturing	Gyártás
 Marking	Jelölés
 Match case	Kis- és nagybetűk megkülönböztetése
@@ -214,6 +245,8 @@ Minimum digits of the counter (leading zeros)	A számláló minimális számjegy
 Missing parameter: {}	Hiányzó paraméter: {}
 Missing value for --{}	Hiányzó érték: --{}
 Model import failed: {}	Sikertelen modellimportálás: {}
+Module	Modul
+Modules	Modulok
 Modules in series	Sorba kötött modulok
 Modules side by side in a row	Modulok egymás mellett egy sorban
 Mounted	Felszerelve
@@ -223,6 +256,8 @@ Mounting holes	Rögzítőfuratok
 Mounting layout {}	{} szerelési terv
 Mounting plate	Szerelőlap
 Mounting rail	Szerelősín
+NC contact	Nyitóérintkező
+NO contact	Záróérintkező
 Name	Név
 Name of the block	A blokk neve
 Name of the plot, e.g. the cadastral parcel	A telek neve, pl. a helyrajzi szám
@@ -230,6 +265,7 @@ Name of the point, e.g. a survey point	A pont neve, pl. egy geodéziai pont
 Name of the scheme	A séma neve
 Net	Hálózat
 Never	Soha
+New group	Új csoport
 New name	Új név
 Next page	Következő oldal
 No	Nem
@@ -251,6 +287,7 @@ No plug {}	Nincs {} csatlakozódugó
 No report block named {}	Nincs {} nevű kimutatásblokk
 No segment {}	Nincs ilyen szegmens: {}
 No station {}	Nincs {} állomás
+No such PV array	Nincs ilyen PV-mező
 No such page	Nincs ilyen oldal
 No such section	Nincs ilyen szakasz
 No symbol with id {}	Nincs {} azonosítójú szimbólum
@@ -265,12 +302,14 @@ Not in the schematic	Nincs a kapcsolási rajzon
 Note	Megjegyzés
 Notes	Megjegyzések
 Number	Szám
+Number of down conductors (0: as many as the class needs for the walls)	A levezetők száma (0: annyi, amennyit az osztály a falakhoz megkövetel)
 Number the sections 1, 2, 3 … on every level first	Először a szakaszok számozása 1, 2, 3 … minden szinten
 Numbers the device tags per structure and identifying letter in schematic order (page, column, top to bottom)	Számozza a készülékazonosítókat struktúránként és kódbetűnként, a kapcsolási rajz sorrendjében (oldal, oszlop, fentről lefelé)
 Only rows containing this text	Csak az ezt a szöveget tartalmazó sorok
 Operating pressure	Üzemi nyomás
 Option {}: {} is not one of its choices	{} opció: a(z) {} nem tartozik a választható értékei közé
 Order number	Rendelési szám
+Other	Egyéb
 Outer diameter	Külső átmérő
 Output	Kimenet
 Overview	Áttekintés
@@ -299,7 +338,7 @@ Part number	Cikkszám
 Part number already exists	A cikkszám már létezik
 Part {}	Alkatrész {}
 Parts	Alkatrészek
-Parts (CSV, JSON, BMEcat, EPLAN XML, EDZ)	Alkatrészek (CSV, JSON, BMEcat, EPLAN XML, EDZ)
+Parts (CSV, JSON, BMEcat, EPLAN XML, EDZ, ZIP)	Alkatrészek (CSV, JSON, BMEcat, EPLAN XML, EDZ, ZIP)
 Parts import failed: {}	Sikertelen alkatrészimportálás: {}
 Password	Jelszó
 Picture	Kép
@@ -310,9 +349,11 @@ Pin side	Tűoldal
 Place	Hely
 Placement scheme	Elhelyezési séma
 Plinth	Lábazat
+Plot	Telek
 Plot frame	Rajzkeret
 Plug	Csatlakozódugó
 Plug diagram	Csatlakozódugó-terv
+Plugins	Bővítmények
 Plugs	Csatlakozódugók
 Poles	Pólusok
 Ports	Portok
@@ -335,9 +376,11 @@ Product subgroup	Termék-alcsoport
 Product top group	Termék-főcsoport
 Profile	Profil
 Project	Projekt
+Project data	Projektadatok
 Project languages	Projektnyelvek
 Project logo	Projektlogó
 Project management	Projektkezelés
+Project manager	Projektvezető
 Project name	Projektnév
 Project properties	Projekttulajdonságok
 Properties	Tulajdonságok
@@ -351,8 +394,11 @@ Rail	Sín
 Range	Tartomány
 Rated current	Névleges áram
 Rated power	Névleges teljesítmény
+Rear wall	Hátfal
 Rectangle	Téglalap
 Rectangular	Téglalap alakú
+Redo	Mégis
+Refresh	Frissítés
 Reject	Elutasítás
 Relative humidity	Relatív páratartalom
 Relay	Relé
@@ -361,17 +407,22 @@ Released pages cannot be moved	A kiadott oldalak nem helyezhetők át
 Remove	Eltávolítás
 Remove from favorites	Eltávolítás a kedvencek közül
 Remove the boundary	Határ eltávolítása
+Remove the lightning protection system	Villámvédelem eltávolítása
 Remove the reference point	Referenciapont eltávolítása
 Report	Kimutatás
 Report blocks	Kimutatásblokkok
 Report: {}	Kimutatás: {}
+Reports	Kimutatások
 Required	Előírt
 Reserve	Tartalék
+Reviewer	Véleményező
 Revision	Revízió
 Revision {}	{}. revízió
 Rework	Utómunka
 Right	Jobb
+Right side	Jobb oldal
 Role	Szerepkör
+Roof	Tető
 Rooms	Helyiségek
 Round	Kerek
 Route	Elvezetés
@@ -392,6 +443,7 @@ Search parts	Alkatrészek keresése
 Searching…	Keresés…
 Section	Szakasz
 Segment	Szakasz
+Select	Kijelölés
 Select a part in the tree or create a new one.	Válasszon egy alkatrészt a fában, vagy hozzon létre egy újat.
 Sensor	Érzékelő
 Sensors, switches, pushbuttons	Érzékelők, kapcsolók, nyomógombok
@@ -401,19 +453,24 @@ Settings	Beállítások
 Shape	Alak
 Short-circuit voltage	Rövidzárási feszültség
 Show history	Előzmények megjelenítése
+Show the logos of the catalogs	A katalógusok logóinak megjelenítése
 Show the row after the column	A sor megjelenítése az oszlop után
 Side	Oldal
 Sign in	Bejelentkezés
 Sign out	Kijelentkezés
 Signed in as {}	Bejelentkezve mint {}
 Signed in as {} ({})	Bejelentkezve mint {} ({})
+Signed out	Kijelentkezve
 Signing in…	Bejelentkezés…
 Single-line / multi-line	Egyvonalas / többvonalas
+Site	Telek
+Site plan	Helyszínrajz
 Size	Méret
 Socket side	Hüvelyoldal
 Solenoid not linked	A mágnestekercs nincs kapcsolva
 Sort by	Rendezés
 Source	Forrás
+Started	Elkezdve
 State	Állapot
 Status	Állapot
 String	String
@@ -440,6 +497,7 @@ Terminal type	Sorkapocstípus
 Terminals	Sorkapcsok
 Text	Szöveg
 Text to find	Keresendő szöveg
+The freestanding PV array {} stands outside the plot boundary	A(z) {} szabadföldi PV-mező a telekhatáron kívül áll
 The identifier must not be empty	Az azonosító nem lehet üres
 The long side of the modules along the rows	A modulok hosszabb oldala a sorok mentén
 The page is released	Az oldal kiadva
@@ -449,11 +507,15 @@ Time	Idő
 Title block	Szövegmező
 To	Cél
 Tools	Szerszámok
+Top	Fent
 Total	Összesen
 Transformer	Transzformátor
+Tutorial	Oktatóanyag
 Type	Típus
 Type number	Típusszám
 Underline	Aláhúzott
+Undo	Visszavonás
+Unexpected argument: {}	Váratlan argumentum: {}
 Unit	Egység
 Unknown column: {}	Ismeretlen oszlop: {}
 Unknown connector: {}	Ismeretlen összekötő: {}
@@ -461,10 +523,12 @@ Unknown enclosure system: {}	Ismeretlen szekrényrendszer: {}
 Unknown face: {}	Ismeretlen felület: {}
 Unknown format: {}	Ismeretlen formátum: {}
 Unknown function definition: {}	Ismeretlen funkciódefiníció: {}
+Unknown language: {}	Ismeretlen nyelv: {}
 Unknown option {}	Ismeretlen opció: {}
 Unknown parameter: {}	Ismeretlen paraméter: {}
 Unknown part: {}	Ismeretlen alkatrész: {}
 Unknown property: {}	Ismeretlen tulajdonság: {}
+Unknown report: {}	Ismeretlen kimutatás: {}
 Unknown scheme: {}	Ismeretlen séma: {}
 Unknown segment	Ismeretlen szegmens
 Unknown symbol {}	Ismeretlen szimbólum: {}
@@ -475,6 +539,7 @@ User	Felhasználó
 User name	Felhasználónév
 Users	Felhasználók
 Version	Verzió
+Viewer	Megtekintő
 Voltage	Feszültség
 Warning	Figyelmeztetés
 Warnings	Figyelmeztetések
@@ -497,11 +562,13 @@ file or folder not found	a fájl vagy mappa nem található
 landscape	fekvő
 left	balra
 mm	mm
+none	nincs
 normal	normál
 not bonded	nincs bekötve
 not connected	nincs csatlakoztatva
 open	nyitott
 pcs	db
+portrait	álló
 rejected	elutasítva
 right	jobbra
 spare	tartalék
@@ -515,6 +582,7 @@ yes	igen
 {} exists already	{} már létezik
 {} is not a PNG or JPEG image	{} nem PNG- vagy JPEG-kép
 {} parts	{} alkatrész
+{} users	{} felhasználó
 {} wires	{} vezeték
 {}, together with the wire to {}	{}, a(z) {} felé menő vezetékkel együtt
 {}: {} does not stand on the floor, choose a floor-standing part	{}: {} nem a padlón áll, válasszon padlón álló alkatrészt

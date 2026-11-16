@@ -31,6 +31,8 @@ mod macros;
 mod manufacturing;
 mod mounting;
 mod placement;
+pub mod earthing;
+pub mod lightning;
 pub mod plot;
 mod points;
 pub mod rack;
@@ -58,8 +60,8 @@ pub use rooms::{
     penetration_link, wall_links, WallLink, Via, MAX_WALL_THICKNESS, PENETRATION_SIZE, PENETRATION_TOP, is_outside, outside_building, through_wall,
 };
 pub(crate) use rooms::inner_footprint;
-pub use system::{apply_system, components, outward, sync_part, system_of_part, wall_box, Build, Component, Role, System, SYSTEMS};
-pub use crate::model::panel::{Building, Enclosure, EnclosureKind, Face, GeoReference, InnerWall, ItemKind, Layout, Level, LinkKind, Opening, PanelItem, PanelRotation, Plot, PvArray, PvDesign, PvMounting, PvString, Roof, RoofShape, RoofWindow, Shaft, SiteLink, Stair, StairKind, Swing, Turn};
+pub use system::{apply_system, components, maker_model, outward, sync_part, system_of_part, wall_box, Build, Component, Role, System, SYSTEMS};
+pub use crate::model::panel::{AirRod, Building, DoorHinge, Electrode, ElectrodeKind, Lightning, Material, RodBase, Enclosure, EnclosureKind, Face, GeoReference, InnerWall, ItemKind, Layout, Level, LinkKind, Opening, PanelItem, PanelRotation, Plot, PvArray, PvDesign, PvMounting, PvString, Roof, RoofShape, RoofWindow, Shaft, SiteLink, Stair, StairKind, Swing, Turn};
 
 /// Distance between enclosure wall and mounting plate edge.
 pub const PLATE_MARGIN: f32 = 25.0;
@@ -350,7 +352,9 @@ impl Default for Enclosure {
             depth: 250.0,
             no_implicit_plate:false,
             mounting_origin:None,
+            mounting_size: None,
             door_clearance: 0.0,
+            door_hinge: DoorHinge::Left,
             items: Vec::new(),
             climate: Default::default(),
             build: Default::default(),
@@ -406,6 +410,9 @@ impl Enclosure {
     }
 
     pub fn plate_size(&self) -> (f32, f32) {
+        if let Some([w, h]) = self.mounting_size.filter(|_| !self.is_assembly()) {
+            return (w.max(10.0), h.max(10.0));
+        }
         let offset=self.face_offset(Face::Plate);
         ((self.width - 2.0 * offset.x).max(10.0), (self.height - 2.0 * offset.y).max(10.0))
     }
@@ -673,8 +680,60 @@ pub fn new_enclosure(prj: &mut Project, part: &str, name: &str) -> Enclosure {
             e.build.plinth = h;
             e.build.plinth_included = true;
         }
+        // The mounting plate of the maker's enclosure (part data `Mounting origin:
+        // 25/12.5/20`: its top left front corner from the left, top and rear, mm).
+        // The door of the maker's enclosure hinged on the right (`Door hinge: right`).
+        if let Some(hinge) = pd.tech_value("Door hinge").and_then(DoorHinge::from_key) {
+            e.door_hinge = hinge;
+        }
+        if let Some(origin) = pd.tech_value("Mounting origin").and_then(mounting_origin) {
+            e.mounting_origin = Some(origin);
+            // Its size when it is not centred (`Mounting size: 550 x 575`).
+            e.mounting_size = pd.tech_value("Mounting size").and_then(mounting_size);
+        }
     }
     e
+}
+
+/// The restricted areas of `kind` of the enclosure's part on a face (its maker's
+/// data), in face coordinates.
+pub fn restricted_areas(prj: &Project, e: &Enclosure, face: Face, kind: crate::parts::Restriction) -> Vec<R> {
+    let Some(part) = part_by_number(prj, &e.part) else { return Vec::new() };
+    part.mounting_data
+        .restricted
+        .iter()
+        .filter(|a| a.kind == kind && a.face == face.key())
+        .map(|a| R::from_points(p(a.x, a.y), p(a.x + a.w, a.y + a.h)))
+        .collect()
+}
+
+/// The restricted areas of the enclosure's part as quadrilaterals on their faces'
+/// mounting surfaces, in enclosure coordinates, with their kind and face.
+pub fn restricted_quads(prj: &Project, e: &Enclosure) -> Vec<(crate::parts::Restriction, Face, [V3; 4])> {
+    let mut out = Vec::new();
+    for face in Face::ALL {
+        for kind in [crate::parts::Restriction::Placing, crate::parts::Restriction::Cutout] {
+            for r in restricted_areas(prj, e, face, kind) {
+                let corners = [(r.min.x, r.min.y), (r.max.x, r.min.y), (r.max.x, r.max.y), (r.min.x, r.max.y)].map(|(x, y)| face_point(e, face, [x, y, 0.0]));
+                out.push((kind, face, corners));
+            }
+        }
+    }
+    out
+}
+
+/// `width x height` in mm, both positive.
+fn mounting_size(text: &str) -> Option<[f32; 2]> {
+    let (w, h) = text.trim().trim_end_matches("mm").split_once(['x', 'X'])?;
+    let n = |v: &str| v.trim().parse::<f32>().ok().filter(|v| v.is_finite() && *v > 0.0);
+    Some([n(w)?, n(h)?])
+}
+
+/// `x/y/z` in mm.
+fn mounting_origin(text: &str) -> Option<[f32; 3]> {
+    let mut it = text.trim().trim_end_matches("mm").split('/').map(|v| v.trim().parse::<f32>().ok().filter(|v| v.is_finite() && *v >= 0.0));
+    let origin = [it.next()??, it.next()??, it.next()??];
+    it.next().is_none().then_some(origin)
 }
 
 /// Rail or duct between two points (orientation by the dominant direction).
@@ -1109,8 +1168,17 @@ pub fn device_mesh_painted(prj: &Project, it: &PanelItem) -> Option<Vec<(Tri, Op
     // wall it sits in, the locknut and the end of the thread from the inner surface on
     // into the enclosure ([`crate::parts::GLAND_GAP`]), whatever the wall's thickness.
     if it.kind == ItemKind::Accessory {
-        let part = part_by_number(prj, &it.part).filter(|p| p.subgroup == "Cable gland")?;
+        let part = part_by_number(prj, &it.part)?;
         let mesh = part.model_3d.as_ref()?;
+        // Outlets, switches, manifolds and the other parts of a room with their models in
+        // their boxes.
+        if part.subgroup != "Cable gland" {
+            if !prj.layout.enclosures.iter().any(|e| e.is_room() && e.item(it.id).is_some()) {
+                return None;
+            }
+            let tris = painted(mesh, place_mesh(mesh, it));
+            return (!tris.is_empty()).then_some(tris);
+        }
         let wall = prj.layout.enclosures.iter().find(|e| e.item(it.id).is_some()).map_or(0.0, |e| e.wall());
         let (min, size) = (mesh.bounds().0, mesh.size());
         let out = tech_number(part, "Outside").filter(|o| *o > 0.0).unwrap_or(size[2]).min(size[2]);
@@ -1589,7 +1657,7 @@ pub fn outside(e: &Enclosure) -> Vec<u64> {
 
 // ---------------------------------------------------------------------- routing
 
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq, serde::Serialize, serde::Deserialize)]
 pub struct Route {
     /// Path on the plate (plate coordinates).
     pub points: Vec<P>,
@@ -1602,7 +1670,7 @@ pub struct Route {
 
 /// Stretch of a duct a wire runs through: from / to along the duct's axis (x of
 /// horizontal, y of vertical ducts), `from <= to`.
-#[derive(Clone, Copy, Debug, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq, serde::Serialize, serde::Deserialize)]
 pub struct DuctRun {
     pub duct: u64,
     pub from: f32,
@@ -1911,7 +1979,7 @@ pub fn route_weighted(e: &Enclosure, from: WireEnd, to: WireEnd, cost: &dyn Fn(u
 }
 
 /// A routed wire of the virtual wiring.
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq, serde::Serialize, serde::Deserialize)]
 pub struct RoutedWire {
     pub enclosure: usize,
     pub from: String,
@@ -1949,7 +2017,7 @@ pub struct RoutedWire {
 }
 
 /// Where a routed wire end comes from.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub enum EndKind {
     /// The device centre: no connection point of its parts matches.
     Centre,
@@ -2256,7 +2324,8 @@ pub fn door_path(e: &Enclosure, at: V3, route: &Route, plate: V3) -> (Vec<V3>, u
 
 /// Where a wire of a device joins the wiring on the plate, and the length from its
 /// connection point to there: down to the plate, or for door devices along the door
-/// (through its cable ducts) to the hinge (left) and across the hinge loop; door
+/// (through its cable ducts) to the hinge ([`Enclosure::door_hinge`]) and across the
+/// hinge loop, joining the plate at its edge on that side; door
 /// devices also return their route on the door. Without a connection point the wire
 /// starts at the device centre, at its front.
 pub fn wiring_end(e: &Enclosure, it: &PanelItem, point: Option<&PlacedPoint>) -> (WireEnd, f32, Option<Route>) {
@@ -2267,11 +2336,12 @@ pub fn wiring_end(e: &Enclosure, it: &PanelItem, point: Option<&PlacedPoint>) ->
     match it.face {
         Face::Plate => (WireEnd { pos: at, exit: point.map(|pt| pt.exit) }, height, None),
         Face::Door => {
-            let (_, ph) = e.plate_size();
-            let r = route_door(e, at, p(DOOR_FRAME / 2.0, at.y));
+            let (pw, ph) = e.plate_size();
+            let right = e.door_hinge == DoorHinge::Right;
+            let r = route_door(e, at, p(if right { e.width - DOOR_FRAME / 2.0 } else { DOOR_FRAME / 2.0 }, at.y));
             let hinge = r.points.last().copied().unwrap_or(at);
             let length = r.plate_length + height + DOOR_LOOP + (e.depth - PLATE_Z);
-            (WireEnd::at(p(0.0, (hinge.y - PLATE_MARGIN).clamp(0.0, ph))), length, Some(r))
+            (WireEnd::at(p(if right { pw } else { 0.0 }, (hinge.y - PLATE_MARGIN).clamp(0.0, ph))), length, Some(r))
         }
         wall => {
             // Devices on the walls (fans, lights): straight to the nearest plate edge.
@@ -2369,12 +2439,18 @@ pub fn layout_material(prj: &Project) -> Vec<(String, f32, Vec<String>)> {
             add(&mut out, crate::production::BUSBAR_HOLDER, holders as f32, e.name.clone());
         }
     }
-    // The modules and the mounting of the PV arrays on the roofs.
-    for b in &prj.layout.buildings {
-        for a in b.roofs.iter().flat_map(|r| &r.solar) {
-            for (part, qty) in solar::material(prj, a) {
-                add(&mut out, &part, qty, format!("{} {}", b.name, a.name));
-            }
+    // The earth electrodes and the lightning protection of the buildings.
+    let poses = site_poses(prj);
+    for (bi, b) in prj.layout.buildings.iter().enumerate() {
+        for (part, qty) in earthing::material(prj, &poses, bi).into_iter().chain(lightning::material(prj, &poses, bi)) {
+            add(&mut out, &part, qty, b.name.clone());
+        }
+    }
+    // The modules and the mounting of the PV arrays on the roofs and on the plot.
+    for (_, s, a) in solar::all_arrays(&prj.layout) {
+        let place = solar::place_name(&prj.layout, s);
+        for (part, qty) in solar::material(prj, a) {
+            add(&mut out, &part, qty, format!("{} {}", place, a.name));
         }
     }
     if prj.layout.hardware {

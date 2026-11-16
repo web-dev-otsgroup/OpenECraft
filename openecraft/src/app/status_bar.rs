@@ -4,11 +4,48 @@
 
 use super::*;
 use crate::commands::Cmd;
+use crate::remote::Link;
+use crate::server_save::State;
 
 impl App {
+    /// The box of a result the user waits for ([`App::notify_popup`]) at the bottom
+    /// right, above the status bar; a click closes it.
+    fn message_popup(&mut self, ctx: &egui::Context) {
+        let Some((msg, t)) = self.popup.clone() else { return };
+        let error = msg.level == crate::style::Level::Error;
+        // Errors stay longer, as in the status bar.
+        let shown = if error { 12.0 } else { 6.0 };
+        let age = ctx.input(|i| i.time) - t;
+        if age >= shown {
+            self.popup = None;
+            return;
+        }
+        ctx.request_repaint_after(std::time::Duration::from_secs_f64(shown - age));
+        let dark = self.dark;
+        let area = egui::Area::new(egui::Id::unique("message_popup")).anchor(egui::Align2::RIGHT_BOTTOM, egui::vec2(-16.0, -36.0)).order(egui::Order::Foreground);
+        let r = area.show(ctx, |ui| {
+            egui::Frame::popup(ui.style()).show(ui, |ui| {
+                ui.set_max_width(380.0);
+                ui.horizontal(|ui| {
+                    icons::show(ui, if error { Icon::Error } else { Icon::Check }, 18.0);
+                    ui.vertical(|ui| {
+                        ui.label(RichText::new(&msg.text).strong().color(msg.level.color(dark, ui.visuals().text_color())));
+                        if !msg.detail.is_empty() {
+                            ui.label(&msg.detail);
+                        }
+                    });
+                });
+            });
+        });
+        if r.response.interact(egui::Sense::click()).clicked() {
+            self.popup = None;
+        }
+    }
+
     #[allow(clippy::too_many_lines)]
     pub(super) fn status_bar(&mut self, ui: &mut egui::Ui) {
         let ctx = ui.ctx().clone();
+        self.message_popup(&ctx);
         let on_page = self.active_doc == Pane::Page;
         let in_layout = self.active_doc == Pane::LayoutView;
         // The hint fills the space between the left and the right segments; a tool
@@ -180,19 +217,38 @@ impl App {
         let origin = self.origin();
         let c = crate::style::colors(self.dark);
         let (color, tip) = match origin {
-            Origin::Server { connected: false, .. } => (c.error, tr("The project server does not answer: changes are not saved on it until the connection is back").to_string()),
+            Origin::Server { link: Link::Offline, .. } => (c.error, tr("The project server does not answer: changes are not saved on it until the connection is back").to_string()),
+            Origin::Server { link: Link::Ended, .. } => (c.warning, tr("The project session has ended (it expired or the server restarted). The project is opened again with your sign-in; your changes are kept.").to_string()),
+            Origin::Server { link: Link::SignedOut, .. } => (c.error, tr("Your sign-in to the project server is no longer valid. Sign in again in the Project server pane; your changes are kept.").to_string()),
+            Origin::Server { link: Link::Refused, .. } => (c.error, tr("The project server does not open this project again. Try again, or keep working on a local copy.").to_string()),
             Origin::Server { name, .. } => (ui.visuals().text_color(), tr_fmt!("{} (project server, revision {})", name, self.remote.shared.as_ref().map_or(0, |s| s.revision))),
             Origin::Recovery(_) => (c.warning, tr("Not the shared project: changes are saved locally until it is opened on the project server again").to_string()),
             Origin::File(path) => (ui.visuals().text_color(), path.to_string()),
             Origin::New => (ui.visuals().weak_text_color(), tr("Save asks for a file").to_string()),
         };
+        // Whether the changes are on the server, apart from the connection.
+        let state = origin.is_server().then(|| self.save_state());
+        let tip = match (state, &self.remote.last_saved) {
+            (Some(_), Some(time)) => format!("{tip}\n{}\n{}", self.save_state_text(), tr_fmt!("Last save confirmed by the project server: {}", time)),
+            (Some(_), None) => format!("{tip}\n{}", self.save_state_text()),
+            _ => tip,
+        };
+        let color = match state {
+            Some(State::Failed | State::Offline) => c.error,
+            Some(State::Partial) => c.warning,
+            _ => color,
+        };
         let icon = match origin {
-            Origin::Server { connected: false, .. } => Some(Icon::Error),
-            Origin::Server { .. } => Some(Icon::Server),
+            Origin::Server { link: Link::Online, .. } => Some(Icon::Server),
+            Origin::Server { link: Link::Ended, .. } => Some(Icon::Warning),
+            Origin::Server { .. } => Some(Icon::Error),
             Origin::Recovery(_) => Some(Icon::Warning),
             _ => None,
         };
-        let text = format!("{}{}", origin.label(), if self.session.dirty() { " *" } else { "" });
+        let mut text = format!("{}{}", origin.label(), if self.session.dirty() { " *" } else { "" });
+        if let Some(state) = state {
+            text = format!("{text} – {}", state.label());
+        }
         let r = ui.add(egui::Button::new(RichText::new(text).color(color)).frame(false)).on_hover_text(tip);
         if let Some(icon) = icon {
             icons::show(ui, icon, 14.0);

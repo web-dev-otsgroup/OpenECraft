@@ -1,44 +1,28 @@
 "use strict";
-const API = "/api/v1";
+/// The data portal: search, parts, catalogs, favorites (on top of common.js).
+/// Parts per page the list offers; the choice is kept (`limit`) and in the address (`n`).
+const LIMITS = [10, 25, 50, 100, 200];
 const LIMIT = 25;
 const FIXED = ["top_group", "group", "subgroup", "manufacturer", "catalog", "lifecycle"];
 const TITLES = { top_group: "Product top group", group: "Product group", subgroup: "Product subgroup", manufacturer: "Manufacturer", catalog: "Catalog", lifecycle: "Lifecycle" };
 const KEYED = { top_group: "top_group", lifecycle: "lifecycle" };
-let T = { texts: {}, keys: {}, languages: [], lang: "en", rights: [], roles: [] };
 let query = blank();
 let view = "parts";
 let favorites = [];
 let catalogNames = {};
 let catalogManufacturers = {};
 let expanded = {};
-let session = load("session") || loadTemporary("session");
-/// The sign-in form: "user" (name and password), "token" (administrator token) or
-/// "register" (a new account, when the server lets users register).
-let loginMode = "user";
-let registrationOpen = false;
+/// The server's `/info` (version, whether the dashboard is shown).
+let serverInfo = null;
 
-function blank() { return { q: null, top_group: null, group: null, subgroup: null, manufacturer: null, catalog: null, lifecycle: null, attributes: [], numbers: [], sort: "Number", descending: false, brief: true, offset: 0, limit: LIMIT }; }
-function load(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } }
-function save(k, v) { try { v === null ? localStorage.removeItem(k) : localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
-function loadTemporary(k) { try { return JSON.parse(sessionStorage.getItem(k)); } catch (e) { return null; } }
-/// Keeps the session for the next visit; one with the access token only for this tab.
-function keepSession() {
-  const temporary = !!session && session.kind === "token";
-  try { temporary ? sessionStorage.setItem("session", JSON.stringify(session)) : sessionStorage.removeItem("session"); } catch (e) {}
-  save("session", session && !temporary ? session : null);
-}
-function esc(s) { return String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
-function t(s) { return T.texts[s] || s; }
-function tf(s, ...args) { let i = 0; return t(s).replace(/\{(\d*)\}/g, (_, n) => esc(args[n === "" ? i++ : +n])); }
-function key(kind, k) { return T.keys[kind + ":" + k] || k; }
+function pageSize() { const n = load("limit"); return LIMITS.includes(n) ? n : LIMIT; }
+function blank() { return { q: null, top_group: null, group: null, subgroup: null, manufacturer: null, catalog: null, lifecycle: null, attributes: [], numbers: [], sort: "Number", descending: false, brief: true, offset: 0, limit: pageSize() }; }
 function shown(facet, value) {
   if (KEYED[facet]) return key(KEYED[facet], value);
   if (facet === "catalog") return catalogNames[value.toLowerCase()] || value;
   if (facet === "group" || facet === "subgroup") return t(value);
   return value;
 }
-function date(secs) { return secs ? new Date(secs * 1000).toLocaleDateString(T.lang) : ""; }
-function dateTime(secs) { return secs ? new Date(secs * 1000).toLocaleString(T.lang, { dateStyle: "short", timeStyle: "short" }) : ""; }
 function size(bytes) { return bytes < 1024 ? bytes + " B" : bytes < 1048576 ? Math.round(bytes / 1024) + " kB" : (bytes / 1048576).toLocaleString(T.lang, { maximumFractionDigits: 1 }) + " MB"; }
 /// The CSV export of the parts shown (the filters the server can read from the address).
 function exportUrl() {
@@ -53,6 +37,7 @@ function exportUrl() {
 /// Back, Forward and bookmarks work.
 function stateHash() {
   if (view === "catalogs") return "catalogs";
+  if (view === "dashboard") return "dashboard";
   if (view === "admin") return "admin/" + adminTab;
   const p = new URLSearchParams();
   if (view === "favorites") p.set("view", "favorites");
@@ -61,11 +46,13 @@ function stateHash() {
   if (query.sort !== "Number") p.set("sort", query.sort);
   if (query.descending) p.set("desc", "1");
   if (query.offset) p.set("offset", String(query.offset));
+  if (query.limit !== LIMIT) p.set("n", String(query.limit));
   return p.toString();
 }
 function readHash() {
   const h = location.hash.replace(/^#/, "");
   if (h === "catalogs") { view = "catalogs"; return; }
+  if (h === "dashboard") { view = "dashboard"; return; }
   if (h === "admin" || h.startsWith("admin/")) { view = "admin"; adminTab = h.slice(6) || "overview"; return; }
   const p = new URLSearchParams(h);
   view = p.get("view") === "favorites" ? "favorites" : "parts";
@@ -75,6 +62,8 @@ function readHash() {
   q.sort = ["Number", "Manufacturer", "Description", "Price", "Modified"].includes(p.get("sort")) ? p.get("sort") : "Number";
   q.descending = p.get("desc") === "1";
   q.offset = Math.max(0, parseInt(p.get("offset") || "0", 10) || 0);
+  const n = parseInt(p.get("n") || "", 10);
+  q.limit = LIMITS.includes(n) ? n : pageSize();
   query = q;
   const box = document.getElementById("q");
   if (box) box.value = query.q || "";
@@ -88,130 +77,40 @@ function money(p) { return p.price ? p.price.toLocaleString(T.lang, { minimumFra
 /// Only web addresses become links (no javascript: or data: addresses of the data).
 function webLink(url) { return /^https?:\/\/[^\s]+$/i.test(String(url ?? "").trim()); }
 function partLink(n) { return '<a href="#part=' + encodeURIComponent(n) + '">' + esc(n) + "</a>"; }
-
-async function api(path, options = {}) {
-  const headers = Object.assign({}, options.headers || {});
-  if (session && session.token) headers.Authorization = "Bearer " + session.token;
-  if (options.json !== undefined) { headers["Content-Type"] = "application/json"; options.body = JSON.stringify(options.json); }
-  const r = await fetch(API + path, Object.assign({}, options, { headers }));
-  // A session the server no longer knows: sign out and read anonymously.
-  if (r.status === 401 && session && !options.retried && path !== "/login") {
-    session = null; favorites = []; keepSession(); renderAccount();
-    return api(path, Object.assign({}, options, { retried: true }));
-  }
-  if (!r.ok) {
-    let msg = r.status + " " + r.statusText;
-    try { msg = (await r.json()).error || msg; } catch (e) {}
-    const err = new Error(msg); err.status = r.status; throw err;
-  }
-  return r.status === 204 ? null : options.raw ? r.blob() : r.json();
+/// Image files a catalog logo may be.
+const LOGO_TYPES = ".png,.jpg,.jpeg,.gif,.webp,.svg";
+/// Logo file ids of the catalogs by lower case id (the address changes with the logo).
+let catalogLogos = {};
+function rememberCatalog(c) {
+  const k = c.id.toLowerCase();
+  catalogNames[k] = c.name;
+  catalogManufacturers[k] = c.manufacturer;
+  if (c.logo) catalogLogos[k] = c.logo.id; else delete catalogLogos[k];
+}
+/// The logo of a catalog (`c`: a catalog or its id) as an image, or nothing.
+function logoImg(c, cls) {
+  const id = typeof c === "string" ? c : c.id;
+  const logo = typeof c === "string" ? catalogLogos[(id || "").toLowerCase()] : c.logo && c.logo.id;
+  if (!id || !logo) return "";
+  const name = catalogNames[id.toLowerCase()] || id;
+  return '<img class="' + cls + '" alt="' + esc(name) + '" title="' + esc(name) + '" src="' + API + "/catalogs/" + encodeURIComponent(id) + "/logo?v=" + encodeURIComponent(logo) + '">';
 }
 
-function translatePage() {
-  document.documentElement.lang = T.lang;
-  document.title = t("OpenECraft data portal");
-  document.querySelectorAll("[data-t]").forEach(e => e.textContent = t(e.dataset.t));
-  document.querySelectorAll("[data-tp]").forEach(e => e.placeholder = t(e.dataset.tp));
-  const sel = document.getElementById("lang");
-  sel.setAttribute("aria-label", t("Language"));
-  sel.innerHTML = T.languages.map(([c, n]) => '<option value="' + c + '"' + (c === T.lang ? " selected" : "") + ">" + esc(n) + "</option>").join("");
+/// The start page: all parts without filters.
+function home() {
+  const keep = { sort: query.sort, descending: query.descending };
+  query = Object.assign(blank(), keep);
+  view = "parts";
+  const box = document.getElementById("q");
+  if (box) box.value = "";
+  go();
 }
 
-async function setLanguage(code) {
-  T = await api("/texts?lang=" + encodeURIComponent(code));
-  save("lang", T.lang);
-  translatePage();
-  renderAccount();
-}
-
-function renderAccount() {
-  const box = document.getElementById("account");
-  document.getElementById("nav-admin").hidden = !adminAllowed();
-  if (session) {
-    box.innerHTML = '<span class="muted">' + tf("Signed in as {}", session.user.name) + " (" + esc(key("role", session.user.role)) + ')</span><button id="logout">' + esc(t("Sign out")) + "</button>";
-    document.getElementById("logout").onclick = logout;
-  } else {
-    if (loginMode === "register" && !registrationOpen) loginMode = "user";
-    const input = (id, type, auto, hint) => '<input id="' + id + '"' + (type ? ' type="' + type + '"' : "") + ' autocomplete="' + auto + '" placeholder="' + esc(hint) + '" aria-label="' + esc(hint) + '">';
-    const link = (mode, label, title) => '<button type="button" class="link" data-mode="' + mode + '"' + (title ? ' title="' + esc(title) + '"' : "") + ">" + esc(label) + "</button>";
-    let fields, submit, links;
-    if (loginMode === "token") {
-      fields = input("token", "password", "off", t("Access token"));
-      submit = t("Sign in");
-      links = link("user", t("User account"), t("Sign in with a user account"));
-    } else if (loginMode === "register") {
-      fields = input("user", "", "username", t("User name")) + input("pw", "password", "new-password", t("Password")) + input("pw2", "password", "new-password", t("Repeat password"));
-      submit = t("Register");
-      links = link("user", t("Cancel"));
-    } else {
-      fields = input("user", "", "username", t("User name")) + input("pw", "password", "current-password", t("Password"));
-      submit = t("Sign in");
-      links = (registrationOpen ? link("register", t("Register"), t("Create an account on this server")) : "") + link("token", t("Access token"), t("Sign in with the access token of the server"));
-    }
-    box.innerHTML = '<form id="login" style="display:flex;gap:6px;flex-wrap:wrap">' + fields + '<button class="' + (loginMode === "register" ? "primary" : "") + '">' + esc(submit) + "</button>" + links +
-      '</form><span id="login-error" class="error"></span>';
-    box.querySelectorAll("[data-mode]").forEach(b => b.onclick = () => { loginMode = b.dataset.mode; renderAccount(); document.querySelector("#login input").focus(); });
-    const fail = msg => { document.getElementById("login-error").textContent = msg; };
-    document.getElementById("login").onsubmit = async e => {
-      e.preventDefault();
-      const value = id => document.getElementById(id).value;
-      try {
-        if (loginMode === "token") {
-          const token = value("token").trim();
-          const info = await api("/info", { headers: { Authorization: "Bearer " + token } });
-          if (!info.user) throw Object.assign(new Error(t("Wrong access token")), { status: 0 });
-          session = { token, user: info.user, access: info.access, kind: "token" };
-        } else if (loginMode === "register") {
-          const name = value("user").trim();
-          if (!name || /\s/.test(name)) { fail(t("A user name must not be empty or contain blanks")); return; }
-          if (value("pw") !== value("pw2")) { fail(t("The passwords do not match")); return; }
-          if (value("pw").trim().length < 8) { fail(tf("The password needs at least {} characters", 8).replace(/&[^;]+;/g, "")); return; }
-          const created = await api("/register", { method: "POST", json: { name, password: value("pw") } });
-          loginMode = "user";
-          // Waiting for an administrator: no session yet.
-          if (!created.token) {
-            renderAccount();
-            const note = document.getElementById("login-error");
-            note.className = "ok";
-            note.textContent = t("Your account was created. An administrator has to approve it before you can sign in.");
-            return;
-          }
-          session = created;
-        } else {
-          session = await api("/login", { method: "POST", json: { name: value("user"), password: value("pw") } });
-        }
-        keepSession();
-        await loadFavorites();
-        renderAccount();
-        route();
-      } catch (err) {
-        const register = loginMode === "register";
-        if (register && err.status === 409) fail(t("This user name is taken"));
-        else if (register && err.status === 403) { registrationOpen = false; renderAccount(); fail(t("The registration is closed")); }
-        else if (register && err.status === 429) fail(t("Too many registrations from this address, try again later"));
-        else if (register && err.status === 400) fail(t("This user name cannot be used"));
-        else if (loginMode === "user" && err.status === 403) fail(t("Your account awaits the approval of an administrator"));
-        else fail(err.status === 401 ? (loginMode === "token" ? t("Wrong access token") : t("Wrong user name or password")) : err.status === 429 ? t("Too many failed sign-ins, try again later") : err.message);
-      }
-    };
-  }
-}
-
-/// The user and the rights of the session as the server sees them now (roles and
-/// grants may have changed since the sign-in).
-async function refreshSession() {
-  if (!session) return;
-  try {
-    const info = await api("/info");
-    if (info.user && session) { session.user = info.user; session.access = info.access; keepSession(); }
-  } catch (e) {}
-  renderAccount();
-}
-
-async function logout() {
-  try { await api("/logout", { method: "POST" }); } catch (e) {}
-  session = null; favorites = []; keepSession();
-  renderAccount();
+// Hooks of common.js
+async function signedIn() { await loadFavorites(); }
+function signedOut(left) {
+  favorites = [];
+  if (!left) return;
   if (view === "favorites" || view === "admin") view = "parts";
   go();
 }
@@ -230,10 +129,9 @@ async function toggleFavorite(number) {
 }
 
 function setNav() {
-  for (const v of ["parts", "favorites", "catalogs", "admin"]) document.getElementById("nav-" + v).classList.toggle("active", view === v);
+  for (const v of ["dashboard", "parts", "favorites", "catalogs", "admin"]) document.getElementById("nav-" + v).classList.toggle("active", view === v);
 }
 
-function content(html) { document.getElementById("content").innerHTML = html; }
 
 async function search() {
   setNav();
@@ -298,7 +196,9 @@ function renderResults(r) {
   let html = '<div class="toolbar"><strong>' + tf("{} parts", r.total) + '</strong><span style="display:flex;gap:10px;flex-wrap:wrap"><label>' + esc(t("Sort by")) + ' <select id="sort">' +
     sorts.map(s => '<option value="' + s + '"' + (query.sort === s ? " selected" : "") + ">" + esc(key("sort", s)) + "</option>").join("") +
     '</select></label><label><input type="checkbox" id="desc"' + (query.descending ? " checked" : "") + "> " + esc(t("Descending")) + "</label>" +
-    (view === "favorites" || query.attributes.length ? "" : '<a href="' + esc(exportUrl()) + '">' + esc(t("Export (CSV)")) + "</a>") + "</span></div>";
+    "<label>" + esc(t("Per page")) + ' <select id="limit">' + LIMITS.map(n => '<option value="' + n + '"' + (query.limit === n ? " selected" : "") + ">" + n + "</option>").join("") + "</select></label>" +
+    (view === "favorites" || query.attributes.length ? "" : '<a href="' + esc(exportUrl()) + '">' + esc(t("Export (CSV)")) + "</a>") +
+    (mayCreateParts() ? '<button class="primary" id="new-part">' + esc(t("New part")) + "</button>" : "") + "</span></div>";
   if (!r.parts.length) html += '<div class="status">' + esc(t("No parts found")) + "</div>";
   else {
     html += '<div class="table-wrap"><table><thead><tr><th></th><th>' + esc(t("Part number")) + "</th><th>" + esc(t("Description")) + '</th><th class="hide-narrow">' + esc(t("Manufacturer")) + '</th><th class="hide-narrow">' + esc(t("Product group")) + '</th><th class="num">' + esc(t("Price")) + "</th><th>" + esc(t("Lifecycle")) + "</th></tr></thead><tbody>";
@@ -309,16 +209,19 @@ function renderResults(r) {
         '</td><td class="hide-narrow">' + esc(p.manufacturer) + '</td><td class="hide-narrow">' + esc(t(p.group)) + '</td><td class="num">' + money(p) + '</td><td><span class="badge ' + life + '">' + esc(key("lifecycle", life)) + "</span></td></tr>";
     }
     html += "</tbody></table></div>";
-    const pages = Math.max(1, Math.ceil(r.total / LIMIT));
-    const page = Math.floor(r.offset / LIMIT) + 1;
+    const pages = Math.max(1, Math.ceil(r.total / query.limit));
+    const page = Math.floor(r.offset / query.limit) + 1;
     html += '<div class="pager"><button id="prev"' + (page <= 1 ? " disabled" : "") + ">" + esc(t("Previous")) + "</button><span>" + tf("Page {} of {}", page, pages) + '</span><button id="next"' + (page >= pages ? " disabled" : "") + ">" + esc(t("Next")) + "</button></div>";
   }
   content(html);
   const el = id => document.getElementById(id);
   el("sort").onchange = e => { query.sort = e.target.value; query.offset = 0; go(); };
   el("desc").onchange = e => { query.descending = e.target.checked; go(); };
-  if (el("prev")) el("prev").onclick = () => { query.offset = Math.max(0, query.offset - LIMIT); go(); };
-  if (el("next")) el("next").onclick = () => { query.offset += LIMIT; go(); };
+  // The page that shows the first part of the current one.
+  el("limit").onchange = e => { const n = +e.target.value; save("limit", n); query.offset = Math.floor(query.offset / n) * n; query.limit = n; go(); };
+  if (el("new-part")) el("new-part").onclick = () => partForm(null);
+  if (el("prev")) el("prev").onclick = () => { query.offset = Math.max(0, query.offset - query.limit); go(); };
+  if (el("next")) el("next").onclick = () => { query.offset += query.limit; go(); };
   document.querySelectorAll("tbody tr").forEach(tr => tr.onclick = async e => {
     if (e.target.classList.contains("star") && session) { await toggleFavorite(tr.dataset.n); search(); return; }
     location.hash = "part=" + encodeURIComponent(tr.dataset.n);
@@ -355,9 +258,12 @@ async function showPart(number) {
   const md = p.mounting_data || {};
   const cutout = c => !c ? "" : c.round ? "Ø" + c.round.d + " mm" : c.rect ? c.rect.w + " x " + c.rect.h + " mm" : "";
   const files = p.attachments || [];
-  let html = '<div class="detail"><div class="head"><div><a href="#" id="back">← ' + esc(t("Back to the results")) + "</a><h2>" + esc(p.number) + "</h2><div>" + esc(p.description) + " " +
-    '<span class="badge ' + life + '">' + esc(key("lifecycle", life)) + "</span>" + (p.successor ? " " + tf("Replaced by {}", "\u0001") .replace("\u0001", partLink(p.successor)) : "") + "</div></div>";
-  html += session ? '<div><button id="fav">' + (fav ? "★ " + esc(t("Remove from favorites")) : "☆ " + esc(t("Add to favorites"))) + "</button></div>" : "";
+  let html = '<div class="detail"><div class="head"><div class="with-logo">' + logoImg(p.catalog || "", "logo-medium") + '<div><a href="#" id="back">← ' + esc(t("Back to the results")) + "</a><h2>" + esc(p.number) + "</h2><div>" + esc(p.description) + " " +
+    '<span class="badge ' + life + '">' + esc(key("lifecycle", life)) + "</span>" + (p.successor ? " " + tf("Replaced by {}", "\u0001") .replace("\u0001", partLink(p.successor)) : "") + "</div></div></div>";
+  const actions = (session ? '<button id="fav">' + (fav ? "★ " + esc(t("Remove from favorites")) : "☆ " + esc(t("Add to favorites"))) + "</button>" : "") +
+    (mayOnPart("edit_parts", p) ? '<button id="edit-part">' + esc(t("Edit")) + "</button>" : "") +
+    (mayOnPart("delete_parts", p) ? '<button class="danger" id="delete-part">' + esc(t("Delete")) + "</button>" : "");
+  html += actions ? '<div class="buttons" style="margin-top:0">' + actions + '<span id="part-msg"></span></div>' : "";
   html += '</div><div class="grid">';
   html += box(t("General"), rows([
     ["Type number", esc(p.type_number)], ["Order number", esc(p.order_number)], ["Manufacturer", esc(p.manufacturer)], ["Supplier", esc(p.supplier)],
@@ -401,6 +307,14 @@ async function showPart(number) {
   document.getElementById("back").onclick = e => { e.preventDefault(); history_back(); };
   const fb = document.getElementById("fav");
   if (fb) fb.onclick = async () => { await toggleFavorite(p.number); showPart(p.number); };
+  const eb = document.getElementById("edit-part");
+  if (eb) eb.onclick = () => partForm(p);
+  const db = document.getElementById("delete-part");
+  if (db) db.onclick = async () => {
+    if (!confirm(tp("Delete part {}?", p.number))) return;
+    try { await api("/parts/" + encodeURIComponent(p.number), { method: "DELETE" }); footer(); history_back(); }
+    catch (e) { message("part-msg", e.message); }
+  };
   const canvas = document.getElementById("mesh");
   if (canvas) meshView(canvas, p.model_3d);
 }
@@ -546,7 +460,8 @@ async function showCatalogs() {
   let list = [];
   try { list = await api("/catalogs"); } catch (e) { content('<div class="status error">' + esc(e.message) + "</div>"); return; }
   if (!list.length) { content('<div class="status">–</div>'); return; }
-  content('<div class="cards">' + list.map((c, i) => '<div class="box"><h3>' + esc(c.manufacturer) + "</h3><strong>" + esc(c.name) + "</strong>" +
+  list.forEach(rememberCatalog);
+  content('<div class="cards">' + list.map((c, i) => '<div class="box">' + (c.logo ? '<div class="card-logo">' + logoImg(c, "logo-large") + "</div>" : "") + "<h3>" + esc(c.manufacturer) + "</h3><strong>" + esc(c.name) + "</strong>" +
     rows([["Version", esc(c.version)], ["Parts", String(c.parts)], ["Last change", esc(date(c.modified))]]) + (c.description ? '<p class="muted">' + esc(c.description) + "</p>" : "") +
     '<button data-c="' + i + '">' + esc(t("Show parts")) + "</button></div>").join("") + "</div>");
   document.querySelectorAll("[data-c]").forEach(b => b.onclick = () => {
@@ -559,12 +474,15 @@ function route() {
   const m = location.hash.match(/^#part=(.+)$/);
   if (m) { showPart(decodeURIComponent(m[1])); return; }
   readHash();
-  if (view === "catalogs") showCatalogs(); else if (view === "admin") showAdmin(); else search();
+  if (view === "dashboard" && !(serverInfo && serverInfo.dashboard)) view = "parts";
+  if (view === "catalogs") showCatalogs(); else if (view === "admin") showAdmin(); else if (view === "dashboard") showDashboard(); else search();
 }
 
 async function footer() {
   try {
     const info = await api("/info");
+    serverInfo = info;
+    document.getElementById("nav-dashboard").hidden = !info.dashboard;
     if (registrationOpen !== !!info.registration) {
       registrationOpen = !!info.registration;
       if (!session) renderAccount();
@@ -574,22 +492,23 @@ async function footer() {
 }
 
 async function start() {
-  // The language of the address (?lang=de) wins over the one chosen last.
-  const asked = new URLSearchParams(location.search).get("lang");
-  const stored = load("lang");
-  try { await setLanguage(asked || stored || navigator.language || "en"); } catch (e) {}
-  try { (await api("/catalogs")).forEach(c => { catalogNames[c.id.toLowerCase()] = c.name; catalogManufacturers[c.id.toLowerCase()] = c.manufacturer; }); } catch (e) {}
+  try { await setLanguage(startLanguage()); } catch (e) {}
+  try { (await api("/catalogs")).forEach(rememberCatalog); } catch (e) {}
   await refreshSession();
   await loadFavorites();
+  try { serverInfo = await api("/info"); } catch (e) {}
+  document.getElementById("nav-dashboard").hidden = !(serverInfo && serverInfo.dashboard);
   renderAccount();
   document.getElementById("lang").onchange = async e => { await setLanguage(e.target.value); route(); footer(); };
   document.getElementById("search-form").onsubmit = e => {
     e.preventDefault();
     query.q = document.getElementById("q").value.trim() || null;
     query.offset = 0;
-    if (view === "catalogs" || view === "admin") view = "parts";
+    if (view === "catalogs" || view === "admin" || view === "dashboard") view = "parts";
     go();
   };
+  document.getElementById("home").onclick = e => { e.preventDefault(); home(); };
+  document.getElementById("nav-dashboard").onclick = () => { view = "dashboard"; go(); };
   document.getElementById("nav-parts").onclick = () => { view = "parts"; query.numbers = []; query.offset = 0; go(); };
   document.getElementById("nav-favorites").onclick = async () => { view = "favorites"; query.offset = 0; await loadFavorites(); go(); };
   document.getElementById("nav-catalogs").onclick = () => { view = "catalogs"; go(); };

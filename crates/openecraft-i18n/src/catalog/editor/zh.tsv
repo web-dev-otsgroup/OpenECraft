@@ -1,4 +1,4 @@
-# English<TAB>简体中文 – the editor (openecraft/) (texts without a line are shown in English). Sorted by the English text: cargo run -p openecraft-i18n --example tidy
+# English<TAB>简体中文 – the editor (openecraft/) and its shell, session and views (openecraft-shell, -session, -canvas) (texts without a line are shown in English). Sorted by the English text: cargo run -p openecraft-i18n --example tidy
    |  Potential {}	   |  电位 {}
   (built-in)	  （内置）
 (choose a part)	（选择部件）
@@ -8,7 +8,6 @@
 (empty)	（空）
 (included)	（已包含）
 (no cable highlighted)	（未突出显示电缆）
-(no structure)	（无结构）
 (none)	（无）
 (project default)	（项目默认值）
 (repairable)	（可修复）
@@ -42,13 +41,13 @@
 3D macro	3D 宏
 3D macro {} inserted	已插入 3D 宏 {}
 3D macro {} saved	已保存 3D 宏 {}
-3D view	3D 视图
 =A1+CAB1	=A1+CAB1
 ? = not in the schematic yet	? = 尚未在原理图中
 A baseline stores the whole project (pages, devices, parts, settings). Releasing a revision stores one.	基线存储整个项目（页、设备、部件、设置）。发布修订时会存储一个基线。
 A cable of the bus type for every connection without cable	为每个没有电缆的连接创建一根总线类型的电缆
 A cutout of the same size at the same place in the neighbour's side wall: together they are a cable passage	在相邻机柜侧板的相同位置开一个相同大小的孔：两者共同构成电缆过孔
 A file of the same name in the folder gets a new version (checked out and in), otherwise the file is added	文件夹中的同名文件将获得新版本（签出后签入），否则添加该文件
+A folder with one small file per page, device and part instead of one project file, for version control such as git	一个文件夹，每个页面、设备和部件各有一个小文件，而不是单个项目文件，用于 git 等版本控制
 A large text across every page, e.g. DRAFT while a revision is being prepared; texts take placeholders, empty: no stamp.	每页上的大号文字，例如准备修订时的“草稿”；文字可含占位符，空 = 无水印。
 A level on top of the highest one	在最高楼层之上添加一层
 A local file opens locally, a server project is opened on the project server again	本地文件在本地打开，服务器项目在项目服务器上重新打开
@@ -65,6 +64,8 @@ A reference point at the origin of the plant	位于设施原点的参考点
 A report block generates the pages of a report, e.g. one terminal diagram per strip, and updates them.	报表块生成报表的页（例如每个端子排一个端子图）并更新这些页。
 A schematic page 3.1, 3.2, … after the current page, kept as sub-page when renumbering	当前页之后的原理图页 3.1、3.2 …，重新编号时保持为子页
 A schematic page per planned device with a page macro that is not in the schematic yet (selected segment, otherwise all)	为每个具有页宏且尚未在原理图中的已规划设备生成一个原理图页（所选规划段，否则全部）
+A split project (.oecp) is a folder with one small file per page, device, part and embedded file, for version control such as git: File › Save as split project.	拆分项目（.oecp）是一个文件夹，每个页面、设备、部件和嵌入文件各有一个小文件，用于 git 等版本控制：文件 › 另存为拆分项目。
+A split project is a folder of files: the browser cannot open it. Convert it to a project file (.oec) or an archive (.oecz) first.	拆分项目是一个包含多个文件的文件夹：浏览器无法打开。请先将其转换为项目文件（.oec）或归档（.oecz）。
 A template of this name is replaced.	将替换同名模板。
 A template sets the page type, plot frame, title block, structure and description of a new page and places its content.	模板设置新页的页类型、图框、标题栏、结构和描述，并放置其内容。
 A way through free air costs this many times the way in a duct or routing path	穿过自由空间的路径成本是线槽或布线路径中的这么多倍
@@ -77,7 +78,6 @@ Accept as checked	接受为已检查
 Accepted messages ({})	已接受的消息 ({})
 Active	激活
 Actuators on the door	柜门上的操作元件
-Add	添加
 Add a command	添加命令
 Add a target language to translate the project texts.	添加目标语言以翻译项目文本。
 Add filter	添加筛选
@@ -110,6 +110,9 @@ Air at devices at most	设备处空气温度最高
 Air temperature	空气温度
 Air temperature at the devices	设备处的空气温度
 Air temperature {} … {} °C	空气温度 {} … {} °C
+Air-termination conductors on the ridges and hips (a mesh on flat roofs), down conductors along the outer walls with test joints, ending on the earth electrodes	屋脊和斜脊上的接闪导体（平屋顶上为网格），沿外墙带测试接头的引下线，终止于接地极
+Air-termination rod	接闪杆
+Air-termination rod placed on building {}; click for the next one · Esc: stop	接闪杆已放置在建筑物 {} 上；单击放置下一个 · Esc：结束
 Align	对齐
 Aligned	对齐
 Alignment	对齐
@@ -126,6 +129,7 @@ All pages	所有页
 All report pages	所有报表页
 All user symbols as library file	所有用户符号作为库文件
 All wires of this potential are highlighted.	此电位的所有导线均已突出显示。
+Also copy revisions, baselines and review records	同时复制修订、基线和审阅记录
 Also the groups that do not fit the function definition	包括不符合功能定义的组
 Altitude	海拔
 Always	始终
@@ -154,6 +158,7 @@ Arc	圆弧
 Archive and version	归档和版本
 Archive project…	归档项目…
 Arms	分支
+Array	阵列
 As defined by the check	按检查的定义
 As the rules say ({})	按规则（{}）
 Aspects of the pages	页的方面
@@ -182,8 +187,7 @@ Automatic ({})	自动 ({})
 Automatic accessories	自动附件
 Automatic configuration	自动组态
 Automatic placement	自动放置
-Automation	自动化
-Aux	辅助
+Automatic: {}	自动：{}
 Avoid:	避开：
 Back	返回
 Back to the project (Esc)	返回项目 (Esc)
@@ -218,6 +222,9 @@ Boundary	边界
 Breaking capacity against the short-circuit current at each protective device of the mains, disconnection at the lowest fault current at the end of its circuit, short-circuit withstand of the cables and selectivity with the device upstream.	电网中每个保护设备的分断能力与短路电流的对比、其电路末端最小故障电流时的切断、电缆的短路耐受能力以及与上级设备的选择性。
 Bridge: four wires; the connection comes in at one side and goes to the three others, the opposite side first	桥接：四条连接线；连接从一侧进入并通往另外三侧，先到对侧
 Building {} added with a level at ground level	已添加建筑物 {}，含一个地面层
+Building {} at x {} m, z {} m	建筑物 {} 位于 x {} m，z {} m
+Building {} at x {} m, z {} m, turned {}°	建筑物 {} 位于 x {} m，z {} m，旋转 {}°
+Building {} at x {} m, z {} m, turned {}°: it stands outside the plot boundary	建筑物 {} 位于 x {} m，z {} m，旋转 {}°：它位于场地边界之外
 Built-in frames cannot be changed; copy one to adapt it.	内置图框无法更改；请复制一个进行调整。
 Built-in scheme: copy it to change it.	内置方案：复制后才能更改。
 Built-in title blocks are read only – use “Copy as new” to make your own.	内置标题栏为只读 – 使用“复制为新项”创建自己的标题栏。
@@ -253,12 +260,16 @@ Change request	变更请求
 Change requests	变更请求
 Change requests (CSV, JSON)	变更请求（CSV、JSON）
 Changed against the frozen routes:	相对于冻结布线的更改：
-Changed by another user in the meantime, your change was replaced: {}	在此期间已被其他用户更改，你的更改已被替换：{}
+Changed by another user before you got the lock	在你获得锁定之前已被其他用户更改
+Changed by another user in the meantime: {}. Your version is kept in the Project server pane.	在此期间已被其他用户更改：{}。你的版本保留在项目服务器窗格中。
 Changed cells of a CSV or Excel file exported here (rows by their key)	在此处导出的 CSV 或 Excel 文件中已更改的单元格（按键匹配行）
 Changed message levels ({})	已更改的消息级别 ({})
 Changed since mounted: was at X {} mm, Y {} mm with part {}	自安装后已更改：原位于 X {} mm，Y {} mm，部件 {}
 Changed since wired: was {} · {} · {}	接线后已更改：原为 {} · {} · {}
 Changes	更改
+Changes not saved on the project server yet: finished changes are saved automatically within {} s	更改尚未保存到项目服务器：已完成的更改会在 {} 秒内自动保存
+Changes not saved on the project server: save them when the server answers again.	更改未保存到项目服务器：请在服务器恢复响应后保存。
+Changes not saved on the project server: they are saved as soon as the server answers again.	更改未保存到项目服务器：服务器恢复响应后将立即保存。
 Changes since revision {}	自修订 {} 以来的更改
 Changes the page order; the name stays	更改页顺序；名称不变
 Changes the tag of all functions of this device	更改此设备所有功能的标识符
@@ -290,10 +301,14 @@ Choose another project	选择其他项目
 Choose file…	选择文件…
 Choose image…	选择图像…
 Choose pages	选择页
+Choose the building.	请选择建筑物。
 Chooses the pages whose structure starts with this	选择结构以此开头的页
 Circle	圆
 Circuits of a generic manifold	通用分配器的回路数
+Class of the lightning protection system: the distance of its down conductors, the mesh of flat roofs and the protection angle	防雷系统的类别：引下线间距、平屋顶网格和保护角
+Class {}	类别 {}
 Clear	清除
+Clear the search	清除搜索
 Clearance	间距
 Click	单击
 Click a text: open its link	单击文本：打开其链接
@@ -302,6 +317,7 @@ Click centre, then a point on the circle	单击圆心，然后单击圆上的一
 Click in the panel layout: a single item of an assembly	在安装板布局中单击：组件中的单个项
 Click into the page to place the image	在页中单击以放置图像
 Click into the page to place {}	在页中单击以放置 {}
+Click on a roof of building {}	请单击建筑物 {} 的屋顶
 Click on a wall	请点击墙
 Click on a wire to place the connection definition point	单击导线以放置连接定义点
 Click on the 4 mm grid	在 4 mm 栅格上单击
@@ -326,17 +342,23 @@ Click two corners	单击两个角点
 Click two corners of the structure box, then set its identifiers in the properties · Esc or right click to finish	单击结构框的两个角，然后在属性中设置其标识符 · Esc 或右键结束
 Click two nodes to connect them	单击两个节点以连接它们
 Click two points to measure from one to the other · Esc: stop	单击两点以从一点测量到另一点 · Esc：停止
+Click where an air-termination rod goes on a roof · Esc: stop	单击接闪杆在屋顶上的位置 · Esc：结束
+Click where an earth rod goes, at or round a building · Esc: stop	单击垂直接地极在建筑物旁或周围的位置 · Esc：结束
 Click where four wires meet: the bridge leads the connection from one side to the three others, the opposite side first · {} turns it · Esc or right click to finish	在四条连接线相交处单击：桥接将连接从一侧引向另外三侧，先到对侧 · {} 可旋转 · Esc 或右键结束
 Click where it is in the site plan	在总平面图中单击其位置
+Click where the air-termination rods go on the roofs in the site plan	在总平面图中单击接闪杆在屋顶上的位置
+Click where the earth rods go in the site plan	在总平面图中单击垂直接地极的位置
+Click where the middle of a freestanding PV array goes in the site plan	在总平面图中单击地面光伏阵列中心所在的位置
+Click where the middle of a freestanding PV array goes · Esc: stop	单击地面光伏阵列中心所在的位置 · Esc：结束
 Click where the reference point is	单击参考点所在位置
 Click where three wires meet: the T-junction names the device the wires start from and the order of their targets · {} turns it where no wires meet yet · Esc or right click to finish	在三条连接线相交处单击：T型节点指定导线出发的设备以及目标的顺序 · 在尚无连接线相交处 {} 可旋转 · Esc 或右键结束
 Click where two wires cross: the crossing connects them and leads each end of its line straight on first, then across · {} turns it · Esc or right click to finish	在两条连接线交叉处单击：交叉连接二者，并将其直线的每一端先直通再横向引出 · {} 可旋转 · Esc 或右键结束
 Click where two wires meet at a right angle, or where connection points face each other across the corner: with Auto-connect on, wires are drawn to it · {} turns it · Esc or right click to finish	在两条连接线直角相交处或连接点隔着拐角相对处单击：开启自动连接时会向它绘制连接线 · {} 可旋转 · Esc 或右键结束
 Click while moving	移动时单击
 Click, or drag it into the page	单击，或将其拖到页中
+Clicked at x {} mm, z {} mm in the floor plan of the building: a new roof window or PV array goes there.	在建筑物平面图中单击于 x {} mm，z {} mm：新的屋顶窗或光伏阵列将放在该处。
 Climate (IEC 60890)	温控 (IEC 60890)
 Clipboard	剪贴板
-Close	关闭
 Close door	关闭柜门
 Close page tab	关闭页选项卡
 Close shared project	关闭共享项目
@@ -367,13 +389,16 @@ Comments ({})	批注（{}）
 Comments a reviewer made in a PDF export of the project (Acrobat or another PDF viewer)	审阅者在项目 PDF 导出中添加的批注（Acrobat 或其他 PDF 查看器）
 Comments and markup	批注和标记
 Company library	公司库
+Compare	比较
 Compare and baselines	比较和基线
 Compare with	比较对象
 Compare with a baseline, a revision or another project file and take differences over	与基线、修订或其他项目文件进行比较，并采用差异
 Complete tag: {}\nAspects missing here are taken from the page (=function +location) or the structure box the symbol lies in.	完整标识符：{}\n此处缺少的结构部分取自页 (=功能 +位置) 或符号所在的结构框。
+Concrete base	混凝土底座
 Condition	条件
 Condition (OPTION=value & …)	条件（OPTION=值 & …）
 Conductive frame	导电框架
+Conductor	导体
 Conflicts	冲突
 Connected devices	已连接的设备
 Connected to:	连接到：
@@ -406,6 +431,9 @@ Copy	复制
 Copy / cut / paste (devices get new tags)	复制 / 剪切 / 粘贴（设备获得新标识符）
 Copy as new	复制为新项
 Copy built-in…	复制内置项…
+Copy of	复制自
+Copy project	复制项目
+Copy project…	复制项目…
 Core designations separated by blanks	以空格分隔的芯线标识
 Core labels placed by hand	手动放置的芯线标注
 Cores 1, 2, 3 … for the wires crossed, plus GNYE	穿过的导线使用芯线 1、2、3 …，另加 GNYE
@@ -417,14 +445,21 @@ Covers what is behind the text	遮盖文本后面的内容
 Create	创建
 Create an enclosure in the panel layout first.	请先在安装板布局中创建一个机柜。
 Create an enclosure or a room (Layout space › New enclosure, New room) to start the panel layout.	创建机柜或房间（布局空间 › 新建机柜、新建房间）以开始布局。
+Create and open	创建并打开
 Create baseline	创建基线
 Create bus cables	创建总线电缆
 Create draft	创建草稿
 Create revision	创建修订
+Created on the server	在服务器上创建
+Created {}	创建于 {}
+Created {} as a copy of {} and opened it	已将 {} 创建为 {} 的副本并打开
+Creates a new project on the server from the saved state of this one; you set its name and properties first	根据此项目已保存的状态在服务器上创建新项目；您先设置其名称和属性
+Creating {} as a copy of {}…	正在将 {} 创建为 {} 的副本…
 Cross references…	交叉引用…
 Crossed wires	穿过的导线
 Ctrl + click on the text opens it as well	按 Ctrl + 单击文本也可将其打开
 Ctrl+A	Ctrl+A
+Current at maximum power	最大功率点电流
 Current-carrying capacity: {} × IEC 60204-1, table 6	载流量：{} × IEC 60204-1，表 6
 Customer rule sets	客户规则集
 Customer, plant or standard	客户、工厂或标准
@@ -437,6 +472,7 @@ Cut length step tubes	管子下料步长
 Cut length step wires	导线下料步长
 Cutout {} × {} mm	开孔 {} × {} mm
 Cutting allowance per end	每端下料余量
+DC leads	直流电缆
 DRAFT	草稿
 DRAFT, FOR APPROVAL and APPROVED in the current language; nothing once released	当前语言的“草稿”“待批准”“已批准”；发布后不显示
 DWG import failed: {}	DWG 导入失败：{}
@@ -460,9 +496,11 @@ Define all used	定义所有已使用的
 Defined potentials	已定义的电位
 Del	Del
 Delete PV array	删除光伏阵列
+Delete air-termination rod	删除接闪杆
 Delete cable (its wires are removed from it)	删除电缆（其导线将从中移除）
 Delete comment	删除批注
 Delete connection point	删除连接点
+Delete earth electrode	删除接地极
 Delete element	删除元素
 Delete enclosure	删除机柜
 Delete enclosure {} with everything placed in it?	删除机柜 {} 及其中放置的所有内容？
@@ -486,10 +524,14 @@ Delete the property and all its values	删除该属性及其所有值
 Delete this workspace	删除此工作区
 Delete variant	删除变体
 Delete zone	删除安装区
+Deletes this copy of your changes for good	永久删除你的更改的此副本
 Depth / mounted at	深度 / 安装于
+Depth below the ground	地面以下深度
 Depth from / to	深度从 / 到
 Depth in the floor	地面内深度
+Depth of its top below the ground	顶端在地面以下的深度
 Derive project definition	派生项目定义
+Describe a problem with a screenshot and the technical details and open it as a new issue on GitHub	用屏幕截图和技术信息描述问题，并在 GitHub 上作为新问题打开
 Descriptions	描述
 Deselect	取消选择
 Designations separated by blanks; empty: those of the symbol	以空格分隔的代号；留空：使用符号的代号
@@ -522,6 +564,8 @@ Devices, connections and terminals: filter, fill, find and replace, CSV	设备�
 Dew point	露点
 Diameter	直径
 Diameter / bends	直径 / 弯曲
+Diameter of a round wire; 0: a flat strip 30 x 3.5 mm	圆导线的直径；0：扁钢 30 x 3.5 mm
+Diameter of the rod	接闪杆直径
 Dictionary for translators: one column per language	供翻译人员使用的词典：每种语言一列
 Digits	位数
 Dimension	尺寸标注
@@ -548,7 +592,6 @@ Divider	隔板
 Do the gesture…	请做出动作…
 Dock	停靠
 Document {} embedded ({})	已嵌入文档 {}（{}）
-Documents	文档
 Done ones too	包括已完成的
 Done.	完成。
 Door (front)	柜门（正面）
@@ -557,9 +600,11 @@ Door NC data (DWG)	柜门 NC 数据 (DWG)
 Door NC data (DXF)	柜门 NC 数据 (DXF)
 Door clearance	柜门间隙
 Door cutouts (CSV)	柜门开孔 (CSV)
+Door hinge	柜门铰链
 Door: {} devices, {} cutouts	柜门：{} 个设备，{} 个开孔
 Dot	点
 Double-click	双击
+Down conductors	引下线
 Download into database	下载到数据库
 Download project	下载项目
 Downloaded {} (version {})	已下载 {}（版本 {}）
@@ -570,6 +615,7 @@ Draft	草稿
 Draft of revision {} created	已创建修订 {} 的草稿
 Draft of revision {} discarded	已放弃修订 {} 的草稿
 Drag	拖动
+Drag a building to move it · R: turn the building under the pointer by 90° · Esc: stop	拖动建筑物以移动 · R：将指针下的建筑物旋转 90° · Esc：结束
 Drag a connection point designation of the selected symbol to place it.	拖动所选符号的连接点标识以放置它。
 Drag an end of a selected wire to move only that end. Alt-drag reverses Keep connections.	拖动所选导线的一端可仅移动该端。按住 Alt 拖动会反转保持连接。
 Drag an entry into the page, or click it and then click into the page.	将条目拖到页中，或单击条目后在页中单击。
@@ -610,12 +656,21 @@ Duct fill limit	线槽填充限值
 Duplicate	复制
 Each example builds on the one before and shows more of the features.	每个示例都以前一个为起点，并展示更多功能。
 Each point-to-point connection can belong to a harness	每个点对点连接都可以属于一个线束
+Earth electrodes	接地极
+Earth electrodes of a building (foundation and ring earth electrodes, earth rods clicked into the site plan) and its lightning protection with the air-termination rods clicked onto its roofs	建筑物的接地极（基础接地极和环形接地极，在总平面图中单击放置的垂直接地极）及其防雷，包括在屋顶上单击放置的接闪杆
+Earth rod placed at building {}; click for the next one · Esc: stop	垂直接地极已放置在建筑物 {} 处；单击放置下一个 · Esc：结束
+Earthing and lightning protection	接地和防雷
+Earthing busbar	接地母线
+Earthing conductor	接地导体
+Earthing points	接地点
 Earthing system	接地系统
 Easting, northing	东坐标、北坐标
 Eaves	檐口
 Edge length of the routing grid: smaller is finer and slower	布线栅格的边长：越小越精细，但越慢
+Edge the door is hinged at, seen from the front: the 3D view opens the door there and the door wires run over it	从正面看柜门铰链所在的边：3D 视图从此边打开柜门，柜门导线经过此边
 Edit in table	在表格中编辑
 Edit in table…	在表格中编辑…
+Edit mode: drag the buildings to their places in the site plan and turn them; a click on a room no longer opens it	编辑模式：在总平面图中将建筑物拖到其位置并旋转；单击房间不再打开它
 Editable copy of this plot frame	此图框的可编辑副本
 Editable copy of this title block	此标题栏的可编辑副本
 Effective surface	有效表面积
@@ -691,7 +746,6 @@ Fill	填充
 Fill level	填充率
 Filled	已填充
 Filter connections…	筛选连接…
-Filter devices…	筛选设备…
 Filter…	筛选…
 Find	查找
 Find a command	查找命令
@@ -703,13 +757,12 @@ Finds the Vault items of the project parts by item number or Part Number propert
 Find…	查找…
 Finish a wire, polyline, polygon or wall	完成导线、多段线、多边形或墙
 Finish or cancel the drawing, then back to selecting	完成或取消绘制，然后返回选择
+Finished changes of a project opened from the project server are saved to it by themselves; input under way is saved once it is finished. Locks are kept. Save (Ctrl+S) still saves at once.	从项目服务器打开的项目，其已完成的更改会自动保存到服务器；正在进行的输入在完成后保存。锁定保持不变。保存 (Ctrl+S) 仍会立即保存。
 First row	第一行
-Fit	适合窗口
 Fit page	适合页面
 Fits {}	适配 {}
 Fitted into the rectangle keeping its aspect ratio (PNG, JPEG)	按原比例缩放到矩形中（PNG、JPEG）
 Float	浮动
-Floor plan	平面图
 Floor plan with {} walls	有 {} 面墙的平面图
 Floor-standing part	落地式部件
 Fluid and process	流体和过程
@@ -731,6 +784,12 @@ Frame of all pages that do not choose one	所有未选择图框的页使用的�
 Free air	自由布线
 Free air factor	自由布线系数
 Free space in front of every device on the plate up to the door; parts add theirs (Service space)	安装板上每个设备前方至柜门的空闲空间；部件可添加各自的值 (Service space)
+Freestanding	地面安装
+Freestanding PV array {}	地面光伏阵列 {}
+Freestanding PV array {} placed; click for the next one · Esc: stop	已放置地面光伏阵列 {}；单击放置下一个 · Esc：结束
+Freestanding PV array {}: {} modules	地面光伏阵列 {}：{} 块组件
+Freestanding PV array {}: {} modules, {} kWp	地面光伏阵列 {}：{} 块组件，{} kWp
+Freestanding PV arrays	地面光伏阵列
 Freeze all routes	冻结所有布线
 Freeze route	冻结布线
 Frequency	频率
@@ -764,6 +823,7 @@ Generated page – edit via page properties	生成的页 – 通过页属性编�
 Generates the pages of all report blocks again	重新生成所有报表块的页
 Generates {} pages	生成 {} 页
 Generation failed: {}	生成失败：{}
+Generator junction box	光伏汇流箱
 Generic	通用
 German zones (DIN 18015-3)	德国安装区（DIN 18015-3）
 Getting started	入门
@@ -773,6 +833,8 @@ Go to page	转到页
 Graphic line	图形线
 Graphic rectangle	图形矩形
 Graphical form	图形表格
+Greatest distance of the conductor holders on the roof and on the walls	屋顶和墙上导体支架的最大间距
+Greatest distance of the posts along a table	立柱沿支架的最大间距
 Greatest distance of the roof hooks along a rail	沿导轨的屋面挂钩最大间距
 Grid	栅格
 Grid north	坐标北
@@ -781,7 +843,6 @@ Grid {} mm	栅格 {} mm
 Group as assembly	组合为组件
 Group column	分组列
 Group in the symbol list, e.g. your company	符号列表中的组，例如你的公司
-Group the pages by structure	按结构对页分组
 Groups shown	显示的组
 HEATER=yes	HEATER=yes
 Hardware configuration and PLC tags for TIA Portal and other PLC tools	用于 TIA Portal 和其他 PLC 工具的硬件组态和 PLC 变量
@@ -795,15 +856,22 @@ Height above sea level	海拔高度
 Height above the floor	离地高度
 Height above the mounting plate	安装板以上高度
 Height above the plate	板以上高度
+Height of the lower edge of the modules above the ground	组件下边缘距地面的高度
 Height of the plinth, 0 without plinth	底座高度，0 表示无底座
+Height of the rod above the covering	接闪杆高出屋面的高度
+Height of the test joints above the ground	测试接头距地面的高度
 Heights above floor (IEC 60204-1)	离地高度 (IEC 60204-1)
 Held while clicking, moving or scrolling. Ctrl is Cmd on macOS.	在单击、移动或滚动时按住。在 macOS 上 Ctrl 为 Cmd。
 Help	帮助
+Hide PV modules	隐藏光伏组件
 Hide the groups you do not need and put the commands you use most into own groups.	隐藏不需要的组，并将最常用的命令放入自定义组。
 Highest phase unbalance	最大相不平衡度
 Highest short-circuit current	最大短路电流
 Highest voltage (open circuit at the lowest temperature), mean and lowest voltage (at maximum power at the mean and the highest temperature), current at maximum power, peak power	最高电压（最低温度下的开路电压），平均和最低电压（平均和最高温度下的最大功率点电压），最大功率点电流，峰值功率
 Highest: the lowest voltage	最高：最低电压
+Holder distance	支架间距
+Holders on the roof	屋顶上的支架
+Holders on the walls	墙上的支架
 Hole to sheet edge	孔到板边距离
 Home	开始
 Hook distance	挂钩间距
@@ -818,6 +886,8 @@ Hose defaults and PCT loops of the pre-planning	软管默认值和预规划的 P
 Hose number	软管编号
 Hoses and pipes	软管和管道
 Hoses rated below it are errors; 0 = not checked	额定压力低于此值的软管视为错误；0 = 不检查
+How far inside the outer walls	在外墙以内的距离
+How far outside the outer walls	在外墙以外的距离
 How the leaf opens: hinged at its left or right edge (seen from inside the room), into or out of the room, or sliding along the wall	门扇的开启方式：铰链在左侧或右侧边缘（从房间内看），向房间内或向外开，或沿墙推拉
 How the wire is terminated at this end; by default as chosen for the connection point or its device, otherwise as the layout sets ferrules	导线在此端的端接方式；默认按连接点或其设备的选择，否则按布局的管型端子设置
 How wires jump over the wires they cross, how T-connections are marked and whether moved items route their connections anew	导线如何跳过所交叉的导线、T 形连接如何标记，以及移动的项目是否重新布线其连接
@@ -851,6 +921,7 @@ Import symbol library…	导入符号库…
 Import symbol table…	导入符号表…
 Imported	已导入
 Imported {} entries of the property library	已导入属性库的 {} 个条目
+Imported {} into the parts database	已将 {} 导入部件数据库
 Imported {} macros	已导入 {} 个宏
 Imported {} page templates	已导入 {} 个页模板
 Imported {} parts into the database	已将 {} 个部件导入数据库
@@ -893,11 +964,11 @@ Instead of user name and password	代替用户名和密码
 Instruments in the P&ID carry function letters and loop number in their label (TIC 101); their device tag links them with the schematic.	P&ID 中的仪表在其标签中带有功能字母和回路编号 (TIC 101)；其设备标识符将其与原理图关联。
 Insulation	绝缘
 Interruption points refer to	中断点引用
+Interval	间隔
 Introduction	简介
 Invalid value	无效值
 Invert the direction of panning by scrolling	反转滚动平移的方向
 Inverter or charge controller (devices with PV input data)	逆变器或充电控制器（带光伏输入数据的设备）
-Isometric	等轴测
 Items copied: {}	已复制的元素：{}
 Items copied: {} (devices left out: {}, a device is placed once)	已复制的元素：{}（省略的设备：{}，设备只放置一次）
 Items cut: {}	已剪切的元素：{}
@@ -917,6 +988,7 @@ Keep connections	保持连接
 Keep sub-pages (3.a, 3.1) with the page before	子页 (3.a, 3.1) 保持在前一页之下
 Keep the degree of protection	保持防护等级
 Keep this route when recalculating, as long as it is still possible	重新计算时保留此布线（只要仍然可行）
+Kept changes	保留的更改
 Key tips of the ribbon	功能区访问键
 Key: {}	键：{}
 Keyboard shortcuts	键盘快捷方式
@@ -930,6 +1002,8 @@ Labeling scheme	标记方案
 Landscape	横向
 Large dot	大圆点
 Larger texts and buttons for a touch screen at the workbench	为工作台触摸屏提供更大的文字和按钮
+Largest mesh	最大网格
+Last save confirmed by the project server: {}	项目服务器确认的上次保存：{}
 Latitude, longitude	纬度、经度
 Layer	图层
 Layer {}	图层 {}
@@ -943,6 +1017,7 @@ Layout space	布局空间
 Layout spaces	布局空间
 Leave out the ceilings of the rooms and the roofs in the 3D view	在三维视图中省略房间顶棚和屋顶
 Leave out the covers of all cable ducts in the 3D view: the wires in them are seen	在 3D 视图中省略所有线槽的盖板：可以看到其中的导线
+Leave out the modules of the PV arrays in the 3D view: their rails, roof hooks, mounting bases, earthing and cabling are seen	在 3D 视图中隐藏光伏阵列的组件：可看到导轨、屋顶挂钩、支架底座、接地和电缆
 Leave repeated values of the first column blank	第一列中重复的值留空
 Left button	左键
 Left edges	左边缘
@@ -950,6 +1025,7 @@ Legend plates (door devices)	铭牌（柜门设备）
 Length from the node to the device	节点到设备的长度
 Length inside an enclosure	机柜内长度
 Length of a shield pigtail where there is no shield clamp	没有屏蔽夹时屏蔽辫线的长度
+Length of the rod	接地极长度
 Length of wires that are not routed in the panel layout	未在安装板布局中布线的导线长度
 Length {} mm	长度 {} mm
 Letters, digits, space, - _ . (up to 64 characters)	字母、数字、空格、- _ .（最多 64 个字符）
@@ -958,6 +1034,8 @@ Level of this kind of message	此类消息的级别
 Level {} added to building {}; new rooms go onto it	已向建筑物 {1} 添加楼层 {0}；新房间将放在该层
 Level {} of building {}	建筑 {1} 的楼层 {0}
 Library	库
+Lightning protection	防雷
+Lightning protection of building {}	建筑物 {} 的防雷
 Like two fingers	与双指相同
 Limits	限值
 Limits in effect	生效的限值
@@ -976,28 +1054,29 @@ Load reserve	负载余量
 Load template…	加载模板…
 Loading changes…	正在加载更改…
 Loading the project access…	正在加载项目访问权限…
+Loading the properties of {}…	正在加载 {} 的属性…
 Loads	负载
 Local file	本地文件
 Local file: {}	本地文件：{}
 Local recovery copy of server project: {}	服务器项目的本地恢复副本：{}
+Local recovery copy with these changes written: {}	包含这些更改的本地恢复副本已写入：{}
 Lock all	全部锁定
 Lock all pages	锁定所有页
 Lock current page	锁定当前页
 Lock page	锁定页
 Lock project data	锁定项目数据
-Locked	已锁定
 Locked by other users	已被其他用户锁定
 Locked by {} on the project server – read only	已被 {} 在项目服务器上锁定 – 只读
 Locked by {} – read only	已被 {} 锁定 – 只读
 Locking…	正在锁定…
 Logic	逻辑
-Logo	标志
 Logo on the cover page	封面上的标志
 Longer values are drawn smaller (0 = no limit)	较长的值将以较小字号绘制（0 = 无限制）
 Look for updates when OpenECraft starts	OpenECraft 启动时检查更新
 Looking for updates…	正在检查更新…
 Looks for a new release of OpenECraft on GitHub and installs it in the background	在 GitHub 上查找 OpenECraft 的新版本并在后台安装
 Loop	回路
+Lower edge	下边缘
 Lowest fault current	最小故障电流
 Lowest: the highest open-circuit voltage	最低：最高开路电压
 Macro boxes	宏边框
@@ -1007,8 +1086,9 @@ Macro {} saved	已保存宏 {}
 Macros	宏
 Macros ({})	宏 ({})
 Macro…	宏…
-Main	主
+Main earthing busbar	总接地母线
 Make the selected elements of this project equal to the compared ones	使此项目中的所选元素与比较对象一致
+Maker	制造商
 Makes the current page content of the option	将当前页设为该选项的内容
 Manage plugins	管理插件
 Management	管理
@@ -1043,6 +1123,7 @@ Messages of this session	本次会话的消息
 Middle	中间
 Middle button	中键
 Middle of the PV array in the floor plan of the building	光伏阵列在建筑平面图中的中心
+Middle of the PV array in the plant	光伏阵列在设施中的中心
 Min. bend radius	最小弯曲半径
 Minimize the ribbon	最小化功能区
 Mirror	镜像
@@ -1051,7 +1132,9 @@ Mixed	混合
 Mode	模式
 Model of a part (2D / 3D)	部件的模型 (2D / 3D)
 Modifier keys	组合键
+Module area	组件面积
 Module part; its size comes from the part	组件部件；尺寸来自部件
+Modules on top of each other on a table	一个支架上上下叠放的组件
 Motors feed the short circuit	电机馈入短路
 Mounted on	安装在
 Mounting assistant: the panel items in mounting order with their place and part	安装助手：按安装顺序列出布局元件及其位置和部件
@@ -1063,6 +1146,7 @@ Mouse	鼠标
 Move	移动
 Move ahead in the 3D view (held)	在 3D 视图中前进（按住）
 Move back in the 3D view (held)	在 3D 视图中后退（按住）
+Move buildings	移动建筑物
 Move down	下移
 Move down in the 3D view (held)	在 3D 视图中向下移动（按住）
 Move faster with the keys of the 3D view	使用 3D 视图的按键更快移动
@@ -1108,7 +1192,6 @@ New document page…	新建文档页…
 New empty	新建空白
 New enclosure	新建机柜
 New graphics page	新建图形页
-New group	新建组
 New harness	新建线束
 New items go onto this layer	新元素放到此图层上
 New mounting layout page	新建安装布局页
@@ -1150,6 +1233,7 @@ No PLC cards in the project.	项目中没有 PLC 卡件。
 No PLC inputs / outputs placed.	未放置 PLC 输入 / 输出。
 No accessories: glands, connectors, shield clamps … go into the bill of materials and are checked against the cable.	无附件：密封接头、连接器、屏蔽夹 … 会计入物料清单，并根据电缆进行检查。
 No bus systems.	没有总线系统。
+No busbar	无母线
 No cable passage to {}: wires to it are not routed	没有到 {} 的电缆过孔：到该机柜的导线不布线
 No cables defined.	未定义电缆。
 No cables yet. Draw a cable definition across wires or add a cable.	尚无电缆。在导线上绘制电缆定义或添加电缆。
@@ -1161,18 +1245,22 @@ No device has mounting data yet: assign parts with dimensions to the devices (Pr
 No differences to {}.	与 {} 无差异。
 No document embedded	未嵌入文档
 No dot: plain T	无圆点：普通 T 形
+No earth electrode yet: a foundation earth electrode in the foundation slab, a ring earth electrode round the walls or earth rods.	尚无接地极：基础底板内的基础接地极、墙体周围的环形接地极或垂直接地极。
 No enclosure yet – create one with New enclosure, or a room for cabinets with New room.	还没有机柜 – 使用“新建机柜”创建，或使用“新建房间”创建放置机柜的房间。
 No field cables: place the enclosures and field devices at nodes of the route network.	没有现场电缆：请将机柜和现场设备放置在布线网络的节点上。
 No filter fans: an air/air heat exchanger or a cooling unit	不使用过滤风扇：使用空气/空气换热器或冷却装置
+No freestanding PV array yet: rows of tilted tables on rammed posts on the plot.	尚无地面光伏阵列：场地上打入式立柱上的倾斜支架排。
 No gesture	无动作
 No harnesses defined.	未定义线束。
 No inverter	无逆变器
 No jump: plain crossing, connections have dots	无跳线：普通交叉，连接处有圆点
+No local recovery copy of these changes has been written yet	尚未写入这些更改的本地恢复副本
 No longer reported	不再报告
 No macros yet. Select items in a schematic and save them as a macro.	尚无宏。在原理图中选择元素并将其另存为宏。
 No modules: plug in PLC cards of the schematic.	没有模块：请插入原理图中的 PLC 卡件。
 No numbers for	不编号
 No panel items: place the devices in the panel layout.	没有布局元件：请在安装板布局中放置设备。
+No part matches.	没有匹配的部件。
 No parts marked for floor mounting yet. Mark one in the parts management: part editor › Mounting data › Floor mounting.	尚无标记为落地安装的部件。请在部件管理中标记：部件编辑器 › 安装数据 › 落地安装。
 No parts marked for wall mounting yet. Mark one in the parts management: part editor › Mounting data › Wall mounting.	尚无标记为墙面安装的部件。请在部件管理中标记：部件编辑器 › 安装数据 › 墙面安装。
 No parts of the product group Cables in the parts database.	部件数据库中没有产品组“电缆”的部件。
@@ -1191,6 +1279,7 @@ No segments yet: draw them in the plant layout.	尚无布线段：请在工厂�
 No shortcut	无快捷方式
 No single-line symbols and no power devices in the schematic.	原理图中没有单线符号，也没有动力设备。
 No stations: add one or use the automatic configuration.	没有站：请添加一个站或使用自动组态。
+No string yet: the modules are not connected.	尚无组串：组件未连接。
 No subprojects were taken out of this project.	尚未从此项目中移出任何子项目。
 No terminal strips: place terminals in a schematic first.	无端子排：请先在原理图中放置端子。
 No user symbols yet. Create one or copy a built-in symbol.	尚无用户符号。创建一个符号或复制内置符号。
@@ -1201,11 +1290,14 @@ None – editing a page or the project data locks it.	无 – 编辑页或项目
 Not a page template file: {}	不是页模板文件：{}
 Not a point: type x y or @dx dy	不是点：请输入 x y 或 @dx dy
 Not a symbol library: {}	不是符号库：{}
+Not changed, the lock was refused: {}. Your version is kept in the Project server pane.	未更改，锁定被拒绝：{}。你的版本保留在项目服务器窗格中。
 Not changed: {}	未更改：{}
+Not changed: {}. Your version is kept in the Project server pane.	未更改：{}。你的版本保留在项目服务器窗格中。
 Not found: {}	未找到：{}
 Not in the project parts – synchronize in parts management	不在项目部件中 – 请在部件管理中同步
 Not on a wire	不在导线上
-Not saved, locked or changed by another user: {}	未保存，已被其他用户锁定或更改：{}
+Not saved yet	尚未保存
+Not saved, locked or changed by another user	未保存，已被其他用户锁定或更改
 Not taken: the left button alone selects, draws and moves; hold a modifier or use another button.	未采用：仅左键用于选择、绘制和移动；请按住组合键或使用其他按键。
 Not the shared project: changes are saved locally until it is opened on the project server again	不是共享项目：在项目服务器上重新打开之前，更改将保存在本地
 Nothing exchanged yet.	尚未进行任何交换。
@@ -1227,6 +1319,7 @@ Offset from one row to the next: downwards for lists, sideways for rows side by 
 On a touch screen and a trackpad. Pan only: pinching does not zoom; zoom only: scrolling with two fingers on a trackpad zooms too, where the system tells trackpads apart. One finger works like the left mouse button.	适用于触摸屏和触控板。仅平移：捏合不缩放；仅缩放：在系统能区分触控板时，双指在触控板上滚动也会缩放。单指的作用与鼠标左键相同。
 On a touch screen; trackpads leave three-finger gestures to the system.	适用于触摸屏；触控板的三指操作由系统处理。
 On startup	启动时
+On the roof, joined to the air-termination conductors; move it to its place	在屋顶上，连接到接闪导体；将其移到所需位置
 One row per label	每个标签一行
 Only devices on the current page	仅限当前页上的设备
 Only frames no page uses can be deleted	只能删除没有页使用的图框
@@ -1254,6 +1347,7 @@ Open the selection: its properties, in the floor plan its face	打开所选内�
 Open to {}: wires cross beside the mounting plates	向 {} 开放：导线在安装板旁边穿过
 Open walls and floors	打开墙壁和地面
 Open, save, import, export, print and the settings	打开、保存、导入、导出、打印和设置
+Open-circuit voltage	开路电压
 OpenECraft page templates	OpenECraft 页模板
 OpenECraft page templates (JSON)	OpenECraft 页模板 (JSON)
 OpenECraft project	OpenECraft 项目
@@ -1264,6 +1358,7 @@ OpenECraft property library	OpenECraft 属性库
 OpenECraft property library (JSON)	OpenECraft 属性库 (JSON)
 OpenECraft rule sets	OpenECraft 规则集
 OpenECraft rule sets (JSON)	OpenECraft 规则集 (JSON)
+OpenECraft split project	OpenECraft 拆分项目
 OpenECraft structure template	OpenECraft 结构模板
 OpenECraft structure template (JSON)	OpenECraft 结构模板 (JSON)
 OpenECraft symbol library	OpenECraft 符号库
@@ -1295,6 +1390,7 @@ Other values ({})	其他值 ({})
 Otherwise from the plant layout, or next to the other line-ups	否则根据工厂布局放置，或放在其他柜排旁边
 Out since {} (pages locked)	自 {} 起已移出（页已锁定）
 Outer diameter (e.g. 8 mm) or DN	外径（例如 8 mm）或 DN
+Outlets	插座
 Outlets, switches, heating	插座、开关、供暖
 Outline	轮廓
 Outlines	轮廓
@@ -1317,6 +1413,10 @@ PLC channels	PLC 通道
 PLC hardware and bus topology	PLC 硬件和总线拓扑
 PLC overview	PLC 概览
 PNG or JPEG bitmap, e.g. a logo or a photo	PNG 或 JPEG 位图，例如徽标或照片
+PV array {}	光伏阵列 {}
+PV array {} lies outside the protection of the air-termination system	光伏阵列 {} 位于接闪器保护范围之外
+PV array {} of building {}: {} modules	建筑物 {1} 的光伏阵列 {0}：{2} 块组件
+PV array {} of building {}: {} modules, {} kWp	建筑物 {1} 的光伏阵列 {0}：{2} 块组件，{3} kWp
 PV arrays	光伏阵列
 Page graphics	页图形
 Page heading	页标题
@@ -1351,6 +1451,10 @@ Part of the profile: generic types or parts from the parts store	型材的部件
 Part selection from the parts database	从部件数据库中选择部件
 Part selection – {}	部件选择 – {}
 Part selection…	选择部件…
+Partly saved	部分保存
+Partly saved (revision {}). Not saved, locked or changed by another user: {}. Your version is kept in the Project server pane.	已部分保存（修订 {}）。未保存，已被其他用户锁定或更改：{}。你的版本保留在项目服务器窗格中。
+Partly saved to the project server (revision {})	已部分保存到项目服务器（修订 {}）
+Partly saved: the project server left changes out. Your version of them is kept below; they are not saved on the server.	部分保存：项目服务器未保存部分更改。您的版本保留在下方；它们未保存到服务器。
 Parts can only be dropped onto pages that can be changed; this one is released, locked or generated	部件只能拖放到可修改的页面上；此页面已发布、已锁定或为生成页面
 Parts management	部件管理
 Parts marked for floor mounting (pumps, tanks, compressors): choose one, then click where it stands on the floor of the room	标记为落地安装的部件（泵、储罐、压缩机）：选择一个，然后在房间地面上单击放置位置
@@ -1364,6 +1468,8 @@ Path for cables, tubes or wires over the plate: click the corners, double-click 
 Path function text	路径功能文本
 Pattern	阵列
 Pattern…	阵列…
+Peak power	峰值功率
+Pick a part in the list.	请在列表中选择部件。
 Pin-out	引脚分配
 Pipe run	管道走线
 Pipe run on a wall, the ceiling or the floor of the room, along which hoses, tubes and pipes are routed: click the corners, double-click or Enter to finish	房间墙面、顶部或地面上的管道走线，软管、管子和管道沿其布线：单击各个角点，双击或按 Enter 完成
@@ -1380,6 +1486,7 @@ Place in schematic	放置到原理图中
 Place in the plant	在工厂中的位置
 Place in the room	房间中的位置
 Place in the site plan	在总平面图中放置
+Place on the wall	放置到墙上
 Place text	放置文本
 Place the georeferenced point everything is measured from	放置用于测量一切的地理参考点
 Place the georeferenced point of the plant in the site plan; its coordinates go into the Buildings pane, every point is then measured from it	在总平面图中放置设施的地理参考点；其坐标在建筑窗格中输入，所有点都从它测量
@@ -1402,7 +1509,6 @@ Plant layout	工厂布局
 Plant layout, route network, field cable planning, equipotential bonding and cable accessories	工厂布局、布线网络、现场电缆规划、等电位联结和电缆附件
 Plant segments with planned devices before the schematic	在原理图之前包含已规划设备的工厂规划段
 Plate outline, holes per diameter, cutouts	板轮廓、按直径分组的孔、开孔
-Plot	场地
 Plot boundary	场地边界
 Plot boundary drawn: {} m²	已绘制场地边界：{} m²
 Plot boundary drawn: {} m²; outside it: {}	已绘制场地边界：{} m²；其外：{}
@@ -1410,8 +1516,8 @@ Plot frames	图框
 Plot, {}	场地，{}
 Plug in card	插入卡件
 Plugin commands	插件命令
-Plugins	插件
 Plugins add commands, checks, reports and exports. External plugins are loaded from the folders in the environment variable {} (one subfolder with a plugin.json per plugin).	插件可添加命令、检查、报表和导出。外部插件从环境变量 {} 中的文件夹加载（每个插件一个包含 plugin.json 的子文件夹）。
+Plus and minus leads from the modules to the inverter	从组件到逆变器的正极和负极电缆
 Points	点
 Polygon	多边形
 Polyline	多段线
@@ -1424,6 +1530,8 @@ Position of the cursor	光标位置
 Position of the device tag (instead of the tag block)	设备标识符的位置（代替标识符块）
 Position of the label (terminal number, address …)	标签的位置（端子号、地址 …）
 Positions are relative to the lower right corner of the symbol.	位置相对于符号的右下角。
+Post distance	立柱间距
+Posts	立柱
 Potential {}	电位 {}
 Potential: {}	电位：{}
 Power and current of the loads of the mains (motors, drives, heaters, power supplies, transformers), the load of each protective device, the demand with the diversity factor and the load budget of the power supplies.	电网负载（电机、驱动器、加热器、电源装置、变压器）的功率和电流、每个保护设备的负载、按同时系数计算的需求以及电源装置的负载预算。
@@ -1448,7 +1556,6 @@ Profile name	配置文件名称
 Profiles	配置文件
 Project access	项目访问权限
 Project and user settings in one dialog	在一个对话框中进行项目和用户设置
-Project data	项目数据
 Project database	项目数据库
 Project database, batch changes of project properties, subprojects, options, archives and verification	项目数据库、批量更改项目属性、子项目、选项、归档和校验
 Project default: {}	项目默认值：{}
@@ -1491,7 +1598,6 @@ Read a file of the other system (CSV or JSON) and review the changes	读取其�
 Readdress card	重新为卡件分配地址
 Reading the folder…	正在读取文件夹…
 Real length per millimetre on the page, e.g. 10 for a 1:10 drawing	页上每毫米对应的实际长度，例如 1:10 图纸为 10
-Rear	后
 Rear left corner of the line-up on the floor, as in the 3D view with all enclosures	柜排在地面上的左后角，与包含所有机柜的 3D 视图中相同
 Recent projects	最近的项目
 Recently used	最近使用
@@ -1499,10 +1605,8 @@ Recommended height of manual actuators (10.1.2)	手动操作元件的建议高�
 Record	录制
 Record: do the gesture in the field that appears, holding a modifier if wanted (Esc cancels). Add keeps the gestures there are. Right click in the select tool opens the context menu.	录制：在出现的区域中做出动作，可按住组合键（Esc 取消）。添加会保留已有的动作。在选择工具中右键单击会打开上下文菜单。
 Redline: to be changed · Greenline: changed as built	红线：待更改 · 绿线：已按竣工状态更改
-Redo	重做
 Reference point	参考点
 Reference point placed at x {} m, z {} m; enter its coordinates in the Buildings pane	参考点已放置在 x {} m、z {} m；请在建筑窗格中输入其坐标
-Refresh	刷新
 Refresh example catalog parts (GEN.*)	刷新示例目录部件 (GEN.*)
 Rejected and closed ones too	包括已拒绝和已关闭的
 Relative column width	相对列宽
@@ -1515,6 +1619,7 @@ Release: lock all pages	发布：锁定所有页
 Released page – read only	已发布页 – 只读
 Released pages in it keep their names	其中已发布的页保留名称
 Released pages keep their name.	已发布页保留其名称。
+Released revisions, baselines, comments, markup, approvals and change requests of the source. Without them the copy starts as a new project.	原项目的已发布修订、基线、批注、标记、批准和变更请求。不复制它们时，副本作为新项目开始。
 Releases all locks; the project stays open as a local copy	释放所有锁定；项目作为本地副本保持打开
 Releasing…	正在释放…
 Remove from cable	从电缆中移除
@@ -1559,14 +1664,19 @@ Replace	替换
 Replace all	全部替换
 Replace text	替换文本
 Replace with	替换为
+Replaced by the version on the project server: {}. Your version is kept in the Project server pane.	已被项目服务器上的版本替换：{}。你的版本保留在项目服务器窗格中。
 Replaced when the configurator generates again; switch off to keep the page	配置器再次生成时将被替换；关闭此选项可保留该页
+Replaced while you held no lock	在你没有锁定时被替换
 Replaces in free texts, function texts, page, device and cable descriptions; released pages stay	在自由文本、功能文本、页描述、设备描述和电缆描述中替换；已发布页保持不变
 Replaces the GEN.* parts in the database with the current example catalog (including models)	用当前示例目录（包括模型）替换数据库中的 GEN.* 部件
 Replaces the company library with the project's own title blocks, report schemes and plot frames (editors of the parts server)	用项目自有的标题栏、报表方案和图框替换公司库（零件服务器的编辑者）
 Replaces the content of the macro boxes whose macro changed in the library	替换其宏在库中已更改的宏边框的内容
+Replaces the current version with yours as a change you can undo; the next save stores it	用你的版本替换当前版本（可撤销的更改）；下次保存时存储
 Replaces the pages of this block	替换此块的页
 Reply	回复
 Reply…	回复…
+Report a bug	报告错误
+Report a bug…	报告错误…
 Report block {}: {} pages generated	报表块 {}：已生成 {} 页
 Report blocks start new pages for every value of this column	报表块为此列的每个值开始新页
 Report blocks updated: {} pages	已更新报表块：{} 页
@@ -1574,7 +1684,6 @@ Report blocks…	报表块…
 Report forms	报表表单
 Report name (page heading)	报表名称（页标题）
 Report with all harness wires	包含所有线束导线的报表
-Reports	报表
 Representation	表示方式
 Requester	请求人
 Reservation	预留
@@ -1611,8 +1720,12 @@ Right edges	右边缘
 Right neighbour	右侧相邻机柜
 Rights	权限
 Risers	踏步数
+Rod holder	接闪杆支架
+Roof pitch	屋顶坡度
 Roof window	屋顶窗
 Roof windows	屋顶窗
+Roof {} of building {}	建筑物 {1} 的屋顶 {0}
+Roof {} of building {}: the layout properties add a PV array or a roof window where it was clicked	建筑物 {1} 的屋顶 {0}：布局属性会在单击处添加光伏阵列或屋顶窗
 Roofs	屋顶
 Room	房间
 Room added on level {}: drag its walls or draw new ones in the floor plan, put cabinets into it in their properties	已在楼层 {} 添加房间：在平面图中拖动其墙壁或绘制新墙，在机柜属性中将机柜放入其中
@@ -1639,6 +1752,8 @@ Row	行
 Row distance	行距
 Row drawing	行图形
 Row labels	行标签
+Rows of tables behind each other	前后排列的支架排
+Rows of tilted tables on posts in front of what stands in the plant, facing the front; move it to its place	设施中已有对象前方立柱上的倾斜支架排，朝向前方；请将其移到所需位置
 Rows on released pages cannot be changed. A line break in a text is written as \\n.	已发布页上的行无法更改。文本中的换行写作 \\n。
 Rows per page	每页行数
 Rule libraries	规则库
@@ -1660,12 +1775,14 @@ Save as local file	另存为本地文件
 Save as macro	另存为宏
 Save as project template…	另存为项目模板…
 Save as scheme	另存为方案
+Save as split project…	另存为拆分项目…
 Save as template	另存为模板
 Save as template…	另存为模板…
 Save asks for a file	“保存”会询问文件
 Save as…	另存为…
 Save current page as template…	将当前页另存为模板…
 Save current…	保存当前…
+Save failed	保存失败
 Save file…	保存文件…
 Save locally	保存到本地
 Save locally to {}	保存到本地 {}
@@ -1674,12 +1791,15 @@ Save page as macro…	将页另存为宏…
 Save page as template	将页另存为模板
 Save page as template…	将页另存为模板…
 Save selection as macro…	将所选内容另存为宏…
+Save shared projects to the project server automatically	自动将共享项目保存到项目服务器
 Save the box content as the macro in the library	将边框内容另存为库中的宏
 Save to project server	保存到项目服务器
 Save to project server: {}	保存到项目服务器：{}
 Save to project server: {} – the connection is lost, saving tries again	保存到项目服务器：{} – 连接已断开，保存将重试
 Save workspace	保存工作区
 Save workspace…	保存工作区…
+Saved	已保存
+Saved the properties of {} (revision {})	已保存 {} 的属性（修订 {}）
 Saved to	保存位置
 Saved to the project server (revision {})	已保存到项目服务器（修订 {}）
 Saved workspaces	已保存的工作区
@@ -1687,8 +1807,10 @@ Saves the placed properties as a placement scheme of the project	将已放置的
 Saves the project without revisions, baselines, review and wiring marks as a template for new projects	将项目另存为新项目的模板，不含修订、基线、审阅和接线标记
 Saves the project's own properties, function definitions and schemes for other projects	保存项目自有的属性、功能定义和方案，供其他项目使用
 Saves the workspace, the arrangement of the panels and the open windows	保存工作区、窗口排列和打开的对话框
+Saves your version of the whole project as a project file	将你的整个项目版本保存为项目文件
 Saving failed: {}	保存失败：{}
 Saving the project access…	正在保存项目访问权限…
+Saving the properties of {}…	正在保存 {} 的属性…
 Saving to the project server…	正在保存到项目服务器…
 Scheme	方案
 Scheme name	方案名称
@@ -1702,23 +1824,26 @@ Scrolling up and down zooms at the pointer, sideways (horizontal wheel, Shift + 
 Scrolling zooms, also where it pans	滚动时缩放，在平移处也是如此
 Search (* and ? as placeholders)…	搜索（* 和 ? 作为通配符）…
 Search below this folder	在此文件夹下搜索
+Search number, description, maker	搜索编号、描述、制造商
 Search the parts server by catalog, product group and technical data, add parts and check the database for updates	按目录、产品组和技术数据搜索部件服务器，添加部件并检查数据库更新
 Second channel	第二通道
+Seconds from a change to its automatic save (10 to 600)	从更改到自动保存的秒数（10 到 600）
 Section properties	分节属性
 Section properties…	分节属性…
 Section {} is now section {}	分节 {} 现在是分节 {}
+See-through PV modules	透明光伏组件
 Seen on the mating faces; the colours are those of the wires and cable cores at the pins.	从插合面看；颜色为引脚上导线和电缆芯线的颜色。
 Segment {}	规划段 {}
 Segments	布线段
 Segregation	隔离
 Segregation factor	隔离系数
-Select	选择
 Select / move (Esc)	选择 / 移动 (Esc)
 Select a file to import it	选择要导入的文件
 Select a function definition. Project definitions (bold) can be changed and are kept in property libraries.	选择功能定义。项目定义（粗体）可以更改，并保存在属性库中。
 Select a macro.	选择一个宏。
 Select a part. Double click adds it to the device.	选择一个部件。双击可将其添加到设备。
 Select a placement scheme. A scheme places properties beside symbols; symbols using it are updated when it changes.	选择放置方案。方案将属性放置在符号旁；方案更改时，使用它的符号会随之更新。
+Select a project in the list	请在列表中选择一个项目
 Select a report block.	选择一个报表块。
 Select a request.	选择一个请求。
 Select a segment.	请选择规划段。
@@ -1740,6 +1865,7 @@ Semicolon	分号
 Separator	分离器
 Server URL	服务器 URL
 Server address and sign-in	服务器地址和登录
+Server project properties	服务器项目属性
 Server type	服务器类型
 Servers	服务器
 Service space in front	前方维护空间
@@ -1761,6 +1887,7 @@ Shielded analogue cables	屏蔽的模拟量电缆
 Shielded drive cables	屏蔽的驱动电缆
 Short circuit and selectivity	短路和选择性
 Short circuit, selectivity, loads, EMC, functional safety and verification against rule sets	短路、选择性、负载、EMC、功能安全以及根据规则集进行验证
+Short-circuit current	短路电流
 Short-circuit currents	短路电流
 Short-circuit power of the network	电网短路容量
 Shortest profile	最短型材
@@ -1771,7 +1898,6 @@ Show as tiles	以图块显示
 Show connection point designations	显示连接点标识
 Show connectors	显示连接器
 Show device tag and cross references	显示设备标识符和交叉引用
-Show everything (Home)	显示全部 (Home)
 Show in panel layout ({})	在安装板布局中显示（{}）
 Show in schematic	在原理图中显示
 Show in the schematic	在原理图中显示
@@ -1780,6 +1906,7 @@ Show or hide panes; drag a tab to dock it elsewhere	显示或隐藏窗格；拖�
 Show project manager	显示项目管理器
 Show the enclosures bayed to this one as well	同时显示与此机柜并柜的机柜
 Show the messages accepted as checked	显示已接受为已检查的消息
+Show the modules of the PV arrays see-through in the 3D view: the wiring of the modules to each other under them is seen	在 3D 视图中透明显示光伏阵列的组件：可看到其下方组件之间的接线
 Show the other wires	显示其他导线
 Show the pane as a window	将窗格显示为窗口
 Show the ribbon	显示功能区
@@ -1792,6 +1919,8 @@ Shown instead of the measured value	代替测量值显示
 Shown now: {}	当前显示：{}
 Shown on the cover page and by the image elements of title blocks that show the project logo	显示在封面上以及显示项目标志的标题栏图像元素中
 Shows	显示
+Shows the differences of your version to the open project; selected ones can be taken over	显示你的版本与打开的项目之间的差异；可以接受所选的差异
+Shows the properties saved on the project server; you change them here if you may and nobody has locked the project data	显示项目服务器上保存的属性；如果您有权限且没有人锁定项目数据，可在此处更改
 Side walls, rear wall, roof and bottom seen from the outside: fans, cable glands, cutouts	从外部看到的侧板、后板、顶板和底板：风扇、电缆密封接头、开孔
 Sign in in the Project server pane; the project opens afterwards	在“项目服务器”窗格中登录；之后项目将打开
 Sign in…	登录…
@@ -1799,7 +1928,6 @@ Signed in to {} as {}	已作为 {1} 登录到 {0}
 Signed out of Vault	已从 Vault 注销
 Single-line	单线
 Single-line symbols for the power devices of the schematic that have none yet, on a new overview page	为原理图中尚无单线符号的动力设备生成单线符号，放在新概览页上
-Site	场地
 Site plan, building {}	总平面图，建筑物 {}
 Size {} × {} mm	尺寸 {} × {} mm
 Slot	槽
@@ -1809,6 +1937,7 @@ Smallest cross-section of control circuits	控制电路的最小截面积
 Smallest cross-section of power circuits	主电路的最小截面积
 Socket outlets, data and antenna outlets	电源插座、数据和天线插座
 Solid	实线
+Some of your changes were not taken by the project server. Your version stays in the Project server pane, also after discarding.	项目服务器未接受你的部分更改。即使丢弃后，你的版本仍保留在项目服务器窗格中。
 Some wires have no length: place their devices in the panel layout or set the field length.	部分导线没有长度：请在安装板布局中放置其设备或设置字段长度。
 Sort by designation	按标识排序
 Sort order	排序顺序
@@ -1872,6 +2001,7 @@ Surge protection	浪涌保护
 Swing the enclosure door open or shut (door devices and their wires move with it)	打开或关闭机柜柜门（柜门设备及其导线随之摆动）
 Switch off the check \"{}\"	关闭检查 \"{}\"
 Switched off on this computer ({})	已在此计算机上关闭（{}）
+Switches	开关
 Switches the options with a condition by the configurator options	根据配置器选项切换带条件的选项
 Switches to this workspace with its panes at their default places	切换到此工作区，并将其窗格恢复到默认位置
 Switches, push buttons and room thermostats	开关、按钮和室内温控器
@@ -1896,6 +2026,7 @@ Tag placed by hand	手动放置的标识符
 Take out a subproject	移出子项目
 Take out of the building	移出建筑物
 Take out {} pages…	移出 {} 页…
+Take over again	重新接受
 Take over cut lengths	采用下料长度
 Take over selected ({})	采用所选项（{}）
 Take over {} changes	采用 {} 处更改
@@ -1920,6 +2051,7 @@ Terminals at least	端子最低
 Terminals with the same jumper number are bridged (same potential). Spare terminals are counted in the bill of materials.	跳线编号相同的端子相互桥接（电位相同）。备用端子计入物料清单。
 Terms separated by ';': key=value (equal), key~text (contains) or text found anywhere	各条件以 ';' 分隔：键=值（等于）、键~文本（包含）或任意位置出现的文本
 Test connection	测试连接
+Test joints	测试接头
 Text offset	文本偏移
 Text size	文本大小
 Texts	文本
@@ -1930,37 +2062,51 @@ The aspect ratio is kept.	保持纵横比。
 The check warns about cable ducts filled above this level	线槽填充率超过此值时检查会发出警告
 The checks keep the distances between classes and let classes overlap as set in Layout checks	检查会保持类别之间的距离，并按“布局检查”中的设置允许类别重叠
 The commands of all plugins by plugin, with a search; the star pins a command to the Plugins tab	按插件列出所有插件的命令并可搜索；点击星标可将命令固定到插件选项卡
+The copy is created from the state saved on the project server. Changes other users have not saved yet are not part of it. Sessions, locks and access rights are not copied; the original stays as it is.	副本根据项目服务器上保存的状态创建。其他用户尚未保存的更改不包含在内。会话、锁定和访问权限不会被复制；原项目保持不变。
 The crossed wires get free cores of the cable in order	穿过的导线按顺序获得电缆的空闲芯线
 The current page belongs to option {}.	当前页属于选项 {}。
 The devices do not fit onto the rail	设备无法放入导轨
 The dictionary is empty: collect the texts from the project.	词典为空：请从项目中收集文本。
 The door seen from the front: door devices and cutouts	从正面看柜门：柜门设备和开孔
-The door seen from the inside (hinges on the right): cable ducts and the wiring behind the door	从内侧看柜门（铰链在右侧）：线槽和柜门后的接线
+The door seen from the inside (mirrored): cable ducts and the wiring behind the door	从内侧看柜门（镜像）：线槽和柜门后的接线
 The element is drawn only when this text with its placeholders is not empty, e.g. the rows of a revision table	仅当此文字（含占位符）不为空时才绘制该元素，例如修订表的行
 The enclosure stands with its left side against the right side of the chosen one; wires run between them through cable passages	该机柜的左侧紧靠所选机柜的右侧；导线通过电缆过孔在它们之间穿过
 The horizontal wire	水平导线
 The items are selected and moved together	这些元素将一起被选择和移动
+The last save failed: {}. Your changes are not saved on the project server; the automatic save tries again.	上次保存失败：{}。您的更改未保存到项目服务器；自动保存将重试。
+The local recovery copy is of {}: your latest changes are not in it yet	本地恢复副本的时间为 {}：尚不包含您最新的更改
+The lock was refused	锁定被拒绝
 The logo is fitted into this area keeping its aspect ratio	标志按原比例缩放到此区域中
 The logo of the project properties, e.g. the customer's	项目属性中的标志，例如客户的标志
+The logos of the manufacturers' catalogs on the parts server, beside the details of a part	部件服务器上制造商目录的标志，显示在部件详细信息旁边
 The macro library has no page macros (Macros › Save page as macro…).	宏库没有页宏（宏 › 将页另存为宏…）。
 The modifiers that turn the wheel sideways or make it zoom are set under Modifier keys.	使滚轮横向平移或缩放的组合键在“组合键”中设置。
 The modules no string takes yet in series, on the first inverter	尚未分配到组串的组件串联，接到第一台逆变器
+The name on the server needs letters, digits, space, - _ . (up to 64 characters).	服务器上的名称由字母、数字、空格、- _ . 组成（最多 64 个字符）。
 The names of its pages follow	其页的名称随之改变
+The open project already has your version	打开的项目已包含你的版本
+The open project has changes that are not saved on the project server yet. You are asked whether to save them first; only saved changes are part of the copy.	打开的项目有尚未保存到项目服务器的更改。系统会询问是否先保存；只有已保存的更改才包含在副本中。
+The open project is a local recovery copy of this project. Its changes are not on the project server and not part of the copy.	打开的项目是此项目的本地恢复副本。其更改不在项目服务器上，也不包含在副本中。
 The open project is a local recovery copy. Its changes are not saved on the project server; before the shared project opens, you decide whether to save them locally or discard them.	打开的项目是本地恢复副本。其更改未保存在项目服务器上；在打开共享项目之前，由您决定将其保存到本地还是放弃。
 The page name gets the section number	页名称获得分节号
 The page type, plot frame, title block, structure, description and the whole content are saved.	将保存页类型、图框、标题栏、结构、描述和全部内容。
 The pages it generated stay	其生成的页保留
 The parts database is shared by all projects. Parts are copied into a project when they are assigned to a device.	部件数据库由所有项目共享。将部件分配给设备时，部件会被复制到项目中。
 The point's coordinates in the coordinate reference system	该点在坐标参考系中的坐标
+The post; its accessories are the table beams, rails and clamps	立柱；其附件为支架横梁、导轨和夹具
 The project changed since the search.	自搜索以来项目已更改。
 The project check	项目检查
+The project data is locked by {}: the properties cannot be changed now.	项目数据已被 {} 锁定：现在无法更改属性。
 The project database needs the desktop version: the browser cannot search folders.	项目数据库需要桌面版：浏览器无法搜索文件夹。
 The project server does not answer: changes are not saved on it until the connection is back	项目服务器无响应：在连接恢复之前，更改不会保存到服务器上
+The project server has confirmed no save of this session yet	项目服务器尚未确认本次会话的任何保存
 The project server {} could not open {}.	项目服务器 {} 无法打开 {}。
 The project's own page templates as a file	项目自己的页模板，作为文件
 The project's own title blocks	项目自己的标题栏
 The project's own title blocks and report schemes	项目自己的标题栏和报表方案
+The properties of the open project; changing them locks the project data	打开的项目的属性；更改它们会锁定项目数据
 The properties of the selection in a window beside the page	在页面旁的窗口中显示所选内容的属性
+The properties were changed on the project server meanwhile. Reload shows them; your entries are replaced.	属性已在项目服务器上被更改。重新加载会显示它们；您输入的内容将被替换。
 The rail or mounting base; its accessories are the hooks, clamps and ballast	导轨或安装底座；其附件为挂钩、压块和压载
 The recalculation keeps frozen routes as long as they are still possible	只要仍然可行，重新计算会保留冻结的布线
 The ribbon with the File tab replaces the menus; Ctrl+Shift+P finds any command.	带“文件”选项卡的功能区取代了菜单；Ctrl+Shift+P 可查找任意命令。
@@ -1968,6 +2114,7 @@ The rooms of the level side by side; click the level again for all of the plant	
 The second fault is checked at the line-to-earth voltage	二次故障按相对地电压进行检查
 The selected devices side by side on the selected rail, from its left end	将所选设备从所选导轨的左端开始并排放置
 The side of {} is open	{} 的侧面是开放的
+The state of the save shows in the status bar and in the Project server pane: saved, not saved yet, saving, waiting for the server, failed or partly saved. The local recovery copy is kept besides; it is no save on the project server.	保存状态显示在状态栏和“项目服务器”窗格中：已保存、尚未保存、正在保存、等待服务器、失败或部分保存。本地恢复副本另行保留；它不是保存到项目服务器。
 The symbol is placed in the project	该符号已在项目中使用
 The terminal parts name no end brackets or end plates (tech data End bracket, End plate).	端子部件未指定终端固定件或终端盖板（技术数据 End bracket、End plate）。
 The update failed	更新失败
@@ -1976,6 +2123,7 @@ The web version is updated on its server.	网页版在其服务器上更新。
 The wire tool routes around symbols and other wires	导线工具绕开符号和其他导线布线
 The wires get the free cores of the cable in order (left to right)	导线按顺序（从左到右）获得电缆的空闲芯线
 The wires of the connection take these values again	连接的导线重新采用这些值
+Their places, sizes and busbars are set in the Buildings pane.	其位置、尺寸和母线在“建筑物”窗格中设置。
 Theme	主题
 These settings are edited in their panes:	这些设置在各自的窗格中编辑：
 Thickness	厚度
@@ -1997,7 +2145,6 @@ Title blocks, report schemes and plot frames shared by all projects on the parts
 To do	待完成
 Toggle corner direction while drawing wires	绘制导线时切换拐角方向
 Toggle routing around symbols (wire tool)	切换绕开符号布线（导线工具）
-Top	顶部
 Top edges	上边缘
 Top left	左上
 Top right	右上
@@ -2005,16 +2152,15 @@ Total selectivity	完全选择性
 Touch screen	触摸屏
 Transfer project parts to database	将项目部件传输到数据库
 Translate the project texts; documentation per language	翻译项目文本；按语言生成文档
+Try again	重试
 Turn about the vertical, counter-clockwise seen from above (90 °: the fronts face to the right)	绕垂直轴旋转，从上方看为逆时针（90 °：正面朝右）
 Turn the 3D view to the point	将 3D 视图转向该点
-Tutorial	教程
 Twin ferrules where two wires share a connection point	两根导线共用一个连接点时使用双线管型端子
 Two fingers	双指
 Two wires must meet here at a right angle. With Auto-connect on, connection points facing its arms are wired to it.	此处必须有两条连接线直角相交。开启自动连接时，正对其分支的连接点会接到它上。
 Type a point and press Enter: x y in mm, or @dx dy relative to the last point; it acts like a click of the current tool	输入点并按 Enter：x y（单位 mm），或 @dx dy 表示相对于上一个点；其作用与当前工具的单击相同
 U {} / {} / {} V, I {} A, {} kWp	U {} / {} / {} V，I {} A，{} kWp
 UI scale	界面缩放
-Undo	撤销
 Undo brings it back.	撤销可将其恢复。
 Undo list	撤销列表
 Undo {} steps	撤销 {} 步
@@ -2072,8 +2218,10 @@ Via:	经过：
 View	视图
 Visible	可见
 Voltage (line to line)	电压（线电压）
+Voltage at maximum power	最大功率点电压
 Voltage drop	电压降
 WGS 84, written into the site of IFC exports	WGS 84，写入 IFC 导出的场地
+Waiting for the server	等待服务器
 Wall {}, {} m: drag to move it, a double-click shows it to equip it	墙 {}，{} m：拖动以移动，双击显示以进行布置
 Wall {}, {} m: the wall shown in the wall view (highlighted); drag to move it	墙 {}，{} m：墙视图中显示的墙（突出显示）；拖动以移动
 Wall-mounted part	墙面安装部件
@@ -2091,8 +2239,10 @@ When it differs from the page	与该页不同时
 Where	位置
 Where neither wire has a termination chosen for it	两根导线都未选择端接方式时
 Where the point is in the plant; y: its height above the ground level of the plant	该点在设施中的位置；y：其高于设施地面的高度
+Where the roof was clicked in the 3D view	在 3D 视图中单击屋顶的位置
 Where the structure of the device comes from: aspects equal to the structure around the symbol are inherited and follow when it moves into or out of a structure box; other aspects are the device's own and stay.	设备结构的来源：与符号周围结构相同的结构部分为继承，符号移入或移出结构框时随之改变；其他结构部分属于设备本身，保持不变。
 Where the wire starts and ends: a connection point from the part data, one generated from the function template, or the device centre if no connection point matches	导线的起点和终点：部件数据中的连接点、由功能模板生成的连接点，或在没有匹配的连接点时使用设备中心
+Who created the project on the project server and when; not the drawing author below	谁在何时在项目服务器上创建了该项目；不是下方的图纸作者
 Whole building	整个建筑
 Whole words	全字匹配
 Width / going	宽度 / 踏步
@@ -2129,6 +2279,7 @@ Wiring assistant: checklist of the wires with 3D view and progress (tablet: open
 Wiring space between devices and ducts	设备与线槽之间的接线空间
 With a user account of the server; replaces the access token	使用服务器的用户帐户；替代访问令牌
 With everything below it	包括其下的所有内容
+With its middle where the roof was clicked in the 3D view	中心位于在 3D 视图中单击屋顶的位置
 With the current pages; the approvals so far become void	使用当前页；之前的审批将失效
 With values only	仅显示有值的
 Withdraw	撤回
@@ -2149,6 +2300,9 @@ YYYY-MM-DD	YYYY-MM-DD
 You may only view this project.	您只能查看此项目。
 You may review this project: comments, markup and approvals, no other changes.	您可以审阅此项目：批注、标记和审批，不可进行其他更改。
 Your unsaved changes of it are taken back	你对其所做的未保存更改将被撤回
+Your version of {}	你在 {} 的版本
+Your version taken over: {}. Save to store it on the project server.	已接受你的版本：{}。保存以将其存储到项目服务器。
+Your versions of changes that were replaced by the version on the project server. They stay here until you discard them.	被项目服务器上的版本替换的更改的你的版本。在你丢弃之前它们会保留在这里。
 Zoom	缩放
 Zoom in in the 3D view (held)	放大 3D 视图（按住）
 Zoom out in the 3D view (held)	缩小 3D 视图（按住）
@@ -2253,7 +2407,10 @@ x y	x y
 {} (default)	{}（默认）
 {} (first column)	{}（第一列）
 {} (locked by {})	{}（已被 {} 锁定）
+{} (no such device)	{}（设备不存在）
+{} (not placed in the layout)	{}（未放置在布局中）
 {} (project server, revision {})	{}（项目服务器，修订 {}）
+{} (revision {})	{}（修订 {}）
 {} (spare)	{}（备用）
 {} (subproject of {})	{}（{} 的子项目）
 {} (unused)	{}（未使用）
@@ -2262,7 +2419,10 @@ x y	x y
 {} PLC function texts updated	已更新 {} 个 PLC 功能文本
 {} Vault items found for the project parts	找到 {} 个与项目部件对应的 Vault 项
 {} Vault items found: review the changes in the integration window	找到 {} 个 Vault 项：请在集成窗口中审阅更改
+{} added to building {}	{0} 已添加到建筑物 {1}
 {} addresses changed	已更改 {} 个地址
+{} air-termination rods	{} 根接闪杆
+{} already exists on the project server.	{} 已存在于项目服务器上。
 {} bundles, {} branch points	{} 个线缆束，{} 个分支点
 {} bus cables created	已创建 {} 根总线电缆
 {} bus connections	{} 个总线连接
@@ -2300,6 +2460,7 @@ x y	x y
 {} devices renamed	已重命名 {} 个设备
 {} differences to {}	与 {1} 有 {0} 处差异
 {} doors	{} 扇门
+{} down conductors with test joints, {} m of conductors	{} 根带测试接头的引下线，{} m 导体
 {} entries in {}	{1} 中有 {0} 个条目
 {} errors	{} 个错误
 {} errors, {} warnings	{} 个错误，{} 个警告
@@ -2314,6 +2475,7 @@ x y	x y
 {} has no function with a symbol; assign it to a device in its properties	{} 没有带符号的功能；请在设备属性中将其分配给设备
 {} has unsaved changes. Discard them?	{} 有未保存的更改。是否放弃？
 {} imported into the parts database and placed as {}	{} 已导入部件数据库并放置为 {}
+{} in {}	{1} 中的 {0}
 {} is neither in the parts database nor on the parts server	{} 不在部件数据库中，也不在部件服务器上
 {} is not in the disk image	磁盘映像中没有 {}
 {} is not made for wall mounting: place it on a mounting rail	{} 不适合墙面安装：请将其放在安装导轨上
@@ -2343,11 +2505,13 @@ x y	x y
 {} of {} entries shown: search to narrow the list	显示 {} / {} 个条目：请搜索以缩小列表范围
 {} of {} items	{} / {} 个元件
 {} of {} pages locked	已锁定 {} / {} 页
+{} of {} parts · double-click: place	{} / {} 个部件 · 双击：放置
 {} of {} pins used	已使用 {} / {} 个插针
 {} of {} rows	{} / {} 行
 {} of {} wires	{} / {} 条导线
 {} of {} wires assigned to cores of {}	已将 {} / {} 条导线分配给 {} 的芯线
 {} on released pages were left as they are	已发布页上的 {} 个保持不变
+{} on {}	{}（{}）
 {} options switched	已切换 {} 个选项
 {} pages generated	已生成 {} 页
 {} pages generated; page macros not found: {}	已生成 {} 页；未找到页宏：{}
@@ -2372,6 +2536,7 @@ x y	x y
 {} renamed: {} pages and devices	已重命名 {}：{} 个页和设备
 {} report pages output to {}	已将 {} 个报表页输出到 {}
 {} routes frozen	已冻结 {} 条布线
+{} rows of tables of {} × {} = {}, {}	{} 排支架，{} × {} = {}，{}
 {} segments created, {} devices added, {} updated	已创建 {} 个规划段，添加 {} 个设备，更新 {} 个
 {} stations, {} bus systems, {} cards assigned, {} addresses changed, {} connections, {} cables	{} 个站，{} 个总线系统，已分配 {} 个卡件，已更改 {} 个地址，{} 个连接，{} 根电缆
 {} structure identifiers added	已添加 {} 个结构标识符
@@ -2385,6 +2550,7 @@ x y	x y
 {} unused structure identifiers removed	已移除 {} 个未使用的结构标识符
 {} values taken over	已采用 {} 个值
 {} warnings	{} 个警告
+{} was changed on the project server meanwhile. Your entries are kept; create the copy again to copy the current saved state.	{} 已在项目服务器上被更改。您输入的内容已保留；请再次创建副本以复制当前保存的状态。
 {} was imported into the parts database; its page no longer exists	{} 已导入部件数据库；其页面已不存在
 {} windows	{} 个窗口
 {} wire pieces joined	已合并 {} 段导线
@@ -2392,15 +2558,21 @@ x y	x y
 {} wires changed	已更改 {} 条导线
 {} wires, {} cables and {} tubes routed	已布线 {} 条导线、{} 根电缆和 {} 根管子
 {} wires, {} – {} mm	{} 条导线，{} – {} mm
+{} {} of building {}	建筑物 {2} 的{0} {1}
 {} °C (max. {} °C)	{} °C（最高 {} °C）
 {} °C (max.)	{} °C（最高）
+{} × {} = {}, {}	{} × {} = {}，{}
 {} × {} pixels, {}	{} × {} 像素，{}
+{} – revision {}, {}	{} – 修订 {}，{}
 {} – {} ({} pages)	{} – {}（{} 页）
 {} – {} here (Esc cancels)	{} – 在此{}（Esc 取消）
+{}, freestanding	{}，地面安装
+{}, {} (copy of {}, revision {})	{}，{}（{} 的副本，修订 {}）
 {}: click to show its floor plan	{}：单击以显示其平面图
 {}: crimp together with the wire to {}	{}：与通往 {} 的导线一起压接
 {}: drag to move it, R turns it, a double-click opens it	{}：拖动以移动，R 旋转，双击打开
 {}: drag to move it, a double-click shows the floor	{}：拖动以移动，双击显示地面
+{}: drag to move, R: turn by 90°	{}：拖动以移动，R：旋转 90°
 {}: nothing to change	{}：无需更改
 {}: pin {}	{}：引脚 {}
 {}: strip {} mm, {}	{}：剥线 {} mm，{}

@@ -5,6 +5,7 @@
 2D front view	Widok 2D z przodu
 2D front view (SVG)	Widok 2D z przodu (SVG)
 3D model (STL, OBJ, STEP, IGES, Parasolid, IFC, JT)	Model 3D (STL, OBJ, STEP, IGES, Parasolid, IFC, JT)
+A short title for the problem (optional)	Krótki tytuł problemu (opcjonalnie)
 Accessories of this part	Akcesoria tej części
 Accessories only work together with the parts they fit. A part lists its accessories, an accessory the parts it fits; either side is enough.	Akcesoria działają tylko razem z częściami, do których pasują. Część wymienia swoje akcesoria, akcesorium części, do których pasuje; wystarczy jedna strona.
 Accessory, mounted: {}	Akcesorium, montaż: {}
@@ -12,34 +13,43 @@ Add connection point	Dodaj punkt połączenia
 Add cutout	Dodaj wycięcie
 Add function	Dodaj funkcję
 Add marked parts to the parts database ({})	Dodaj oznaczone artykuły do bazy danych artykułów ({})
+Add restricted area	Dodaj obszar zastrzeżony
 Add to the parts database	Dodaj do bazy danych artykułów
 Adds the macros of the file to the macro library	Dodaje makra z pliku do biblioteki makr
 All parts are up to date	Wszystkie artykuły są aktualne
 Already in the parts database	Już w bazie danych artykułów
 Apply {} updates	Zastosuj aktualizacje ({})
+Areas of the enclosure kept free of devices (placing) or of cutouts and holes (cut-out); place and size in the coordinates of the face, as its items have them.	Obszary obudowy wolne od urządzeń (montaż) lub od wycięć i otworów (wycięcie); położenie i rozmiar we współrzędnych powierzchni, jak jej elementy.
 Check the parts database for updates	Sprawdź aktualizacje bazy danych artykułów
 Checking for part updates…	Sprawdzanie aktualizacji artykułów…
 Clearance front	Odstęp przedni
 Clearance left	Odstęp lewy
 Clearance right	Odstęp prawy
+Click a face, edge or corner to look from there; drag to orbit	Kliknij ścianę, krawędź lub narożnik, aby patrzeć stamtąd; przeciągnij, aby obracać
 Compared with {} parts of the server	Porównano z artykułami serwera: {}
 Compares the local parts with the parts server: newer versions, phase-out, discontinued and removed parts	Porównuje lokalne artykuły z serwerem artykułów: nowsze wersje, artykuły wycofywane, wycofane i usunięte
 Connect to a parts server and search.	Połącz się z serwerem artykułów i wyszukaj.
 Connected: {} {} – {} parts, revision {}, {}	Połączono: {} {} – artykuły: {}, rewizja {}, {}
 Connection designations	Oznaczenia połączeń
+Copy report	Kopiuj zgłoszenie
+Copy screenshot	Kopiuj zrzut ekranu
 Corner radius	Promień narożnika
+Could not save the screenshot: {}	Nie można zapisać zrzutu ekranu: {}
+Cut-out	Wycięcie
 Datasheet (URL)	Karta katalogowa (URL)
 Deleted catalog {}	Usunięto katalog {}
 Deleted part {}	Usunięto artykuł {}
 Deleted user {}	Usunięto użytkownika {}
 Deleting {}…	Usuwanie {}…
-Dimensions	Wymiary
+Describe the problem you saw	Opisz problem, który widzisz
+Describe what happened before continuing.	Opisz, co się stało, zanim przejdziesz dalej.
 Door cutouts	Wycięcia w drzwiach
 Downloaded {} ({} bytes)	Pobrano {} ({} B)
 Downloading parts…	Pobieranie artykułów…
 Drag it onto a schematic page to place it	Przeciągnij na stronę schematu, aby umieścić
 EPLAN numbers	Numery EPLAN
 EPLAN product groups	Grupy produktów EPLAN
+Expected result (optional)	Oczekiwany wynik (opcjonalnie)
 FLOOR	PODŁOGA
 Faces	Powierzchnie
 Filter (number, type, manufacturer, text …)	Filtr (numer, typ, producent, tekst …)
@@ -49,11 +59,13 @@ Floor mounting	Montaż na podłodze
 Functions the part provides. Used for device selection, the contact image (reserve contacts), the project check and to assign connection designations. Designations are listed in symbol connection order, separated by blanks.	Funkcje udostępniane przez artykuł. Używane do wyboru urządzenia, obrazu styków (styki rezerwowe), kontroli projektu i nadawania oznaczeń przyłączy. Oznaczenia są podane w kolejności przyłączy symbolu, oddzielone spacjami.
 Generate from function template	Generuj z szablonu funkcji
 Group by	Grupuj według
+Hides this form and takes a screenshot of the window as it is now	Ukrywa ten formularz i robi zrzut ekranu okna w obecnym stanie
 Identifying letter of devices using this part (K, Q, S …)	Litera kodu urządzeń używających tego artykułu (K, Q, S …)
 Import STL / OBJ / STEP / IGES / IFC / JT…	Importuj STL / OBJ / STEP / IGES / IFC / JT…
 Import SVG…	Importuj SVG…
 In the door, when they differ from the cutouts	W drzwiach, gdy różnią się od wycięć
 Internal values of the EPLAN part exchange (0: undefined)	Wartości wewnętrzne wymiany artykułów EPLAN (0: niezdefiniowane)
+Isometric view, everything shown	Widok izometryczny, wszystko widoczne
 It only works attached to one of the parts it fits; the project check reports it on a device without such a part	Działa tylko zamocowane na jednej z części, do których pasuje; kontrola projektu zgłasza je w urządzeniu bez takiej części
 Largest conductor the clamp takes (0: not known)	Największy przewód, jaki przyjmuje zacisk (0: nieznany)
 Loaded the library {}	Wczytano bibliotekę {}
@@ -72,10 +84,15 @@ Moves lines such as Power loss: 3 W into the typed fields	Przenosi wiersze takie
 No own connection points – the generated ones are shown.	Brak własnych punktów połączeń – wyświetlane są wygenerowane.
 No part of the database comes from the EPLAN Data Portal	Żaden artykuł bazy danych nie pochodzi z EPLAN Data Portal
 No parts found.	Nie znaleziono artykułów.
+No screenshot could be taken of this window.	Nie można zrobić zrzutu ekranu tego okna.
+Offline, or GitHub does not open? Copy the report and submit it later.	Brak połączenia albo GitHub się nie otwiera? Skopiuj zgłoszenie i wyślij je później.
 Only floor-standing parts	Tylko artykuły stojące na podłodze
 Only parts for direct wall mounting	Tylko artykuły do bezpośredniego montażu naściennego
+Open GitHub issue form	Otwórz formularz zgłoszenia na GitHubie
 Open datasheet	Otwórz kartę katalogową
 Open in the browser	Otwórz w przeglądarce
+Opens your browser and copies the report for you to paste into the GitHub issue form.	Otwiera przeglądarkę i kopiuje zgłoszenie, aby wkleić je do formularza zgłoszenia na GitHubie.
+Opens your browser with the report filled in and copies it. Review and submit it on GitHub.	Otwiera przeglądarkę z wypełnionym zgłoszeniem i kopiuje je. Sprawdź je i wyślij na GitHubie.
 Outside the face	Poza powierzchnią
 Pan and zoom together	Przesuwanie i powiększanie razem
 Pan only	Tylko przesuwanie
@@ -84,38 +101,59 @@ Parts server: {}	Serwer artykułów: {}
 Parts this part is assembled from; the bill of materials lists them under it	Artykuły, z których składa się ten artykuł; zestawienie materiałów wymienia je pod nim
 Personal access token	Osobisty token dostępu
 Place by clicking into the view	Umieść, klikając w widoku
+Placing	Montaż
 Prices / other	Ceny / inne
+Rear	Tył
 Remove all	Usuń wszystko
 Remove picture	Usuń obraz
+Remove screenshot	Usuń zrzut ekranu
 Removing the file…	Usuwanie pliku…
 Replaces the connection points by the IEC convention: odd designations at the top, even ones at the bottom	Zastępuje punkty połączeń zgodnie z konwencją IEC: oznaczenia nieparzyste u góry, parzyste u dołu
+Report copied. Keep it to submit on GitHub when you are online.	Zgłoszenie skopiowane. Zachowaj je, aby wysłać je na GitHubie po połączeniu z siecią.
+Report copied. Paste it into the GitHub issue form and submit it there.	Zgłoszenie skopiowane. Wklej je do formularza zgłoszenia na GitHubie i wyślij je tam.
+Reports are public. A GitHub account is needed to submit them.	Zgłoszenia są publiczne. Do ich wysłania potrzebne jest konto GitHub.
 Reset filter	Resetuj filtr
+Restricted areas: {}	Obszary zastrzeżone: {}
+Retake screenshot	Zrób zrzut ekranu ponownie
+Review your report on GitHub and submit it there.	Sprawdź zgłoszenie na GitHubie i wyślij je tam.
 Rotate 90°:	Obróć o 90°:
+Save screenshot…	Zapisz zrzut ekranu…
 Save the file	Zapisz plik
 Saved part {}	Zapisano artykuł {}
 Saved the library {}	Zapisano bibliotekę {}
 Saving favorites…	Zapisywanie ulubionych…
 Saving {}…	Zapisywanie {}…
 Scale ×	Skala ×
+Screenshot (optional)	Zrzut ekranu (opcjonalnie)
+Screenshot copied. Paste it into the GitHub issue form.	Zrzut ekranu skopiowany. Wklej go do formularza zgłoszenia na GitHubie.
+Screenshot removed from this report.	Zrzut ekranu usunięty z tego zgłoszenia.
+Screenshot saved. Attach the PNG file in the GitHub issue form.	Zrzut ekranu zapisany. Dołącz plik PNG w formularzu zgłoszenia na GitHubie.
 Select a part to see its details.	Wybierz artykuł, aby zobaczyć szczegóły.
 Select a row, then click into the view to place it.	Wybierz wiersz, a następnie kliknij w widoku, aby go umieścić.
 Server revision	Rewizja serwera
-Signed out	Wylogowano
+Show everything (Home)	Pokaż wszystko (Home)
 Signing out…	Wylogowywanie…
 Smallest conductor the clamp takes (0: not known)	Najmniejszy przewód, jaki przyjmuje zacisk (0: nieznany)
 Stands on the floor of a room	Stoi na podłodze pomieszczenia
 Stands on the floor of a room, like pumps, tanks and compressors	Stoi na podłodze pomieszczenia, jak pompy, zbiorniki i sprężarki
+Steps to reproduce (optional)	Kroki do odtworzenia (opcjonalnie)
 Successor {}	Następca {}
+Summary	Podsumowanie
 Take {} values from the technical data	Przejmij wartości z danych technicznych ({})
+Technical details	Dane techniczne
 The 2D front view is used in the panel front view and on mounting layout pages, the 3D model in the 3D panel view. Both are fitted to the mounting data (width × height × depth).	Widok 2D z przodu jest używany w widoku z przodu szafy i na stronach planu montażu, model 3D w widoku 3D szafy. Oba są dopasowywane do danych montażowych (szerokość × wysokość × głębokość).
 The model ({} × {} × {}) differs from the mounting data ({} × {} × {}); it is stretched to the mounting data.	Model ({} × {} × {}) różni się od danych montażowych ({} × {} × {}); zostanie rozciągnięty do danych montażowych.
 The parts server has no library {} yet	Serwer części nie ma jeszcze biblioteki {}
 The price refers to this many units	Cena odnosi się do tej liczby jednostek
+The report includes the version, the system and counts of what the open project holds, but no project contents. Review the details before sharing them.	Zgłoszenie zawiera wersję, system i liczby elementów otwartego projektu, ale żadnej treści projektu. Sprawdź dane, zanim je udostępnisz.
+The screenshot is not attached by itself: copy or save it, then add it to the GitHub issue form.	Zrzut ekranu nie jest dołączany sam: skopiuj go lub zapisz, a potem dodaj do formularza zgłoszenia na GitHubie.
 The successor is not in this parts list	Następcy nie ma na tej liście artykułów
 This part is an accessory	Ta część jest akcesorium
 Top group	Grupa główna
 Top group {}, product group {}, subgroup {}	Grupa główna {}, grupa produktów {}, podgrupa {}
 Turn the model so that its front faces the viewer (+Z) and its top is +Y	Obróć model tak, aby jego przód był skierowany do obserwatora (+Z), a góra była +Y
+Turn the view 90° to the left	Obróć widok o 90° w lewo
+Turn the view 90° to the right	Obróć widok o 90° w prawo
 Uploaded {} parts, server revision {}	Przesłano artykuły: {}, rewizja serwera {}
 Uploading parts file…	Przesyłanie pliku artykułów…
 Uploading {} parts…	Przesyłanie artykułów ({})…
@@ -125,6 +163,9 @@ Use model size as mounting data	Przejmij rozmiar modelu jako dane montażowe
 Voltage / current	Napięcie / prąd
 WALL	ŚCIANA
 Wall mounting	Montaż naścienny
+What did you do just before the problem? A short list is enough	Co zrobiłeś tuż przed problemem? Wystarczy krótka lista
+What did you expect to see?	Czego się spodziewałeś?
+What happened?	Co się stało?
 Where the accessory sits on the part it fits, in the panel layout and the 3D view	Gdzie akcesorium znajduje się na pasującej części, w układzie szafy i w widoku 3D
 Where the cutouts are: the centre from the middle of the front view (x to the right, y down), the turn counter-clockwise.	Położenie wycięć: środek od środka widoku z przodu (x w prawo, y w dół), obrót przeciwnie do ruchu wskazówek zegara.
 Where the wires are connected in the panel layout: the designation as in the function template, the position in the front view (x from the left, y from the top, z above the mounting surface) and the direction the wire leaves in. Parts without own connection points get them from the function template.	Gdzie przewody są podłączane w zabudowie szafy: oznaczenie jak w szablonie funkcji, położenie w widoku z przodu (x od lewej, y od góry, z nad powierzchnią montażową) i kierunek wyprowadzenia przewodu. Artykuły bez własnych punktów połączeń otrzymują je z szablonu funkcji.
@@ -160,7 +201,6 @@ up to {} mm²	do {} mm²
 {} mm right	{} mm z prawej
 {} of {} parts	{} z {} artykułów
 {} parts found	Znalezione artykuły: {}
-{} users	Użytkownicy: {}
 {} wires per connection point	{} przewodów na punkt połączenia
 {} × {} mm, {} elements	{} × {} mm, elementy: {}
 {} × {} × {} mm	{} × {} × {} mm
